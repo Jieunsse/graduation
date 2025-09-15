@@ -1,0 +1,43 @@
+.container {
+  width: 240px; /* 사이드바 기본 너비 */
+  height: 100vh; /* 화면 전체 높이 */
+
+  background-color: #0f111a; /* 임시 배경색 */
+
+
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.item:hover {
+  background-color: #a3a3a3;
+}
+
+.dropdownMenu {
+  display: flex;
+  flex-direction: column;
+
+  margin-left: 12px;
+}
+
+.dropdownItem {
+  padding: 6px 12px;
+  margin-bottom: 4px;
+  color: #bbb;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.dropdownItem:hover {
+  background-color: #444;
+}
+
+
+
