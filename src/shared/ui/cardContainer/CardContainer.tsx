@@ -1,15 +1,9 @@
-import { Grid } from '@radix-ui/themes';
 import { Card } from '@src/components/card/Card.tsx';
 import style from './cardContainer.module.css';
 
 export const CardContainer = () => {
   return (
-    <Grid
-      gap="3"
-      justify="center"
-      columns="repeat(3, 1fr)"
-      className={style.container}
-    >
+    <div className={style.container}>
       <Card
         title={'이탈리아 그랑프리'}
         date={'2025.09.07'}
@@ -73,6 +67,6 @@ export const CardContainer = () => {
         category={'VSC'}
         description={'버추얼 세이프티카 발동'}
       />
-    </Grid>
+    </div>
   );
 };
