@@ -14,7 +14,7 @@ export const Header = () => {
             <button className={style.buttonStyle}>게시판</button>
             <button className={style.buttonStyle}>타임라인</button>
             <button className={style.buttonStyle}>데이터랩</button>
-            <button className={style.buttonStyle}>튜토리얼</button>
+            <button className={style.buttonStyle}>길라잡이</button>
           </Flex>
 
           {/* 오른쪽: 로그인 */}

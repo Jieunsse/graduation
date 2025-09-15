@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Home } from '@src/pages/home/Home.tsx';
+import { Test } from '@src/test/Test.tsx';
 
 export const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Test />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,0 +1,70 @@
+/* footer.module.css */
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #121212; /* 헤더 배경색과 동일 */
+}
+
+.container {
+  margin-top: 12px;
+  border: 1px solid #2c2c2e;
+  border-radius: 4px;
+  width: 80%;
+  max-width: 1200px;
+  padding: 20px; /* 푸터는 위아래 패딩 좀 더 줌 */
+  background-color: #121212; /* 헤더와 동일 배경 */
+  color: white;
+}
+
+.footerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.logoSection {
+  flex: 1;
+}
+
+.logo {
+  font-family: Teko, serif;
+  color: #9B1112;
+  font-size: 40px;
+}
+
+.copy {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.menuSection {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  flex: 2;
+}
+
+.menuSection h4 {
+  font-size: 16px;
+  margin-bottom: 1rem;
+  color: #efefef;
+}
+
+.menuSection ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menuSection li {
+  margin: 0.25rem 0;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.menuSection li:hover {
+  color: #999;
+}
+
+
