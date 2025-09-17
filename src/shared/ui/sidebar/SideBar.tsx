@@ -20,6 +20,11 @@ import {
   ThemeIcon,
 } from '@shared/ui/sidebar/SideBarIcons.tsx';
 
+interface SideBarProps {
+  appearance: 'light' | 'dark';
+  setAppearance: React.Dispatch<React.SetStateAction<'light' | 'dark'>>;
+}
+
 const primaryNavigation: MenuItem[] = [
   { label: '라이브 타이밍', Icon: LiveIcon, variant: 'highlight', tag: 'LIVE' },
   { label: '레이스 캘린더', Icon: CalendarIcon },
@@ -64,7 +69,7 @@ const controlItems: ControlItem[] = [
   },
 ];
 
-export const SideBar = () => {
+export const SideBar = ({ appearance, setAppearance }: SideBarProps) => {
   const [openSections, setOpenSections] = useState<Record<string, boolean>>(
     () =>
       collapsibleNavigation.reduce<Record<string, boolean>>(
@@ -83,8 +88,14 @@ export const SideBar = () => {
     }));
   };
 
+  const toggleTheme = () => {
+    setAppearance((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
+
   return (
-    <aside className={styles.container} aria-label="사이드바 내비게이션">
+    <aside
+      className={`${styles.container} ${appearance === 'light' ? styles.light : ''}`}
+    >
       <div>
         <nav className={styles.section} aria-label="주요 메뉴">
           <ul className={styles.menuList}>
@@ -174,6 +185,7 @@ export const SideBar = () => {
               type="button"
               className={styles.controlButton}
               key={control.label}
+              onClick={control.label === '테마' ? toggleTheme : undefined}
             >
               <span className={styles.controlContent}>
                 <span className={styles.controlIcon}>
@@ -181,7 +193,13 @@ export const SideBar = () => {
                 </span>
                 <span>
                   <span className={styles.controlLabel}>{control.label}</span>
-                  <span className={styles.controlValue}>{control.value}</span>
+                  <span className={styles.controlValue}>
+                    {control.label === '테마'
+                      ? appearance === 'dark'
+                        ? '다크'
+                        : '라이트'
+                      : control.value}
+                  </span>
                 </span>
               </span>
               <ChevronDownIcon className={styles.controlChevron} />

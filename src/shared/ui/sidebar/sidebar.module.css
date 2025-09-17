@@ -258,3 +258,10 @@
   height: 16px;
   color: #939eca;
 }
+
+/* 라이트 모드*/
+.light {
+  background: linear-gradient(180deg, #f9faff 0%, #f1f3fb 100%);
+  border-right: 1px solid rgba(180, 190, 230, 0.5);
+  color: #1a1b20;
+}
