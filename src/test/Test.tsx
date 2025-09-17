@@ -14,7 +14,11 @@ export const Test = ({ appearance, setAppearance }: TestProps) => {
   return (
     <div className={styles.page}>
       <Header />
+
+      <div className={styles.main}>
+
       <main className={styles.main}>
+
         <SideBar appearance={appearance} setAppearance={setAppearance} />
         <section className={styles.content}>
           <CardContainer />
