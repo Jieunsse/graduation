@@ -1,43 +1,353 @@
 .container {
-  width: 240px; /* 사이드바 기본 너비 */
-  height: 100vh; /* 화면 전체 높이 */
+  width: 268px;
+  min-height: 100vh;
+  padding: 32px 24px 28px;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, #0a0f1c 0%, #070910 100%);
+  border-right: 1px solid rgba(62, 75, 120, 0.38);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #e4e8ff;
+  font-family: 'Paperlogy', 'Noto Sans KR', sans-serif;
+}
 
-  background-color: #0f111a; /* 임시 배경색 */
-
-
+.section {
   display: flex;
   flex-direction: column;
 }
 
-.item {
-  padding: 8px 12px;
+.menuList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.menuButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 14px;
+  background: none;
+  color: #c9d1f3;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  line-height: 1.45;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.menuButton:hover {
+  background: rgba(91, 114, 196, 0.16);
+  color: #ffffff;
+}
+
+.menuButton:focus-visible,
+.controlButton:focus-visible,
+.subMenuButton:focus-visible {
+  outline: 2px solid rgba(120, 146, 255, 0.55);
+  outline-offset: 2px;
+}
+
+.menuButtonHighlight {
+  background: linear-gradient(135deg, rgba(110, 135, 255, 0.28), rgba(68, 100, 238, 0.2));
+  color: #ffffff;
+  box-shadow: 0 12px 28px rgba(39, 58, 147, 0.35);
+}
+
+.menuButtonHighlight:hover {
+  background: linear-gradient(135deg, rgba(134, 159, 255, 0.36), rgba(92, 121, 255, 0.26));
+}
+
+.menuButtonOpen {
+  background: rgba(92, 116, 201, 0.18);
+  color: #f5f7ff;
+}
+
+.menuButtonContent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  background: rgba(66, 80, 127, 0.26);
+  color: #95a3d8;
+  flex-shrink: 0;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.menuButtonHighlight .iconWrapper {
+  background: rgba(124, 147, 255, 0.32);
+  color: #dae0ff;
+}
+
+.menuButton:hover .iconWrapper,
+.menuButtonOpen .iconWrapper {
+  background: rgba(110, 135, 255, 0.28);
+  color: #e6ebff;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.label {
+  font-weight: 500;
+  color: inherit;
+}
+
+.tag {
+  margin-left: auto;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: rgba(116, 138, 255, 0.22);
+  color: #dfe4ff;
+  font-weight: 600;
+}
+
+.menuButtonHighlight .tag {
+  background: rgba(142, 163, 255, 0.32);
+  color: #ffffff;
+}
+
+.divider {
+  margin: 28px 0 22px;
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(74, 86, 133, 0) 0%, rgba(74, 86, 133, 0.65) 50%, rgba(74, 86, 133, 0) 100%);
+}
+
+.collapsibleItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.menuButtonCollapsible {
+  padding: 12px;
+}
+
+.chevron {
+  margin-left: auto;
+  width: 16px;
+  height: 16px;
+  color: inherit;
+  opacity: 0.65;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.menuButton:hover .chevron {
+  opacity: 1;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.subMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-left: 46px;
+  margin-top: 6px;
   margin-bottom: 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.subMenuButton {
+  border: none;
+  background: none;
+  color: #96a4ce;
+  padding: 4px 0;
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
   cursor: pointer;
-  border-radius: 4px;
+  transition: color 0.2s ease;
 }
 
-.item:hover {
-  background-color: #a3a3a3;
+.subMenuButton:hover {
+  color: #ffffff;
 }
 
-.dropdownMenu {
+.controls {
   display: flex;
   flex-direction: column;
-
-  margin-left: 12px;
+  gap: 12px;
+  margin-top: 32px;
 }
 
-.dropdownItem {
-  padding: 6px 12px;
-  margin-bottom: 4px;
-  color: #bbb;
-  border-radius: 4px;
+.controlButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(63, 77, 126, 0.55);
+  background: rgba(15, 21, 35, 0.92);
+  color: #dce2ff;
   cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
 }
 
-.dropdownItem:hover {
-  background-color: #444;
+.controlButton:hover {
+  background: rgba(39, 51, 86, 0.92);
+  border-color: rgba(101, 126, 197, 0.75);
+  color: #ffffff;
 }
 
+.controlContent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
 
+.controlIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: rgba(79, 99, 162, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #bcc7ff;
+  flex-shrink: 0;
+}
 
+.controlLabel {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8691b4;
+  margin-bottom: 2px;
+}
+
+.controlValue {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #eef1ff;
+  letter-spacing: -0.01em;
+}
+
+.controlChevron {
+  margin-left: auto;
+  width: 16px;
+  height: 16px;
+  color: #939eca;
+}
+
+/* 라이트 모드*/
+.light {
+  background: linear-gradient(180deg, #f9faff 0%, #f1f3fb 100%);
+  border-right: 1px solid rgba(180, 190, 230, 0.5);
+  color: #1a1b20;
+}
+
+/* 상단 메뉴 버튼 */
+.light .menuButton {
+  color: #3a4059;
+}
+
+.light .menuButton:hover {
+  background: rgba(100, 130, 230, 0.1);
+  color: #1a1b20;
+}
+
+.light .menuButtonHighlight {
+  background: linear-gradient(135deg, rgba(180, 200, 255, 0.6), rgba(130, 160, 255, 0.4));
+  color: #1c1e2a;
+  box-shadow: 0 6px 16px rgba(120, 140, 230, 0.3);
+}
+
+.light .menuButtonOpen {
+  background: rgba(170, 190, 255, 0.15);
+  color: #1c1e2a;
+}
+
+.light .iconWrapper {
+  background: rgba(200, 210, 240, 0.3);
+  color: #5c6aa5;
+}
+
+.light .menuButton:hover .iconWrapper,
+.light .menuButtonOpen .iconWrapper {
+  background: rgba(140, 160, 250, 0.25);
+  color: #2f3a70;
+}
+
+.light .tag {
+  background: rgba(150, 170, 250, 0.25);
+  color: #2e3570;
+}
+
+/* 하단 컨트롤 버튼 */
+.light .controlButton {
+  background: #ffffff;
+  border-color: rgba(190, 200, 230, 0.8);
+  color: #2d3458;
+}
+
+.light .controlButton:hover {
+  background: #f0f3fb;
+  border-color: rgba(140, 160, 230, 0.9);
+  color: #000000;
+}
+
+.light .controlIcon {
+  background: rgba(190, 200, 240, 0.4);
+  color: #5a659a;
+}
+
+.light .controlLabel {
+  color: #7a829c;
+}
+
+.light .controlValue {
+  color: #1c1e2a;
+}
+
+.light .controlChevron {
+  color: #6a749c;
+}
+
+/* 서브메뉴 */
+.light .subMenuButton {
+  color: #5c6288;
+}
+
+.light .subMenuButton:hover {
+  color: #000000;
+}
+
+/* 구분선 */
+.light .divider {
+  background: linear-gradient(
+    90deg,
+    rgba(180, 190, 220, 0) 0%,
+    rgba(180, 190, 220, 0.6) 50%,
+    rgba(180, 190, 220, 0) 100%
+  );
+}
