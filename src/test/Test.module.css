@@ -1,4 +1,31 @@
+
 .main {
   display: flex;
   align-items: stretch;
+
+
+.main {
+  display: flex;
+  align-items: stretch;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+  overflow: auto;
+
+
 }

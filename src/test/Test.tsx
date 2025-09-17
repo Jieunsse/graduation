@@ -12,13 +12,23 @@ interface TestProps {
 
 export const Test = ({ appearance, setAppearance }: TestProps) => {
   return (
-    <>
+    <div className={styles.page}>
       <Header />
+date-sidebar-css-for-height-adjustments
       <div className={styles.main}>
+
+
+      <div className={styles.main}>
+
+      <main className={styles.main}>
+
+
         <SideBar appearance={appearance} setAppearance={setAppearance} />
-        <CardContainer />
-      </div>
+        <section className={styles.content}>
+          <CardContainer />
+        </section>
+      </main>
       <Footer />
-    </>
+    </div>
   );
 };
