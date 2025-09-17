@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from './sidebar.module.css';
+import React from 'react';
 import type {
   CollapsibleNavItem,
   ControlItem,
@@ -13,7 +14,6 @@ import {
   CreatorIcon,
   DocumentIcon,
   LanguageIcon,
-  LiveIcon,
   NewsIcon,
   SupportIcon,
   TechIcon,
@@ -26,7 +26,6 @@ interface SideBarProps {
 }
 
 const primaryNavigation: MenuItem[] = [
-  { label: '라이브 타이밍', Icon: LiveIcon, variant: 'highlight', tag: 'LIVE' },
   { label: '레이스 캘린더', Icon: CalendarIcon },
   { label: '최신 뉴스', Icon: NewsIcon },
   { label: 'FIA 문서', Icon: DocumentIcon },
