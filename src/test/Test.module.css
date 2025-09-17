@@ -1,3 +1,8 @@
+
+.main {
+  display: flex;
+  align-items: stretch;
+
 .page {
   display: flex;
   flex-direction: column;
@@ -16,4 +21,5 @@
   justify-content: center;
   padding: 24px;
   overflow: auto;
+
 }
