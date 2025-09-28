@@ -1,5 +1,5 @@
 import { Flex } from '@radix-ui/themes';
-import style from './header.module.css';
+import * as style from './header.css';
 
 export const Header = () => {
   return (

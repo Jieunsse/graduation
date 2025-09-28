@@ -1,9 +1,9 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Main } from '@app/Main.tsx';
-import 'normalize.css';
+import '@shared/styles/reset.css.ts';
+import '@shared/styles/global.css.ts';
 import '@radix-ui/themes/styles.css';
-import '@shared/styles/global.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
