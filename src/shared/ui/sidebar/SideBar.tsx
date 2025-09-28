@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from './sidebar.module.css';
+import * as styles from './sidebar.css.ts';
 import React from 'react';
 import type {
   CollapsibleNavItem,
@@ -56,16 +56,8 @@ const collapsibleNavigation: CollapsibleNavItem[] = [
 ];
 
 const controlItems: ControlItem[] = [
-  {
-    label: '테마',
-    value: '다크',
-    Icon: ThemeIcon,
-  },
-  {
-    label: '언어',
-    value: '한국어',
-    Icon: LanguageIcon,
-  },
+  { label: '테마', value: '다크', Icon: ThemeIcon },
+  { label: '언어', value: '한국어', Icon: LanguageIcon },
 ];
 
 export const SideBar = ({ appearance, setAppearance }: SideBarProps) => {
@@ -92,32 +84,26 @@ export const SideBar = ({ appearance, setAppearance }: SideBarProps) => {
   };
 
   return (
-    <aside
-      className={`${styles.container} ${appearance === 'light' ? styles.light : ''}`}
-    >
+    <aside className={styles.container}>
+      {/* 상단 메뉴 */}
       <div>
         <nav className={styles.section} aria-label="주요 메뉴">
           <ul className={styles.menuList}>
             {primaryNavigation.map((item) => {
               const IconComponent = item.Icon;
+              const isHighlight = (item as any).variant === 'highlight';
               return (
                 <li key={item.label}>
                   <button
                     type="button"
-                    className={`${styles.menuButton} ${
-                      item.variant === 'highlight'
-                        ? styles.menuButtonHighlight
-                        : ''
-                    }`}
+                    className={`${styles.menuButton} ${isHighlight ? styles.menuButtonHighlight : ''}`}
                   >
-                    <span className={styles.menuButtonContent}>
-                      <span className={styles.iconWrapper}>
-                        <IconComponent className={styles.icon} />
-                      </span>
-                      <span className={styles.label}>{item.label}</span>
+                    <span className={styles.iconWrapper}>
+                      <IconComponent className={styles.icon} />
                     </span>
-                    {item.tag ? (
-                      <span className={styles.tag}>{item.tag}</span>
+                    <span className={styles.label}>{item.label}</span>
+                    {(item as any).tag ? (
+                      <span className={styles.tag}>{(item as any).tag}</span>
                     ) : null}
                   </button>
                 </li>
@@ -128,6 +114,7 @@ export const SideBar = ({ appearance, setAppearance }: SideBarProps) => {
 
         <hr className={styles.divider} />
 
+        {/* 접힘형 메뉴 */}
         <nav className={styles.section} aria-label="세부 메뉴">
           <ul className={styles.menuList}>
             {collapsibleNavigation.map((section) => {
@@ -135,34 +122,45 @@ export const SideBar = ({ appearance, setAppearance }: SideBarProps) => {
               const isOpen = Boolean(openSections[section.label]);
 
               return (
-                <li key={section.label} className={styles.collapsibleItem}>
+                <li key={section.label}>
                   <button
                     type="button"
-                    className={`${styles.menuButton} ${styles.menuButtonCollapsible} ${
-                      isOpen ? styles.menuButtonOpen : ''
-                    }`}
+                    className={`${styles.menuButton} ${isOpen ? styles.menuButtonOpen : ''}`}
                     onClick={() => toggleSection(section.label)}
                     aria-expanded={isOpen}
                   >
-                    <span className={styles.menuButtonContent}>
-                      <span className={styles.iconWrapper}>
-                        <IconComponent className={styles.icon} />
-                      </span>
-                      <span className={styles.label}>{section.label}</span>
+                    <span className={styles.iconWrapper}>
+                      <IconComponent className={styles.icon} />
                     </span>
-                    <ChevronDownIcon
-                      className={`${styles.chevron} ${isOpen ? styles.chevronOpen : ''}`}
-                    />
+                    <span className={styles.label}>{section.label}</span>
+                    {/* 우측 화살표 아이콘: 별도 클래스 없이 최소 인라인만 */}
+                    <span style={{ marginLeft: 'auto', opacity: 0.65 }}>
+                      <ChevronDownIcon className={styles.icon} />
+                    </span>
                   </button>
+
                   {isOpen ? (
-                    <ul className={styles.subMenu}>
+                    <ul
+                      className={styles.menuList}
+                      style={{
+                        marginLeft: 46,
+                        gap: 4,
+                        marginTop: 6,
+                        marginBottom: 8,
+                      }}
+                    >
                       {section.subItems.map((subItem) => (
                         <li key={subItem}>
                           <button
                             type="button"
-                            className={styles.subMenuButton}
+                            className={styles.menuButton}
+                            style={{
+                              padding: '4px 8px',
+                              fontSize: 13,
+                              background: 'none',
+                            }}
                           >
-                            {subItem}
+                            <span className={styles.label}>{subItem}</span>
                           </button>
                         </li>
                       ))}
@@ -175,33 +173,55 @@ export const SideBar = ({ appearance, setAppearance }: SideBarProps) => {
         </nav>
       </div>
 
-      <div className={styles.controls}>
+      {/* 하단 컨트롤(테마/언어) */}
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 12,
+          marginTop: 32,
+        }}
+      >
         {controlItems.map((control) => {
           const IconComponent = control.Icon;
+          const isTheme = control.label === '테마';
+          const valueText = isTheme
+            ? appearance === 'dark'
+              ? '다크'
+              : '라이트'
+            : control.value;
 
           return (
             <button
               type="button"
               className={styles.controlButton}
               key={control.label}
-              onClick={control.label === '테마' ? toggleTheme : undefined}
+              onClick={isTheme ? toggleTheme : undefined}
             >
-              <span className={styles.controlContent}>
-                <span className={styles.controlIcon}>
-                  <IconComponent className={styles.icon} />
+              <span
+                className={styles.iconWrapper}
+                style={{ width: 36, height: 36 }}
+              >
+                <IconComponent className={styles.icon} />
+              </span>
+
+              <span style={{ display: 'flex', flexDirection: 'column' }}>
+                <span
+                  style={{
+                    fontSize: 11,
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    opacity: 0.75,
+                  }}
+                >
+                  {control.label}
                 </span>
-                <span>
-                  <span className={styles.controlLabel}>{control.label}</span>
-                  <span className={styles.controlValue}>
-                    {control.label === '테마'
-                      ? appearance === 'dark'
-                        ? '다크'
-                        : '라이트'
-                      : control.value}
-                  </span>
+                <span style={{ fontSize: 14, fontWeight: 600 }}>
+                  {valueText}
                 </span>
               </span>
-              <ChevronDownIcon className={styles.controlChevron} />
+
+              <ChevronDownIcon className={styles.icon} />
             </button>
           );
         })}

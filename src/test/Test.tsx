@@ -1,8 +1,10 @@
-import { SideBar } from '@shared/ui/sidebar/SideBar.tsx';
 import React from 'react';
+import { SideBar } from '@shared/ui/sidebar/SideBar.tsx';
 import { Header } from '@shared/ui/header/Header.tsx';
 import { Footer } from '@shared/ui/footer/Footer.tsx';
-import { CardContainer } from '@shared/ui/cardContainer/CardContainer.tsx';
+// import { Hero } from '@src/components/hero/Hero.tsx';
+import { MainContainer } from '@shared/layout/MainContainer.tsx';
+// import { CardContainer } from '@shared/ui/cardContainer/CardContainer.tsx';
 
 interface TestProps {
   appearance: 'light' | 'dark';
@@ -12,12 +14,16 @@ interface TestProps {
 export const Test = ({ appearance, setAppearance }: TestProps) => {
   return (
     <>
-      <Header />
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <SideBar appearance={appearance} setAppearance={setAppearance} />
-        <CardContainer />
-      </div>
-      <Footer />
+      <MainContainer
+        sidebar={
+          <SideBar appearance={appearance} setAppearance={setAppearance} />
+        }
+      >
+        <Header />
+        {/*<Hero />*/}
+        {/*<CardContainer />*/}
+        <Footer />
+      </MainContainer>
     </>
   );
 };

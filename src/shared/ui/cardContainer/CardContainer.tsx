@@ -1,9 +1,9 @@
 import { Card } from '@src/components/card/Card.tsx';
-import style from './cardContainer.module.css';
+import * as styles from './cardContainer.css.ts';
 
 export const CardContainer = () => {
   return (
-    <div className={style.container}>
+    <div className={styles.container}>
       <Card
         title={'이탈리아 그랑프리'}
         date={'2025.09.07'}
