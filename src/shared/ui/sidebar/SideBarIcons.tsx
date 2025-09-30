@@ -176,10 +176,10 @@ export const TechIcon = ({ className }: SvgIconProps) => (
   </svg>
 );
 
-export const SupportIcon = ({ className }: SvgIconProps) => (
+export const ThemeIcon = ({ className }: SvgIconProps) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
     <path
-      d="M12 20s-7-4.5-7-10A4 4 0 0 1 12 7a4 4 0 0 1 7 3c0 5.5-7 10-7 10z"
+      d="M19 14.5a7.5 7.5 0 1 1-8.5-9.3 6 6 0 0 0 8.5 9.3z"
       stroke="currentColor"
       strokeWidth="1.4"
       strokeLinecap="round"
@@ -187,10 +187,84 @@ export const SupportIcon = ({ className }: SvgIconProps) => (
     />
   </svg>
 );
-export const ThemeIcon = ({ className }: SvgIconProps) => (
+
+export const SunIcon = ({ className }: SvgIconProps) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    {/* 태양 본체 */}
+    <circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="1.4" />
+
+    {/* 태양 광선 */}
+    <line
+      x1="12"
+      y1="1"
+      x2="12"
+      y2="3"
+      stroke="currentColor"
+      strokeWidth="1.4"
+    />
+    <line
+      x1="12"
+      y1="21"
+      x2="12"
+      y2="23"
+      stroke="currentColor"
+      strokeWidth="1.4"
+    />
+    <line
+      x1="4.22"
+      y1="4.22"
+      x2="5.64"
+      y2="5.64"
+      stroke="currentColor"
+      strokeWidth="1.4"
+    />
+    <line
+      x1="18.36"
+      y1="18.36"
+      x2="19.78"
+      y2="19.78"
+      stroke="currentColor"
+      strokeWidth="1.4"
+    />
+    <line
+      x1="1"
+      y1="12"
+      x2="3"
+      y2="12"
+      stroke="currentColor"
+      strokeWidth="1.4"
+    />
+    <line
+      x1="21"
+      y1="12"
+      x2="23"
+      y2="12"
+      stroke="currentColor"
+      strokeWidth="1.4"
+    />
+    <line
+      x1="4.22"
+      y1="19.78"
+      x2="5.64"
+      y2="18.36"
+      stroke="currentColor"
+      strokeWidth="1.4"
+    />
+    <line
+      x1="18.36"
+      y1="5.64"
+      x2="19.78"
+      y2="4.22"
+      stroke="currentColor"
+      strokeWidth="1.4"
+    />
+  </svg>
+);
+
+export const SupportIcon = ({ className }: SvgIconProps) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
     <path
-      d="M19 14.5a7.5 7.5 0 1 1-8.5-9.3 6 6 0 0 0 8.5 9.3z"
+      d="M12 20s-7-4.5-7-10A4 4 0 0 1 12 7a4 4 0 0 1 7 3c0 5.5-7 10-7 10z"
       stroke="currentColor"
       strokeWidth="1.4"
       strokeLinecap="round"
