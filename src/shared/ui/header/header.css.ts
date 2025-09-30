@@ -54,12 +54,28 @@ export const buttonStyle = style({
   fontWeight: 400,
   fontSize: '16px',
   borderRadius: '12px',
-  transition: 'background-color 0.2s ease, color 0.2s ease',
+  textDecoration: 'none',
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  lineHeight: 1,
+  transition: 'background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease',
+  selectors: {
+    '&:visited': {
+      color: '#c9d1f3',
+    },
+  },
 
   ':hover': {
     background: 'rgba(91, 114, 196, 0.16)', // ✅ 사이드바 hover 배경
     color: '#ffffff',
   },
+});
+
+export const buttonActive = style({
+  background: 'rgba(91, 114, 196, 0.24)',
+  color: '#ffffff',
+  boxShadow: '0 0 0 1px rgba(134, 159, 255, 0.35)',
 });
 
 export const loginButtonStyle = style({
@@ -95,6 +111,12 @@ globalStyle(`.light .${buttonStyle}`, {
 globalStyle(`.light .${buttonStyle}:hover`, {
   background: 'rgba(150, 166, 237, 0.25)',
   color: '#111633',
+});
+
+globalStyle(`.light .${buttonActive}`, {
+  background: 'rgba(150, 166, 237, 0.35)',
+  color: '#111633',
+  boxShadow: '0 0 0 1px rgba(150, 166, 237, 0.45)',
 });
 
 globalStyle(`.light .${loginButtonStyle}`, {
