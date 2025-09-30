@@ -16,6 +16,10 @@ export const Header = () => {
     navigate('/');
   };
 
+  const handleLoginClick = () => {
+    navigate('/login');
+  };
+
   return (
     <div className={style.box}>
       <div className={style.container}>
@@ -55,7 +59,9 @@ export const Header = () => {
           </Flex>
 
           {/* 오른쪽: 로그인 */}
-          <button className={style.loginButtonStyle}>로그인</button>
+          <button className={style.loginButtonStyle} onClick={handleLoginClick}>
+            로그인
+          </button>
         </Flex>
       </div>
     </div>
