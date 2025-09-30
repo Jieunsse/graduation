@@ -55,24 +55,24 @@ export const darkVars = createGlobalTheme('.dark', {
   },
 });
 
-// ✅ 라이트 모드
 export const lightVars = createGlobalTheme('.light', {
   color: {
-    brand: '#3b82f6', // 라이트 모드 브랜드 블루
+    // 브랜드 & 포인트
+    brand: '#6C4BFF',
+    brandHover: '#7B61FF',
+    dashboardBlue: '#1A73E8',
 
-    headerBg: '#ffffff',
-    headerText: '#2d2d2d',
-    headerBorder: '#e3e6ef',
+    // 텍스트
+    textPrimary: '#1C1C1C', // 본문 텍스트
+    textSecondary: '#6C6C6C', // 보조 텍스트
+    textLight: '#E4E8FF', // 강조 대비 텍스트 (ex. 버튼 안)
 
-    buttonBg: '#f1f5f9',
-    buttonHover: '#e2e8f0',
+    // 배경
+    bgLight: '#FFFFFF', // 기본 배경 (화이트)
+    bgDark: 'linear-gradient(180deg, #0a0f1c 0%, #070910 100%)', // 다크 배경은 라이트 모드에서도 필요 시 fallback
 
-    loginButtonBg: '#3b82f6',
-    loginButtonText: '#ffffff',
-
-    background: '#f9fafc', // 사이드바/푸터 밝은 배경
-    text: '#2d2d2d',
-    subText: '#6b7280',
-    border: '#e3e6ef',
+    // 테두리
+    borderDark: 'rgba(62, 75, 120, 0.38)', // 사이드바 톤
+    borderLight: 'rgba(0, 0, 0, 0.08)', // 푸터 라인
   },
 });

@@ -50,7 +50,7 @@ export const buttonStyle = style({
   padding: '10px 16px',
   backgroundColor: 'transparent',
   color: '#c9d1f3', // ✅ 사이드바 기본 텍스트 컬러
-  fontFamily: `'Paperlogy', 'Noto Sans KR', sans-serif`,
+  fontFamily: `'Paperozi', sans-serif`,
   fontWeight: 400,
   fontSize: '16px',
   borderRadius: '12px',
@@ -69,7 +69,7 @@ export const loginButtonStyle = style({
   background:
     'linear-gradient(135deg, rgba(110, 135, 255, 0.28), rgba(68, 100, 238, 0.2))', // ✅ highlight 스타일 차용
   borderRadius: '12px',
-  fontFamily: `'Paperlogy', 'Noto Sans KR', sans-serif`,
+  fontFamily: `'Paperozi', sans-serif`,
   fontWeight: 500,
   color: '#ffffff',
   boxShadow: '0 12px 28px rgba(39, 58, 147, 0.35)',
