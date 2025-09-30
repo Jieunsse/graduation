@@ -1,5 +1,5 @@
 // src/shared/ui/header/header.css.ts
-import { style } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
 
 export const box = style({
   position: 'fixed',
@@ -79,4 +79,33 @@ export const loginButtonStyle = style({
     background:
       'linear-gradient(135deg, rgba(134, 159, 255, 0.36), rgba(92, 121, 255, 0.26))',
   },
+});
+
+// Light mode overrides
+globalStyle(`.light .${container}`, {
+  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(236, 240, 255, 0.94))',
+  border: '1px solid rgba(184, 196, 233, 0.8)',
+  boxShadow: '0 12px 28px rgba(159, 176, 231, 0.28)',
+});
+
+globalStyle(`.light .${buttonStyle}`, {
+  color: '#2f3762',
+});
+
+globalStyle(`.light .${buttonStyle}:hover`, {
+  background: 'rgba(150, 166, 237, 0.25)',
+  color: '#111633',
+});
+
+globalStyle(`.light .${loginButtonStyle}`, {
+  background:
+    'linear-gradient(135deg, rgba(155, 17, 18, 0.18), rgba(155, 17, 18, 0.12))',
+  color: '#9B1112',
+  boxShadow: '0 10px 22px rgba(155, 17, 18, 0.18)',
+});
+
+globalStyle(`.light .${loginButtonStyle}:hover`, {
+  background:
+    'linear-gradient(135deg, rgba(155, 17, 18, 0.24), rgba(155, 17, 18, 0.16))',
+  color: '#5c0909',
 });
