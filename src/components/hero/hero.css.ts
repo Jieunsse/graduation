@@ -42,11 +42,6 @@ export const ctaButton = style({
 
 globalStyle(`.light .${hero}`, {
   color: lightVars.color.textPrimary,
-  background:
-    'linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(236, 240, 255, 0.94))',
-  borderRadius: '32px',
-  border: `1px solid ${lightVars.color.borderLight}`,
-  boxShadow: '0 32px 64px rgba(159, 176, 231, 0.35)',
   padding: '3rem 2.5rem',
   gap: '1.5rem',
 });

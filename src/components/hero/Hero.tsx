@@ -1,7 +1,14 @@
 import * as styles from './hero.css.ts';
 import { Button } from '@radix-ui/themes';
+import { useNavigate } from 'react-router-dom';
 
 export const Hero = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/dashboard');
+  };
+
   return (
     <section className={styles.hero}>
       <h1 className={styles.title}>
@@ -15,10 +22,7 @@ export const Hero = () => {
         className={styles.ctaButton}
         size="3"
         variant="solid"
-        onClick={() => {
-          // 라우팅 연결
-          window.location.href = '/dashboard';
-        }}
+        onClick={handleClick}
       >
         Enter the Cosmos
       </Button>
