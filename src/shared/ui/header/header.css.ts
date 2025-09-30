@@ -42,6 +42,10 @@ export const logo = style({
   color: '#9B1112', // ✅ 브랜드 블루
   fontSize: '40px',
   marginTop: '8px',
+  background: 'none',
+  border: 'none',
+  cursor: 'pointer',
+  whiteSpace: 'nowrap',
 });
 
 export const buttonStyle = style({
@@ -59,7 +63,8 @@ export const buttonStyle = style({
   alignItems: 'center',
   justifyContent: 'center',
   lineHeight: 1,
-  transition: 'background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease',
+  transition:
+    'background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease',
   selectors: {
     '&:visited': {
       color: '#c9d1f3',
@@ -99,7 +104,8 @@ export const loginButtonStyle = style({
 
 // Light mode overrides
 globalStyle(`.light .${container}`, {
-  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(236, 240, 255, 0.94))',
+  background:
+    'linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(236, 240, 255, 0.94))',
   border: '1px solid rgba(184, 196, 233, 0.8)',
   boxShadow: '0 12px 28px rgba(159, 176, 231, 0.28)',
 });

@@ -2,9 +2,8 @@ import React from 'react';
 import { SideBar } from '@shared/ui/sidebar/SideBar.tsx';
 import { Header } from '@shared/ui/header/Header.tsx';
 import { Footer } from '@shared/ui/footer/Footer.tsx';
-// import { Hero } from '@src/components/hero/Hero.tsx';
+import { Hero } from '@src/components/hero/Hero.tsx';
 import { MainContainer } from '@shared/layout/MainContainer.tsx';
-// import { CardContainer } from '@shared/ui/cardContainer/CardContainer.tsx';
 
 interface TestProps {
   appearance: 'light' | 'dark';
@@ -20,8 +19,7 @@ export const Test = ({ appearance, setAppearance }: TestProps) => {
         }
       >
         <Header />
-        {/*<Hero />*/}
-        {/*<CardContainer />*/}
+        <Hero />
         <Footer />
       </MainContainer>
     </>

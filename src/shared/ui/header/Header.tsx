@@ -1,5 +1,5 @@
 import { Flex } from '@radix-ui/themes';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import * as style from './header.css';
 
 const navItems = [
@@ -10,12 +10,20 @@ const navItems = [
 ];
 
 export const Header = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/');
+  };
+
   return (
     <div className={style.box}>
       <div className={style.container}>
         <Flex align="center" justify="between" className={style.headerRow}>
           {/* 왼쪽: 로고 */}
-          <span className={style.logo}>F1 KOREA</span>
+          <button className={style.logo} onClick={handleClick}>
+            F1 KOREA
+          </button>
 
           {/* 가운데: 메뉴 버튼 */}
           <Flex gap="6" align="center" justify="center">
@@ -35,7 +43,11 @@ export const Header = () => {
               }
 
               return (
-                <button key={item.label} type="button" className={style.buttonStyle}>
+                <button
+                  key={item.label}
+                  type="button"
+                  className={style.buttonStyle}
+                >
                   {item.label}
                 </button>
               );
