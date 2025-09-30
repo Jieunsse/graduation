@@ -42,6 +42,10 @@ export const logo = style({
   color: '#9B1112', // ✅ 브랜드 블루
   fontSize: '40px',
   marginTop: '8px',
+  background: 'none',
+  border: 'none',
+  cursor: 'pointer',
+  whiteSpace: 'nowrap',
 });
 
 export const buttonStyle = style({
@@ -50,16 +54,33 @@ export const buttonStyle = style({
   padding: '10px 16px',
   backgroundColor: 'transparent',
   color: '#c9d1f3', // ✅ 사이드바 기본 텍스트 컬러
-  fontFamily: `'Paperlogy', 'Noto Sans KR', sans-serif`,
+  fontFamily: `'Paperozi', sans-serif`,
   fontWeight: 400,
   fontSize: '16px',
   borderRadius: '12px',
-  transition: 'background-color 0.2s ease, color 0.2s ease',
+  textDecoration: 'none',
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  lineHeight: 1,
+  transition:
+    'background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease',
+  selectors: {
+    '&:visited': {
+      color: '#c9d1f3',
+    },
+  },
 
   ':hover': {
     background: 'rgba(91, 114, 196, 0.16)', // ✅ 사이드바 hover 배경
     color: '#ffffff',
   },
+});
+
+export const buttonActive = style({
+  background: 'rgba(91, 114, 196, 0.24)',
+  color: '#ffffff',
+  boxShadow: '0 0 0 1px rgba(134, 159, 255, 0.35)',
 });
 
 export const loginButtonStyle = style({
@@ -69,7 +90,7 @@ export const loginButtonStyle = style({
   background:
     'linear-gradient(135deg, rgba(110, 135, 255, 0.28), rgba(68, 100, 238, 0.2))', // ✅ highlight 스타일 차용
   borderRadius: '12px',
-  fontFamily: `'Paperlogy', 'Noto Sans KR', sans-serif`,
+  fontFamily: `'Paperozi', sans-serif`,
   fontWeight: 500,
   color: '#ffffff',
   boxShadow: '0 12px 28px rgba(39, 58, 147, 0.35)',
@@ -83,7 +104,8 @@ export const loginButtonStyle = style({
 
 // Light mode overrides
 globalStyle(`.light .${container}`, {
-  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(236, 240, 255, 0.94))',
+  background:
+    'linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(236, 240, 255, 0.94))',
   border: '1px solid rgba(184, 196, 233, 0.8)',
   boxShadow: '0 12px 28px rgba(159, 176, 231, 0.28)',
 });
@@ -95,6 +117,12 @@ globalStyle(`.light .${buttonStyle}`, {
 globalStyle(`.light .${buttonStyle}:hover`, {
   background: 'rgba(150, 166, 237, 0.25)',
   color: '#111633',
+});
+
+globalStyle(`.light .${buttonActive}`, {
+  background: 'rgba(150, 166, 237, 0.35)',
+  color: '#111633',
+  boxShadow: '0 0 0 1px rgba(150, 166, 237, 0.45)',
 });
 
 globalStyle(`.light .${loginButtonStyle}`, {
