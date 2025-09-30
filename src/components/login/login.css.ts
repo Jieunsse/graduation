@@ -57,14 +57,14 @@ export const label = style({
 });
 
 export const input = style({
-  width: '100%',
-  padding: '14px 16px',
+  padding: '12px 8px',
   borderRadius: '14px',
   border: '1px solid rgba(102, 120, 189, 0.6)',
   background: 'rgba(5, 9, 19, 0.78)',
   color: '#f7f9ff',
   fontSize: '15px',
-  transition: 'border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease',
+  transition:
+    'border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease',
   selectors: {
     '&::placeholder': {
       color: 'rgba(149, 163, 216, 0.68)',
@@ -81,7 +81,8 @@ export const input = style({
 export const loginButton = style({
   marginTop: '12px',
   width: '100%',
-  padding: '14px 16px',
+  height: '47px',
+  padding: '12px 8px',
   borderRadius: '14px',
   border: 'none',
   cursor: 'pointer',
@@ -91,12 +92,11 @@ export const loginButton = style({
   fontSize: '16px',
   fontWeight: 600,
   letterSpacing: '0.04em',
-  boxShadow: '0 18px 32px rgba(39, 58, 147, 0.45)',
   transition: 'transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease',
   selectors: {
     '&:hover': {
       transform: 'translateY(-1px)',
-      boxShadow: '0 22px 38px rgba(62, 92, 214, 0.42)',
+      // boxShadow: '0 22px 38px rgba(62, 92, 214, 0.42)',
       background:
         'linear-gradient(135deg, rgba(155, 17, 18, 0.36), rgba(134, 159, 255, 0.28))',
     },
@@ -104,45 +104,6 @@ export const loginButton = style({
       transform: 'translateY(0)',
     },
   },
-});
-
-export const googleButton = style({
-  width: '100%',
-  padding: '12px 16px',
-  borderRadius: '14px',
-  border: '1px solid rgba(141, 150, 196, 0.4)',
-  background: 'rgba(10, 14, 24, 0.62)',
-  color: '#f7f9ff',
-  fontSize: '15px',
-  fontWeight: 500,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  gap: '12px',
-  cursor: 'pointer',
-  transition: 'border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease',
-  selectors: {
-    '& svg': {
-      width: '20px',
-      height: '20px',
-    },
-    '&:hover': {
-      borderColor: 'rgba(155, 17, 18, 0.55)',
-      boxShadow: '0 16px 32px rgba(9, 12, 24, 0.45)',
-      background: 'rgba(15, 20, 34, 0.82)',
-    },
-  },
-});
-
-export const googleIcon = style({
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: '32px',
-  height: '32px',
-  borderRadius: '50%',
-  background: '#fff',
-  boxShadow: '0 4px 14px rgba(9, 12, 24, 0.4)',
 });
 
 export const footer = style({
@@ -202,17 +163,7 @@ globalStyle(`.light .${input}:focus`, {
 globalStyle(`.light .${loginButton}`, {
   background:
     'linear-gradient(135deg, rgba(155, 17, 18, 0.86), rgba(155, 17, 18, 0.74))',
-  boxShadow: '0 18px 38px rgba(155, 17, 18, 0.3)',
-});
-
-globalStyle(`.light .${googleButton}`, {
-  background: '#ffffff',
-  color: '#2f3762',
-  border: '1px solid rgba(184, 196, 233, 0.8)',
-});
-
-globalStyle(`.light .${googleIcon}`, {
-  boxShadow: '0 4px 12px rgba(120, 132, 189, 0.25)',
+  // boxShadow: '0 18px 38px rgba(155, 17, 18, 0.3)',
 });
 
 globalStyle(`.light .${footer}`, {
