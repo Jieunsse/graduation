@@ -1,8 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Test } from '@src/test/Test.tsx';
 import React from 'react';
 import { BoardPage } from '@src/domain/board/pages/BoardPage.tsx';
 import { CardContainer } from '@src/components/card/cardContainer/CardContainer.tsx';
+import { Home } from '@src/pages/home/Home.tsx';
+import { Login } from '@src/pages/login/Login.tsx';
 
 interface RouterProps {
   appearance: 'light' | 'dark';
@@ -16,7 +17,7 @@ export const Router = ({ appearance, setAppearance }: RouterProps) => {
         <Route
           path="/"
           element={
-            <Test appearance={appearance} setAppearance={setAppearance} />
+            <Home appearance={appearance} setAppearance={setAppearance} />
           }
         />
         <Route
@@ -26,6 +27,7 @@ export const Router = ({ appearance, setAppearance }: RouterProps) => {
           }
         />
         <Route path="/card" element={<CardContainer />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );

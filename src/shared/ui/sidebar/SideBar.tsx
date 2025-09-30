@@ -18,6 +18,7 @@ import {
   SupportIcon,
   TechIcon,
   ThemeIcon,
+  SunIcon,
 } from '@shared/ui/sidebar/SideBarIcons.tsx';
 
 interface SideBarProps {
@@ -183,8 +184,13 @@ export const SideBar = ({ appearance, setAppearance }: SideBarProps) => {
         }}
       >
         {controlItems.map((control) => {
-          const IconComponent = control.Icon;
+          let IconComponent = control.Icon;
           const isTheme = control.label === '테마';
+
+          if (isTheme) {
+            IconComponent = appearance === 'dark' ? ThemeIcon : SunIcon;
+          }
+
           const valueText = isTheme
             ? appearance === 'dark'
               ? '다크'
@@ -220,8 +226,6 @@ export const SideBar = ({ appearance, setAppearance }: SideBarProps) => {
                   {valueText}
                 </span>
               </span>
-
-              <ChevronDownIcon className={styles.icon} />
             </button>
           );
         })}

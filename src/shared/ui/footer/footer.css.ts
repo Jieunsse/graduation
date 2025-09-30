@@ -3,18 +3,19 @@ import { globalStyle, style } from '@vanilla-extract/css';
 import { vars } from '@shared/styles/token.css.ts';
 
 export const box = style({
-  position: 'fixed',
-  bottom: 0,
+  bottom: 10,
   left: vars.layout.sidebarWidth,
-  width: `calc(100% - ${vars.layout.sidebarWidth})`,
+  width: '1200px',
+  height: '200px',
   background: 'linear-gradient(180deg, #0a0f1c 0%, #070910 100%)', // ✅ 사이드바/헤더와 통일
-  borderTop: '1px solid rgba(62, 75, 120, 0.38)', // ✅ 사이드바 보더와 동일
+  border: '1px solid rgba(62, 75, 120, 0.38)', // ✅ 사이드바 보더와 동일
+  borderRadius: '42px',
   zIndex: 1000,
 });
 
 export const container = style({
   width: '100%',
-  maxWidth: '1400px',
+  maxWidth: '1000px',
   padding: '32px 24px',
   margin: '0 auto',
   color: '#c9d1f3', // ✅ 기본 텍스트 컬러 통일
