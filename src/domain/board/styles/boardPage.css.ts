@@ -84,11 +84,11 @@ export const primaryButton = style({
   fontSize: 16,
   fontWeight: 600,
   cursor: 'pointer',
-  boxShadow: '0 20px 28px rgba(155, 17, 18, 0.25)',
+  // boxShadow: '0 20px 28px rgba(155, 17, 18, 0.25)',
   transition: 'transform 0.2s ease, box-shadow 0.2s ease',
   ':hover': {
     transform: 'translateY(-1px)',
-    boxShadow: '0 24px 32px rgba(155, 17, 18, 0.35)',
+    // boxShadow: '0 24px 32px rgba(155, 17, 18, 0.35)',
   },
 });
 
