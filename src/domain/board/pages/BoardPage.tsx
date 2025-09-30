@@ -82,7 +82,9 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
 
   return (
     <MainContainer
-      sidebar={<SideBar appearance={appearance} setAppearance={setAppearance} />}
+      sidebar={
+        <SideBar appearance={appearance} setAppearance={setAppearance} />
+      }
     >
       <Header />
 
@@ -92,15 +94,14 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
 
           <div className={styles.heroContent}>
             <div className={styles.heroMeta}>
-              <span>총 {formatNumber(summary.total)}개의 이야기</span>
-              <span>HOT {formatNumber(summary.hot)}</span>
-              <span>NEW {formatNumber(summary.today)}</span>
+              <span>총 {formatNumber(summary.total)}개의 게시글</span>
+              {/*<span>HOT {formatNumber(summary.hot)}</span>*/}
+              {/*<span>NEW {formatNumber(summary.today)}</span>*/}
             </div>
             <h1 className={styles.heroTitle}>자유 게시판</h1>
             <p className={styles.heroDescription}>
               서로의 관람 경험, 전략 분석, 그리고 작은 루머까지 자유롭게 나누고
-              기록하는 공간입니다. 추후에는 다양한 팀과 주제별로 게시판을 확장해
-              나갈 예정이에요.
+              기록하는 공간입니다. <br />
             </p>
           </div>
 
@@ -174,7 +175,9 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
                   <div key={post.id} className={rowClass}>
                     <div className={styles.titleCell}>
                       <p className={styles.titleMain}>
-                        {badgeLabel ? <span className={styles.badge}>{badgeLabel}</span> : null}
+                        {badgeLabel ? (
+                          <span className={styles.badge}>{badgeLabel}</span>
+                        ) : null}
                         {post.title}
                       </p>
                       {post.tags && post.tags.length > 0 ? (
@@ -188,9 +191,15 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
                       ) : null}
                     </div>
                     <span className={styles.statCell}>{post.author}</span>
-                    <span className={styles.statCell}>{formatDate(post.createdAt)}</span>
-                    <span className={styles.statCell}>{formatNumber(post.views)}</span>
-                    <span className={styles.statCell}>💬 {formatNumber(post.comments)}</span>
+                    <span className={styles.statCell}>
+                      {formatDate(post.createdAt)}
+                    </span>
+                    <span className={styles.statCell}>
+                      {formatNumber(post.views)}
+                    </span>
+                    <span className={styles.statCell}>
+                      💬 {formatNumber(post.comments)}
+                    </span>
                   </div>
                 );
               })

@@ -28,8 +28,6 @@ export const hero = style({
 export const heroOverlay = style({
   position: 'absolute',
   inset: 0,
-  background:
-    'radial-gradient(circle at top right, rgba(155, 17, 18, 0.35), transparent 45%)',
   pointerEvents: 'none',
 });
 
@@ -46,7 +44,7 @@ export const heroTitle = style({
   fontSize: 32,
   fontWeight: 700,
   letterSpacing: '-0.01em',
-  color: '#f5f7ff',
+  color: '#111633',
 });
 
 export const heroDescription = style({
@@ -55,6 +53,7 @@ export const heroDescription = style({
   lineHeight: 1.6,
   color: 'rgba(221, 227, 255, 0.82)',
   fontSize: 15,
+  whiteSpace: 'nowrap',
 });
 
 export const heroMeta = style({
@@ -200,6 +199,7 @@ export const searchButton = style({
     background: 'rgba(134, 159, 255, 0.85)',
     transform: 'translateY(-1px)',
   },
+  whiteSpace: 'nowrap',
 });
 
 export const listHeader = style({
@@ -256,8 +256,9 @@ export const badge = style({
   alignItems: 'center',
   padding: '4px 10px',
   borderRadius: 999,
-  background: 'rgba(91, 114, 196, 0.22)',
-  color: 'rgba(204, 211, 255, 0.95)',
+  background:
+    'linear-gradient(135deg, rgba(155, 17, 18, 0.18), rgba(155, 17, 18, 0.12))',
+  color: '#9b1112',
   fontSize: 11,
   letterSpacing: '0.08em',
   textTransform: 'uppercase',
@@ -319,7 +320,7 @@ export const pageButtonActive = style({
 export const emptyState = style({
   padding: '48px 24px',
   textAlign: 'center',
-  color: 'rgba(204, 211, 255, 0.65)',
+  color: '#111633',
   fontSize: 15,
 });
 
