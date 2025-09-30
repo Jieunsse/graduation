@@ -1,5 +1,5 @@
 // src/shared/ui/footer/footer.css.ts
-import { style } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
 import { vars } from '@shared/styles/token.css.ts';
 
 export const box = style({
@@ -75,4 +75,30 @@ export const menuItem = style({
   ':hover': {
     color: '#ffffff', // ✅ hover 시 화이트로 강조
   },
+});
+
+// Light mode overrides
+globalStyle(`.light .${box}`, {
+  background: 'linear-gradient(180deg, #ffffff 0%, #eef2ff 100%)',
+  borderTop: '1px solid rgba(184, 196, 233, 0.8)',
+});
+
+globalStyle(`.light .${container}`, {
+  color: '#2f3762',
+});
+
+globalStyle(`.light .${copy}`, {
+  color: '#5a6594',
+});
+
+globalStyle(`.light .${menuHeading}`, {
+  color: '#111633',
+});
+
+globalStyle(`.light .${menuItem}`, {
+  color: '#3b4573',
+});
+
+globalStyle(`.light .${menuItem}:hover`, {
+  color: '#111633',
 });

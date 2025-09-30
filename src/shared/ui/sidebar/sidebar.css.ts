@@ -1,5 +1,5 @@
 // src/shared/ui/sidebar/sidebar.css.ts
-import { style } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
 
 // 컨테이너
 export const container = style({
@@ -159,4 +159,64 @@ export const controlButton = style({
       outlineOffset: '2px',
     },
   },
+});
+
+// Light mode overrides
+globalStyle(`.light .${container}`, {
+  background: 'linear-gradient(180deg, #f7f9ff 0%, #e8edff 100%)',
+  borderRight: '1px solid rgba(169, 181, 224, 0.7)',
+  color: '#2d3561',
+});
+
+globalStyle(`.light .${menuButton}`, {
+  color: '#3c4574',
+});
+
+globalStyle(`.light .${menuButton}:hover`, {
+  background: 'rgba(137, 156, 232, 0.22)',
+  color: '#141836',
+});
+
+globalStyle(`.light .${menuButtonHighlight}`, {
+  background:
+    'linear-gradient(135deg, rgba(143, 161, 245, 0.28), rgba(103, 133, 236, 0.18))',
+  color: '#141836',
+  boxShadow: '0 12px 28px rgba(120, 145, 226, 0.35)',
+});
+
+globalStyle(`.light .${menuButtonHighlight}:hover`, {
+  background:
+    'linear-gradient(135deg, rgba(165, 181, 248, 0.36), rgba(126, 153, 240, 0.24))',
+});
+
+globalStyle(`.light .${menuButtonOpen}`, {
+  background: 'rgba(147, 167, 255, 0.24)',
+  color: '#141836',
+});
+
+globalStyle(`.light .${iconWrapper}`, {
+  background: 'rgba(153, 168, 226, 0.24)',
+  color: '#5360a3',
+});
+
+globalStyle(`.light .${tag}`, {
+  background: 'rgba(172, 185, 249, 0.34)',
+  color: '#1f2652',
+});
+
+globalStyle(`.light .${divider}`, {
+  background:
+    'linear-gradient(90deg, rgba(176, 189, 233, 0) 0%, rgba(176, 189, 233, 0.85) 50%, rgba(176, 189, 233, 0) 100%)',
+});
+
+globalStyle(`.light .${controlButton}`, {
+  background: 'rgba(244, 247, 255, 0.92)',
+  border: '1px solid rgba(176, 189, 233, 0.75)',
+  color: '#2f3762',
+});
+
+globalStyle(`.light .${controlButton}:hover`, {
+  background: 'rgba(231, 237, 255, 0.96)',
+  borderColor: 'rgba(148, 166, 233, 0.95)',
+  color: '#111633',
 });
