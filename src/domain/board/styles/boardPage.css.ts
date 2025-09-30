@@ -69,19 +69,17 @@ export const heroActions = style({
   position: 'relative',
   zIndex: 1,
   display: 'flex',
-  flexDirection: 'column',
   alignItems: 'flex-end',
   gap: 12,
 });
 
 export const primaryButton = style({
-  border: 'none',
+  border: '1px solid rgba(221, 227, 255, 0.32)',
   borderRadius: 14,
-  padding: '14px 28px',
-  background:
-    'linear-gradient(135deg, rgba(155, 17, 18, 0.92), rgba(216, 58, 59, 0.85))',
+  padding: '12px 24px',
+  background: 'rgba(255, 255, 255, 0.72)',
   color: '#ffffff',
-  fontSize: 16,
+  fontSize: 14,
   fontWeight: 600,
   cursor: 'pointer',
   // boxShadow: '0 20px 28px rgba(155, 17, 18, 0.25)',
