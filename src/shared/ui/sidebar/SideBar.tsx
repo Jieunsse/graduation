@@ -220,8 +220,6 @@ export const SideBar = ({ appearance, setAppearance }: SideBarProps) => {
                   {valueText}
                 </span>
               </span>
-
-              <ChevronDownIcon className={styles.icon} />
             </button>
           );
         })}

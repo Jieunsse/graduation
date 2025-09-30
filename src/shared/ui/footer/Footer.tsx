@@ -9,9 +9,7 @@ export const Footer = () => {
           {/* 왼쪽: 로고 + 카피라이트 */}
           <div className={styles.logoSection}>
             <div className={styles.logo}>F1 KOREA</div>
-            <p className={styles.copy}>
-              © 2025 Conradmaker. All rights reserved.
-            </p>
+            <p className={styles.copy}>© 2025 F1Korea. All rights reserved.</p>
           </div>
 
           {/* 오른쪽: 메뉴 */}
