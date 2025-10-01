@@ -133,3 +133,11 @@ export const driver = style({
     },
   },
 });
+
+export const button = style({
+  selectors: {
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+});
