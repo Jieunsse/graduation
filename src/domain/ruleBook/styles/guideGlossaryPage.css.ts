@@ -15,13 +15,16 @@ export const hero = style({
   gap: 16,
   padding: '40px 48px',
   borderRadius: 24,
-  background: 'linear-gradient(135deg, rgba(18, 26, 46, 0.92), rgba(60, 80, 180, 0.78))',
+  background:
+    'linear-gradient(135deg, rgba(18, 26, 46, 0.92), rgba(60, 80, 180, 0.78))',
   border: '1px solid rgba(98, 122, 210, 0.48)',
   boxShadow: '0 28px 42px rgba(10, 14, 28, 0.48)',
   color: 'rgba(223, 229, 255, 0.94)',
+  whiteSpace: 'nowrap',
   selectors: {
     ':root.light &': {
-      background: 'linear-gradient(135deg, #f4f7ff 0%, #eef1ff 55%, #e2e7ff 100%)',
+      background:
+        'linear-gradient(135deg, #f4f7ff 0%, #eef1ff 55%, #e2e7ff 100%)',
       border: '1px solid rgba(140, 152, 255, 0.45)',
       boxShadow: '0 20px 40px rgba(118, 131, 255, 0.18)',
       color: '#1C1C1C',
@@ -63,7 +66,7 @@ export const heroMeta = style({
 
 export const cardGrid = style({
   display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+  gridTemplateColumns: 'repeat(3, 1fr)',
   gap: 24,
 });
 

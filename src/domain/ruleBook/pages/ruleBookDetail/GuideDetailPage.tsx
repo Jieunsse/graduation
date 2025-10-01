@@ -1,11 +1,11 @@
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { MainContainer } from '@shared/layout/MainContainer.tsx';
 import { SideBar } from '@shared/ui/sidebar/SideBar.tsx';
 import { Header } from '@shared/ui/header/Header.tsx';
 import { Footer } from '@shared/ui/footer/Footer.tsx';
-import { findGlossaryTerm } from './data/glossary.ts';
-import * as styles from './styles/guideDetailPage.css.ts';
+import { findGlossaryTerm } from '@src/domain/ruleBook/data/glossary.ts';
+import * as styles from '@src/domain/ruleBook/styles/guideDetailPage.css.ts';
 
 interface GuideDetailPageProps {
   appearance: 'light' | 'dark';
@@ -19,7 +19,10 @@ export const GuideDetailPage = ({
   const navigate = useNavigate();
   const { slug } = useParams<{ slug: string }>();
 
-  const term = useMemo(() => (slug ? findGlossaryTerm(slug) : undefined), [slug]);
+  const term = useMemo(
+    () => (slug ? findGlossaryTerm(slug) : undefined),
+    [slug]
+  );
 
   const handleBack = () => {
     navigate('/guide');
@@ -34,7 +37,11 @@ export const GuideDetailPage = ({
       <Header />
 
       <div className={styles.page}>
-        <button type="button" className={styles.backButton} onClick={handleBack}>
+        <button
+          type="button"
+          className={styles.backButton}
+          onClick={handleBack}
+        >
           ← 길라잡이 목록으로
         </button>
 
@@ -76,8 +83,12 @@ export const GuideDetailPage = ({
                   <h2 className={styles.quickFactsTitle}>Quick Facts</h2>
                   {term.quickFacts.map((fact) => (
                     <div key={fact.label} className={styles.quickFactItem}>
-                      <span className={styles.quickFactLabel}>{fact.label}</span>
-                      <span className={styles.quickFactValue}>{fact.value}</span>
+                      <span className={styles.quickFactLabel}>
+                        {fact.label}
+                      </span>
+                      <span className={styles.quickFactValue}>
+                        {fact.value}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -88,8 +99,8 @@ export const GuideDetailPage = ({
           <section className={styles.emptyState}>
             <h2 className={styles.emptyTitle}>용어 정보를 찾을 수 없어요.</h2>
             <p className={styles.emptyMessage}>
-              주소가 정확한지 확인하거나 다른 용어 카드를 선택해 주세요. 길라잡이
-              메인으로 돌아가면 모든 용어 목록을 다시 볼 수 있습니다.
+              주소가 정확한지 확인하거나 다른 용어 카드를 선택해 주세요.
+              길라잡이 메인으로 돌아가면 모든 용어 목록을 다시 볼 수 있습니다.
             </p>
           </section>
         )}
