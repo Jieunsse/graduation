@@ -9,9 +9,10 @@ interface CardProps {
   description: string;
   buttonText?: string;
   onButtonClick?: () => void;
+  metaLabel?: string;
 }
 
-type categoryType = 'PIT' | 'SC' | 'VSC' | 'RET' | 'PEN';
+type categoryType = 'PIT' | 'SC' | 'VSC' | 'RET' | 'PEN' | 'FLAG' | 'FINISH';
 
 export const Card = ({
   title,
@@ -21,6 +22,7 @@ export const Card = ({
   driver,
   buttonText = '자세히 보기',
   onButtonClick,
+  metaLabel = '드라이버',
 }: CardProps) => {
   const tagClassName = `${styles.tag} ${styles.category[category]}`;
 
@@ -36,7 +38,9 @@ export const Card = ({
         <span className={styles.description}>{description}</span>
       </div>
       <div className={styles.footer}>
-        <span className={styles.driver}>드라이버 : {driver}</span>
+        <span className={styles.driver}>
+          {metaLabel} : {driver}
+        </span>
         <Button variant="outline" size="2" onClick={onButtonClick}>
           {buttonText}
         </Button>
