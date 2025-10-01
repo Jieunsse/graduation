@@ -44,7 +44,7 @@ export const heroTitle = style({
   fontSize: 32,
   fontWeight: 700,
   letterSpacing: '-0.01em',
-  color: '#111633',
+  color: 'rgba(221, 227, 255, 0.88)',
 });
 
 export const heroDescription = style({
@@ -333,6 +333,10 @@ globalStyle(`.light .${hero}`, {
 
 globalStyle(`.light .${heroDescription}`, {
   color: 'rgba(46, 53, 82, 0.82)',
+});
+
+globalStyle(`.light .${heroTitle}`, {
+  color: '#111633',
 });
 
 globalStyle(`.light .${heroMeta}`, {
