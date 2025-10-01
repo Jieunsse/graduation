@@ -6,7 +6,7 @@ const navItems = [
   { label: '게시판', to: '/board', type: 'link' as const },
   { label: '타임라인', type: 'button' as const },
   { label: '데이터랩', type: 'button' as const },
-  { label: '길라잡이', type: 'button' as const },
+  { label: '길라잡이', to: '/guide', type: 'link' as const },
 ];
 
 export const Header = () => {
