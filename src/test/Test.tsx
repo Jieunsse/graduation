@@ -3,7 +3,7 @@ import { SideBar } from '@shared/ui/sidebar/SideBar.tsx';
 import { Header } from '@shared/ui/header/Header.tsx';
 import { Footer } from '@shared/ui/footer/Footer.tsx';
 import { MainContainer } from '@shared/layout/MainContainer.tsx';
-import { CardContainer } from '@src/components/card/cardContainer/CardContainer.tsx';
+import { CardContainer } from '@src/domain/ruleBook/components/card/cardContainer/CardContainer.tsx';
 
 interface TestProps {
   appearance: 'light' | 'dark';

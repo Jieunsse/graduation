@@ -6,7 +6,7 @@ const navItems = [
   { label: '게시판', to: '/board', type: 'link' as const },
   { label: '타임라인', type: 'button' as const },
   { label: '데이터랩', type: 'button' as const },
-  { label: '길라잡이', type: 'button' as const },
+  { label: '룰북', to: '/guide', type: 'link' as const },
 ];
 
 export const Header = () => {
@@ -24,12 +24,10 @@ export const Header = () => {
     <div className={style.box}>
       <div className={style.container}>
         <Flex align="center" justify="between" className={style.headerRow}>
-          {/* 왼쪽: 로고 */}
           <button className={style.logo} onClick={handleClick}>
             F1 KOREA
           </button>
 
-          {/* 가운데: 메뉴 버튼 */}
           <Flex gap="6" align="center" justify="center">
             {navItems.map((item) => {
               if (item.type === 'link') {
@@ -58,7 +56,6 @@ export const Header = () => {
             })}
           </Flex>
 
-          {/* 오른쪽: 로그인 */}
           <button className={style.loginButtonStyle} onClick={handleLoginClick}>
             로그인
           </button>
