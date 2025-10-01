@@ -32,6 +32,11 @@ export const hero = style({
   },
 });
 
+export const heroContainer = style({
+  display: 'flex',
+  justifyContent: 'space-between',
+});
+
 export const heroTitle = style({
   margin: 0,
   fontSize: 36,
@@ -41,7 +46,7 @@ export const heroTitle = style({
 
 export const heroSubtitle = style({
   margin: 0,
-  fontSize: 18,
+  fontSize: 14,
   lineHeight: 1.6,
   maxWidth: 640,
   color: 'rgba(226, 233, 255, 0.85)',

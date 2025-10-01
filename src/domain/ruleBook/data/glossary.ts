@@ -21,7 +21,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     category: 'SC',
     summary:
       '트랙 위 심각한 사고나 위험 요소가 발생했을 때 레이스를 통제해 드라이버와 관계자의 안전을 확보하는 절차입니다.',
-    highlight: '레이스 중 통제 절차',
+    highlight: '세이프티 카',
     description:
       '세이프티 카가 투입되면 전체 차량은 세이프티 카 뒤에 줄지어 서행하며, 추월이 금지되고 피트 레인 출구는 통제됩니다.',
     keyPoints: [
@@ -32,7 +32,10 @@ export const glossaryTerms: GlossaryTerm[] = [
     quickFacts: [
       { label: '투입 기준', value: '트랙 위 물체, 사고, 기상 악화 등' },
       { label: '속도', value: '세이프티 카가 설정한 속도에 맞춰 제한' },
-      { label: '레이스 재시작', value: '세이프티 카 소등 후 리더의 가속 구간에서' },
+      {
+        label: '레이스 재시작',
+        value: '세이프티 카 소등 후 리더의 가속 구간에서',
+      },
     ],
     sections: [
       {
@@ -59,7 +62,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     category: 'VSC',
     summary:
       '트랙 전체를 느리게 만드는 대신 각 차량이 정해진 속도 제한을 지키며 주행하도록 하는 전자 통제 시스템입니다.',
-    highlight: '전자식 속도 제한',
+    highlight: '세이프티 카',
     description:
       '세이프티 카보다 빠른 상황 정리가 가능할 때 사용되며, 드라이버는 스티어링 휠에 표시되는 델타 타임을 지속적으로 확인해야 합니다.',
     keyPoints: [
@@ -97,7 +100,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     category: 'FLAG',
     summary:
       '트랙 상황이 매우 위험하거나 레이스 지속이 불가능할 때 모든 세션을 즉시 중단시키는 신호입니다.',
-    highlight: '세션 완전 중단',
+    highlight: '플래그',
     description:
       '레드 플래그가 나오면 모든 차량은 속도를 줄이고 피트 레인으로 돌아와야 하며, 상황에 따라 레이스가 재개되거나 종료됩니다.',
     keyPoints: [
@@ -131,10 +134,10 @@ export const glossaryTerms: GlossaryTerm[] = [
     slug: 'chequered-flag',
     title: '체커기',
     englishTitle: 'Chequered Flag',
-    category: 'FINISH',
+    category: 'FLAG',
     summary:
       '레이스 또는 세션 종료를 알리는 흑백 깃발로, 모든 차량이 해당 랩을 마치면 공식적으로 종료됩니다.',
-    highlight: '레이스 종료 신호',
+    highlight: '플래그',
     description:
       '체커기가 떨어진 후에는 오버테이크가 무효 처리되며, 차량은 쿨다운 랩을 통해 파크 퍼메로 복귀합니다.',
     keyPoints: [
@@ -145,7 +148,10 @@ export const glossaryTerms: GlossaryTerm[] = [
     quickFacts: [
       { label: '주요 의미', value: '레이스 종료, 결과 확정' },
       { label: '후속 절차', value: '쿨다운 랩 → 파크 퍼메 → 시상식' },
-      { label: '기록 처리', value: '체커기 이후는 타이밍 시트에 반영되지 않음' },
+      {
+        label: '기록 처리',
+        value: '체커기 이후는 타이밍 시트에 반영되지 않음',
+      },
     ],
     sections: [
       {

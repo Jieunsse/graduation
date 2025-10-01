@@ -42,7 +42,7 @@ export const GuideDetailPage = ({
           className={styles.backButton}
           onClick={handleBack}
         >
-          ← 길라잡이 목록으로
+          룰북으로 돌아가기
         </button>
 
         {term ? (
