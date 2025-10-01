@@ -38,7 +38,12 @@ export const Card = ({
         <span className={styles.driver}>
           {metaLabel} : <span className={tagClassName}>{category}</span>
         </span>
-        <Button variant="outline" size="2" onClick={onButtonClick}>
+        <Button
+          variant="outline"
+          size="2"
+          onClick={onButtonClick}
+          className={styles.button}
+        >
           {buttonText}
         </Button>
       </div>
