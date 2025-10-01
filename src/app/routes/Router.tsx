@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import React from 'react';
 import { BoardPage } from '@src/domain/board/pages/BoardPage.tsx';
 import { Home } from '@app/home/Home.tsx';
-import { Login } from '@src/domain/user/pages/login/Login.tsx';
+import { LoginPage } from '@domain/user/pages/login/LoginPage.tsx';
 import { GuideGlossaryPage } from '@src/domain/ruleBook/pages/ruleBook/GuideGlossaryPage.tsx';
 import { GuideDetailPage } from '@src/domain/ruleBook/pages/ruleBookDetail/GuideDetailPage.tsx';
 
@@ -45,7 +45,7 @@ export const Router = ({ appearance, setAppearance }: RouterProps) => {
             />
           }
         />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   );

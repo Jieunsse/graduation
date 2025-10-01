@@ -6,7 +6,7 @@ export const Hero = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/dashboard');
+    navigate('/board');
   };
 
   return (

@@ -1,5 +1,5 @@
-import { Card } from '@src/domain/ruleBook/components/card/Card.tsx';
-import * as styles from './cardContainer.css.ts';
+import { Card } from '@domain/ruleBook/components/card/card/Card.tsx';
+import * as styles from '../styles/cardContainer/cardContainer.css.ts';
 
 export const CardContainer = () => {
   return (
