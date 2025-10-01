@@ -6,6 +6,7 @@ export const container = style({
   justifyItems: 'center',
   gap: '16px',
   width: '100%',
+  marginTop: '200px',
 
   '@media': {
     'screen and (max-width: 768px)': {
