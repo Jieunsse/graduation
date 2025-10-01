@@ -1,5 +1,5 @@
 import { Button } from '@radix-ui/themes';
-import * as styles from './card.css';
+import * as styles from './card.css.ts';
 
 interface CardProps {
   title: string;
@@ -9,18 +9,19 @@ interface CardProps {
   description: string;
   buttonText?: string;
   onButtonClick?: () => void;
+  metaLabel?: string;
 }
 
-type categoryType = 'PIT' | 'SC' | 'VSC' | 'RET' | 'PEN';
+type categoryType = 'PIT' | 'SC' | 'VSC' | 'RET' | 'PEN' | 'FLAG' | 'FINISH';
 
 export const Card = ({
   title,
   date,
   category,
   description,
-  driver,
   buttonText = '자세히 보기',
   onButtonClick,
+  metaLabel = '드라이버',
 }: CardProps) => {
   const tagClassName = `${styles.tag} ${styles.category[category]}`;
 
@@ -31,12 +32,12 @@ export const Card = ({
         <span className={styles.date}>{date}</span>
       </div>
       <div className={styles.body}>
-        <span className={tagClassName}>{category}</span>
-        <span className={styles.colon}>:</span>
         <span className={styles.description}>{description}</span>
       </div>
       <div className={styles.footer}>
-        <span className={styles.driver}>드라이버 : {driver}</span>
+        <span className={styles.driver}>
+          {metaLabel} : <span className={tagClassName}>{category}</span>
+        </span>
         <Button variant="outline" size="2" onClick={onButtonClick}>
           {buttonText}
         </Button>
