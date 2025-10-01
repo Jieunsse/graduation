@@ -1,9 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import React from 'react';
 import { BoardPage } from '@src/domain/board/pages/BoardPage.tsx';
-import { Home } from '@src/pages/home/Home.tsx';
-import { Login } from '@src/pages/login/Login.tsx';
-import { CardPage } from '@pages/card/CardPage.tsx';
+import { Home } from '@app/home/Home.tsx';
+import { Login } from '@src/domain/user/pages/login/Login.tsx';
 import { GuideGlossaryPage } from '@src/domain/ruleBook/pages/ruleBook/GuideGlossaryPage.tsx';
 import { GuideDetailPage } from '@src/domain/ruleBook/pages/ruleBookDetail/GuideDetailPage.tsx';
 
@@ -26,12 +25,6 @@ export const Router = ({ appearance, setAppearance }: RouterProps) => {
           path="/board"
           element={
             <BoardPage appearance={appearance} setAppearance={setAppearance} />
-          }
-        />
-        <Route
-          path="/card"
-          element={
-            <CardPage appearance={appearance} setAppearance={setAppearance} />
           }
         />
         <Route
