@@ -23,7 +23,7 @@
       "@pages/*": ["src/pages/*"],
       "@components/*": ["src/app/components/*"],
       "@shared/*": ["src/shared/*"],
-      "@domains/*": ["src/domains/*"],
+      "@domain/*": ["src/domain/*"],
     },
 
     /* Linting */
