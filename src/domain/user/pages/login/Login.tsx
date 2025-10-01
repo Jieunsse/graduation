@@ -1,5 +1,5 @@
-import { LoginForm } from '@src/components/login/LoginForm.tsx';
-import * as styles from './login.css.ts';
+import { LoginForm } from '@src/domain/user/components/login/LoginForm.tsx';
+import * as styles from './styles/login.css.ts';
 
 export const Login = () => {
   return (
