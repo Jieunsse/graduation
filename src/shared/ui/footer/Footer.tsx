@@ -1,5 +1,5 @@
 import { Flex } from '@radix-ui/themes';
-import * as styles from './footer.css';
+import * as styles from '../styles/footer/footer.css.ts';
 
 export const Footer = () => {
   return (

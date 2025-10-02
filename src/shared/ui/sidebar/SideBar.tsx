@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import * as styles from './sidebar.css.ts';
+import * as styles from '../styles/sidebar/sidebar.css.ts';
 import React from 'react';
 import type {
   CollapsibleNavItem,
