@@ -4,9 +4,9 @@ import { MainContainer } from '@shared/layout/MainContainer.tsx';
 import { SideBar } from '@shared/ui/sidebar/SideBar.tsx';
 import { Header } from '@shared/ui/header/Header.tsx';
 import { Footer } from '@shared/ui/footer/Footer.tsx';
-import { Card } from '@src/domain/ruleBook/components/card/Card.tsx';
+import { Card } from '@domain/ruleBook/components/card/card/Card.tsx';
 import { glossaryTerms } from '@src/domain/ruleBook/data/glossary.ts';
-import * as styles from '@src/domain/ruleBook/styles/guideGlossaryPage.css.ts';
+import * as styles from '@domain/ruleBook/styles/ruleBook/guideGlossaryPage.css.ts';
 
 interface GuideGlossaryPageProps {
   appearance: 'light' | 'dark';

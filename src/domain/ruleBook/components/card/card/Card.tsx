@@ -1,5 +1,5 @@
 import { Button } from '@radix-ui/themes';
-import * as styles from './card.css.ts';
+import * as styles from '../styles/card/card.css.ts';
 
 interface CardProps {
   title: string;

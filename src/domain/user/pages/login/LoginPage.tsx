@@ -1,7 +1,7 @@
-import { LoginForm } from '@src/domain/user/components/login/LoginForm.tsx';
-import * as styles from './styles/login.css.ts';
+import { LoginForm } from '@domain/user/components/loginForm/LoginForm.tsx';
+import * as styles from '../../styles/login/login.css.ts';
 
-export const Login = () => {
+export const LoginPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.primaryGlow} aria-hidden="true" />
