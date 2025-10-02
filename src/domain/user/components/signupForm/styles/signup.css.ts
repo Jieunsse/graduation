@@ -34,7 +34,7 @@ export const logo = style({
 export const titleGroup = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '8px',
+  gap: '6px',
 });
 
 export const title = style({
@@ -105,23 +105,6 @@ export const passwordHint = style({
   borderRadius: '16px',
   background: 'rgba(23, 30, 55, 0.55)',
   border: '1px solid rgba(63, 77, 126, 0.45)',
-});
-
-export const hintTitle = style({
-  fontSize: '13px',
-  fontWeight: 600,
-  color: 'rgba(203, 209, 255, 0.85)',
-});
-
-export const hintList = style({
-  margin: 0,
-  paddingLeft: '18px',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '4px',
-  color: 'rgba(149, 163, 216, 0.75)',
-  fontSize: '12px',
-  lineHeight: 1.5,
 });
 
 export const actions = style({
@@ -216,18 +199,14 @@ globalStyle(`.light .${passwordHint}`, {
   border: '1px solid rgba(184, 196, 233, 0.6)',
 });
 
-globalStyle(`.light .${hintTitle}`, {
-  color: 'rgba(55, 63, 92, 0.8)',
-});
-
-globalStyle(`.light .${hintList}`, {
-  color: 'rgba(93, 105, 152, 0.8)',
-});
-
 globalStyle(`.light .${footer}`, {
   color: 'rgba(55, 63, 92, 0.8)',
 });
 
 globalStyle(`.light .${loginButton}`, {
   color: '#9B1112',
+});
+
+globalStyle(`.light .${submitButton}`, {
+  background: '#9B1112',
 });

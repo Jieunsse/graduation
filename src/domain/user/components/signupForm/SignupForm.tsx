@@ -38,9 +38,6 @@ export const SignupForm = () => {
               autoComplete="username"
               required
             />
-            <span className={styles.helper}>
-              프로필에 표시될 이름으로 50자 이내로 입력해주세요.
-            </span>
           </label>
 
           <label className={styles.label}>
@@ -80,15 +77,6 @@ export const SignupForm = () => {
               required
             />
           </label>
-
-          <div className={styles.passwordHint}>
-            <span className={styles.hintTitle}>안전한 비밀번호 가이드</span>
-            <ul className={styles.hintList}>
-              <li>8자 이상 입력해주세요.</li>
-              <li>영문 대소문자, 숫자, 특수문자를 조합하면 더욱 안전합니다.</li>
-              <li>다른 사이트에서 사용 중인 비밀번호는 피해주세요.</li>
-            </ul>
-          </div>
         </div>
 
         <div className={styles.actions}>
@@ -100,7 +88,11 @@ export const SignupForm = () => {
 
       <div className={styles.footer}>
         <span>이미 계정이 있으신가요?</span>
-        <button className={styles.loginButton} type="button" onClick={handleGoToLogin}>
+        <button
+          className={styles.loginButton}
+          type="button"
+          onClick={handleGoToLogin}
+        >
           로그인
         </button>
       </div>
