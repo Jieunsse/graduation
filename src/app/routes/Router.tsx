@@ -5,6 +5,7 @@ import { Home } from '@app/home/Home.tsx';
 import { LoginPage } from '@domain/user/pages/login/LoginPage.tsx';
 import { GuideGlossaryPage } from '@src/domain/ruleBook/pages/ruleBook/GuideGlossaryPage.tsx';
 import { GuideDetailPage } from '@src/domain/ruleBook/pages/ruleBookDetail/GuideDetailPage.tsx';
+import { BoardDetailPage } from '@domain/board/pages/boardDetail/boardDetailPages.tsx';
 
 interface RouterProps {
   appearance: 'light' | 'dark';
@@ -25,6 +26,15 @@ export const Router = ({ appearance, setAppearance }: RouterProps) => {
           path="/board"
           element={
             <BoardPage appearance={appearance} setAppearance={setAppearance} />
+          }
+        />
+        <Route
+          path="/board/:id"
+          element={
+            <BoardDetailPage
+              appearance={appearance}
+              setAppearance={setAppearance}
+            />
           }
         />
         <Route

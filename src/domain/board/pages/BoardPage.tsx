@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { MainContainer } from '@shared/layout/MainContainer.tsx';
 import { SideBar } from '@shared/ui/sidebar/SideBar.tsx';
 import { Header } from '@shared/ui/header/Header.tsx';
@@ -167,12 +168,16 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
             ) : (
               filteredPosts.map((post) => {
                 const badgeLabel = getBadgeLabel(post);
-                const rowClass = `${styles.listRow} ${
+                const rowClass = `${styles.listRowLink} ${
                   post.isNotice ? styles.listRowNotice : ''
                 }`;
 
                 return (
-                  <div key={post.id} className={rowClass}>
+                  <Link
+                    key={post.id}
+                    to={`/board/${post.id}`}
+                    className={rowClass}
+                  >
                     <div className={styles.titleCell}>
                       <p className={styles.titleMain}>
                         {badgeLabel ? (
@@ -200,7 +205,7 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
                     <span className={styles.statCell}>
                       💬 {formatNumber(post.comments)}
                     </span>
-                  </div>
+                  </Link>
                 );
               })
             )}

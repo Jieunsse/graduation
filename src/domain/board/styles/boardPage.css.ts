@@ -228,6 +228,26 @@ export const listRow = style({
   gap: 16,
 });
 
+export const listRowLink = style([
+  listRow,
+  {
+    textDecoration: 'none',
+    color: 'inherit',
+    cursor: 'pointer',
+    transition: 'background 0.2s ease, transform 0.2s ease',
+    selectors: {
+      '&:hover': {
+        background: 'rgba(71, 85, 140, 0.22)',
+      },
+      '&:focus-visible': {
+        outline: '2px solid rgba(134, 159, 255, 0.75)',
+        outlineOffset: 2,
+        borderRadius: 12,
+      },
+    },
+  },
+]);
+
 export const listRowNotice = style({
   background: 'rgba(155, 17, 18, 0.08)',
   borderBottom: '1px solid rgba(155, 17, 18, 0.25)',
@@ -395,6 +415,14 @@ globalStyle(`.light .${listHeader}`, {
 globalStyle(`.light .${listRow}`, {
   color: '#1b2350',
   borderColor: 'rgba(219, 224, 247, 0.8)',
+});
+
+globalStyle(`.light .${listRowLink}:hover`, {
+  background: 'rgba(206, 214, 255, 0.6)',
+});
+
+globalStyle(`.light .${listRowLink}:focus-visible`, {
+  outlineColor: 'rgba(118, 140, 255, 0.9)',
 });
 
 globalStyle(`.light .${listRowNotice}`, {
