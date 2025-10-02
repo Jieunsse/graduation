@@ -3,6 +3,7 @@ import React from 'react';
 import { BoardPage } from '@src/domain/board/pages/BoardPage.tsx';
 import { Home } from '@app/home/Home.tsx';
 import { LoginPage } from '@domain/user/pages/login/LoginPage.tsx';
+import { SignupPage } from '@domain/user/pages/signup/SignupPage.tsx';
 import { GuideGlossaryPage } from '@src/domain/ruleBook/pages/ruleBook/GuideGlossaryPage.tsx';
 import { GuideDetailPage } from '@src/domain/ruleBook/pages/ruleBookDetail/GuideDetailPage.tsx';
 import { BoardDetailPage } from '@domain/board/pages/boardDetail/boardDetailPages.tsx';
@@ -56,6 +57,7 @@ export const Router = ({ appearance, setAppearance }: RouterProps) => {
           }
         />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
       </Routes>
     </BrowserRouter>
   );
