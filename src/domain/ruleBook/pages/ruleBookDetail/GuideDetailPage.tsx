@@ -5,7 +5,7 @@ import { SideBar } from '@shared/ui/sidebar/SideBar.tsx';
 import { Header } from '@shared/ui/header/Header.tsx';
 import { Footer } from '@shared/ui/footer/Footer.tsx';
 import { findGlossaryTerm } from '@src/domain/ruleBook/data/glossary.ts';
-import * as styles from '@src/domain/ruleBook/styles/guideDetailPage.css.ts';
+import * as styles from '@domain/ruleBook/styles/ruleBookDetail/guideDetailPage.css.ts';
 
 interface GuideDetailPageProps {
   appearance: 'light' | 'dark';

@@ -7,7 +7,7 @@ export const LoginForm = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // TODO: integrate real login flow
+    // TODO: integrate real loginForm flow
   };
 
   const handleSignUp = () => {

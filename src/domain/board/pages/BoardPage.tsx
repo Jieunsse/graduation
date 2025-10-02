@@ -5,7 +5,7 @@ import { Header } from '@shared/ui/header/Header.tsx';
 import { Footer } from '@shared/ui/footer/Footer.tsx';
 import * as styles from '../styles/boardPage.css.ts';
 import { mockBoardPosts } from '../data/mockPosts.ts';
-import type { BoardPost } from '../types.ts';
+import type { BoardPost } from '@domain/board/types';
 
 const categories = ['전체', '공지', '정보', '잡담', '후기', '질문'] as const;
 

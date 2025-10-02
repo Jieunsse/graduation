@@ -1,6 +1,6 @@
 import { Flex } from '@radix-ui/themes';
 import { NavLink, useNavigate } from 'react-router-dom';
-import * as style from './header.css';
+import * as style from '../styles/header/header.css.ts';
 
 const navItems = [
   { label: '게시판', to: '/board', type: 'link' as const },

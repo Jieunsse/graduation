@@ -1,4 +1,4 @@
-import type { BoardPost } from '../types.ts';
+import type { BoardPost } from '../types/types.ts';
 
 export const mockBoardPosts: BoardPost[] = [
   {
