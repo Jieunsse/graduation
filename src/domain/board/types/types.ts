@@ -11,4 +11,5 @@ export interface BoardPost {
   isNotice?: boolean;
   isNew?: boolean;
   isHot?: boolean;
+  content?: string[];
 }

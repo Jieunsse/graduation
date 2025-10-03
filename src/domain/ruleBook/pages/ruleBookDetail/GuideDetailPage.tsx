@@ -6,6 +6,7 @@ import { Header } from '@shared/ui/header/Header.tsx';
 import { Footer } from '@shared/ui/footer/Footer.tsx';
 import { findGlossaryTerm } from '@src/domain/ruleBook/data/glossary.ts';
 import * as styles from '@domain/ruleBook/styles/ruleBookDetail/guideDetailPage.css.ts';
+import { ImgCard } from '@domain/ruleBook/components/imgCard/ImgCard.tsx';
 
 interface GuideDetailPageProps {
   appearance: 'light' | 'dark';
@@ -79,6 +80,10 @@ export const GuideDetailPage = ({
               </section>
 
               <aside className={styles.sidebarPanel}>
+                <ImgCard
+                  src={term.img ?? ''}
+                  alt={term.alt ?? '목업 이미지를 추가해주세요'}
+                />
                 <div className={styles.quickFacts}>
                   <h2 className={styles.quickFactsTitle}>Quick Facts</h2>
                   {term.quickFacts.map((fact) => (
