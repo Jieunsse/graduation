@@ -6,6 +6,7 @@ import { Header } from '@shared/ui/header/Header.tsx';
 import { Footer } from '@shared/ui/footer/Footer.tsx';
 import { findGlossaryTerm } from '@src/domain/ruleBook/data/glossary.ts';
 import * as styles from '@domain/ruleBook/styles/ruleBookDetail/guideDetailPage.css.ts';
+import safetyCarImage from '@domain/ruleBook/img/safetyCar.png';
 
 interface GuideDetailPageProps {
   appearance: 'light' | 'dark';
@@ -79,6 +80,13 @@ export const GuideDetailPage = ({
               </section>
 
               <aside className={styles.sidebarPanel}>
+                <div className={styles.quickFactsImageCard}>
+                  <img
+                    src={safetyCarImage}
+                    alt="Safety car"
+                    className={styles.quickFactsImage}
+                  />
+                </div>
                 <div className={styles.quickFacts}>
                   <h2 className={styles.quickFactsTitle}>Quick Facts</h2>
                   {term.quickFacts.map((fact) => (
