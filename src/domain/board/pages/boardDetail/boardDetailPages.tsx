@@ -4,7 +4,7 @@ import { MainContainer } from '@shared/layout/MainContainer.tsx';
 import { SideBar } from '@shared/ui/sidebar/SideBar.tsx';
 import { Header } from '@shared/ui/header/Header.tsx';
 import { Footer } from '@shared/ui/footer/Footer.tsx';
-import { BoardDetail } from '@domain/board/component/boardDetail/boardDetail.tsx';
+import { BoardDetail } from '@domain/board/components/boardDetail/boardDetail.tsx';
 import { mockBoardPosts } from '@domain/board/data/mockPosts.ts';
 import * as styles from '@domain/board/styles/boardDetail.css.ts';
 

@@ -30,7 +30,8 @@ export const backButton = style({
   letterSpacing: '0.04em',
   textDecoration: 'none',
   cursor: 'pointer',
-  transition: 'background 0.2s ease, transform 0.2s ease, border-color 0.2s ease',
+  transition:
+    'background 0.2s ease, transform 0.2s ease, border-color 0.2s ease',
   ':hover': {
     background: 'rgba(35, 45, 82, 0.75)',
     borderColor: 'rgba(134, 159, 255, 0.65)',
@@ -48,7 +49,8 @@ export const hero = style({
   gap: 20,
   padding: '36px 40px',
   borderRadius: 20,
-  background: 'linear-gradient(135deg, rgba(17, 24, 45, 0.94), rgba(49, 76, 158, 0.78))',
+  background:
+    'linear-gradient(135deg, rgba(17, 24, 45, 0.94), rgba(49, 76, 158, 0.78))',
   border: '1px solid rgba(91, 114, 196, 0.45)',
   boxShadow: '0 24px 48px rgba(9, 14, 28, 0.45)',
   position: 'relative',
@@ -149,9 +151,10 @@ export const contentHeading = style({
 
 export const paragraph = style({
   margin: 0,
-  lineHeight: 1.72,
+  lineHeight: 0.4,
   color: 'rgba(221, 227, 255, 0.88)',
   fontSize: 15,
+  wordBreak: 'keep-all',
 });
 
 export const divider = style({
@@ -187,7 +190,7 @@ export const commentTitle = style({
 
 export const commentSubtitle = style({
   margin: 0,
-  fontSize: 14,
+  fontSize: 12,
   color: 'rgba(221, 227, 255, 0.72)',
 });
 
@@ -200,7 +203,8 @@ export const commentForm = style({
 export const commentTextArea = style({
   width: '100%',
   minHeight: 120,
-  padding: '16px 18px',
+  padding: '12px',
+  boxSizing: 'border-box',
   borderRadius: 14,
   border: '1px solid rgba(91, 114, 196, 0.4)',
   background: 'rgba(8, 12, 23, 0.75)',
@@ -223,7 +227,7 @@ export const commentTextArea = style({
 
 export const commentActions = style({
   display: 'flex',
-  justifyContent: 'space-between',
+  justifyContent: 'flex-end',
   alignItems: 'center',
   gap: 16,
   flexWrap: 'wrap',
@@ -363,7 +367,8 @@ globalStyle(`.light .${backButton}:hover`, {
 });
 
 globalStyle(`.light .${hero}`, {
-  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(236, 240, 255, 0.92))',
+  background:
+    'linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(236, 240, 255, 0.92))',
   border: '1px solid rgba(184, 196, 233, 0.75)',
   boxShadow: '0 18px 40px rgba(159, 176, 231, 0.28)',
 });

@@ -1,3 +1,5 @@
+import { RuleBookImages } from '@domain/ruleBook/data/images.ts';
+
 export type GlossaryCategory = 'SC' | 'VSC' | 'FLAG' | 'FINISH';
 
 export interface GlossaryTerm {
@@ -5,6 +7,8 @@ export interface GlossaryTerm {
   title: string;
   englishTitle: string;
   category: GlossaryCategory;
+  img?: string;
+  alt?: string;
   summary: string;
   highlight: string;
   description: string;
@@ -19,6 +23,8 @@ export const glossaryTerms: GlossaryTerm[] = [
     title: '세이프티 카',
     englishTitle: 'Safety Car (SC)',
     category: 'SC',
+    img: RuleBookImages.safetyCar,
+    alt: 'safety Car',
     summary:
       '트랙 위 심각한 사고나 위험 요소가 발생했을 때 레이스를 통제해 드라이버와 관계자의 안전을 확보하는 절차입니다.',
     highlight: '세이프티 카',
@@ -72,7 +78,10 @@ export const glossaryTerms: GlossaryTerm[] = [
     ],
     quickFacts: [
       { label: '주요 상황', value: '사고 수습 후 레이스 재개' },
-      { label: '표시 위치', value: '주로 스타트/피니시 라인 및 현장 마샬 포스트' },
+      {
+        label: '표시 위치',
+        value: '주로 스타트/피니시 라인 및 현장 마샬 포스트',
+      },
       { label: '무전 공지', value: 'Race Control이 동시에 “Green Flag” 방송' },
     ],
     sections: [

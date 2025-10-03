@@ -177,9 +177,15 @@ export const BoardDetail = ({ post, onBack }: BoardDetailProps) => {
             <span className={styles.heroMetaItem}>
               작성자 <strong>{post.author}</strong>
             </span>
-            <span className={styles.heroMetaItem}>작성일 {formattedCreatedAt}</span>
-            <span className={styles.heroMetaItem}>조회수 {post.views.toLocaleString('ko-KR')}</span>
-            <span className={styles.heroMetaItem}>좋아요 {post.likes.toLocaleString('ko-KR')}</span>
+            <span className={styles.heroMetaItem}>
+              작성일 {formattedCreatedAt}
+            </span>
+            <span className={styles.heroMetaItem}>
+              조회수 {post.views.toLocaleString('ko-KR')}
+            </span>
+            <span className={styles.heroMetaItem}>
+              좋아요 {post.likes.toLocaleString('ko-KR')}
+            </span>
             <span className={styles.heroMetaItem}>댓글 {comments.length}</span>
           </div>
         </div>
@@ -223,10 +229,6 @@ export const BoardDetail = ({ post, onBack }: BoardDetailProps) => {
       <section className={styles.commentSection}>
         <div className={styles.commentHeader}>
           <h2 className={styles.commentTitle}>댓글</h2>
-          <p className={styles.commentSubtitle}>
-            서로를 존중하며 이야기를 나눠 주세요. 현재 {comments.length}
-            개의 댓글이 있어요.
-          </p>
         </div>
 
         <form className={styles.commentForm} onSubmit={handleSubmit}>
@@ -238,9 +240,6 @@ export const BoardDetail = ({ post, onBack }: BoardDetailProps) => {
           />
 
           <div className={styles.commentActions}>
-            <span className={styles.commentHelper}>
-              Enter로 줄바꿈, 등록 버튼으로 댓글을 남길 수 있어요.
-            </span>
             <button
               type="submit"
               className={styles.commentSubmit}
