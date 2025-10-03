@@ -15,13 +15,15 @@ export const hero = style({
   gap: 18,
   padding: '48px 52px',
   borderRadius: 28,
-  background: 'linear-gradient(135deg, rgba(14, 20, 36, 0.95), rgba(45, 65, 152, 0.85))',
+  background:
+    'linear-gradient(135deg, rgba(14, 20, 36, 0.95), rgba(45, 65, 152, 0.85))',
   border: '1px solid rgba(96, 118, 210, 0.48)',
   boxShadow: '0 32px 52px rgba(6, 10, 24, 0.58)',
   color: 'rgba(223, 229, 255, 0.94)',
   selectors: {
     ':root.light &': {
-      background: 'linear-gradient(135deg, #f2f4ff 0%, #eef2ff 58%, #e8ebff 100%)',
+      background:
+        'linear-gradient(135deg, #f2f4ff 0%, #eef2ff 58%, #e8ebff 100%)',
       border: '1px solid rgba(140, 152, 255, 0.4)',
       boxShadow: '0 24px 44px rgba(105, 122, 245, 0.16)',
       color: '#1C1C1C',
@@ -108,6 +110,7 @@ export const description = style({
   fontSize: 16,
   lineHeight: 1.7,
   color: 'rgba(224, 232, 255, 0.85)',
+  wordBreak: 'keep-all',
   selectors: {
     ':root.light &': {
       color: 'rgba(35, 35, 35, 0.8)',
