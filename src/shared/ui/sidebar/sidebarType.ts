@@ -9,6 +9,7 @@ export type MenuItem = {
   Icon: (props: SvgIconProps) => JSX.Element;
   variant?: 'highlight';
   tag?: string;
+  path?: string;
 };
 
 export type CollapsibleNavItem = {
