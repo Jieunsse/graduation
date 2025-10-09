@@ -108,7 +108,7 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
 
           <div className={styles.heroActions}>
             <button type="button" className={styles.secondaryButton}>
-              ✍️ 새 글 작성하기
+              새 글 작성하기
             </button>
             <button type="button" className={styles.secondaryButton}>
               내가 쓴 글 보기

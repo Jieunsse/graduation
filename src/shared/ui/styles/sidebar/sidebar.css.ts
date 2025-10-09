@@ -78,6 +78,15 @@ export const menuButtonHighlight = style([
   },
 ]);
 
+export const menuButtonActive = style([
+  menuButton,
+  {
+    background: 'rgba(96, 118, 210, 0.24)',
+    color: '#ffffff',
+    boxShadow: '0 16px 32px rgba(52, 72, 168, 0.4)',
+  },
+]);
+
 export const menuButtonOpen = style([
   menuButton,
   {
@@ -182,6 +191,12 @@ globalStyle(`.light .${menuButtonHighlight}`, {
     'linear-gradient(135deg, rgba(143, 161, 245, 0.28), rgba(103, 133, 236, 0.18))',
   color: '#141836',
   boxShadow: '0 12px 28px rgba(120, 145, 226, 0.35)',
+});
+
+globalStyle(`.light .${menuButtonActive}`, {
+  background: 'rgba(154, 172, 245, 0.24)',
+  color: '#1b2350',
+  boxShadow: '0 16px 32px rgba(140, 160, 240, 0.28)',
 });
 
 globalStyle(`.light .${menuButtonHighlight}:hover`, {
