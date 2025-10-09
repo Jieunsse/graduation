@@ -66,6 +66,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     title: '그린 플래그',
     englishTitle: 'Green Flag',
     category: 'FLAG',
+    img: RuleBookImages.greenFlag,
     summary:
       '트랙이 완전히 정리되어 정상적인 레이스 속도로 주행할 수 있음을 알리는 신호입니다.',
     highlight: '플래그',
@@ -106,6 +107,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     title: '옐로우 플래그',
     englishTitle: 'Yellow Flag',
     category: 'FLAG',
+    img: RuleBookImages.yellowFlag,
     summary:
       '위험 구간이 발생했음을 알리며, 속도를 줄이고 추월을 금지하라는 지시를 내리는 가장 기본적인 경고 신호입니다.',
     highlight: '플래그',
@@ -143,6 +145,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     title: '블루 플래그',
     englishTitle: 'Blue Flag',
     category: 'FLAG',
+    img: RuleBookImages.blueFlag,
     summary:
       '뒤에서 더 빠른 차량이 접근 중이니 즉시 진로를 양보하라는 신호로, 주로 랩다운 차량에게 적용됩니다.',
     highlight: '플래그',
@@ -180,6 +183,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     title: '블랙 플래그',
     englishTitle: 'Black Flag',
     category: 'FLAG',
+    img: RuleBookImages.blackFlag,
     summary:
       '심각한 규정 위반이나 차량 결함으로 즉시 피트로 돌아오라는 퇴장 명령을 의미하는 가장 강력한 제재 신호입니다.',
     highlight: '플래그',
@@ -217,6 +221,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     title: '버츄얼 세이프티 카',
     englishTitle: 'Virtual Safety Car (VSC)',
     category: 'VSC',
+    img: RuleBookImages.virtualSafetyCar,
     summary:
       '트랙 전체를 느리게 만드는 대신 각 차량이 정해진 속도 제한을 지키며 주행하도록 하는 전자 통제 시스템입니다.',
     highlight: '세이프티 카',
@@ -255,6 +260,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     title: '레드 플래그',
     englishTitle: 'Red Flag',
     category: 'FLAG',
+    img: RuleBookImages.redFlag,
     summary:
       '트랙 상황이 매우 위험하거나 레이스 지속이 불가능할 때 모든 세션을 즉시 중단시키는 신호입니다.',
     highlight: '플래그',
@@ -292,6 +298,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     title: '체커기',
     englishTitle: 'Chequered Flag',
     category: 'FLAG',
+    img: RuleBookImages.chequered_flag,
     summary:
       '레이스 또는 세션 종료를 알리는 흑백 깃발로, 모든 차량이 해당 랩을 마치면 공식적으로 종료됩니다.',
     highlight: '플래그',
