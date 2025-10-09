@@ -1,5 +1,6 @@
 import React from 'react';
 import type { TrackInfo } from '@domain/calender/data/trackMap.ts';
+import { circuitImages } from '@domain/calender/data/images.ts';
 import * as styles from './trackCard.css.ts';
 
 interface TrackCardProps {
