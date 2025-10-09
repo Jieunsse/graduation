@@ -4,7 +4,8 @@ export const container = style({
   display: 'flex',
   flexDirection: 'column',
   gap: 18,
-  padding: '28px 24px',
+  minHeight: '1300px',
+  padding: '28px 12px',
   borderRadius: 24,
   background: 'rgba(9, 13, 24, 0.88)',
   border: '1px solid rgba(64, 82, 132, 0.4)',
@@ -53,9 +54,15 @@ export const list = style({
   display: 'flex',
   flexDirection: 'column',
   gap: 14,
-  maxHeight: 'calc(100vh - 280px)',
+  maxHeight: '1200px',
   overflowY: 'auto',
   paddingRight: 6,
+  overflow: 'auto',
+  selectors: {
+    '&::-webkit-scrollbar': {
+      display: 'none',
+    },
+  },
 });
 
 export const empty = style({

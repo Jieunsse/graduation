@@ -7,7 +7,7 @@ import { SignupPage } from '@domain/user/pages/signup/SignupPage.tsx';
 import { GuideGlossaryPage } from '@src/domain/ruleBook/pages/ruleBook/GuideGlossaryPage.tsx';
 import { GuideDetailPage } from '@src/domain/ruleBook/pages/ruleBookDetail/GuideDetailPage.tsx';
 import { BoardDetailPage } from '@domain/board/pages/boardDetail/boardDetailPages.tsx';
-import { CalanderPage } from '@domain/calander/pages/calanderPage.tsx';
+import { CalenderPage } from '@domain/calender/pages/CalenderPage.tsx';
 
 interface RouterProps {
   appearance: 'light' | 'dark';
@@ -60,7 +60,7 @@ export const Router = ({ appearance, setAppearance }: RouterProps) => {
         <Route
           path="/calendar"
           element={
-            <CalanderPage
+            <CalenderPage
               appearance={appearance}
               setAppearance={setAppearance}
             />
@@ -69,7 +69,7 @@ export const Router = ({ appearance, setAppearance }: RouterProps) => {
         <Route
           path="/calendar/:slug"
           element={
-            <CalanderPage
+            <CalenderPage
               appearance={appearance}
               setAppearance={setAppearance}
             />

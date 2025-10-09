@@ -2,10 +2,11 @@ import { style, styleVariants } from '@vanilla-extract/css';
 
 export const card = style({
   display: 'grid',
-  gridTemplateColumns: '80px minmax(0, 1fr) auto',
-  gap: 20,
+  gridTemplateColumns: '40px minmax(0, 1fr) auto',
+  gap: 8,
   alignItems: 'center',
   padding: '18px 24px',
+  minHeight: '180px',
   borderRadius: 20,
   background: 'rgba(13, 19, 35, 0.9)',
   border: '1px solid rgba(72, 96, 156, 0.36)',
@@ -33,12 +34,14 @@ export const card = style({
 });
 
 export const selected = style({
-  background: 'linear-gradient(135deg, rgba(69, 102, 235, 0.85), rgba(32, 56, 150, 0.9))',
+  background:
+    'linear-gradient(135deg, rgba(69, 102, 235, 0.85), rgba(32, 56, 150, 0.9))',
   borderColor: 'rgba(123, 153, 255, 0.9)',
   boxShadow: '0 24px 40px rgba(46, 78, 198, 0.55)',
   selectors: {
     ':root.light &': {
-      background: 'linear-gradient(135deg, rgba(125, 150, 255, 0.92), rgba(77, 111, 240, 0.9))',
+      background:
+        'linear-gradient(135deg, rgba(125, 150, 255, 0.92), rgba(77, 111, 240, 0.9))',
       color: '#ffffff',
       boxShadow: '0 24px 48px rgba(104, 132, 245, 0.36)',
     },
@@ -50,7 +53,7 @@ export const round = style({
   flexDirection: 'column',
   alignItems: 'flex-start',
   justifyContent: 'center',
-  gap: 6,
+  gap: 4,
 });
 
 export const roundLabel = style({
@@ -69,15 +72,17 @@ export const roundNumber = style({
 export const info = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: 6,
+  gap: 4,
   minWidth: 0,
+  wordBreak: 'keep-all',
+  whiteSpace: 'nowrap',
 });
 
 export const locationRow = style({
   display: 'flex',
   alignItems: 'center',
   gap: 8,
-  fontSize: 14,
+  fontSize: 12,
   color: 'rgba(216, 224, 255, 0.78)',
   selectors: {
     ':root.light &': {
@@ -88,17 +93,15 @@ export const locationRow = style({
 
 export const title = style({
   margin: 0,
-  fontSize: 18,
+  fontSize: 20,
   fontWeight: 700,
   letterSpacing: '-0.01em',
   whiteSpace: 'nowrap',
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
 });
 
 export const circuit = style({
   margin: 0,
-  fontSize: 13,
+  fontSize: 12,
   color: 'rgba(183, 196, 240, 0.72)',
   selectors: {
     ':root.light &': {
@@ -112,12 +115,15 @@ export const trailing = style({
   flexDirection: 'column',
   alignItems: 'flex-end',
   gap: 8,
+  width: '188px',
 });
 
 export const statusBadge = styleVariants({
   upcoming: {
-    padding: '6px 12px',
+    marginBottom: '52px',
+    padding: '6px 8px',
     borderRadius: 999,
+    textAlign: 'center',
     background: 'rgba(56, 178, 89, 0.18)',
     color: '#74f0a6',
     fontSize: 12,
@@ -132,6 +138,7 @@ export const statusBadge = styleVariants({
     },
   },
   live: {
+    marginBottom: '52px',
     padding: '6px 12px',
     borderRadius: 999,
     background: 'rgba(58, 132, 247, 0.22)',
@@ -148,6 +155,7 @@ export const statusBadge = styleVariants({
     },
   },
   completed: {
+    marginBottom: '52px',
     padding: '6px 12px',
     borderRadius: 999,
     background: 'rgba(120, 132, 162, 0.22)',
@@ -166,8 +174,11 @@ export const statusBadge = styleVariants({
 });
 
 export const dateText = style({
-  fontSize: 13,
+  fontSize: 12,
   color: 'rgba(186, 198, 240, 0.72)',
+  whiteSpace: 'nowrap',
+  wordBreak: 'keep-all',
+  marginLeft: '48px',
   selectors: {
     ':root.light &': {
       color: 'rgba(38, 52, 92, 0.6)',
