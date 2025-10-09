@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
-import type { CalanderEvent } from '@domain/calander/data/calander.ts';
-import * as styles from './calanderCard.css.ts';
+import { useMemo } from 'react';
+import type { CalenderEvent } from '@domain/calender/data/calender.ts';
+import * as styles from './calenderCard.css.ts';
 
 type EventStatus = 'upcoming' | 'live' | 'completed';
 
@@ -10,7 +10,7 @@ const STATUS_LABEL: Record<EventStatus, string> = {
   completed: '종료',
 };
 
-const getEventStatus = (event: CalanderEvent): EventStatus => {
+const getEventStatus = (event: CalenderEvent): EventStatus => {
   const now = Date.now();
   const start = new Date(event.startDate).getTime();
   const end = new Date(event.endDate).getTime();
@@ -54,13 +54,17 @@ const formatDateTime = (iso: string) => {
   return `${datePart} ${timePart} ~`;
 };
 
-interface CalanderCardProps {
-  event: CalanderEvent;
+interface CalenderCardProps {
+  event: CalenderEvent;
   isSelected?: boolean;
-  onSelect?: (event: CalanderEvent) => void;
+  onSelect?: (event: CalenderEvent) => void;
 }
 
-export const CalanderCard = ({ event, isSelected = false, onSelect }: CalanderCardProps) => {
+export const CalenderCard = ({
+  event,
+  isSelected = false,
+  onSelect,
+}: CalenderCardProps) => {
   const status = useMemo(() => getEventStatus(event), [event]);
   const formattedRaceStart = useMemo(
     () => formatDateTime(event.raceStart),
@@ -101,9 +105,11 @@ export const CalanderCard = ({ event, isSelected = false, onSelect }: CalanderCa
       </div>
 
       <div className={styles.trailing}>
-        <span className={styles.statusBadge[status]}>{STATUS_LABEL[status]}</span>
-        <span className={styles.dateText}>{formattedRaceStart}</span>
+        <span className={styles.statusBadge[status]}>
+          {STATUS_LABEL[status]}
+        </span>
       </div>
+      <span className={styles.dateText}>{formattedRaceStart}</span>
     </button>
   );
 };

@@ -1,6 +1,6 @@
-import type { TrackInfo } from '@domain/calander/data/trackMap.ts';
+import type { TrackInfo } from '@domain/calender/data/trackMap.ts';
 
-export type CalanderSessionType =
+export type CalenderSessionType =
   | 'practice1'
   | 'practice2'
   | 'practice3'
@@ -9,14 +9,14 @@ export type CalanderSessionType =
   | 'sprintShootout'
   | 'race';
 
-export interface CalanderSession {
-  type: CalanderSessionType;
+export interface CalenderSession {
+  type: CalenderSessionType;
   label: string;
   start: string;
   end: string;
 }
 
-export interface CalanderEvent {
+export interface CalenderEvent {
   slug: TrackInfo['slug'];
   round: number;
   country: string;
@@ -30,7 +30,7 @@ export interface CalanderEvent {
   raceEnd: string;
   startDate: string;
   endDate: string;
-  sessions: CalanderSession[];
+  sessions: CalenderSession[];
 }
 
 type LocalDateInput = {
@@ -42,7 +42,7 @@ type LocalDateInput = {
 };
 
 type SessionTemplate = {
-  type: CalanderSessionType;
+  type: CalenderSessionType;
   label: string;
   localTime: LocalDateInput;
   durationMinutes: number;
@@ -77,7 +77,7 @@ const createSessions = (sessions: SessionTemplate[], offset: number) =>
       label: session.label,
       start,
       end: addMinutes(start, session.durationMinutes),
-    } satisfies CalanderSession;
+    } satisfies CalenderSession;
   });
 
 interface CreateEventParams {
@@ -93,7 +93,7 @@ interface CreateEventParams {
   sessions: SessionTemplate[];
 }
 
-const createEvent = (params: CreateEventParams): CalanderEvent => {
+const createEvent = (params: CreateEventParams): CalenderEvent => {
   const sessions = createSessions(params.sessions, params.offset);
   const race = sessions.find((session) => session.type === 'race');
 
@@ -119,7 +119,7 @@ const createEvent = (params: CreateEventParams): CalanderEvent => {
   };
 };
 
-export const calanderEvents: CalanderEvent[] = [
+export const CalenderEvents: CalenderEvent[] = [
   createEvent({
     slug: 'australian-grand-prix',
     round: 1,
@@ -151,7 +151,7 @@ export const calanderEvents: CalanderEvent[] = [
       },
       {
         type: 'qualifying',
-        label: '예선',
+        label: '퀄리파잉',
         localTime: { year: 2025, month: 3, day: 15, hour: 16, minute: 0 },
         durationMinutes: 90,
       },
@@ -194,7 +194,7 @@ export const calanderEvents: CalanderEvent[] = [
       },
       {
         type: 'qualifying',
-        label: '예선',
+        label: '퀄리파잉',
         localTime: { year: 2025, month: 3, day: 22, hour: 15, minute: 0 },
         durationMinutes: 90,
       },
@@ -237,7 +237,7 @@ export const calanderEvents: CalanderEvent[] = [
       },
       {
         type: 'qualifying',
-        label: '예선',
+        label: '퀄리파잉',
         localTime: { year: 2025, month: 4, day: 5, hour: 15, minute: 0 },
         durationMinutes: 90,
       },
@@ -280,7 +280,7 @@ export const calanderEvents: CalanderEvent[] = [
       },
       {
         type: 'qualifying',
-        label: '예선',
+        label: '퀄리파잉',
         localTime: { year: 2025, month: 4, day: 12, hour: 18, minute: 0 },
         durationMinutes: 90,
       },
@@ -323,7 +323,7 @@ export const calanderEvents: CalanderEvent[] = [
       },
       {
         type: 'qualifying',
-        label: '예선',
+        label: '퀄리파잉',
         localTime: { year: 2025, month: 4, day: 19, hour: 20, minute: 0 },
         durationMinutes: 90,
       },
@@ -366,7 +366,7 @@ export const calanderEvents: CalanderEvent[] = [
       },
       {
         type: 'qualifying',
-        label: '예선',
+        label: '퀄리파잉',
         localTime: { year: 2025, month: 5, day: 3, hour: 16, minute: 0 },
         durationMinutes: 90,
       },
@@ -409,7 +409,7 @@ export const calanderEvents: CalanderEvent[] = [
       },
       {
         type: 'qualifying',
-        label: '예선',
+        label: '퀄리파잉',
         localTime: { year: 2025, month: 5, day: 17, hour: 16, minute: 0 },
         durationMinutes: 90,
       },
@@ -452,7 +452,7 @@ export const calanderEvents: CalanderEvent[] = [
       },
       {
         type: 'qualifying',
-        label: '예선',
+        label: '퀄리파잉',
         localTime: { year: 2025, month: 5, day: 24, hour: 16, minute: 0 },
         durationMinutes: 90,
       },
@@ -495,7 +495,7 @@ export const calanderEvents: CalanderEvent[] = [
       },
       {
         type: 'qualifying',
-        label: '예선',
+        label: '퀄리파잉',
         localTime: { year: 2025, month: 5, day: 31, hour: 16, minute: 0 },
         durationMinutes: 90,
       },
@@ -538,7 +538,7 @@ export const calanderEvents: CalanderEvent[] = [
       },
       {
         type: 'qualifying',
-        label: '예선',
+        label: '퀄리파잉',
         localTime: { year: 2025, month: 6, day: 14, hour: 15, minute: 0 },
         durationMinutes: 90,
       },
@@ -581,7 +581,7 @@ export const calanderEvents: CalanderEvent[] = [
       },
       {
         type: 'qualifying',
-        label: '예선',
+        label: '퀄리파잉',
         localTime: { year: 2025, month: 6, day: 28, hour: 16, minute: 0 },
         durationMinutes: 90,
       },
@@ -624,7 +624,7 @@ export const calanderEvents: CalanderEvent[] = [
       },
       {
         type: 'qualifying',
-        label: '예선',
+        label: '퀄리파잉',
         localTime: { year: 2025, month: 7, day: 5, hour: 15, minute: 0 },
         durationMinutes: 90,
       },
@@ -667,7 +667,7 @@ export const calanderEvents: CalanderEvent[] = [
       },
       {
         type: 'qualifying',
-        label: '예선',
+        label: '퀄리파잉',
         localTime: { year: 2025, month: 7, day: 19, hour: 16, minute: 0 },
         durationMinutes: 90,
       },
@@ -710,7 +710,7 @@ export const calanderEvents: CalanderEvent[] = [
       },
       {
         type: 'qualifying',
-        label: '예선',
+        label: '퀄리파잉',
         localTime: { year: 2025, month: 7, day: 26, hour: 16, minute: 0 },
         durationMinutes: 90,
       },
@@ -753,7 +753,7 @@ export const calanderEvents: CalanderEvent[] = [
       },
       {
         type: 'qualifying',
-        label: '예선',
+        label: '퀄리파잉',
         localTime: { year: 2025, month: 8, day: 30, hour: 16, minute: 0 },
         durationMinutes: 90,
       },
@@ -796,7 +796,7 @@ export const calanderEvents: CalanderEvent[] = [
       },
       {
         type: 'qualifying',
-        label: '예선',
+        label: '퀄리파잉',
         localTime: { year: 2025, month: 9, day: 6, hour: 16, minute: 0 },
         durationMinutes: 90,
       },
@@ -839,7 +839,7 @@ export const calanderEvents: CalanderEvent[] = [
       },
       {
         type: 'qualifying',
-        label: '예선',
+        label: '퀄리파잉',
         localTime: { year: 2025, month: 9, day: 20, hour: 17, minute: 0 },
         durationMinutes: 90,
       },
@@ -882,7 +882,7 @@ export const calanderEvents: CalanderEvent[] = [
       },
       {
         type: 'qualifying',
-        label: '예선',
+        label: '퀄리파잉',
         localTime: { year: 2025, month: 10, day: 4, hour: 21, minute: 0 },
         durationMinutes: 90,
       },
@@ -925,7 +925,7 @@ export const calanderEvents: CalanderEvent[] = [
       },
       {
         type: 'qualifying',
-        label: '예선',
+        label: '퀄리파잉',
         localTime: { year: 2025, month: 10, day: 18, hour: 16, minute: 0 },
         durationMinutes: 90,
       },
@@ -968,7 +968,7 @@ export const calanderEvents: CalanderEvent[] = [
       },
       {
         type: 'qualifying',
-        label: '예선',
+        label: '퀄리파잉',
         localTime: { year: 2025, month: 10, day: 25, hour: 15, minute: 0 },
         durationMinutes: 90,
       },
@@ -1011,7 +1011,7 @@ export const calanderEvents: CalanderEvent[] = [
       },
       {
         type: 'qualifying',
-        label: '예선',
+        label: '퀄리파잉',
         localTime: { year: 2025, month: 11, day: 8, hour: 15, minute: 0 },
         durationMinutes: 90,
       },
@@ -1054,7 +1054,7 @@ export const calanderEvents: CalanderEvent[] = [
       },
       {
         type: 'qualifying',
-        label: '예선',
+        label: '퀄리파잉',
         localTime: { year: 2025, month: 11, day: 22, hour: 0, minute: 0 },
         durationMinutes: 90,
       },
@@ -1097,7 +1097,7 @@ export const calanderEvents: CalanderEvent[] = [
       },
       {
         type: 'qualifying',
-        label: '예선',
+        label: '퀄리파잉',
         localTime: { year: 2025, month: 11, day: 29, hour: 20, minute: 0 },
         durationMinutes: 90,
       },
@@ -1140,7 +1140,7 @@ export const calanderEvents: CalanderEvent[] = [
       },
       {
         type: 'qualifying',
-        label: '예선',
+        label: '퀄리파잉',
         localTime: { year: 2025, month: 12, day: 6, hour: 18, minute: 0 },
         durationMinutes: 90,
       },
@@ -1154,5 +1154,5 @@ export const calanderEvents: CalanderEvent[] = [
   }),
 ];
 
-export const findCalanderEvent = (slug: string) =>
-  calanderEvents.find((event) => event.slug === slug);
+export const findCalenderEvent = (slug: string) =>
+  CalenderEvents.find((event) => event.slug === slug);

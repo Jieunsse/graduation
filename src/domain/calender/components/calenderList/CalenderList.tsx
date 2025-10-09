@@ -1,19 +1,18 @@
-import React from 'react';
-import type { CalanderEvent } from '@domain/calander/data/calander.ts';
-import { CalanderCard } from '@domain/calander/components/calanderCard/CalanderCard.tsx';
-import * as styles from './calanderList.css.ts';
+import type { CalenderEvent } from '@domain/calender/data/calender.ts';
+import { CalenderCard } from '@domain/calender/components/calenderCard/CalenderCard.tsx';
+import * as styles from './calenderList.css.ts';
 
-interface CalanderListProps {
-  events: CalanderEvent[];
+interface CalenderListProps {
+  events: CalenderEvent[];
   selectedSlug: string;
   onSelect: (slug: string) => void;
 }
 
-export const CalanderList = ({
+export const CalenderList = ({
   events,
   selectedSlug,
   onSelect,
-}: CalanderListProps) => {
+}: CalenderListProps) => {
   const total = events.length;
 
   return (
@@ -31,7 +30,7 @@ export const CalanderList = ({
       ) : (
         <div className={styles.list}>
           {events.map((event) => (
-            <CalanderCard
+            <CalenderCard
               key={event.slug}
               event={event}
               isSelected={event.slug === selectedSlug}

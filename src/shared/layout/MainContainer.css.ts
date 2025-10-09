@@ -5,7 +5,12 @@ export const container = style({
   display: 'grid',
   gridTemplateColumns: `${vars.layout.sidebarWidth} minmax(0, 1fr)`,
   height: '100vh', // minHeight → height 로 변경
-  overflow: 'hidden', // 전체 스크롤 제거
+  overflow: 'auto',
+  selectors: {
+    '&::-webkit-scrollbar': {
+      display: 'none',
+    },
+  },
 });
 
 export const sidebarSlot = style({

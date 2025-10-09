@@ -1,5 +1,5 @@
 import React from 'react';
-import type { TrackInfo } from '@domain/calander/data/trackMap.ts';
+import type { TrackInfo } from '@domain/calender/data/trackMap.ts';
 import * as styles from './trackCard.css.ts';
 
 interface TrackCardProps {
@@ -20,7 +20,9 @@ export const TrackCard = ({ track, mapImage }: TrackCardProps) => {
           </p>
         </div>
         <div className={styles.mapContainer}>
-          <p className={styles.mapPlaceholder}>트랙을 선택하면 상세 정보가 표시됩니다.</p>
+          <p className={styles.mapPlaceholder}>
+            트랙을 선택하면 상세 정보가 표시됩니다.
+          </p>
         </div>
       </section>
     );
@@ -47,7 +49,10 @@ export const TrackCard = ({ track, mapImage }: TrackCardProps) => {
   ];
 
   return (
-    <section className={styles.container} aria-labelledby={`${track.slug}-track-title`}>
+    <section
+      className={styles.container}
+      aria-labelledby={`${track.slug}-track-title`}
+    >
       <div className={styles.header}>
         <h2 id={`${track.slug}-track-title`} className={styles.title}>
           트랙 정보
@@ -61,7 +66,8 @@ export const TrackCard = ({ track, mapImage }: TrackCardProps) => {
         {statItems.map((item) => (
           <div key={item.label} className={styles.infoItem}>
             <span className={styles.infoLabel}>{item.label}</span>
-            {typeof item.value === 'string' || typeof item.value === 'number' ? (
+            {typeof item.value === 'string' ||
+            typeof item.value === 'number' ? (
               <span className={styles.infoValue}>{item.value}</span>
             ) : (
               item.value

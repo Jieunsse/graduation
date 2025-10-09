@@ -1,6 +1,9 @@
-import React, { useMemo } from 'react';
-import type { CalanderEvent, CalanderSession } from '@domain/calander/data/calander.ts';
-import * as styles from './calanderDetail.css.ts';
+import { useMemo } from 'react';
+import type {
+  CalenderEvent,
+  CalenderSession,
+} from '@domain/calender/data/calender.ts';
+import * as styles from './calenderDetail.css.ts';
 
 const KOREA_TIMEZONE = 'Asia/Seoul';
 
@@ -28,7 +31,7 @@ const formatDateRange = (startIso: string, endIso: string) => {
   return `${startLabel} ~ ${endLabel}`;
 };
 
-const formatSessionRange = (session: CalanderSession) => {
+const formatSessionRange = (session: CalenderSession) => {
   const start = new Date(session.start);
   const end = new Date(session.end);
 
@@ -89,11 +92,11 @@ const formatSessionRange = (session: CalanderSession) => {
   };
 };
 
-interface CalanderDetailProps {
-  event?: CalanderEvent;
+interface CalenderDetailProps {
+  event?: CalenderEvent;
 }
 
-export const CalanderDetail = ({ event }: CalanderDetailProps) => {
+export const CalenderDetail = ({ event }: CalenderDetailProps) => {
   const dateRange = useMemo(() => {
     if (!event) {
       return '';
@@ -112,7 +115,10 @@ export const CalanderDetail = ({ event }: CalanderDetailProps) => {
   }
 
   return (
-    <section className={styles.container} aria-labelledby={`${event.slug}-title`}>
+    <section
+      className={styles.container}
+      aria-labelledby={`${event.slug}-title`}
+    >
       <header className={styles.header}>
         <span className={styles.label}>FORMULA 1</span>
         <h2 id={`${event.slug}-title`} className={styles.title}>
@@ -130,13 +136,18 @@ export const CalanderDetail = ({ event }: CalanderDetailProps) => {
       <div>
         <div className={styles.sectionHeader}>
           <h3 className={styles.sectionTitle}>세션 일정</h3>
-          <span className={styles.sessionDuration}>시간은 한국 기준(KST)입니다.</span>
+          <span className={styles.sessionDuration}>
+            시간은 한국 기준(KST)입니다.
+          </span>
         </div>
         <ul className={styles.sessionList}>
           {event.sessions.map((session) => {
             const { window, duration } = formatSessionRange(session);
             return (
-              <li key={`${event.slug}-${session.type}`} className={styles.sessionItem}>
+              <li
+                key={`${event.slug}-${session.type}`}
+                className={styles.sessionItem}
+              >
                 <div>
                   <span className={styles.sessionLabel}>{session.label}</span>
                   {duration ? (
