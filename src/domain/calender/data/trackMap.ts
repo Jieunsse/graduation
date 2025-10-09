@@ -1,3 +1,5 @@
+import { circuitImages } from '@domain/calender/data/images.ts';
+
 export interface TrackInfo {
   slug:
     | 'australian-grand-prix'
@@ -57,6 +59,7 @@ export const trackInfos: TrackInfo[] = [
       driver: 'Carlos Sainz',
       year: 2024,
     },
+    mapImage: circuitImages.Australia_circuit,
   },
   {
     slug: 'chinese-grand-prix',
@@ -73,6 +76,7 @@ export const trackInfos: TrackInfo[] = [
       driver: 'Michael Schumacher',
       year: 2004,
     },
+    mapImage: circuitImages.China_circuit,
   },
   {
     slug: 'japanese-grand-prix',
@@ -89,6 +93,7 @@ export const trackInfos: TrackInfo[] = [
       driver: 'Lewis Hamilton',
       year: 2019,
     },
+    mapImage: circuitImages.Japan_circuit,
   },
   {
     slug: 'bahrain-grand-prix',
@@ -105,6 +110,7 @@ export const trackInfos: TrackInfo[] = [
       driver: 'Pedro de la Rosa',
       year: 2005,
     },
+    mapImage: circuitImages.Bahrain_circuit,
   },
   {
     slug: 'saudi-arabian-grand-prix',
@@ -113,7 +119,7 @@ export const trackInfos: TrackInfo[] = [
     firstGrandPrix: 2021,
     numberOfLaps: 50,
     circuitLengthKm: 6.174,
-    raceDistanceKm: 308.450,
+    raceDistanceKm: 308.45,
     cornerCount: 27,
     drsZones: 3,
     lapRecord: {
@@ -121,6 +127,7 @@ export const trackInfos: TrackInfo[] = [
       driver: 'Lewis Hamilton',
       year: 2021,
     },
+    mapImage: circuitImages.Saudi_Arabia_circuit,
   },
   {
     slug: 'miami-grand-prix',
@@ -137,6 +144,7 @@ export const trackInfos: TrackInfo[] = [
       driver: 'Sergio Pérez',
       year: 2023,
     },
+    mapImage: circuitImages.Miami_circuit,
   },
   {
     slug: 'emilia-romagna-grand-prix',
@@ -153,6 +161,7 @@ export const trackInfos: TrackInfo[] = [
       driver: 'Lewis Hamilton',
       year: 2020,
     },
+    mapImage: circuitImages.Emila_Romagna_circuit,
   },
   {
     slug: 'monaco-grand-prix',
@@ -169,6 +178,7 @@ export const trackInfos: TrackInfo[] = [
       driver: 'Lewis Hamilton',
       year: 2021,
     },
+    mapImage: circuitImages.Monaco_circuit,
   },
   {
     slug: 'spanish-grand-prix',
@@ -185,6 +195,7 @@ export const trackInfos: TrackInfo[] = [
       driver: 'Max Verstappen',
       year: 2023,
     },
+    mapImage: circuitImages.Spain_circuit,
   },
   {
     slug: 'canadian-grand-prix',
@@ -193,7 +204,7 @@ export const trackInfos: TrackInfo[] = [
     firstGrandPrix: 1978,
     numberOfLaps: 70,
     circuitLengthKm: 4.361,
-    raceDistanceKm: 305.270,
+    raceDistanceKm: 305.27,
     cornerCount: 14,
     drsZones: 3,
     lapRecord: {
@@ -201,6 +212,7 @@ export const trackInfos: TrackInfo[] = [
       driver: 'Valtteri Bottas',
       year: 2019,
     },
+    mapImage: circuitImages.Canada_circuit,
   },
   {
     slug: 'austrian-grand-prix',
@@ -217,6 +229,7 @@ export const trackInfos: TrackInfo[] = [
       driver: 'Carlos Sainz',
       year: 2020,
     },
+    mapImage: circuitImages.Austria_circuit,
   },
   {
     slug: 'british-grand-prix',
@@ -233,6 +246,7 @@ export const trackInfos: TrackInfo[] = [
       driver: 'Max Verstappen',
       year: 2020,
     },
+    mapImage: circuitImages.Great_Britain_circuit,
   },
   {
     slug: 'hungarian-grand-prix',
@@ -241,7 +255,7 @@ export const trackInfos: TrackInfo[] = [
     firstGrandPrix: 1986,
     numberOfLaps: 70,
     circuitLengthKm: 4.381,
-    raceDistanceKm: 306.630,
+    raceDistanceKm: 306.63,
     cornerCount: 14,
     drsZones: 2,
     lapRecord: {
@@ -249,6 +263,7 @@ export const trackInfos: TrackInfo[] = [
       driver: 'Lewis Hamilton',
       year: 2020,
     },
+    mapImage: circuitImages.Hungary_circuit,
   },
   {
     slug: 'belgian-grand-prix',
@@ -265,6 +280,7 @@ export const trackInfos: TrackInfo[] = [
       driver: 'Valtteri Bottas',
       year: 2018,
     },
+    mapImage: circuitImages.Belgium_circuit,
   },
   {
     slug: 'dutch-grand-prix',
@@ -281,6 +297,7 @@ export const trackInfos: TrackInfo[] = [
       driver: 'Lewis Hamilton',
       year: 2021,
     },
+    mapImage: circuitImages.Netherlands_circuit,
   },
   {
     slug: 'italian-grand-prix',
@@ -289,7 +306,7 @@ export const trackInfos: TrackInfo[] = [
     firstGrandPrix: 1950,
     numberOfLaps: 53,
     circuitLengthKm: 5.793,
-    raceDistanceKm: 306.720,
+    raceDistanceKm: 306.72,
     cornerCount: 11,
     drsZones: 2,
     lapRecord: {
@@ -297,6 +314,7 @@ export const trackInfos: TrackInfo[] = [
       driver: 'Rubens Barrichello',
       year: 2004,
     },
+    mapImage: circuitImages.Italy_circuit,
   },
   {
     slug: 'azerbaijan-grand-prix',
@@ -313,6 +331,7 @@ export const trackInfos: TrackInfo[] = [
       driver: 'Charles Leclerc',
       year: 2019,
     },
+    mapImage: circuitImages.Baku_circuit,
   },
   {
     slug: 'singapore-grand-prix',
@@ -320,7 +339,7 @@ export const trackInfos: TrackInfo[] = [
     location: 'Singapore, Singapore',
     firstGrandPrix: 2008,
     numberOfLaps: 62,
-    circuitLengthKm: 4.940,
+    circuitLengthKm: 4.94,
     raceDistanceKm: 306.143,
     cornerCount: 19,
     drsZones: 2,
@@ -329,6 +348,7 @@ export const trackInfos: TrackInfo[] = [
       driver: 'Kevin Magnussen',
       year: 2018,
     },
+    mapImage: circuitImages.Singapore_circuit,
   },
   {
     slug: 'united-states-grand-prix',
@@ -345,6 +365,7 @@ export const trackInfos: TrackInfo[] = [
       driver: 'Charles Leclerc',
       year: 2019,
     },
+    mapImage: circuitImages.USA_circuit,
   },
   {
     slug: 'mexico-city-grand-prix',
@@ -361,6 +382,7 @@ export const trackInfos: TrackInfo[] = [
       driver: 'Valtteri Bottas',
       year: 2021,
     },
+    mapImage: circuitImages.Mexico_circuit,
   },
   {
     slug: 'saopaulo-grand-prix',
@@ -377,6 +399,7 @@ export const trackInfos: TrackInfo[] = [
       driver: 'Valtteri Bottas',
       year: 2018,
     },
+    mapImage: circuitImages.Brazil_circuit,
   },
   {
     slug: 'las-vegas-grand-prix',
@@ -385,7 +408,7 @@ export const trackInfos: TrackInfo[] = [
     firstGrandPrix: 2023,
     numberOfLaps: 50,
     circuitLengthKm: 6.201,
-    raceDistanceKm: 310.050,
+    raceDistanceKm: 310.05,
     cornerCount: 17,
     drsZones: 2,
     lapRecord: {
@@ -393,6 +416,7 @@ export const trackInfos: TrackInfo[] = [
       driver: 'Oscar Piastri',
       year: 2023,
     },
+    mapImage: circuitImages.Las_Vegas_circuit,
   },
   {
     slug: 'qatar-grand-prix',
@@ -409,6 +433,7 @@ export const trackInfos: TrackInfo[] = [
       driver: 'Lando Norris',
       year: 2021,
     },
+    mapImage: circuitImages.Qatar_circuit,
   },
   {
     slug: 'abu-dhabi-grand-prix',
@@ -425,6 +450,7 @@ export const trackInfos: TrackInfo[] = [
       driver: 'Max Verstappen',
       year: 2021,
     },
+    mapImage: circuitImages.Abu_Dhabi_circuit,
   },
 ];
 
