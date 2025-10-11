@@ -38,7 +38,8 @@ export const heroGlow = style({
   width: 320,
   height: 320,
   borderRadius: '50%',
-  background: 'radial-gradient(circle, rgba(155, 17, 18, 0.45), transparent 65%)',
+  background:
+    'radial-gradient(circle, rgba(155, 17, 18, 0.45), transparent 65%)',
   filter: 'blur(0px)',
   pointerEvents: 'none',
 });
@@ -67,6 +68,7 @@ export const heroDescription = style({
   lineHeight: 1.6,
   fontSize: 16,
   color: 'rgba(221, 227, 255, 0.82)',
+  wordBreak: 'keep-all',
 });
 
 export const layout = style({
@@ -131,8 +133,8 @@ export const sliderRoot = style({
 export const sliderTrack = style({
   position: 'relative',
   flexGrow: 1,
-  height: 6,
-  borderRadius: 999,
+  height: 24,
+  borderRadius: 24,
   background:
     'linear-gradient(90deg, rgba(41, 53, 92, 0.65), rgba(82, 102, 171, 0.65))',
   overflow: 'hidden',
@@ -189,8 +191,8 @@ export const markerLayer = style({
 
 export const marker = style({
   position: 'absolute',
-  width: 14,
-  height: 14,
+  width: 18,
+  height: 18,
   borderRadius: '50%',
   transform: 'translate(-50%, -50%)',
   border: '2px solid rgba(9, 12, 24, 0.85)',

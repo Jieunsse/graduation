@@ -22,7 +22,11 @@ const formatRaceTime = (seconds: number) => {
     .padStart(2, '0')}`;
 };
 
-export const TimelineSlider = ({ events, currentTime, onTimeChange }: TimelineSliderProps) => {
+export const TimelineSlider = ({
+  events,
+  currentTime,
+  onTimeChange,
+}: TimelineSliderProps) => {
   const minTime = events.length > 0 ? events[0].time : 0;
   const maxTime = events.length > 0 ? events[events.length - 1].time : 0;
   const range = Math.max(maxTime - minTime, 1);
@@ -33,14 +37,14 @@ export const TimelineSlider = ({ events, currentTime, onTimeChange }: TimelineSl
     (event: React.ChangeEvent<HTMLInputElement>) => {
       onTimeChange(Number(event.target.value));
     },
-    [onTimeChange],
+    [onTimeChange]
   );
 
   const handleMarkerClick = useCallback(
     (time: number) => {
       onTimeChange(time);
     },
-    [onTimeChange],
+    [onTimeChange]
   );
 
   const handleWheel = useCallback(
@@ -55,7 +59,7 @@ export const TimelineSlider = ({ events, currentTime, onTimeChange }: TimelineSl
       const next = clamp(currentTime + direction * step, minTime, maxTime);
       onTimeChange(next);
     },
-    [currentTime, maxTime, minTime, onTimeChange, range],
+    [currentTime, maxTime, minTime, onTimeChange, range]
   );
 
   const markers = useMemo(() => {
@@ -116,11 +120,11 @@ export const TimelineSlider = ({ events, currentTime, onTimeChange }: TimelineSl
         <span>전체 {formatRaceTime(maxTime)}</span>
       </div>
 
-      <div className={styles.controlGroup} aria-hidden>
-        {markers.map((marker) => (
-          <EventIcon key={marker.id} type={marker.type} size="small" ariaLabel={marker.label} />
-        ))}
-      </div>
+      {/*<div className={styles.controlGroup} aria-hidden>*/}
+      {/*  {markers.map((marker) => (*/}
+      {/*    <EventIcon key={marker.id} type={marker.type} size="small" ariaLabel={marker.label} />*/}
+      {/*  ))}*/}
+      {/*</div>*/}
     </div>
   );
 };
