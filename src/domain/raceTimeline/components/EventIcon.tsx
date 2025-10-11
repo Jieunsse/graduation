@@ -1,4 +1,3 @@
-import React from 'react';
 import * as styles from '../styles/timeline.css.ts';
 import type { RaceEventType } from '../types/raceEvent.ts';
 
@@ -16,7 +15,11 @@ interface EventIconProps {
   ariaLabel?: string;
 }
 
-export const EventIcon = ({ type, size = 'medium', ariaLabel }: EventIconProps) => {
+export const EventIcon = ({
+  type,
+  size = 'medium',
+  ariaLabel,
+}: EventIconProps) => {
   return (
     <span
       className={`${styles.eventIcon} ${styles.eventIconSize[size]} ${styles.eventIconByType[type]}`}

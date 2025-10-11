@@ -25,8 +25,8 @@ export const hero = style({
   gap: 18,
   padding: '36px 40px',
   borderRadius: 24,
-  background:
-    'linear-gradient(135deg, rgba(15, 21, 35, 0.94), rgba(155, 17, 18, 0.58))',
+  // background:
+  //   'linear-gradient(135deg, rgba(15, 21, 35, 0.94), rgba(155, 17, 18, 0.58))',
   border: '1px solid rgba(155, 17, 18, 0.35)',
   boxShadow: '0 24px 48px rgba(9, 12, 24, 0.46)',
   overflow: 'hidden',
@@ -38,8 +38,8 @@ export const heroGlow = style({
   width: 320,
   height: 320,
   borderRadius: '50%',
-  background:
-    'radial-gradient(circle, rgba(155, 17, 18, 0.45), transparent 65%)',
+  // background:
+  // 'radial-gradient(circle, rgba(155, 17, 18, 0.45), transparent 65%)',
   filter: 'blur(0px)',
   pointerEvents: 'none',
 });
@@ -397,10 +397,7 @@ export const lightDivider = style({
 // Light mode overrides
 
 globalStyle(`.light .${hero}`, {
-  background:
-    'linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(155, 17, 18, 0.16))',
-  border: '1px solid rgba(155, 17, 18, 0.22)',
-  boxShadow: '0 24px 48px rgba(155, 17, 18, 0.18)',
+  border: '1px solid rgba(26, 28, 46, 0.78)',
 });
 
 globalStyle(`.light .${heroMeta}`, {
