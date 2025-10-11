@@ -501,3 +501,7 @@ globalStyle(`.light .${controlButtonPrimary}`, {
 globalStyle(`.light .${controlLabel}`, {
   color: 'rgba(26, 28, 46, 0.6)',
 });
+
+globalStyle(`.light .${upcomingMeta}`, {
+  color: 'rgba(26, 28, 46, 0.6)',
+});

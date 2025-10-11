@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from 'react';
 import * as styles from '../styles/timeline.css.ts';
 import type { RaceEvent } from '../types/raceEvent.ts';
 import { raceEventTypeLabel } from '../types/raceEvent.ts';
-import { EventIcon } from './EventIcon.tsx';
+// import { EventIcon } from './EventIcon.tsx';
 
 interface TimelineSliderProps {
   events: RaceEvent[];

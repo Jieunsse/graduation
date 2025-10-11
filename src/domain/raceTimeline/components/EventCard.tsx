@@ -1,4 +1,3 @@
-import React from 'react';
 import { EventIcon } from './EventIcon.tsx';
 import * as styles from '../styles/timeline.css.ts';
 import type { RaceEvent } from '../types/raceEvent.ts';
@@ -18,7 +17,11 @@ const formatRaceTime = (seconds: number) => {
     .padStart(2, '0')}`;
 };
 
-export const EventCard = ({ activeEvent, upcomingEvents, currentTime }: EventCardProps) => {
+export const EventCard = ({
+  activeEvent,
+  upcomingEvents,
+  currentTime,
+}: EventCardProps) => {
   if (!activeEvent) {
     return (
       <div className={styles.eventPanel}>
@@ -28,7 +31,8 @@ export const EventCard = ({ activeEvent, upcomingEvents, currentTime }: EventCar
             타임라인을 탐색해보세요
           </h2>
           <p className={styles.eventMeta}>
-            현재 재생 위치 <strong>{formatRaceTime(Math.max(currentTime, 0))}</strong>
+            현재 재생 위치{' '}
+            <strong>{formatRaceTime(Math.max(currentTime, 0))}</strong>
           </p>
         </div>
         <p className={styles.eventDescription}>
@@ -46,13 +50,19 @@ export const EventCard = ({ activeEvent, upcomingEvents, currentTime }: EventCar
     <div className={styles.eventPanel}>
       <div className={styles.eventHeader}>
         <h2 className={styles.eventTitle}>
-          <EventIcon type={activeEvent.type} size="medium" ariaLabel={raceEventTypeLabel[activeEvent.type]} />
+          <EventIcon
+            type={activeEvent.type}
+            size="medium"
+            ariaLabel={raceEventTypeLabel[activeEvent.type]}
+          />
           {raceEventTypeLabel[activeEvent.type]}
         </h2>
         <div className={styles.eventMeta}>
           <span>랩 {activeEvent.lap}랩</span>
           <span>타이밍 {formatRaceTime(activeEvent.time)}</span>
-          {activeEvent.position ? <span>포지션 P{activeEvent.position}</span> : null}
+          {activeEvent.position ? (
+            <span>포지션 P{activeEvent.position}</span>
+          ) : null}
           {activeEvent.team ? <span>{activeEvent.team}</span> : null}
         </div>
       </div>
