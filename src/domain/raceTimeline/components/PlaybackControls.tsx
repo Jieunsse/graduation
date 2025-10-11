@@ -1,4 +1,3 @@
-import React from 'react';
 import * as styles from '../styles/timeline.css.ts';
 
 interface PlaybackControlsProps {
@@ -52,7 +51,7 @@ export const PlaybackControls = ({
               className={`${styles.controlButton} ${isActive ? styles.controlButtonActive : ''}`}
               onClick={() => onSpeedChange(value)}
             >
-              {value.toFixed(1)}x
+              {value.toFixed(1)}
             </button>
           );
         })}

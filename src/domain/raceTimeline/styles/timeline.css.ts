@@ -265,7 +265,6 @@ export const controlButtonPrimary = style({
     'linear-gradient(135deg, rgba(155, 17, 18, 0.85), rgba(134, 159, 255, 0.65))',
   borderColor: 'rgba(255, 255, 255, 0.32)',
   color: '#ffffff',
-  boxShadow: '0 16px 28px rgba(155, 17, 18, 0.35)',
 });
 
 export const controlButtonActive = style({
@@ -494,8 +493,7 @@ globalStyle(`.light .${controlButton}:hover`, {
 });
 
 globalStyle(`.light .${controlButtonPrimary}`, {
-  color: '#ffffff',
-  boxShadow: '0 16px 28px rgba(155, 17, 18, 0.25)',
+  // boxShadow: '0 16px 28px rgba(155, 17, 18, 0.25)',
 });
 
 globalStyle(`.light .${controlLabel}`, {
