@@ -209,6 +209,11 @@ export const markerByType = styleVariants(eventColors, ({ base, glow }) => ({
   boxShadow: `0 0 0 4px ${glow}`,
 }));
 
+export const markerActive = style({
+  transform: 'translate(-50%, -50%) scale(1.25)',
+  filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.35))',
+});
+
 export const playheadTime = style({
   display: 'flex',
   alignItems: 'center',
