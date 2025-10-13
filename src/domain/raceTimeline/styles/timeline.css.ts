@@ -218,7 +218,6 @@ export const playheadTime = style({
   justifyContent: 'space-between',
   gap: 16,
   fontSize: 14,
-  color: 'rgba(200, 206, 240, 0.75)',
 });
 
 export const controlsRow = style({
