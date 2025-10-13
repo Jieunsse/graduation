@@ -1,4 +1,7 @@
-import { createGlobalTheme, createGlobalThemeContract } from '@vanilla-extract/css';
+import {
+  createGlobalTheme,
+  createGlobalThemeContract,
+} from '@vanilla-extract/css';
 
 export const colorVars = createGlobalThemeContract({
   brand: {

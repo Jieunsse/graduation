@@ -492,10 +492,6 @@ globalStyle(`.light .${controlButton}:hover`, {
   background: 'rgba(206, 214, 255, 0.9)',
 });
 
-globalStyle(`.light .${controlButtonPrimary}`, {
-  // boxShadow: '0 16px 28px rgba(155, 17, 18, 0.25)',
-});
-
 globalStyle(`.light .${controlLabel}`, {
   color: 'rgba(26, 28, 46, 0.6)',
 });
