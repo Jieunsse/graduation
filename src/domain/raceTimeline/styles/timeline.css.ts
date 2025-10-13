@@ -38,8 +38,6 @@ export const heroGlow = style({
   width: 320,
   height: 320,
   borderRadius: '50%',
-  // background:
-  // 'radial-gradient(circle, rgba(155, 17, 18, 0.45), transparent 65%)',
   filter: 'blur(0px)',
   pointerEvents: 'none',
 });
@@ -402,7 +400,7 @@ export const lightDivider = style({
 // Light mode overrides
 
 globalStyle(`.light .${hero}`, {
-  border: '1px solid rgba(26, 28, 46, 0.78)',
+  border: '1px solid rgba(63, 77, 126, 0.35)',
 });
 
 globalStyle(`.light .${heroMeta}`, {
