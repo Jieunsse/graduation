@@ -1,5 +1,6 @@
 // src/shared/ui/footer/footer.css.ts
-import { globalStyle, style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
+import { colorVars } from '@shared/styles/color.css.ts';
 import { vars } from '@shared/styles/token.css.ts';
 
 export const box = style({
@@ -7,8 +8,9 @@ export const box = style({
   left: vars.layout.sidebarWidth,
   width: '1200px',
   height: '200px',
-  background: 'linear-gradient(180deg, #0a0f1c 0%, #070910 100%)', // ✅ 사이드바/헤더와 통일
-  border: '1px solid rgba(62, 75, 120, 0.38)', // ✅ 사이드바 보더와 동일
+  background: colorVars.surface.background,
+  border: `1px solid ${colorVars.border.footer}`,
+  borderTop: `1px solid ${colorVars.border.footerTop}`,
   borderRadius: '42px',
   zIndex: 1000,
 });
@@ -18,7 +20,7 @@ export const container = style({
   maxWidth: '1000px',
   padding: '32px 24px',
   margin: '0 auto',
-  color: '#c9d1f3', // ✅ 기본 텍스트 컬러 통일
+  color: colorVars.text.surface,
 });
 
 export const footerRow = style({
@@ -35,14 +37,14 @@ export const logoSection = style({
 
 export const logo = style({
   fontFamily: 'Teko, sans-serif',
-  color: '#9B1112', // ✅ 브랜드 블루
+  color: colorVars.brand.primary,
   fontSize: '28px',
   marginBottom: '8px',
 });
 
 export const copy = style({
   fontSize: '13px',
-  color: '#95a3d8', // ✅ 사이드바 iconWrapper 텍스트 톤
+  color: colorVars.text.surfaceMuted,
 });
 
 export const menuSection = style({
@@ -56,7 +58,7 @@ export const menuHeading = style({
   fontSize: '14px',
   fontWeight: 600,
   marginBottom: '0.75rem',
-  color: '#ffffff', // ✅ 명확하게 white로 heading 강조
+  color: colorVars.text.heading,
 });
 
 export const menuList = style({
@@ -70,36 +72,10 @@ export const menuList = style({
 
 export const menuItem = style({
   fontSize: '13px',
-  color: '#c9d1f3', // ✅ 사이드바 기본 텍스트 컬러
+  color: colorVars.text.menuItem,
   cursor: 'pointer',
   transition: 'color 0.2s ease',
   ':hover': {
-    color: '#ffffff', // ✅ hover 시 화이트로 강조
+    color: colorVars.text.menuItemHover,
   },
-});
-
-// Light mode overrides
-globalStyle(`.light .${box}`, {
-  background: 'linear-gradient(180deg, #ffffff 0%, #eef2ff 100%)',
-  borderTop: '1px solid rgba(184, 196, 233, 0.8)',
-});
-
-globalStyle(`.light .${container}`, {
-  color: '#2f3762',
-});
-
-globalStyle(`.light .${copy}`, {
-  color: '#5a6594',
-});
-
-globalStyle(`.light .${menuHeading}`, {
-  color: '#111633',
-});
-
-globalStyle(`.light .${menuItem}`, {
-  color: '#3b4573',
-});
-
-globalStyle(`.light .${menuItem}:hover`, {
-  color: '#111633',
 });
