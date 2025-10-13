@@ -1,5 +1,6 @@
 // src/shared/ui/sidebar/sidebar.css.ts
-import { globalStyle, style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
+import { colorVars } from '@shared/styles/color.css.ts';
 
 // 컨테이너
 export const container = style({
@@ -7,12 +8,12 @@ export const container = style({
   minHeight: '100vh',
   padding: '32px 24px 28px',
   boxSizing: 'border-box',
-  background: 'linear-gradient(180deg, #0a0f1c 0%, #070910 100%)',
-  borderRight: '1px solid rgba(62, 75, 120, 0.38)',
+  background: colorVars.surface.sidebar,
+  borderRight: `1px solid ${colorVars.border.sidebar}`,
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  color: '#e4e8ff',
+  color: colorVars.text.sidebar,
   fontFamily: `'Paperlogy', 'Noto Sans KR', sans-serif`,
 });
 
@@ -42,7 +43,7 @@ export const menuButton = style({
   border: 'none',
   borderRadius: '14px',
   background: 'none',
-  color: '#c9d1f3',
+  color: colorVars.text.menuButton,
   fontSize: '14px',
   letterSpacing: '-0.01em',
   lineHeight: '1.45',
@@ -51,13 +52,13 @@ export const menuButton = style({
     'background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease',
 
   ':hover': {
-    background: 'rgba(91, 114, 196, 0.16)',
-    color: '#ffffff',
+    background: colorVars.surface.interactiveHover,
+    color: colorVars.text.menuButtonHover,
   },
 
   selectors: {
     '&:focus-visible': {
-      outline: '2px solid rgba(120, 146, 255, 0.55)',
+      outline: `2px solid ${colorVars.border.focus}`,
       outlineOffset: '2px',
     },
   },
@@ -67,13 +68,11 @@ export const menuButton = style({
 export const menuButtonHighlight = style([
   menuButton,
   {
-    background:
-      'linear-gradient(135deg, rgba(110, 135, 255, 0.28), rgba(68, 100, 238, 0.2))',
-    color: '#ffffff',
-    boxShadow: '0 12px 28px rgba(39, 58, 147, 0.35)',
+    background: colorVars.gradient.sidebarHighlight,
+    color: colorVars.text.menuButtonHover,
+    boxShadow: colorVars.effect.sidebarHighlightShadow,
     ':hover': {
-      background:
-        'linear-gradient(135deg, rgba(134, 159, 255, 0.36), rgba(92, 121, 255, 0.26))',
+      background: colorVars.gradient.sidebarHighlightHover,
     },
   },
 ]);
@@ -81,17 +80,17 @@ export const menuButtonHighlight = style([
 export const menuButtonActive = style([
   menuButton,
   {
-    background: 'rgba(96, 118, 210, 0.24)',
-    color: '#ffffff',
-    boxShadow: '0 16px 32px rgba(52, 72, 168, 0.4)',
+    background: colorVars.surface.active,
+    color: colorVars.text.menuActive,
+    boxShadow: colorVars.effect.sidebarActiveShadow,
   },
 ]);
 
 export const menuButtonOpen = style([
   menuButton,
   {
-    background: 'rgba(92, 116, 201, 0.18)',
-    color: '#f5f7ff',
+    background: colorVars.surface.open,
+    color: colorVars.text.menuOpen,
   },
 ]);
 
@@ -103,8 +102,8 @@ export const iconWrapper = style({
   width: '34px',
   height: '34px',
   borderRadius: '12px',
-  background: 'rgba(66, 80, 127, 0.26)',
-  color: '#95a3d8',
+  background: colorVars.surface.icon,
+  color: colorVars.text.icon,
   flexShrink: 0,
   transition: 'background 0.2s ease, color 0.2s ease',
 });
@@ -127,8 +126,8 @@ export const tag = style({
   fontSize: '11px',
   letterSpacing: '0.14em',
   textTransform: 'uppercase',
-  background: 'rgba(116, 138, 255, 0.22)',
-  color: '#dfe4ff',
+  background: colorVars.surface.tag,
+  color: colorVars.text.tag,
   fontWeight: 600,
 });
 
@@ -137,8 +136,7 @@ export const divider = style({
   margin: '28px 0 22px',
   border: 'none',
   height: '1px',
-  background:
-    'linear-gradient(90deg, rgba(74, 86, 133, 0) 0%, rgba(74, 86, 133, 0.65) 50%, rgba(74, 86, 133, 0) 100%)',
+  background: colorVars.gradient.divider,
 });
 
 // 하단 컨트롤 버튼
@@ -149,89 +147,23 @@ export const controlButton = style({
   gap: '12px',
   padding: '14px 16px',
   borderRadius: '14px',
-  border: '1px solid rgba(63, 77, 126, 0.55)',
-  background: 'rgba(15, 21, 35, 0.92)',
-  color: '#dce2ff',
+  border: `1px solid ${colorVars.border.control}`,
+  background: colorVars.surface.control,
+  color: colorVars.text.control,
   cursor: 'pointer',
   transition:
     'border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease',
 
   ':hover': {
-    background: 'rgba(39, 51, 86, 0.92)',
-    borderColor: 'rgba(101, 126, 197, 0.75)',
-    color: '#ffffff',
+    background: colorVars.surface.controlHover,
+    borderColor: colorVars.border.controlHover,
+    color: colorVars.text.controlHover,
   },
 
   selectors: {
     '&:focus-visible': {
-      outline: '2px solid rgba(120, 146, 255, 0.55)',
+      outline: `2px solid ${colorVars.border.focus}`,
       outlineOffset: '2px',
     },
   },
-});
-
-// Light mode overrides
-globalStyle(`.light .${container}`, {
-  background: 'linear-gradient(180deg, #f7f9ff 0%, #e8edff 100%)',
-  borderRight: '1px solid rgba(169, 181, 224, 0.7)',
-  color: '#2d3561',
-});
-
-globalStyle(`.light .${menuButton}`, {
-  color: '#3c4574',
-});
-
-globalStyle(`.light .${menuButton}:hover`, {
-  background: 'rgba(137, 156, 232, 0.22)',
-  color: '#141836',
-});
-
-globalStyle(`.light .${menuButtonHighlight}`, {
-  background:
-    'linear-gradient(135deg, rgba(143, 161, 245, 0.28), rgba(103, 133, 236, 0.18))',
-  color: '#141836',
-  boxShadow: '0 12px 28px rgba(120, 145, 226, 0.35)',
-});
-
-globalStyle(`.light .${menuButtonActive}`, {
-  background: 'rgba(154, 172, 245, 0.24)',
-  color: '#1b2350',
-  boxShadow: '0 16px 32px rgba(140, 160, 240, 0.28)',
-});
-
-globalStyle(`.light .${menuButtonHighlight}:hover`, {
-  background:
-    'linear-gradient(135deg, rgba(165, 181, 248, 0.36), rgba(126, 153, 240, 0.24))',
-});
-
-globalStyle(`.light .${menuButtonOpen}`, {
-  background: 'rgba(147, 167, 255, 0.24)',
-  color: '#141836',
-});
-
-globalStyle(`.light .${iconWrapper}`, {
-  background: 'rgba(153, 168, 226, 0.24)',
-  color: '#5360a3',
-});
-
-globalStyle(`.light .${tag}`, {
-  background: 'rgba(172, 185, 249, 0.34)',
-  color: '#1f2652',
-});
-
-globalStyle(`.light .${divider}`, {
-  background:
-    'linear-gradient(90deg, rgba(176, 189, 233, 0) 0%, rgba(176, 189, 233, 0.85) 50%, rgba(176, 189, 233, 0) 100%)',
-});
-
-globalStyle(`.light .${controlButton}`, {
-  background: 'rgba(244, 247, 255, 0.92)',
-  border: '1px solid rgba(176, 189, 233, 0.75)',
-  color: '#2f3762',
-});
-
-globalStyle(`.light .${controlButton}:hover`, {
-  background: 'rgba(231, 237, 255, 0.96)',
-  borderColor: 'rgba(148, 166, 233, 0.95)',
-  color: '#111633',
 });
