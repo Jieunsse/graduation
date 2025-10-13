@@ -10,10 +10,6 @@ interface TimelineSliderProps {
   onTimeChange: (time: number) => void;
 }
 
-const clamp = (value: number, min: number, max: number) => {
-  return Math.min(Math.max(value, min), max);
-};
-
 const formatRaceTime = (seconds: number) => {
   const minutes = Math.floor(seconds / 60);
   const remaining = Math.floor(seconds % 60);
@@ -27,17 +23,50 @@ export const TimelineSlider = ({
   currentTime,
   onTimeChange,
 }: TimelineSliderProps) => {
-  const minTime = events.length > 0 ? events[0].time : 0;
-  const maxTime = events.length > 0 ? events[events.length - 1].time : 0;
-  const range = Math.max(maxTime - minTime, 1);
-  const clampedTime = clamp(currentTime, minTime, maxTime);
-  const progress = range === 0 ? 0 : ((clampedTime - minTime) / range) * 100;
+  const eventTimes = useMemo(() => events.map((event) => event.time), [events]);
+  const eventCount = eventTimes.length;
+  const maxIndex = Math.max(eventCount - 1, 0);
+
+  const findNearestEventIndex = useCallback(
+    (time: number) => {
+      if (eventCount === 0) {
+        return 0;
+      }
+
+      let nearestIndex = 0;
+      let smallestDistance = Math.abs(eventTimes[0] - time);
+
+      for (let index = 1; index < eventCount; index += 1) {
+        const distance = Math.abs(eventTimes[index] - time);
+        if (distance < smallestDistance) {
+          smallestDistance = distance;
+          nearestIndex = index;
+        }
+      }
+
+      return nearestIndex;
+    },
+    [eventCount, eventTimes]
+  );
+
+  const currentIndex = useMemo(
+    () => findNearestEventIndex(currentTime),
+    [currentTime, findNearestEventIndex]
+  );
+
+  const activeTime = eventCount > 0 ? eventTimes[currentIndex] : 0;
+  const maxTime = eventCount > 0 ? eventTimes[eventCount - 1] : 0;
+  const progress = maxIndex === 0 ? 0 : (currentIndex / maxIndex) * 100;
 
   const handleInputChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      onTimeChange(Number(event.target.value));
+      const nextIndex = Number(event.target.value);
+      const nextTime = eventTimes[nextIndex];
+      if (typeof nextTime === 'number') {
+        onTimeChange(nextTime);
+      }
     },
-    [onTimeChange]
+    [eventTimes, onTimeChange]
   );
 
   const handleMarkerClick = useCallback(
@@ -50,30 +79,33 @@ export const TimelineSlider = ({
   const handleWheel = useCallback(
     (event: React.WheelEvent<HTMLDivElement>) => {
       event.preventDefault();
-      if (range === 0) {
+      if (eventCount === 0) {
         return;
       }
 
       const direction = event.deltaY > 0 ? 1 : -1;
-      const step = Math.max(1, Math.round(range / 120));
-      const next = clamp(currentTime + direction * step, minTime, maxTime);
-      onTimeChange(next);
+      const nextIndex = Math.min(Math.max(currentIndex + direction, 0), maxIndex);
+      const nextTime = eventTimes[nextIndex];
+      if (typeof nextTime === 'number' && nextTime !== activeTime) {
+        onTimeChange(nextTime);
+      }
     },
-    [currentTime, maxTime, minTime, onTimeChange, range]
+    [activeTime, currentIndex, eventCount, eventTimes, maxIndex, onTimeChange]
   );
 
   const markers = useMemo(() => {
-    return events.map((event) => {
-      const percent = ((event.time - minTime) / range) * 100;
+    return events.map((event, index) => {
+      const percent = maxIndex === 0 ? 0 : (index / maxIndex) * 100;
       return {
         id: event.id,
         type: event.type,
         time: event.time,
         percent: Number.isFinite(percent) ? percent : 0,
         label: `${raceEventTypeLabel[event.type]} · ${formatRaceTime(event.time)}`,
+        isActive: index === currentIndex,
       };
     });
-  }, [events, minTime, range]);
+  }, [currentIndex, events, maxIndex]);
 
   return (
     <div className={styles.sliderContainer} onWheel={handleWheel}>
@@ -90,7 +122,7 @@ export const TimelineSlider = ({
                 key={marker.id}
                 type="button"
                 style={{ left: `${marker.percent}%` }}
-                className={`${styles.marker} ${styles.markerByType[marker.type]}`}
+                className={`${styles.marker} ${styles.markerByType[marker.type]} ${marker.isActive ? styles.markerActive : ''}`}
                 onClick={() => handleMarkerClick(marker.time)}
                 aria-label={marker.label}
               />
@@ -104,10 +136,10 @@ export const TimelineSlider = ({
         </div>
         <input
           type="range"
-          min={minTime}
-          max={maxTime}
+          min={0}
+          max={maxIndex}
           step={1}
-          value={clampedTime}
+          value={currentIndex}
           onChange={handleInputChange}
           className={styles.sliderInput}
           aria-label="Race timeline"
@@ -116,7 +148,7 @@ export const TimelineSlider = ({
       </div>
 
       <div className={styles.playheadTime}>
-        <span>현재 시점 {formatRaceTime(clampedTime)}</span>
+        <span>현재 시점 {formatRaceTime(activeTime)}</span>
         <span>전체 {formatRaceTime(maxTime)}</span>
       </div>
 

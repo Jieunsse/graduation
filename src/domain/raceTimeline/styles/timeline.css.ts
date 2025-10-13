@@ -38,8 +38,6 @@ export const heroGlow = style({
   width: 320,
   height: 320,
   borderRadius: '50%',
-  // background:
-  // 'radial-gradient(circle, rgba(155, 17, 18, 0.45), transparent 65%)',
   filter: 'blur(0px)',
   pointerEvents: 'none',
 });
@@ -209,13 +207,17 @@ export const markerByType = styleVariants(eventColors, ({ base, glow }) => ({
   boxShadow: `0 0 0 4px ${glow}`,
 }));
 
+export const markerActive = style({
+  transform: 'translate(-50%, -50%) scale(1.25)',
+  filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.35))',
+});
+
 export const playheadTime = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
   gap: 16,
   fontSize: 14,
-  color: 'rgba(200, 206, 240, 0.75)',
 });
 
 export const controlsRow = style({
@@ -397,7 +399,7 @@ export const lightDivider = style({
 // Light mode overrides
 
 globalStyle(`.light .${hero}`, {
-  border: '1px solid rgba(26, 28, 46, 0.78)',
+  border: '1px solid rgba(63, 77, 126, 0.35)',
 });
 
 globalStyle(`.light .${heroMeta}`, {
@@ -487,10 +489,6 @@ globalStyle(`.light .${controlButton}`, {
 
 globalStyle(`.light .${controlButton}:hover`, {
   background: 'rgba(206, 214, 255, 0.9)',
-});
-
-globalStyle(`.light .${controlButtonPrimary}`, {
-  // boxShadow: '0 16px 28px rgba(155, 17, 18, 0.25)',
 });
 
 globalStyle(`.light .${controlLabel}`, {

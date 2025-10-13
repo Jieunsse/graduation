@@ -1,5 +1,5 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { lightVars } from '@shared/styles/token.css.ts';
+import { colorVars } from '@shared/styles/color.css.ts';
 
 export const hero = style({
   display: 'flex',
@@ -8,7 +8,7 @@ export const hero = style({
   justifyContent: 'center',
   minHeight: '80vh',
   textAlign: 'center',
-  color: '#fff',
+  color: colorVars.text.highlight,
   padding: '2rem',
   transition: 'color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease',
 });
@@ -31,36 +31,37 @@ export const description = style({
 export const ctaButton = style({
   borderRadius: '12px',
   padding: '0.75rem 1.5rem',
-  color: '#fff',
+  color: colorVars.text.highlight,
   cursor: 'pointer',
   transition: 'background 0.2s ease, box-shadow 0.2s ease',
   ':hover': {
-    background: '#2563eb',
-    boxShadow: '0 18px 32px rgba(37, 99, 235, 0.25)',
+    background: colorVars.accent.blue,
+    boxShadow: colorVars.effect.accentShadow,
   },
 });
 
 globalStyle(`.light .${hero}`, {
-  color: lightVars.color.textPrimary,
+  color: colorVars.text.primary,
   padding: '3rem 2.5rem',
   gap: '1.5rem',
 });
 
 globalStyle(`.light .${title}`, {
-  color: lightVars.color.textPrimary,
+  color: colorVars.text.primary,
 });
 
 globalStyle(`.light .${description}`, {
-  color: lightVars.color.textSecondary,
+  color: colorVars.text.secondary,
 });
 
 globalStyle(`.light .${ctaButton}`, {
-  background: '#9B1112',
-  color: lightVars.color.textLight,
-  boxShadow: '0 18px 36px rgba(155, 17, 18, 0.25)',
+  background: colorVars.brand.primary,
+  color: colorVars.brand.onPrimary,
+  boxShadow: colorVars.effect.brandShadow,
 });
 
 globalStyle(`.light .${ctaButton}:hover`, {
-  background: '#b71516',
-  boxShadow: '0 22px 40px rgba(155, 17, 18, 0.28)',
+  background: colorVars.brand.primaryHover,
+  color: colorVars.brand.onPrimaryHover,
+  boxShadow: colorVars.effect.brandShadowHover,
 });

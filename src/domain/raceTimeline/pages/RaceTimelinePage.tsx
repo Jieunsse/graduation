@@ -15,82 +15,77 @@ interface RaceTimelinePageProps {
   setAppearance: React.Dispatch<React.SetStateAction<'light' | 'dark'>>;
 }
 
-const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
+const findNearestEventIndex = (events: RaceEvent[], time: number) => {
+  if (events.length === 0) {
+    return 0;
+  }
 
-const getActiveEvent = (events: RaceEvent[], currentTime: number) => {
-  let latest: RaceEvent | undefined;
-  for (let index = 0; index < events.length; index += 1) {
-    const event = events[index];
-    if (event.time <= currentTime) {
-      latest = event;
-    } else {
-      break;
+  let nearestIndex = 0;
+  let smallestDistance = Math.abs(events[0].time - time);
+
+  for (let index = 1; index < events.length; index += 1) {
+    const distance = Math.abs(events[index].time - time);
+    if (distance < smallestDistance) {
+      smallestDistance = distance;
+      nearestIndex = index;
     }
   }
 
-  return latest;
+  return nearestIndex;
 };
 
 export const RaceTimelinePage = ({ appearance, setAppearance }: RaceTimelinePageProps) => {
   const { data: events = [], isLoading } = useRaceEvents();
-  const [currentTime, setCurrentTime] = useState(0);
+  const [currentEventIndex, setCurrentEventIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [speed, setSpeed] = useState(1);
 
-  const minTime = events.length > 0 ? events[0].time : 0;
-  const maxTime = events.length > 0 ? events[events.length - 1].time : 0;
+  const currentEvent = events[currentEventIndex];
+  const currentTime = currentEvent?.time ?? 0;
 
   useEffect(() => {
     if (events.length > 0) {
-      setCurrentTime((previous) => {
+      setCurrentEventIndex((previous) => {
         if (previous === 0) {
-          return events[0].time;
+          return 0;
         }
-        return clamp(previous, events[0].time, maxTime);
+        return Math.min(previous, events.length - 1);
       });
+    } else {
+      setCurrentEventIndex(0);
     }
-  }, [events, maxTime]);
+  }, [events]);
 
   useEffect(() => {
     if (!isPlaying || events.length === 0) {
       return;
     }
 
-    let animationFrame: number;
-    let previousTimestamp: number | null = null;
+    if (currentEventIndex >= events.length - 1) {
+      setIsPlaying(false);
+      return;
+    }
 
-    const step = (timestamp: number) => {
-      if (previousTimestamp === null) {
-        previousTimestamp = timestamp;
-        animationFrame = requestAnimationFrame(step);
-        return;
-      }
+    const duration = Math.max(100, Math.round(3000 / speed));
 
-      const deltaSeconds = (timestamp - previousTimestamp) / 1000;
-      previousTimestamp = timestamp;
-
-      setCurrentTime((prev) => {
-        const next = clamp(prev + deltaSeconds * speed * 6, minTime, maxTime);
-        if (next >= maxTime) {
+    const timeoutId = window.setTimeout(() => {
+      setCurrentEventIndex((prev) => {
+        if (prev >= events.length - 1) {
           setIsPlaying(false);
-          return maxTime;
+          return prev;
         }
-        return next;
+        return prev + 1;
       });
-
-      animationFrame = requestAnimationFrame(step);
-    };
-
-    animationFrame = requestAnimationFrame(step);
+    }, duration);
 
     return () => {
-      cancelAnimationFrame(animationFrame);
+      window.clearTimeout(timeoutId);
     };
-  }, [events.length, isPlaying, maxTime, minTime, speed]);
+  }, [currentEventIndex, events.length, isPlaying, speed]);
 
   const activeEvent = useMemo(
-    () => (events.length > 0 ? getActiveEvent(events, currentTime) : undefined),
-    [currentTime, events],
+    () => (events.length > 0 ? events[currentEventIndex] : undefined),
+    [currentEventIndex, events],
   );
 
   const upcomingEvents = useMemo(() => {
@@ -98,12 +93,15 @@ export const RaceTimelinePage = ({ appearance, setAppearance }: RaceTimelinePage
       return [];
     }
 
-    const pivot = activeEvent ? activeEvent.time : currentTime;
-    return events.filter((event) => event.time > pivot);
-  }, [activeEvent, currentTime, events]);
+    return events.slice(currentEventIndex + 1);
+  }, [currentEventIndex, events]);
 
   const handleTimeChange = (value: number) => {
-    setCurrentTime(value);
+    if (events.length === 0) {
+      return;
+    }
+
+    setCurrentEventIndex(findNearestEventIndex(events, value));
   };
 
   const handleTogglePlay = () => {
@@ -111,8 +109,8 @@ export const RaceTimelinePage = ({ appearance, setAppearance }: RaceTimelinePage
       return;
     }
 
-    if (!isPlaying && currentTime >= maxTime) {
-      setCurrentTime(events[0].time);
+    if (!isPlaying && currentEventIndex >= events.length - 1) {
+      setCurrentEventIndex(0);
     }
 
     setIsPlaying((prev) => !prev);
@@ -124,7 +122,7 @@ export const RaceTimelinePage = ({ appearance, setAppearance }: RaceTimelinePage
     }
 
     setIsPlaying(false);
-    setCurrentTime(events[0].time);
+    setCurrentEventIndex(0);
   };
 
   const handleSpeedChange = (nextSpeed: number) => {
