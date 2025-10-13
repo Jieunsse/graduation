@@ -83,7 +83,13 @@ export const colorVars = createGlobalThemeContract({
   },
 });
 
-const darkPalette = {
+type PaletteFromContract<T> = {
+  [K in keyof T]: T[K] extends string ? string : PaletteFromContract<T[K]>;
+};
+
+type Palette = PaletteFromContract<typeof colorVars>;
+
+const darkPalette: Palette = {
   brand: {
     primary: '#9B1112',
     primaryHover: '#b71516',
@@ -169,9 +175,9 @@ const darkPalette = {
     white: '#ffffff',
     black: '#000000',
   },
-} as const;
+};
 
-const lightPalette: typeof darkPalette = {
+const lightPalette: Palette = {
   brand: {
     primary: '#9B1112',
     primaryHover: '#b71516',
