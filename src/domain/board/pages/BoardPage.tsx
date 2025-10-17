@@ -1,12 +1,12 @@
 import React, { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { MainContainer } from '@shared/layout/MainContainer.tsx';
-import { SideBar } from '@shared/ui/sidebar/SideBar.tsx';
-import { Header } from '@shared/ui/header/Header.tsx';
-import { Footer } from '@shared/ui/footer/Footer.tsx';
+import { Link, useNavigate } from 'react-router-dom';
+import { MainContainer } from '../../../shared/layout/MainContainer.tsx';
+import { SideBar } from '../../../shared/ui/sidebar/SideBar.tsx';
+import { Header } from '../../../shared/ui/header/Header.tsx';
+import { Footer } from '../../../shared/ui/footer/Footer.tsx';
 import * as styles from '../styles/boardPage.css.ts';
-import { mockBoardPosts } from '../data/mockPosts.ts';
-import type { BoardPost } from '@domain/board/types';
+import type { BoardPost } from '../types/types.ts';
+import { useBoardStore } from '../store/boardStore.ts';
 
 const categories = ['전체', '공지', '정보', '잡담', '후기', '질문'] as const;
 
@@ -38,21 +38,23 @@ const getBadgeLabel = (post: BoardPost) => {
 };
 
 export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
+  const navigate = useNavigate();
+  const posts = useBoardStore((state) => state.posts);
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>('전체');
   const [searchQuery, setSearchQuery] = useState('');
 
   const summary = useMemo(() => {
-    const total = mockBoardPosts.length;
-    const hot = mockBoardPosts.filter((post) => post.isHot).length;
-    const today = mockBoardPosts.filter((post) => post.isNew).length;
+    const total = posts.length;
+    const hot = posts.filter((post) => post.isHot).length;
+    const today = posts.filter((post) => post.isNew).length;
 
     return { total, hot, today };
-  }, []);
+  }, [posts]);
 
   const filteredPosts = useMemo(() => {
     const normalizedQuery = searchQuery.trim().toLowerCase();
 
-    return mockBoardPosts
+    return posts
       .filter((post) => {
         const categoryMatch =
           activeCategory === '전체' ? true : post.category === activeCategory;
@@ -79,7 +81,7 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
 
         return b.id - a.id;
       });
-  }, [activeCategory, searchQuery]);
+  }, [activeCategory, searchQuery, posts]);
 
   return (
     <MainContainer
@@ -107,7 +109,11 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
           </div>
 
           <div className={styles.heroActions}>
-            <button type="button" className={styles.secondaryButton}>
+            <button
+              type="button"
+              className={styles.secondaryButton}
+              onClick={() => navigate('/board/write')}
+            >
               새 글 작성하기
             </button>
             <button type="button" className={styles.secondaryButton}>
