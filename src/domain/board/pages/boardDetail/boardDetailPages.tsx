@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { MainContainer } from '@shared/layout/MainContainer.tsx';
-import { SideBar } from '@shared/ui/sidebar/SideBar.tsx';
-import { Header } from '@shared/ui/header/Header.tsx';
-import { Footer } from '@shared/ui/footer/Footer.tsx';
-import { BoardDetail } from '@domain/board/components/boardDetail/boardDetail.tsx';
-import { mockBoardPosts } from '@domain/board/data/mockPosts.ts';
-import * as styles from '@domain/board/styles/boardDetail.css.ts';
+import { MainContainer } from '../../../../shared/layout/MainContainer.tsx';
+import { SideBar } from '../../../../shared/ui/sidebar/SideBar.tsx';
+import { Header } from '../../../../shared/ui/header/Header.tsx';
+import { Footer } from '../../../../shared/ui/footer/Footer.tsx';
+import { BoardDetail } from '../../components/boardDetail/boardDetail.tsx';
+import * as styles from '../../styles/boardDetail.css.ts';
+import { useBoardStore } from '../../store/boardStore.ts';
 
 interface BoardDetailPageProps {
   appearance: 'light' | 'dark';
@@ -20,10 +20,11 @@ export const BoardDetailPage = ({
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const postId = Number(id);
+  const posts = useBoardStore((state) => state.posts);
 
   const post = useMemo(
-    () => mockBoardPosts.find((item) => item.id === postId),
-    [postId]
+    () => posts.find((item) => item.id === postId),
+    [posts, postId]
   );
 
   const handleBack = () => {
