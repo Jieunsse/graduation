@@ -2,10 +2,13 @@ import { create } from 'zustand';
 import { mockBoardPosts } from '../data/mockPosts.ts';
 import type { BoardPost } from '../types/types.ts';
 
+type UserSelectableCategory = Exclude<BoardPost['category'], '공지'>;
+
 interface AddPostPayload {
   title: string;
   author: string;
   content: string;
+  category: UserSelectableCategory;
 }
 
 interface BoardState {
@@ -48,7 +51,7 @@ export const useBoardStore = create<BoardState>((set, get) => ({
       views: 0,
       comments: 0,
       likes: 0,
-      category: '잡담',
+      category: payload.category,
       tags: [],
       isNew: true,
       content: parseContent(trimmedContent),
@@ -59,3 +62,5 @@ export const useBoardStore = create<BoardState>((set, get) => ({
     return newPost;
   },
 }));
+
+export type { UserSelectableCategory };

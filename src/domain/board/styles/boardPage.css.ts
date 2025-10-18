@@ -335,6 +335,11 @@ export const pageButtonActive = style({
   borderColor: 'rgba(134, 159, 255, 0.85)',
 });
 
+globalStyle(`.${pageButton}:disabled`, {
+  opacity: 0.4,
+  cursor: 'not-allowed',
+});
+
 export const emptyState = style({
   padding: '48px 24px',
   textAlign: 'center',
