@@ -2,7 +2,8 @@ import React, { useMemo, useState } from 'react';
 import { Input, TextArea, Button } from '@radix-ui/themes';
 import { useNavigate } from 'react-router-dom';
 import * as styles from './boardWrite.css.ts';
-import { useBoardStore } from '../../store/boardStore.ts';
+import { BoardDropDown } from '../../../components/boardDropDown/boardDropDown.tsx';
+import { useBoardStore, type UserSelectableCategory } from '../../store/boardStore.ts';
 
 type FieldKey = 'title' | 'author' | 'content';
 
@@ -18,6 +19,7 @@ export const BoardWrite = () => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [content, setContent] = useState('');
+  const [category, setCategory] = useState<UserSelectableCategory>('정보');
   const [touched, setTouched] = useState<Record<FieldKey, boolean>>({
     title: false,
     author: false,
@@ -66,6 +68,7 @@ export const BoardWrite = () => {
       title,
       author,
       content,
+      category,
     });
 
     navigate('/board');
@@ -82,6 +85,10 @@ export const BoardWrite = () => {
       </header>
 
       <form className={styles.form} onSubmit={handleSubmit}>
+        <div className={styles.field}>
+          <BoardDropDown value={category} onChange={setCategory} />
+        </div>
+
         <div className={styles.field}>
           <label htmlFor="board-write-title" className={styles.label}>
             제목
