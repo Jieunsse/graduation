@@ -10,6 +10,7 @@ import { CalenderPage } from '../../domain/calender/pages/CalenderPage.tsx';
 import { RaceTimelinePage } from '../../domain/raceTimeline/pages/RaceTimelinePage.tsx';
 import { LoginPage } from '../../domain/user/pages/login/LoginPage.tsx';
 import { SignupPage } from '../../domain/user/pages/signup/SignupPage.tsx';
+import { DriverCardPage } from '../../domain/driver/pages/driverCardPage.tsx';
 
 interface RouterProps {
   appearance: 'light' | 'dark';
@@ -90,6 +91,15 @@ export const Router = ({ appearance, setAppearance }: RouterProps) => {
           path="/timeline"
           element={
             <RaceTimelinePage
+              appearance={appearance}
+              setAppearance={setAppearance}
+            />
+          }
+        />
+        <Route
+          path="/drivers"
+          element={
+            <DriverCardPage
               appearance={appearance}
               setAppearance={setAppearance}
             />
