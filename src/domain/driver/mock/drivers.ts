@@ -4,7 +4,7 @@ export const drivers: Driver[] = [
   {
     id: 'alexander-albon',
     driverNumber: 23,
-    name: 'Alexander Albon',
+    name: '알렉산더 알본',
     team: 'Williams Racing',
     nationality: 'Thailand',
     countryCode: 'TH',
@@ -18,7 +18,7 @@ export const drivers: Driver[] = [
   {
     id: 'fernando-alonso',
     driverNumber: 14,
-    name: 'Fernando Alonso',
+    name: '페르난도 알론소',
     team: 'Aston Martin Aramco F1 Team',
     nationality: 'Spain',
     countryCode: 'ES',
@@ -32,7 +32,7 @@ export const drivers: Driver[] = [
   {
     id: 'kimi-antonelli',
     driverNumber: 7,
-    name: 'Kimi Antonelli',
+    name: '키미 안토넬리',
     team: 'Mercedes-AMG PETRONAS F1 Team',
     nationality: 'Italy',
     countryCode: 'IT',
@@ -46,8 +46,8 @@ export const drivers: Driver[] = [
   {
     id: 'oliver-bearman',
     driverNumber: 87,
-    name: 'Oliver Bearman',
-    team: 'Scuderia Ferrari',
+    name: '올리버 베어맨',
+    team: 'Hass F1 Team',
     nationality: 'United Kingdom',
     countryCode: 'GB',
     points: 18,
@@ -60,8 +60,8 @@ export const drivers: Driver[] = [
   {
     id: 'gabriel-bortoleto',
     driverNumber: 5,
-    name: 'Gabriel Bortoleto',
-    team: 'Visa Cash App RB F1 Team',
+    name: '가브리엘 보르톨레토',
+    team: 'Kick Sauber',
     nationality: 'Brazil',
     countryCode: 'BR',
     points: 0,
@@ -74,7 +74,7 @@ export const drivers: Driver[] = [
   {
     id: 'franco-colapinto',
     driverNumber: 43,
-    name: 'Franco Colapinto',
+    name: '프랑코 콜라핀토',
     team: 'Williams Racing',
     nationality: 'Argentina',
     countryCode: 'AR',
@@ -88,7 +88,7 @@ export const drivers: Driver[] = [
   {
     id: 'pierre-gasly',
     driverNumber: 10,
-    name: 'Pierre Gasly',
+    name: '피에르 가슬리',
     team: 'BWT Alpine F1 Team',
     nationality: 'France',
     countryCode: 'FR',
@@ -102,8 +102,8 @@ export const drivers: Driver[] = [
   {
     id: 'isack-hadjar',
     driverNumber: 20,
-    name: 'Isack Hadjar',
-    team: 'Visa Cash App RB F1 Team',
+    name: '이삭 하자르',
+    team: 'Racing Bulls',
     nationality: 'France',
     countryCode: 'FR',
     points: 0,
@@ -116,7 +116,7 @@ export const drivers: Driver[] = [
   {
     id: 'lewis-hamilton',
     driverNumber: 44,
-    name: 'Lewis Hamilton',
+    name: '루이스 해밀턴',
     team: 'Mercedes-AMG PETRONAS F1 Team',
     nationality: 'United Kingdom',
     countryCode: 'GB',
@@ -130,7 +130,7 @@ export const drivers: Driver[] = [
   {
     id: 'nico-hulkenberg',
     driverNumber: 27,
-    name: 'Nico Hülkenberg',
+    name: '니코 휠켄베르크',
     team: 'MoneyGram Haas F1 Team',
     nationality: 'Germany',
     countryCode: 'DE',
@@ -144,8 +144,8 @@ export const drivers: Driver[] = [
   {
     id: 'liam-lawson',
     driverNumber: 30,
-    name: 'Liam Lawson',
-    team: 'Visa Cash App RB F1 Team',
+    name: '리암 로슨',
+    team: 'Racing Bulls',
     nationality: 'New Zealand',
     countryCode: 'NZ',
     points: 2,
@@ -158,7 +158,7 @@ export const drivers: Driver[] = [
   {
     id: 'charles-leclerc',
     driverNumber: 16,
-    name: 'Charles Leclerc',
+    name: '샤를 르클레르',
     team: 'Scuderia Ferrari',
     nationality: 'Monaco',
     countryCode: 'MC',
@@ -172,7 +172,7 @@ export const drivers: Driver[] = [
   {
     id: 'lando-norris',
     driverNumber: 4,
-    name: 'Lando Norris',
+    name: '랜도 노리스',
     team: 'McLaren Formula 1 Team',
     nationality: 'United Kingdom',
     countryCode: 'GB',
@@ -184,7 +184,7 @@ export const drivers: Driver[] = [
       'https://www.formula1.com/content/dam/fom-website/drivers/L/LANNOR01_Lando_Norris/lannor01.png.transform/9col/image.png',
   },
   {
-    id: 'esteban-ocon',
+    id: '에스테반 오콘',
     driverNumber: 31,
     name: 'Esteban Ocon',
     team: 'BWT Alpine F1 Team',
@@ -200,7 +200,7 @@ export const drivers: Driver[] = [
   {
     id: 'oscar-piastri',
     driverNumber: 81,
-    name: 'Oscar Piastri',
+    name: '오스카 피아스트리',
     team: 'McLaren Formula 1 Team',
     nationality: 'Australia',
     countryCode: 'AU',
@@ -214,7 +214,7 @@ export const drivers: Driver[] = [
   {
     id: 'george-russell',
     driverNumber: 63,
-    name: 'George Russell',
+    name: '조지 러셀',
     team: 'Mercedes-AMG PETRONAS F1 Team',
     nationality: 'United Kingdom',
     countryCode: 'GB',
@@ -228,8 +228,8 @@ export const drivers: Driver[] = [
   {
     id: 'carlos-sainz',
     driverNumber: 55,
-    name: 'Carlos Sainz',
-    team: 'Scuderia Ferrari',
+    name: '카를로스 사인츠',
+    team: '윌리엄스',
     nationality: 'Spain',
     countryCode: 'ES',
     points: 285,
@@ -242,7 +242,7 @@ export const drivers: Driver[] = [
   {
     id: 'lance-stroll',
     driverNumber: 18,
-    name: 'Lance Stroll',
+    name: '랜스 스트롤',
     team: 'Aston Martin Aramco F1 Team',
     nationality: 'Canada',
     countryCode: 'CA',
@@ -256,8 +256,8 @@ export const drivers: Driver[] = [
   {
     id: 'yuki-tsunoda',
     driverNumber: 22,
-    name: 'Yuki Tsunoda',
-    team: 'Visa Cash App RB F1 Team',
+    name: '유키 츠노다',
+    team: 'Oracle Red Bull Racing',
     nationality: 'Japan',
     countryCode: 'JP',
     points: 67,
@@ -270,7 +270,7 @@ export const drivers: Driver[] = [
   {
     id: 'max-verstappen',
     driverNumber: 1,
-    name: 'Max Verstappen',
+    name: '막스 베르스타펜',
     team: 'Oracle Red Bull Racing',
     nationality: 'Netherlands',
     countryCode: 'NL',

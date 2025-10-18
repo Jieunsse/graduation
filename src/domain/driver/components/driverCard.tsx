@@ -1,4 +1,3 @@
-import React from 'react';
 import * as styles from './driverCard.css.ts';
 import type { Driver } from '../types/driver.ts';
 
@@ -36,7 +35,11 @@ export const DriverCard = ({ driver }: DriverCardProps) => {
       <div className={styles.content}>
         <header className={styles.header}>
           <span className={styles.numberBadge}>#{driver.driverNumber}</span>
-          <span className={styles.flag} role="img" aria-label={driver.nationality}>
+          <span
+            className={styles.flag}
+            role="img"
+            aria-label={driver.nationality}
+          >
             {flagEmoji || driver.countryCode}
           </span>
         </header>
@@ -48,23 +51,23 @@ export const DriverCard = ({ driver }: DriverCardProps) => {
 
         <div className={styles.statList}>
           <div className={styles.statItem}>
-            <span className={styles.statLabel}>Nationality</span>
+            <span className={styles.statLabel}>국적</span>
             <span className={styles.statValue}>{driver.nationality}</span>
           </div>
           <div className={styles.statItem}>
-            <span className={styles.statLabel}>Points</span>
+            <span className={styles.statLabel}>포인트</span>
             <span className={styles.statValue}>{driver.points}</span>
           </div>
           <div className={styles.statItem}>
-            <span className={styles.statLabel}>Wins</span>
+            <span className={styles.statLabel}>우승</span>
             <span className={styles.statValue}>{driver.wins}</span>
           </div>
           <div className={styles.statItem}>
-            <span className={styles.statLabel}>Podiums</span>
+            <span className={styles.statLabel}>포디엄</span>
             <span className={styles.statValue}>{driver.podiums}</span>
           </div>
           <div className={styles.statItem}>
-            <span className={styles.statLabel}>Poles</span>
+            <span className={styles.statLabel}>폴 포지션</span>
             <span className={styles.statValue}>{driver.poles}</span>
           </div>
         </div>
