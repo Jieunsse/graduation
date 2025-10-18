@@ -1,9 +1,12 @@
 import React, { useMemo, useState } from 'react';
-import { Input, TextArea, Button } from '@radix-ui/themes';
+import { TextArea, Button } from '@radix-ui/themes';
 import { useNavigate } from 'react-router-dom';
 import * as styles from './boardWrite.css.ts';
 import { BoardDropDown } from '../../../components/boardDropDown/boardDropDown.tsx';
-import { useBoardStore, type UserSelectableCategory } from '../../store/boardStore.ts';
+import {
+  useBoardStore,
+  type UserSelectableCategory,
+} from '../../store/boardStore.ts';
 
 type FieldKey = 'title' | 'author' | 'content';
 
@@ -93,7 +96,7 @@ export const BoardWrite = () => {
           <label htmlFor="board-write-title" className={styles.label}>
             제목
           </label>
-          <Input
+          <input
             id="board-write-title"
             value={title}
             onChange={(event) => setTitle(event.target.value)}
@@ -110,7 +113,7 @@ export const BoardWrite = () => {
           <label htmlFor="board-write-author" className={styles.label}>
             작성자
           </label>
-          <Input
+          <input
             id="board-write-author"
             value={author}
             onChange={(event) => setAuthor(event.target.value)}
@@ -141,7 +144,11 @@ export const BoardWrite = () => {
         </div>
 
         <div className={styles.actions}>
-          <Button type="submit" className={styles.submitButton} disabled={!isValid}>
+          <Button
+            type="submit"
+            className={styles.submitButton}
+            disabled={!isValid}
+          >
             작성 완료
           </Button>
         </div>
