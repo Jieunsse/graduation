@@ -29,7 +29,7 @@ interface SideBarProps {
 
 const primaryNavigation: MenuItem[] = [
   { label: '레이스 캘린더', Icon: CalendarIcon, path: '/calendar' },
-  { label: '최신 뉴스', Icon: NewsIcon },
+  { label: 'Drivers', Icon: NewsIcon, path: '/drivers' },
   { label: 'FIA 문서', Icon: DocumentIcon },
   { label: '크리에이터 콘텐츠', Icon: CreatorIcon },
 ];
