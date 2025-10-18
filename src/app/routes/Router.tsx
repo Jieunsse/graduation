@@ -1,14 +1,16 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import React from 'react';
-import { BoardPage } from '@src/domain/board/pages/BoardPage.tsx';
-import { Home } from '@app/home/Home.tsx';
-import { LoginPage } from '@domain/user/pages/login/LoginPage.tsx';
-import { SignupPage } from '@domain/user/pages/signup/SignupPage.tsx';
-import { GuideGlossaryPage } from '@src/domain/ruleBook/pages/ruleBook/GuideGlossaryPage.tsx';
-import { GuideDetailPage } from '@src/domain/ruleBook/pages/ruleBookDetail/GuideDetailPage.tsx';
-import { BoardDetailPage } from '@domain/board/pages/boardDetail/boardDetailPages.tsx';
-import { CalenderPage } from '@domain/calender/pages/CalenderPage.tsx';
-import { RaceTimelinePage } from '@domain/raceTimeline/pages/RaceTimelinePage.tsx';
+import { Home } from '../home/Home.tsx';
+import { BoardPage } from '../../domain/board/pages/BoardPage.tsx';
+import { BoardDetailPage } from '../../domain/board/pages/boardDetail/boardDetailPages.tsx';
+import { BoardWritePage } from '../../domain/board/pages/boardWritePage/boardWritePage.tsx';
+import { GuideGlossaryPage } from '../../domain/ruleBook/pages/ruleBook/GuideGlossaryPage.tsx';
+import { GuideDetailPage } from '../../domain/ruleBook/pages/ruleBookDetail/GuideDetailPage.tsx';
+import { CalenderPage } from '../../domain/calender/pages/CalenderPage.tsx';
+import { RaceTimelinePage } from '../../domain/raceTimeline/pages/RaceTimelinePage.tsx';
+import { LoginPage } from '../../domain/user/pages/login/LoginPage.tsx';
+import { SignupPage } from '../../domain/user/pages/signup/SignupPage.tsx';
+import { DriverCardPage } from '../../domain/driver/pages/driverCardPage.tsx';
 
 interface RouterProps {
   appearance: 'light' | 'dark';
@@ -29,6 +31,15 @@ export const Router = ({ appearance, setAppearance }: RouterProps) => {
           path="/board"
           element={
             <BoardPage appearance={appearance} setAppearance={setAppearance} />
+          }
+        />
+        <Route
+          path="/board/write"
+          element={
+            <BoardWritePage
+              appearance={appearance}
+              setAppearance={setAppearance}
+            />
           }
         />
         <Route
@@ -80,6 +91,15 @@ export const Router = ({ appearance, setAppearance }: RouterProps) => {
           path="/timeline"
           element={
             <RaceTimelinePage
+              appearance={appearance}
+              setAppearance={setAppearance}
+            />
+          }
+        />
+        <Route
+          path="/drivers"
+          element={
+            <DriverCardPage
               appearance={appearance}
               setAppearance={setAppearance}
             />

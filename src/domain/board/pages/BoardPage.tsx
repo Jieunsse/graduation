@@ -1,14 +1,15 @@
-import React, { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { MainContainer } from '@shared/layout/MainContainer.tsx';
-import { SideBar } from '@shared/ui/sidebar/SideBar.tsx';
-import { Header } from '@shared/ui/header/Header.tsx';
-import { Footer } from '@shared/ui/footer/Footer.tsx';
+import React, { useEffect, useMemo, useState, useCallback } from 'react';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { MainContainer } from '../../../shared/layout/MainContainer.tsx';
+import { SideBar } from '../../../shared/ui/sidebar/SideBar.tsx';
+import { Header } from '../../../shared/ui/header/Header.tsx';
+import { Footer } from '../../../shared/ui/footer/Footer.tsx';
 import * as styles from '../styles/boardPage.css.ts';
-import { mockBoardPosts } from '../data/mockPosts.ts';
-import type { BoardPost } from '@domain/board/types';
+import type { BoardPost } from '../types/types.ts';
+import { useBoardStore } from '../store/boardStore.ts';
 
 const categories = ['전체', '공지', '정보', '잡담', '후기', '질문'] as const;
+const POSTS_PER_PAGE = 10;
 
 type CategoryFilter = (typeof categories)[number];
 
@@ -38,21 +39,25 @@ const getBadgeLabel = (post: BoardPost) => {
 };
 
 export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
+  const navigate = useNavigate();
+  const posts = useBoardStore((state) => state.posts);
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>('전체');
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const rawPageParam = searchParams.get('page');
 
   const summary = useMemo(() => {
-    const total = mockBoardPosts.length;
-    const hot = mockBoardPosts.filter((post) => post.isHot).length;
-    const today = mockBoardPosts.filter((post) => post.isNew).length;
+    const total = posts.length;
+    const hot = posts.filter((post) => post.isHot).length;
+    const today = posts.filter((post) => post.isNew).length;
 
     return { total, hot, today };
-  }, []);
+  }, [posts]);
 
   const filteredPosts = useMemo(() => {
     const normalizedQuery = searchQuery.trim().toLowerCase();
 
-    return mockBoardPosts
+    return posts
       .filter((post) => {
         const categoryMatch =
           activeCategory === '전체' ? true : post.category === activeCategory;
@@ -79,7 +84,81 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
 
         return b.id - a.id;
       });
-  }, [activeCategory, searchQuery]);
+  }, [activeCategory, searchQuery, posts]);
+
+  const totalPages = useMemo(
+    () => Math.max(1, Math.ceil(filteredPosts.length / POSTS_PER_PAGE)),
+    [filteredPosts]
+  );
+
+  const requestedPage = useMemo(() => {
+    const pageParam = Number(rawPageParam ?? '1');
+    if (!Number.isFinite(pageParam) || Number.isNaN(pageParam) || pageParam < 1) {
+      return 1;
+    }
+
+    return Math.floor(pageParam);
+  }, [rawPageParam]);
+
+  const currentPage = useMemo(
+    () => Math.min(requestedPage, totalPages),
+    [requestedPage, totalPages]
+  );
+
+  const updatePageQuery = useCallback(
+    (page: number) => {
+      setSearchParams((prev) => {
+        const next = new URLSearchParams(prev);
+        const nextPage = Math.min(Math.max(page, 1), totalPages);
+
+        if (nextPage === 1) {
+          next.delete('page');
+        } else {
+          next.set('page', String(nextPage));
+        }
+
+        return next;
+      }, { replace: true });
+    },
+    [setSearchParams, totalPages]
+  );
+
+  useEffect(() => {
+    const normalizedParam = currentPage === 1 ? null : String(currentPage);
+
+    if (normalizedParam === rawPageParam) {
+      return;
+    }
+
+    updatePageQuery(currentPage);
+  }, [currentPage, rawPageParam, updatePageQuery]);
+
+  const paginatedPosts = useMemo(() => {
+    const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+    return filteredPosts.slice(startIndex, startIndex + POSTS_PER_PAGE);
+  }, [currentPage, filteredPosts]);
+
+  const handleCategoryChange = (category: CategoryFilter) => {
+    setActiveCategory(category);
+    updatePageQuery(1);
+  };
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+    updatePageQuery(1);
+  };
+
+  const handlePageChange = (page: number) => {
+    updatePageQuery(page);
+  };
+
+  const pageNumbers = useMemo(() => {
+    const maxButtons = 3;
+    return Array.from({ length: Math.min(totalPages, maxButtons) }, (_, index) => index + 1);
+  }, [totalPages]);
+
+  const hasPreviousPage = currentPage > 1;
+  const hasNextPage = currentPage < totalPages;
 
   return (
     <MainContainer
@@ -107,7 +186,11 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
           </div>
 
           <div className={styles.heroActions}>
-            <button type="button" className={styles.secondaryButton}>
+            <button
+              type="button"
+              className={styles.secondaryButton}
+              onClick={() => navigate('/board/write')}
+            >
               새 글 작성하기
             </button>
             <button type="button" className={styles.secondaryButton}>
@@ -130,7 +213,7 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
                     key={category}
                     type="button"
                     className={categoryClass}
-                    onClick={() => setActiveCategory(category)}
+                    onClick={() => handleCategoryChange(category)}
                   >
                     {category}
                   </button>
@@ -144,7 +227,7 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
                 className={styles.searchInput}
                 placeholder="제목, 작성자, 태그 검색"
                 value={searchQuery}
-                onChange={(event) => setSearchQuery(event.target.value)}
+                onChange={handleSearchChange}
               />
               <button type="button" className={styles.searchButton}>
                 검색
@@ -161,12 +244,12 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
           </div>
 
           <div className={styles.list}>
-            {filteredPosts.length === 0 ? (
+            {paginatedPosts.length === 0 ? (
               <div className={styles.emptyState}>
                 아직 등록된 글이 없습니다. 새로운 이야기를 가장 먼저 남겨보세요!
               </div>
             ) : (
-              filteredPosts.map((post) => {
+              paginatedPosts.map((post) => {
                 const badgeLabel = getBadgeLabel(post);
                 const rowClass = `${styles.listRowLink} ${
                   post.isNotice ? styles.listRowNotice : ''
@@ -212,22 +295,32 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
           </div>
 
           <div className={styles.pagination}>
-            <button type="button" className={styles.pageButton}>
-              ←
-            </button>
             <button
               type="button"
-              className={`${styles.pageButton} ${styles.pageButtonActive}`}
+              className={styles.pageButton}
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={!hasPreviousPage}
             >
-              1
+              ←
             </button>
-            <button type="button" className={styles.pageButton}>
-              2
-            </button>
-            <button type="button" className={styles.pageButton}>
-              3
-            </button>
-            <button type="button" className={styles.pageButton}>
+            {pageNumbers.map((pageNumber) => (
+              <button
+                key={pageNumber}
+                type="button"
+                className={`${styles.pageButton} ${
+                  pageNumber === currentPage ? styles.pageButtonActive : ''
+                }`}
+                onClick={() => handlePageChange(pageNumber)}
+              >
+                {pageNumber}
+              </button>
+            ))}
+            <button
+              type="button"
+              className={styles.pageButton}
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={!hasNextPage}
+            >
               →
             </button>
           </div>

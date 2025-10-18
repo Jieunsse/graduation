@@ -1,5 +1,6 @@
 // src/shared/ui/header/header.css.ts
-import { globalStyle, style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
+import { colorVars } from '@shared/styles/color.css.ts';
 
 export const box = style({
   position: 'fixed',
@@ -24,10 +25,10 @@ export const container = style({
   justifyContent: 'space-between',
   alignItems: 'center',
 
-  background: 'rgba(15, 21, 35, 0.92)', // ✅ 사이드바 controlButton 배경 톤 차용
-  border: '1px solid rgba(63, 77, 126, 0.55)', // ✅ 통일감
+  background: colorVars.surface.panel,
+  border: `1px solid ${colorVars.border.panel}`,
   borderRadius: '12px',
-  boxShadow: '0 12px 28px rgba(39, 58, 147, 0.35)', // ✅ highlight shadow와 유사
+  boxShadow: colorVars.effect.elevation,
 });
 
 export const headerRow = style({
@@ -39,7 +40,7 @@ export const headerRow = style({
 
 export const logo = style({
   fontFamily: 'Teko, serif',
-  color: '#9B1112', // ✅ 브랜드 블루
+  color: colorVars.brand.primary,
   fontSize: '40px',
   marginTop: '8px',
   background: 'none',
@@ -53,7 +54,7 @@ export const buttonStyle = style({
   cursor: 'pointer',
   padding: '10px 16px',
   backgroundColor: 'transparent',
-  color: '#c9d1f3', // ✅ 사이드바 기본 텍스트 컬러
+  color: colorVars.text.surface,
   fontFamily: `'Paperozi', sans-serif`,
   fontWeight: 400,
   fontSize: '16px',
@@ -67,73 +68,36 @@ export const buttonStyle = style({
     'background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease',
   selectors: {
     '&:visited': {
-      color: '#c9d1f3',
+      color: colorVars.text.surface,
     },
   },
 
   ':hover': {
-    background: 'rgba(91, 114, 196, 0.16)', // ✅ 사이드바 hover 배경
-    color: '#ffffff',
+    background: colorVars.surface.interactiveHover,
+    color: colorVars.text.menuButtonHover,
   },
 });
 
 export const buttonActive = style({
-  background: 'rgba(91, 114, 196, 0.24)',
-  color: '#ffffff',
-  boxShadow: '0 0 0 1px rgba(134, 159, 255, 0.35)',
+  background: colorVars.surface.interactiveActive,
+  color: colorVars.text.menuButtonHover,
+  boxShadow: colorVars.effect.focusRing,
 });
 
 export const loginButtonStyle = style({
   border: 'none',
   cursor: 'pointer',
   padding: '10px 16px',
-  background:
-    'linear-gradient(135deg, rgba(110, 135, 255, 0.28), rgba(68, 100, 238, 0.2))', // ✅ highlight 스타일 차용
+  background: colorVars.gradient.callout,
   borderRadius: '12px',
   fontFamily: `'Paperozi', sans-serif`,
   fontWeight: 500,
-  color: '#ffffff',
-  boxShadow: '0 12px 28px rgba(39, 58, 147, 0.35)',
+  color: colorVars.text.onCallout,
+  boxShadow: colorVars.effect.calloutShadow,
   transition: 'background 0.2s ease',
 
   ':hover': {
-    background:
-      'linear-gradient(135deg, rgba(134, 159, 255, 0.36), rgba(92, 121, 255, 0.26))',
+    background: colorVars.gradient.calloutHover,
+    color: colorVars.text.onCalloutHover,
   },
-});
-
-// Light mode overrides
-globalStyle(`.light .${container}`, {
-  background:
-    'linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(236, 240, 255, 0.94))',
-  border: '1px solid rgba(184, 196, 233, 0.8)',
-  boxShadow: '0 12px 28px rgba(159, 176, 231, 0.28)',
-});
-
-globalStyle(`.light .${buttonStyle}`, {
-  color: '#2f3762',
-});
-
-globalStyle(`.light .${buttonStyle}:hover`, {
-  background: 'rgba(150, 166, 237, 0.25)',
-  color: '#111633',
-});
-
-globalStyle(`.light .${buttonActive}`, {
-  background: 'rgba(150, 166, 237, 0.35)',
-  color: '#111633',
-  boxShadow: '0 0 0 1px rgba(150, 166, 237, 0.45)',
-});
-
-globalStyle(`.light .${loginButtonStyle}`, {
-  background:
-    'linear-gradient(135deg, rgba(155, 17, 18, 0.18), rgba(155, 17, 18, 0.12))',
-  color: '#9B1112',
-  boxShadow: '0 10px 22px rgba(155, 17, 18, 0.18)',
-});
-
-globalStyle(`.light .${loginButtonStyle}:hover`, {
-  background:
-    'linear-gradient(135deg, rgba(155, 17, 18, 0.24), rgba(155, 17, 18, 0.16))',
-  color: '#5c0909',
 });
