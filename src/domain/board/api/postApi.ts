@@ -1,5 +1,5 @@
 import type { AxiosResponse } from 'axios';
-import { httpClient } from '../../../shared/api/httpClient.ts';
+import { httpClient } from '@shared/api/httpClient.ts';
 
 export interface Post {
   postId: number;
@@ -21,7 +21,9 @@ export interface CreatePostRequest {
   tags?: string[];
 }
 
-export type UpdatePostRequest = Partial<Omit<Post, 'postId' | 'userId' | 'createdAt' | 'updatedAt'>>;
+export type UpdatePostRequest = Partial<
+  Omit<Post, 'postId' | 'userId' | 'createdAt' | 'updatedAt'>
+>;
 
 export const getAllPosts = async (): Promise<Post[]> => {
   const response: AxiosResponse<Post[]> = await httpClient.get('/posts');
@@ -29,12 +31,17 @@ export const getAllPosts = async (): Promise<Post[]> => {
 };
 
 export const getPostById = async (postId: number): Promise<Post> => {
-  const response: AxiosResponse<Post> = await httpClient.get(`/posts/${postId}`);
+  const response: AxiosResponse<Post> = await httpClient.get(
+    `/posts/${postId}`
+  );
   return response.data;
 };
 
 export const createPost = async (payload: CreatePostRequest): Promise<Post> => {
-  const response: AxiosResponse<Post> = await httpClient.post('/posts', payload);
+  const response: AxiosResponse<Post> = await httpClient.post(
+    '/posts',
+    payload
+  );
   return response.data;
 };
 
@@ -42,7 +49,10 @@ export const updatePost = async (
   postId: number,
   payload: UpdatePostRequest
 ): Promise<Post> => {
-  const response: AxiosResponse<Post> = await httpClient.put(`/posts/${postId}`, payload);
+  const response: AxiosResponse<Post> = await httpClient.put(
+    `/posts/${postId}`,
+    payload
+  );
   return response.data;
 };
 

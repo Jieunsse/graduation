@@ -1,5 +1,5 @@
 import type { AxiosResponse } from 'axios';
-import { httpClient } from '../../../shared/api/httpClient.ts';
+import { httpClient } from '@shared/api/httpClient.ts';
 
 export interface EventLog {
   eventLogId: number;
@@ -29,15 +29,22 @@ export const getAllEventLogs = async (): Promise<EventLog[]> => {
   return response.data;
 };
 
-export const getEventLogById = async (eventLogId: number): Promise<EventLog> => {
-  const response: AxiosResponse<EventLog> = await httpClient.get(`/eventlog/${eventLogId}`);
+export const getEventLogById = async (
+  eventLogId: number
+): Promise<EventLog> => {
+  const response: AxiosResponse<EventLog> = await httpClient.get(
+    `/eventlog/${eventLogId}`
+  );
   return response.data;
 };
 
 export const createEventLog = async (
   payload: CreateEventLogRequest
 ): Promise<EventLog> => {
-  const response: AxiosResponse<EventLog> = await httpClient.post('/eventlog', payload);
+  const response: AxiosResponse<EventLog> = await httpClient.post(
+    '/eventlog',
+    payload
+  );
   return response.data;
 };
 

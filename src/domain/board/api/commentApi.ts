@@ -1,5 +1,5 @@
 import type { AxiosResponse } from 'axios';
-import { httpClient } from '../../../shared/api/httpClient.ts';
+import { httpClient } from '@shared/api/httpClient.ts';
 
 export interface Comment {
   commentId: number;
@@ -24,14 +24,19 @@ export const getAllComments = async (): Promise<Comment[]> => {
 };
 
 export const getCommentById = async (commentId: number): Promise<Comment> => {
-  const response: AxiosResponse<Comment> = await httpClient.get(`/comments/${commentId}`);
+  const response: AxiosResponse<Comment> = await httpClient.get(
+    `/comments/${commentId}`
+  );
   return response.data;
 };
 
 export const createComment = async (
   payload: CreateCommentRequest
 ): Promise<Comment> => {
-  const response: AxiosResponse<Comment> = await httpClient.post('/comments', payload);
+  const response: AxiosResponse<Comment> = await httpClient.post(
+    '/comments',
+    payload
+  );
   return response.data;
 };
 

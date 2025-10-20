@@ -1,5 +1,5 @@
 import type { AxiosResponse } from 'axios';
-import { httpClient } from '../../../shared/api/httpClient.ts';
+import { httpClient } from '@shared/api/httpClient.ts';
 
 export interface LapHistory {
   lapHistoryId: number;
@@ -29,19 +29,27 @@ export type UpdateLapHistoryRequest = Partial<
 >;
 
 export const getAllLapHistories = async (): Promise<LapHistory[]> => {
-  const response: AxiosResponse<LapHistory[]> = await httpClient.get('/laphistory');
+  const response: AxiosResponse<LapHistory[]> =
+    await httpClient.get('/laphistory');
   return response.data;
 };
 
-export const getLapHistoryById = async (lapHistoryId: number): Promise<LapHistory> => {
-  const response: AxiosResponse<LapHistory> = await httpClient.get(`/laphistory/${lapHistoryId}`);
+export const getLapHistoryById = async (
+  lapHistoryId: number
+): Promise<LapHistory> => {
+  const response: AxiosResponse<LapHistory> = await httpClient.get(
+    `/laphistory/${lapHistoryId}`
+  );
   return response.data;
 };
 
 export const createLapHistory = async (
   payload: CreateLapHistoryRequest
 ): Promise<LapHistory> => {
-  const response: AxiosResponse<LapHistory> = await httpClient.post('/laphistory', payload);
+  const response: AxiosResponse<LapHistory> = await httpClient.post(
+    '/laphistory',
+    payload
+  );
   return response.data;
 };
 

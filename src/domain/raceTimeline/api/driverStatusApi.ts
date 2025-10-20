@@ -1,5 +1,5 @@
 import type { AxiosResponse } from 'axios';
-import { httpClient } from '../../../shared/api/httpClient.ts';
+import { httpClient } from '@shared/api/httpClient.ts';
 
 export interface DriverStatus {
   driverStatusId: number;
@@ -27,7 +27,8 @@ export type UpdateDriverStatusRequest = Partial<
 >;
 
 export const getAllDriverStatuses = async (): Promise<DriverStatus[]> => {
-  const response: AxiosResponse<DriverStatus[]> = await httpClient.get('/driverstatus');
+  const response: AxiosResponse<DriverStatus[]> =
+    await httpClient.get('/driverstatus');
   return response.data;
 };
 
@@ -43,7 +44,10 @@ export const getDriverStatusById = async (
 export const createDriverStatus = async (
   payload: CreateDriverStatusRequest
 ): Promise<DriverStatus> => {
-  const response: AxiosResponse<DriverStatus> = await httpClient.post('/driverstatus', payload);
+  const response: AxiosResponse<DriverStatus> = await httpClient.post(
+    '/driverstatus',
+    payload
+  );
   return response.data;
 };
 
@@ -58,6 +62,8 @@ export const updateDriverStatus = async (
   return response.data;
 };
 
-export const deleteDriverStatus = async (driverStatusId: number): Promise<void> => {
+export const deleteDriverStatus = async (
+  driverStatusId: number
+): Promise<void> => {
   await httpClient.delete(`/driverstatus/${driverStatusId}`);
 };

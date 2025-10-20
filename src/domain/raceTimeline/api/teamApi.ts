@@ -1,5 +1,5 @@
 import type { AxiosResponse } from 'axios';
-import { httpClient } from '../../../shared/api/httpClient.ts';
+import { httpClient } from '@shared/api/httpClient.ts';
 
 export interface Team {
   teamId: number;
@@ -16,7 +16,9 @@ export interface CreateTeamRequest {
   country: string;
 }
 
-export type UpdateTeamRequest = Partial<Omit<Team, 'teamId' | 'createdAt' | 'updatedAt'>>;
+export type UpdateTeamRequest = Partial<
+  Omit<Team, 'teamId' | 'createdAt' | 'updatedAt'>
+>;
 
 export const getAllTeams = async (): Promise<Team[]> => {
   const response: AxiosResponse<Team[]> = await httpClient.get('/team');
@@ -37,7 +39,10 @@ export const updateTeam = async (
   teamId: number,
   payload: UpdateTeamRequest
 ): Promise<Team> => {
-  const response: AxiosResponse<Team> = await httpClient.put(`/team/${teamId}`, payload);
+  const response: AxiosResponse<Team> = await httpClient.put(
+    `/team/${teamId}`,
+    payload
+  );
   return response.data;
 };
 

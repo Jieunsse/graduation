@@ -1,5 +1,5 @@
 import type { AxiosResponse } from 'axios';
-import { httpClient } from '../../../shared/api/httpClient.ts';
+import { httpClient } from '@shared/api/httpClient.ts';
 
 export interface Race {
   raceId: number;
@@ -20,7 +20,9 @@ export interface CreateRaceRequest {
   status: string;
 }
 
-export type UpdateRaceRequest = Partial<Omit<Race, 'raceId' | 'createdAt' | 'updatedAt'>>;
+export type UpdateRaceRequest = Partial<
+  Omit<Race, 'raceId' | 'createdAt' | 'updatedAt'>
+>;
 
 export const getAllRaces = async (): Promise<Race[]> => {
   const response: AxiosResponse<Race[]> = await httpClient.get('/race');
@@ -41,7 +43,10 @@ export const updateRace = async (
   raceId: number,
   payload: UpdateRaceRequest
 ): Promise<Race> => {
-  const response: AxiosResponse<Race> = await httpClient.put(`/race/${raceId}`, payload);
+  const response: AxiosResponse<Race> = await httpClient.put(
+    `/race/${raceId}`,
+    payload
+  );
   return response.data;
 };
 
