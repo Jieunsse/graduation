@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { TextArea, Button } from '@radix-ui/themes';
 import { useNavigate } from 'react-router-dom';
 import * as styles from './boardWrite.css.ts';
-import { BoardDropDown } from '../../../components/boardDropDown/boardDropDown.tsx';
+import { BoardDropDown } from '@domain/board/components/boardDropDown/boardDropDown.tsx';
 import {
   useBoardStore,
   type UserSelectableCategory,
