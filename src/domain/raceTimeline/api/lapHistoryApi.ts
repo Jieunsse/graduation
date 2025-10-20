@@ -12,6 +12,7 @@ export interface LapHistory {
   sector3Time: string;
   createdAt: string;
   updatedAt: string;
+  recordedAt: string;
 }
 
 export interface CreateLapHistoryRequest {
@@ -22,6 +23,7 @@ export interface CreateLapHistoryRequest {
   sector1Time: string;
   sector2Time: string;
   sector3Time: string;
+  recordedAt: string;
 }
 
 export type UpdateLapHistoryRequest = Partial<

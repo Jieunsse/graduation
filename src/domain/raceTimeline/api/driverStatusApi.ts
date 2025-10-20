@@ -4,22 +4,33 @@ import { httpClient } from '@shared/api/httpClient.ts';
 export interface DriverStatus {
   driverStatusId: number;
   raceId: number;
-  driverId: number;
+  driverId: string;
   status: string;
-  lapNumber: number;
+  currentLap: number;
   position: number;
-  time: string;
+  lastLapTime: string;
+
+  totalTime: string;
+  gap: string;
+  tire: string;
+  pitStops: number;
+
   createdAt: string;
   updatedAt: string;
 }
 
 export interface CreateDriverStatusRequest {
   raceId: number;
-  driverId: number;
+  driverId: string;
   status: string;
-  lapNumber: number;
+  currentLap: number;
   position: number;
-  time: string;
+  lastLapTime: string;
+
+  totalTime: string;
+  gap: string;
+  tire: string;
+  pitStops: number;
 }
 
 export type UpdateDriverStatusRequest = Partial<

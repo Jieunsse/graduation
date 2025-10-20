@@ -8,6 +8,7 @@ export interface Team {
   country: string;
   createdAt: string;
   updatedAt: string;
+  foundedYear: number;
 }
 
 export interface CreateTeamRequest {

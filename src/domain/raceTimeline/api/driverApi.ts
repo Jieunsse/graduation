@@ -2,22 +2,24 @@ import type { AxiosResponse } from 'axios';
 import { httpClient } from '@shared/api/httpClient.ts';
 
 export interface Driver {
-  driverId: number;
+  driverId: string;
   teamId: number;
-  driverName: string;
+  firstName: string;
+  lastName: string;
   carNumber: number;
-  country: string;
-  status: string;
+  nationality: string;
+  birthdate: string;
   createdAt: string;
   updatedAt: string;
 }
 
 export interface CreateDriverRequest {
   teamId: number;
-  driverName: string;
+  firstName: string;
+  lastName: string;
+  nationality: string;
+  birthdate: string;
   carNumber: number;
-  country: string;
-  status: string;
 }
 
 export type UpdateDriverRequest = Partial<

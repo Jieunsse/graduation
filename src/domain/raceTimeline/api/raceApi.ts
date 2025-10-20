@@ -3,20 +3,20 @@ import { httpClient } from '@shared/api/httpClient.ts';
 
 export interface Race {
   raceId: number;
-  eventName: string;
-  location: string;
-  startTime: string;
-  endTime: string;
+  season: number;
+  round: number;
+  circuitName: string;
+  raceDate: string;
   status: string;
   createdAt: string;
   updatedAt: string;
 }
 
 export interface CreateRaceRequest {
-  eventName: string;
-  location: string;
-  startTime: string;
-  endTime: string;
+  season: number;
+  round: number;
+  circuitName: string;
+  raceDate: string;
   status: string;
 }
 

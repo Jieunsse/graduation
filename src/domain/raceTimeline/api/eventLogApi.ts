@@ -4,7 +4,7 @@ import { httpClient } from '@shared/api/httpClient.ts';
 export interface EventLog {
   eventLogId: number;
   raceId: number;
-  driverId: number | null;
+  driverId: string;
   eventType: string;
   description: string;
   eventTime: string;
@@ -14,7 +14,7 @@ export interface EventLog {
 
 export interface CreateEventLogRequest {
   raceId: number;
-  driverId?: number;
+  driverId?: string;
   eventType: string;
   description: string;
   eventTime: string;
