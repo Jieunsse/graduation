@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { colorVars } from '../../../shared/styles/color.css.ts';
+import { colorVars } from '@shared/styles/color.css.ts';
 
 export const page = style({
   display: 'flex',
