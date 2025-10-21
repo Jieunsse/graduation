@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState, useCallback } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { MainContainer } from '../../../shared/layout/MainContainer.tsx';
-import { SideBar } from '../../../shared/ui/sidebar/SideBar.tsx';
-import { Header } from '../../../shared/ui/header/Header.tsx';
-import { Footer } from '../../../shared/ui/footer/Footer.tsx';
+import { MainContainer } from '@shared/layout/MainContainer.tsx';
+import { SideBar } from '@shared/ui/sidebar/SideBar.tsx';
+import { Header } from '@shared/ui/header/Header.tsx';
+import { Footer } from '@shared/ui/footer/Footer.tsx';
 import * as styles from '../styles/boardPage.css.ts';
 import type { BoardPost } from '../types/types.ts';
 import { useBoardStore } from '../store/boardStore.ts';
@@ -93,7 +93,11 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
 
   const requestedPage = useMemo(() => {
     const pageParam = Number(rawPageParam ?? '1');
-    if (!Number.isFinite(pageParam) || Number.isNaN(pageParam) || pageParam < 1) {
+    if (
+      !Number.isFinite(pageParam) ||
+      Number.isNaN(pageParam) ||
+      pageParam < 1
+    ) {
       return 1;
     }
 
@@ -107,18 +111,21 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
 
   const updatePageQuery = useCallback(
     (page: number) => {
-      setSearchParams((prev) => {
-        const next = new URLSearchParams(prev);
-        const nextPage = Math.min(Math.max(page, 1), totalPages);
+      setSearchParams(
+        (prev) => {
+          const next = new URLSearchParams(prev);
+          const nextPage = Math.min(Math.max(page, 1), totalPages);
 
-        if (nextPage === 1) {
-          next.delete('page');
-        } else {
-          next.set('page', String(nextPage));
-        }
+          if (nextPage === 1) {
+            next.delete('page');
+          } else {
+            next.set('page', String(nextPage));
+          }
 
-        return next;
-      }, { replace: true });
+          return next;
+        },
+        { replace: true }
+      );
     },
     [setSearchParams, totalPages]
   );
@@ -154,7 +161,10 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
 
   const pageNumbers = useMemo(() => {
     const maxButtons = 3;
-    return Array.from({ length: Math.min(totalPages, maxButtons) }, (_, index) => index + 1);
+    return Array.from(
+      { length: Math.min(totalPages, maxButtons) },
+      (_, index) => index + 1
+    );
   }, [totalPages]);
 
   const hasPreviousPage = currentPage > 1;

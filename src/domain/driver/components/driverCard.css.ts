@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { colorVars } from '../../../shared/styles/color.css.ts';
+import { colorVars } from '@shared/styles/color.css.ts';
 
 export const card = style({
   display: 'flex',
@@ -11,7 +11,8 @@ export const card = style({
   color: colorVars.text.primary,
   minHeight: '100%',
   boxShadow: colorVars.effect.elevation,
-  transition: 'transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease',
+  transition:
+    'transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease',
   selectors: {
     '&:hover': {
       transform: 'translateY(-8px)',
