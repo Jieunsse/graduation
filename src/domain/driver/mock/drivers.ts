@@ -1,4 +1,5 @@
 import type { Driver } from '../types/driver.ts';
+import kimiAntonelli from '@domain/driver/img/2025mercedesandant01right.png';
 
 export const drivers: Driver[] = [
   {
@@ -40,8 +41,7 @@ export const drivers: Driver[] = [
     wins: 0,
     podiums: 0,
     poles: 0,
-    imageUrl:
-      'https://www.formula1.com/content/dam/fom-website/drivers/K/KIMANT01_Kimi_Antonelli/kimant01.png.transform/9col/image.png',
+    imageUrl: kimiAntonelli,
   },
   {
     id: 'oliver-bearman',
