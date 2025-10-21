@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "thumbnail": "https://img.youtube.com/vi/TUP52DS7YwU/hqdefault.jpg",
+    "profileImage": "https://yt3.googleusercontent.com/ytc/AIdro_mQ3af6Gpl54XlCQg9x5Cl0yfCrAU1WakQc2Wld=s176-c-k-c0x00ffffff-no-rj",
+    "creator": "F1 Korea Channel",
+    "description": "2025 시즌 리뷰 - 레드불의 완벽한 레이스 전략",
+    "duration": "12:34"
+  },
+  {
+    "id": 2,
+    "thumbnail": "https://img.youtube.com/vi/7m5Ljqjcd04/hqdefault.jpg",
+    "profileImage": "https://yt3.googleusercontent.com/ytc/AIdro_k4cF4sOnT1g5XpHlcWjKb11Y4Mp-hhrOVtU5d3=s176-c-k-c0x00ffffff-no-rj",
+    "creator": "Pit Stop Lab",
+    "description": "F1 2025 규정 변화 총정리",
+    "duration": "09:10"
+  },
+  {
+    "id": 3,
+    "thumbnail": "https://img.youtube.com/vi/S5BvE1OtS-8/hqdefault.jpg",
+    "profileImage": "https://yt3.googleusercontent.com/ytc/AIdro_kd8CVd-6nFqwKDtkQI8JESIeP3fLbFPlPFFitA=s176-c-k-c0x00ffffff-no-rj",
+    "creator": "Garage Talk",
+    "description": "미국 그랑프리 관전 포인트 5가지",
+    "duration": "14:02"
+  },
+  {
+    "id": 4,
+    "thumbnail": "https://img.youtube.com/vi/OnuX3K7Be1Q/hqdefault.jpg",
+    "profileImage": "https://yt3.googleusercontent.com/ytc/AIdro_n47jGg3aZ5fI8AxwK5K-8mOyf8Lrxl7AyC8JGz=s176-c-k-c0x00ffffff-no-rj",
+    "creator": "Race Debrief",
+    "description": "F1 일본 GP 아나벨라 서킷 완전 해부",
+    "duration": "17:45"
+  },
+  {
+    "id": 5,
+    "thumbnail": "https://img.youtube.com/vi/Xy4ulMhz3xo/hqdefault.jpg",
+    "profileImage": "https://yt3.googleusercontent.com/ytc/AIdro_mQKldqK3dW9Q0ZtA6z6sJPvA7Ot4W4mHkkL0GE=s176-c-k-c0x00ffffff-no-rj",
+    "creator": "Sector 51",
+    "description": "비하인드 더 씬: 메르세데스의 야간 전략 회의",
+    "duration": "11:58"
+  },
+  {
+    "id": 6,
+    "thumbnail": "https://img.youtube.com/vi/8sh9pqTYEGY/hqdefault.jpg",
+    "profileImage": "https://yt3.googleusercontent.com/ytc/AIdro_l4E64E1Eq0k4I9pjUBBQ1pp5bzIbkV4zU2Y0tr=s176-c-k-c0x00ffffff-no-rj",
+    "creator": "Turn One Studio",
+    "description": "싱가포르 GP 야간 레이스 셋업 분석",
+    "duration": "10:26"
+  },
+  {
+    "id": 7,
+    "thumbnail": "https://img.youtube.com/vi/WZ3A6V8veAc/hqdefault.jpg",
+    "profileImage": "https://yt3.googleusercontent.com/ytc/AIdro_nZJTywbGI4Emeue_bxoTtDY3oABOLr0Ny3hdwS=s176-c-k-c0x00ffffff-no-rj",
+    "creator": "Apex Lab",
+    "description": "베르스타펜이 메리다르를 타고 우승? 카트부터 F1까지",
+    "duration": "08:47"
+  },
+  {
+    "id": 8,
+    "thumbnail": "https://img.youtube.com/vi/Y0XJ6T5Ydb0/hqdefault.jpg",
+    "profileImage": "https://yt3.googleusercontent.com/ytc/AIdro_nCXW-nbpxfOwZ1efS9OF13WnAyp72zS2rLRiD6=s176-c-k-c0x00ffffff-no-rj",
+    "creator": "Grid Briefing",
+    "description": "F1 2025 테스트에서 드러난 3가지 신기술",
+    "duration": "13:21"
+  }
+]
