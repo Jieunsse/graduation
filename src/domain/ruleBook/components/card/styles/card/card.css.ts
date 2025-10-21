@@ -1,4 +1,3 @@
-// card.css.ts
 import { style, styleVariants } from '@vanilla-extract/css';
 
 export const card = style({

@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { MainContainer } from '../../../../shared/layout/MainContainer.tsx';
-import { SideBar } from '../../../../shared/ui/sidebar/SideBar.tsx';
-import { Header } from '../../../../shared/ui/header/Header.tsx';
-import { Footer } from '../../../../shared/ui/footer/Footer.tsx';
+import { MainContainer } from '@shared/layout/MainContainer.tsx';
+import { SideBar } from '@shared/ui/sidebar/SideBar.tsx';
+import { Header } from '@shared/ui/header/Header.tsx';
+import { Footer } from '@shared/ui/footer/Footer.tsx';
 import { BoardDetail } from '../../components/boardDetail/boardDetail.tsx';
 import * as styles from '../../styles/boardDetail.css.ts';
 import { useBoardStore } from '../../store/boardStore.ts';

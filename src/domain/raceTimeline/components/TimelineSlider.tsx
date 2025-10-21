@@ -2,7 +2,6 @@ import React, { useCallback, useMemo } from 'react';
 import * as styles from '../styles/timeline.css.ts';
 import type { RaceEvent } from '../types/raceEvent.ts';
 import { raceEventTypeLabel } from '../types/raceEvent.ts';
-// import { EventIcon } from './EventIcon.tsx';
 
 interface TimelineSliderProps {
   events: RaceEvent[];
@@ -84,7 +83,10 @@ export const TimelineSlider = ({
       }
 
       const direction = event.deltaY > 0 ? 1 : -1;
-      const nextIndex = Math.min(Math.max(currentIndex + direction, 0), maxIndex);
+      const nextIndex = Math.min(
+        Math.max(currentIndex + direction, 0),
+        maxIndex
+      );
       const nextTime = eventTimes[nextIndex];
       if (typeof nextTime === 'number' && nextTime !== activeTime) {
         onTimeChange(nextTime);

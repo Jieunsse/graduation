@@ -1,8 +1,8 @@
 import React from 'react';
-import { MainContainer } from '../../../../shared/layout/MainContainer.tsx';
-import { SideBar } from '../../../../shared/ui/sidebar/SideBar.tsx';
-import { Header } from '../../../../shared/ui/header/Header.tsx';
-import { Footer } from '../../../../shared/ui/footer/Footer.tsx';
+import { MainContainer } from '@shared/layout/MainContainer.tsx';
+import { SideBar } from '@shared/ui/sidebar/SideBar.tsx';
+import { Header } from '@shared/ui/header/Header.tsx';
+import { Footer } from '@shared/ui/footer/Footer.tsx';
 import { BoardWrite } from '../../components/boardWrite/boardWrite.tsx';
 import * as styles from '../../styles/boardWritePage.css.ts';
 
@@ -17,7 +17,9 @@ export const BoardWritePage = ({
 }: BoardWritePageProps) => {
   return (
     <MainContainer
-      sidebar={<SideBar appearance={appearance} setAppearance={setAppearance} />}
+      sidebar={
+        <SideBar appearance={appearance} setAppearance={setAppearance} />
+      }
     >
       <Header />
       <div className={styles.page}>
