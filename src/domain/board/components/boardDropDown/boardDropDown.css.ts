@@ -1,5 +1,5 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { colorVars } from '../../../shared/styles/color.css.ts';
+import { colorVars } from '@shared/styles/color.css.ts';
 
 export const root = style({
   position: 'relative',

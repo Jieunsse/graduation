@@ -1,8 +1,13 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import * as styles from './boardDropDown.css.ts';
-import type { UserSelectableCategory } from '../../board/store/boardStore.ts';
+import type { UserSelectableCategory } from '../../store/boardStore.ts';
 
-const categories: readonly UserSelectableCategory[] = ['정보', '잡담', '후기', '질문'];
+const categories: readonly UserSelectableCategory[] = [
+  '정보',
+  '잡담',
+  '후기',
+  '질문',
+];
 
 type BoardCategory = (typeof categories)[number];
 
@@ -12,10 +17,15 @@ interface BoardDropDownProps {
   label?: string;
 }
 
-const mergeClassNames = (...classNames: Array<string | false | null | undefined>) =>
-  classNames.filter(Boolean).join(' ');
+const mergeClassNames = (
+  ...classNames: Array<string | false | null | undefined>
+) => classNames.filter(Boolean).join(' ');
 
-export const BoardDropDown = ({ value, onChange, label = '카테고리' }: BoardDropDownProps) => {
+export const BoardDropDown = ({
+  value,
+  onChange,
+  label = '카테고리',
+}: BoardDropDownProps) => {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const requestedIndex = useMemo(() => categories.indexOf(value), [value]);
@@ -71,7 +81,10 @@ export const BoardDropDown = ({ value, onChange, label = '카테고리' }: Board
       >
         <span>{categories[requestedIndex] ?? categories[0]}</span>
         <svg
-          className={mergeClassNames(styles.chevron, open && styles.chevronOpen)}
+          className={mergeClassNames(
+            styles.chevron,
+            open && styles.chevronOpen
+          )}
           width="16"
           height="16"
           viewBox="0 0 24 24"
@@ -98,7 +111,10 @@ export const BoardDropDown = ({ value, onChange, label = '카테고리' }: Board
                 type="button"
                 role="option"
                 aria-selected={isActive}
-                className={mergeClassNames(styles.option, isActive && styles.optionActive)}
+                className={mergeClassNames(
+                  styles.option,
+                  isActive && styles.optionActive
+                )}
                 onClick={() => handleSelect(categoryOption)}
               >
                 {categoryOption}

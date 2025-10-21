@@ -67,13 +67,10 @@ export const SideBar = ({ appearance, setAppearance }: SideBarProps) => {
   const location = useLocation();
   const [openSections, setOpenSections] = useState<Record<string, boolean>>(
     () =>
-      collapsibleNavigation.reduce<Record<string, boolean>>(
-        (acc, item, index) => {
-          acc[item.label] = index === 0;
-          return acc;
-        },
-        {}
-      )
+      collapsibleNavigation.reduce<Record<string, boolean>>((acc, item) => {
+        acc[item.label] = false;
+        return acc;
+      }, {})
   );
 
   const toggleSection = (label: string) => {
@@ -94,35 +91,35 @@ export const SideBar = ({ appearance, setAppearance }: SideBarProps) => {
         <nav className={styles.section} aria-label="주요 메뉴">
           <ul className={styles.menuList}>
             {primaryNavigation.map((item) => {
-          const IconComponent = item.Icon;
-          const isHighlight = (item as any).variant === 'highlight';
-          const isActive = item.path
-            ? location.pathname.startsWith(item.path)
-            : false;
-          const className = [
-            styles.menuButton,
-            isHighlight ? styles.menuButtonHighlight : '',
-            isActive ? styles.menuButtonActive : '',
-          ]
-            .filter(Boolean)
-            .join(' ');
-          const handleClick = () => {
-            if (item.path) {
-              navigate(item.path);
-            }
-          };
-          return (
-            <li key={item.label}>
-              <button
-                type="button"
-                className={className}
-                onClick={handleClick}
-                aria-current={isActive ? 'page' : undefined}
-              >
-                <span className={styles.iconWrapper}>
-                  <IconComponent className={styles.icon} />
-                </span>
-                <span className={styles.label}>{item.label}</span>
+              const IconComponent = item.Icon;
+              const isHighlight = (item as any).variant === 'highlight';
+              const isActive = item.path
+                ? location.pathname.startsWith(item.path)
+                : false;
+              const className = [
+                styles.menuButton,
+                isHighlight ? styles.menuButtonHighlight : '',
+                isActive ? styles.menuButtonActive : '',
+              ]
+                .filter(Boolean)
+                .join(' ');
+              const handleClick = () => {
+                if (item.path) {
+                  navigate(item.path);
+                }
+              };
+              return (
+                <li key={item.label}>
+                  <button
+                    type="button"
+                    className={className}
+                    onClick={handleClick}
+                    aria-current={isActive ? 'page' : undefined}
+                  >
+                    <span className={styles.iconWrapper}>
+                      <IconComponent className={styles.icon} />
+                    </span>
+                    <span className={styles.label}>{item.label}</span>
                     {(item as any).tag ? (
                       <span className={styles.tag}>{(item as any).tag}</span>
                     ) : null}
