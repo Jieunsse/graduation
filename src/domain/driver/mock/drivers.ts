@@ -1,4 +1,5 @@
 import type { Driver } from '../types/driver.ts';
+import kimiAntonelli from '@domain/driver/img/2025mercedesandant01right.png';
 
 export const drivers: Driver[] = [
   {
@@ -40,8 +41,7 @@ export const drivers: Driver[] = [
     wins: 0,
     podiums: 0,
     poles: 0,
-    imageUrl:
-      'https://www.formula1.com/content/dam/fom-website/drivers/K/KIMANT01_Kimi_Antonelli/kimant01.png.transform/9col/image.png',
+    imageUrl: kimiAntonelli,
   },
   {
     id: 'oliver-bearman',
@@ -111,7 +111,7 @@ export const drivers: Driver[] = [
     podiums: 0,
     poles: 0,
     imageUrl:
-      'https://www.formula1.com/content/dam/fom-website/drivers/I/ISAHAJ01_Isack_Hadjar/isahaj01.png.transform/9col/image.png',
+      'https://i.namu.wiki/i/aYyQpuIM2Ta41ZbtXIPYHcBHN_rfFZkNWOua_9eEkXap5C-XEEpIzESmCCu5xhbUO2alDOhyvI8IJlu112g9uw.webp',
   },
   {
     id: 'lewis-hamilton',
@@ -186,7 +186,7 @@ export const drivers: Driver[] = [
   {
     id: '에스테반 오콘',
     driverNumber: 31,
-    name: 'Esteban Ocon',
+    name: '에스테반 오콘',
     team: 'BWT Alpine F1 Team',
     nationality: 'France',
     countryCode: 'FR',
@@ -209,7 +209,7 @@ export const drivers: Driver[] = [
     podiums: 9,
     poles: 0,
     imageUrl:
-      'https://www.formula1.com/content/dam/fom-website/drivers/O/OSCPIS01_Oscar_Piastri/oscpis01.png.transform/9col/image.png',
+      'https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_auto/content/dam/fom-website/2018-redesign-assets/drivers/2025/oscpia01.png',
   },
   {
     id: 'george-russell',
