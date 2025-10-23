@@ -35,7 +35,8 @@ export const imageWrapper = style({
 export const driverImage = style({
   width: '100%',
   maxWidth: '220px',
-  height: 'auto',
+  height: '200px',
+  marginBottom: '0',
   objectFit: 'contain',
   filter: 'drop-shadow(0 18px 36px rgba(0, 0, 0, 0.25))',
 });
