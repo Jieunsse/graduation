@@ -12,10 +12,20 @@ export const card = style({
   color: colorVars.text.primary,
   minHeight: '100%',
   transition: 'opacity 0.2s ease, border-color 0.2s ease',
+  cursor: 'pointer',
+  outline: 'none',
   selectors: {
     '&:hover': {
       opacity: 0.95,
       borderColor: colorVars.border.controlHover,
+    },
+    '&:focus-visible': {
+      borderColor: colorVars.border.focus,
+      boxShadow: `${colorVars.effect.elevation}, ${colorVars.effect.focusRing}`,
+    },
+    '&[data-selected="true"]': {
+      borderColor: colorVars.border.control,
+      boxShadow: `${colorVars.effect.elevation}, ${colorVars.effect.sidebarHighlightShadow}`,
     },
   },
 });
