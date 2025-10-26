@@ -15,7 +15,7 @@ export type MenuItem = {
 export type CollapsibleNavItem = {
   label: string;
   Icon: (props: SvgIconProps) => JSX.Element;
-  subItems: string[];
+  subItems: { label: string; path?: string }[];
 };
 
 export type ControlItem = {
