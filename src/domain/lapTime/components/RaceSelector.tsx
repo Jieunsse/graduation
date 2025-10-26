@@ -36,7 +36,7 @@ export const RaceSelector = ({
 }: RaceSelectorProps) => {
   const selected = useMemo(
     () => sessions.find((session) => session.sessionKey === selectedSessionKey),
-    [sessions, selectedSessionKey],
+    [sessions, selectedSessionKey]
   );
 
   const detailText = useMemo(() => {
@@ -56,6 +56,7 @@ export const RaceSelector = ({
       <div className={styles.optionCard}>
         <span className={styles.optionLabel}>Grand Prix</span>
         <select
+          id="raceSelector"
           className={styles.select}
           value={selectedSessionKey?.toString() ?? ''}
           onChange={(event) => {
@@ -74,8 +75,12 @@ export const RaceSelector = ({
             {isLoading ? '경기 목록을 불러오는 중...' : '그랑프리를 선택하세요'}
           </option>
           {sessions.map((session) => (
-            <option key={session.sessionKey} value={session.sessionKey.toString()}>
-              {session.meetingName}
+            <option
+              key={session.sessionKey}
+              value={session.sessionKey.toString()}
+            >
+              {session.meetingName ??
+                `${session.location.split('•')[0].trim()} (${session.sessionName})`}
             </option>
           ))}
         </select>

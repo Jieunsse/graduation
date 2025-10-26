@@ -36,7 +36,7 @@ export interface RaceSession {
   meetingName: string;
   sessionName: string;
   date: string;
-  location?: string;
+  location: string;
 }
 
 export interface RaceSessionApiResponse {
