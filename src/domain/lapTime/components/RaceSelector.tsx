@@ -80,7 +80,7 @@ export const RaceSelector = ({
               value={session.sessionKey.toString()}
             >
               {session.meetingName ??
-                `${session.location.split('•')[0].trim()} (${session.sessionName})`}
+                `${session.location?.split('•')[0].trim() ?? 'Unknown'} (${session.sessionName})`}
             </option>
           ))}
         </select>
