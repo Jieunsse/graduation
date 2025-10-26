@@ -42,7 +42,7 @@ export const select = style({
   padding: '0 10px',
   fontSize: 14,
   backgroundColor: 'transparent',
-  color: 'inherit',
+  color: '#121212',
 });
 
 export const helperText = style({
