@@ -10,10 +10,14 @@ const fetchMockLapTimes = async (): Promise<LapTime[]> => {
   return response.data;
 };
 
-export const useLapTimeData = (sessionKey: number) => {
+export const useLapTimeData = (sessionKey: number | null) => {
   return useQuery({
-    queryKey: ['lap-times', sessionKey],
+    queryKey: ['lap-times', sessionKey ?? 'none'],
     queryFn: async () => {
+      if (typeof sessionKey !== 'number') {
+        return [];
+      }
+
       try {
         const data = await fetchLapTimes(sessionKey);
         if (!data.length) {
@@ -26,5 +30,6 @@ export const useLapTimeData = (sessionKey: number) => {
       }
     },
     staleTime: 1000 * 60,
+    enabled: typeof sessionKey === 'number',
   });
 };

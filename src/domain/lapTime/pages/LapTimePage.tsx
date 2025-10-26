@@ -4,6 +4,7 @@ import { SideBar } from '@shared/ui/sidebar/SideBar.tsx';
 import { Header } from '@shared/ui/header/Header.tsx';
 import { Footer } from '@shared/ui/footer/Footer.tsx';
 import { useLapTimeData } from '@domain/lapTime/hooks/useLapTimeData.ts';
+import { useRaceSessions } from '@domain/lapTime/hooks/useRaceSessions.ts';
 import {
   type LapChartPoint,
   LapTimeChart,
@@ -13,6 +14,7 @@ import {
   type DriverOption,
   DriverSelector,
 } from '@domain/lapTime/components/DriverSelector.tsx';
+import { RaceSelector } from '@domain/lapTime/components/RaceSelector.tsx';
 import type { LapTime, LapTimeUnit } from '@domain/lapTime/types/lapTime.ts';
 import * as styles from '@domain/lapTime/styles/chart.css.ts';
 
@@ -20,8 +22,6 @@ interface LapTimePageProps {
   appearance: 'light' | 'dark';
   setAppearance: React.Dispatch<React.SetStateAction<'light' | 'dark'>>;
 }
-
-const DEFAULT_SESSION_KEY = 9158;
 
 const colorPalette = [
   '#6366F1',
@@ -69,12 +69,21 @@ export const LapTimePage = ({
   appearance,
   setAppearance,
 }: LapTimePageProps) => {
+  const currentYear = useMemo(() => new Date().getUTCFullYear(), []);
+  const {
+    data: raceSessions = [],
+    isLoading: isSessionsLoading,
+    isError: isSessionsError,
+  } = useRaceSessions(currentYear);
+
+  const [selectedSessionKey, setSelectedSessionKey] = useState<number | null>(null);
   const {
     data: lapTimes = [],
-    isLoading,
-    isError,
-    error,
-  } = useLapTimeData(DEFAULT_SESSION_KEY);
+    isLoading: isLapLoading,
+    isError: isLapError,
+    error: lapError,
+    isFetching: isLapFetching,
+  } = useLapTimeData(selectedSessionKey);
 
   const [includePitLaps, setIncludePitLaps] = useState(false);
   const [unit, setUnit] = useState<LapTimeUnit>('seconds');
@@ -82,21 +91,41 @@ export const LapTimePage = ({
   const [selectedDrivers, setSelectedDrivers] = useState<string[]>([]);
 
   useEffect(() => {
-    if (lapTimes.length === 0) {
+    if (raceSessions.length === 0) {
       return;
     }
-    setSelectedDrivers((prev) => {
-      if (prev.length > 0) {
-        return prev;
+
+    setSelectedSessionKey((prev) => {
+      if (prev !== null) {
+        const exists = raceSessions.some((session) => session.sessionKey === prev);
+        if (exists) {
+          return prev;
+        }
       }
-      return Array.from(new Set(lapTimes.map((lap) => lap.driver))).slice(0, 6);
+
+      return raceSessions[0]?.sessionKey ?? null;
+    });
+  }, [raceSessions]);
+
+  useEffect(() => {
+    if (lapTimes.length === 0) {
+      setSelectedDrivers([]);
+      return;
+    }
+
+    const uniqueDrivers = Array.from(new Set(lapTimes.map((lap) => lap.driver)));
+
+    setSelectedDrivers((prev) => {
+      const validPrev = prev.filter((driver) => uniqueDrivers.includes(driver));
+      if (validPrev.length > 0) {
+        return validPrev;
+      }
+      return uniqueDrivers.slice(0, 6);
     });
   }, [lapTimes]);
 
   const driverColors = useMemo(() => {
-    const uniqueDrivers = Array.from(
-      new Set(lapTimes.map((lap) => lap.driver))
-    );
+    const uniqueDrivers = Array.from(new Set(lapTimes.map((lap) => lap.driver)));
     return assignDriverColors(uniqueDrivers);
   }, [lapTimes]);
 
@@ -176,6 +205,9 @@ export const LapTimePage = ({
     });
   };
 
+  const isChartReady =
+    !isLapLoading && !isLapError && selectedSessionKey !== null && chartData.length > 0;
+
   return (
     <MainContainer
       sidebar={
@@ -193,12 +225,19 @@ export const LapTimePage = ({
                 비교합니다.
               </p>
             </div>
-            {isLoading ? (
+            {isLapFetching ? (
               <div role="status" aria-live="polite" style={{ fontSize: 13 }}>
                 데이터 동기화 중...
               </div>
             ) : null}
           </div>
+
+          <RaceSelector
+            sessions={raceSessions}
+            selectedSessionKey={selectedSessionKey ?? undefined}
+            onChange={setSelectedSessionKey}
+            isLoading={isSessionsLoading}
+          />
 
           <ChartOptions
             includePitLaps={includePitLaps}
@@ -209,30 +248,42 @@ export const LapTimePage = ({
             onCutOffRatioChange={setCutOffRatio}
             fastestLap={fastestLap}
           />
+
           <DriverSelector
             drivers={driverOptions}
             selectedDrivers={selectedDrivers}
             onToggleDriver={handleToggleDriver}
           />
 
-          {isLoading ? (
+          {isSessionsError ? (
+            <div className={styles.emptyState} role="alert">
+              경기 세션 정보를 불러오지 못했습니다.
+            </div>
+          ) : null}
+
+          {isLapLoading ? (
             <div className={styles.emptyState} role="status" aria-live="polite">
               랩타임 데이터를 불러오는 중입니다...
             </div>
           ) : null}
 
-          {isError ? (
+          {isLapError ? (
             <div className={styles.emptyState} role="alert">
-              데이터를 불러오지 못했습니다. {String(error)}
+              데이터를 불러오지 못했습니다. {String(lapError)}
             </div>
           ) : null}
 
-          {!isLoading && !isError ? (
-            <LapTimeChart
-              data={chartData}
-              drivers={activeDriverOptions}
-              unit={unit}
-            />
+          {isChartReady ? (
+            <LapTimeChart data={chartData} drivers={activeDriverOptions} unit={unit} />
+          ) : null}
+
+          {!isLapLoading &&
+          !isLapError &&
+          selectedSessionKey !== null &&
+          chartData.length === 0 ? (
+            <div className={styles.emptyState} role="status" aria-live="polite">
+              표시할 랩타임 데이터가 없습니다.
+            </div>
           ) : null}
         </div>
       </section>
