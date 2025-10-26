@@ -85,9 +85,9 @@ export const driverCheckbox = style({
   height: 18,
 });
 
-export const driverColor = style({
-  width: 14,
-  height: 14,
+export const driverImg = style({
+  width: 48,
+  height: 48,
   borderRadius: '9999px',
   boxShadow: '0 0 0 2px rgba(15, 23, 42, 0.5)',
   selectors: {
@@ -97,11 +97,25 @@ export const driverColor = style({
   },
 });
 
+export const driverColor = style({
+  width: 12,
+  height: 12,
+  borderRadius: '9999px',
+  boxShadow: '0 0 0 2px rgba(15, 23, 42, 0.5)',
+  selectors: {
+    ':root.light &': {
+      boxShadow: '0 0 0 2px rgba(255, 255, 255, 0.9)',
+    },
+  },
+  marginLeft: '12px',
+});
+
 export const driverInfo = style({
   display: 'flex',
   flexDirection: 'column',
   gap: 4,
   minWidth: 0,
+  marginLeft: '12px',
 });
 
 export const driverName = style({
