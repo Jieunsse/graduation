@@ -1,0 +1,11 @@
+[
+  { "driver": "Max Verstappen", "lap": 1, "time": 93.214, "isPitLap": false, "team": "Red Bull Racing" },
+  { "driver": "Max Verstappen", "lap": 2, "time": 92.851, "isPitLap": false, "team": "Red Bull Racing" },
+  { "driver": "Max Verstappen", "lap": 15, "time": 125.932, "isPitLap": true, "team": "Red Bull Racing" },
+  { "driver": "Lewis Hamilton", "lap": 1, "time": 94.105, "isPitLap": false, "team": "Mercedes" },
+  { "driver": "Lewis Hamilton", "lap": 2, "time": 93.887, "isPitLap": false, "team": "Mercedes" },
+  { "driver": "Lewis Hamilton", "lap": 16, "time": 128.42, "isPitLap": true, "team": "Mercedes" },
+  { "driver": "Charles Leclerc", "lap": 1, "time": 94.562, "isPitLap": false, "team": "Ferrari" },
+  { "driver": "Charles Leclerc", "lap": 2, "time": 94.128, "isPitLap": false, "team": "Ferrari" },
+  { "driver": "Charles Leclerc", "lap": 17, "time": 126.91, "isPitLap": true, "team": "Ferrari" }
+]
