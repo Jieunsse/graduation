@@ -1,0 +1,56 @@
+export interface LapTimeApiResponse {
+  driver_number: number;
+  lap_number: number;
+  lap_duration: number | null;
+  pit_in_time?: string | null;
+  pit_out_time?: string | null;
+  driver_name?: string | null;
+  team_name?: string | null;
+}
+
+export interface DriverApiResponse {
+  driver_number: number;
+  driver_name?: string | null;
+  full_name?: string | null;
+  broadcast_name?: string | null;
+  first_name?: string | null;
+  last_name?: string | null;
+  name_acronym?: string | null;
+}
+
+export interface LapTime {
+  driver: string;
+  lap: number;
+  time: number;
+  isPitLap: boolean;
+  team: string;
+}
+
+export type LapTimeUnit = 'seconds' | 'minutes';
+
+export interface LapTimeFilters {
+  includePitLaps: boolean;
+  cutOffRatio: number;
+  unit: LapTimeUnit;
+  selectedDrivers: string[];
+}
+
+export interface SessionApiResponse {
+  session_key: number;
+  meeting_key: number;
+  meeting_name: string;
+  session_name: string;
+  session_type: string;
+  country_name?: string | null;
+  circuit_short_name?: string | null;
+  date_start: string;
+  year: number;
+}
+
+export interface RaceSession {
+  sessionKey: number;
+  meetingName: string;
+  sessionName: string;
+  date: string;
+  location?: string;
+}
