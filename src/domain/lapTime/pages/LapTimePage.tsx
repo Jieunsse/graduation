@@ -76,7 +76,9 @@ export const LapTimePage = ({
     isError: isSessionsError,
   } = useRaceSessions(currentYear);
 
-  const [selectedSessionKey, setSelectedSessionKey] = useState<number | null>(null);
+  const [selectedSessionKey, setSelectedSessionKey] = useState<number | null>(
+    null
+  );
   const {
     data: lapTimes = [],
     isLoading: isLapLoading,
@@ -97,7 +99,9 @@ export const LapTimePage = ({
 
     setSelectedSessionKey((prev) => {
       if (prev !== null) {
-        const exists = raceSessions.some((session) => session.sessionKey === prev);
+        const exists = raceSessions.some(
+          (session) => session.sessionKey === prev
+        );
         if (exists) {
           return prev;
         }
@@ -109,23 +113,30 @@ export const LapTimePage = ({
 
   useEffect(() => {
     if (lapTimes.length === 0) {
-      setSelectedDrivers([]);
+      if (selectedDrivers.length > 0) setSelectedDrivers([]);
       return;
     }
 
-    const uniqueDrivers = Array.from(new Set(lapTimes.map((lap) => lap.driver)));
+    const uniqueDrivers = Array.from(
+      new Set(lapTimes.map((lap) => lap.driver))
+    );
+    const validPrev = selectedDrivers.filter((driver) =>
+      uniqueDrivers.includes(driver)
+    );
 
-    setSelectedDrivers((prev) => {
-      const validPrev = prev.filter((driver) => uniqueDrivers.includes(driver));
-      if (validPrev.length > 0) {
-        return validPrev;
-      }
-      return uniqueDrivers.slice(0, 6);
-    });
+    const newDrivers =
+      validPrev.length > 0 ? validPrev : uniqueDrivers.slice(0, 6);
+
+    // ✅ 이전 상태와 동일하면 setState 호출하지 않기
+    if (JSON.stringify(newDrivers) !== JSON.stringify(selectedDrivers)) {
+      setSelectedDrivers(newDrivers);
+    }
   }, [lapTimes]);
 
   const driverColors = useMemo(() => {
-    const uniqueDrivers = Array.from(new Set(lapTimes.map((lap) => lap.driver)));
+    const uniqueDrivers = Array.from(
+      new Set(lapTimes.map((lap) => lap.driver))
+    );
     return assignDriverColors(uniqueDrivers);
   }, [lapTimes]);
 
@@ -206,7 +217,10 @@ export const LapTimePage = ({
   };
 
   const isChartReady =
-    !isLapLoading && !isLapError && selectedSessionKey !== null && chartData.length > 0;
+    !isLapLoading &&
+    !isLapError &&
+    selectedSessionKey !== null &&
+    chartData.length > 0;
 
   return (
     <MainContainer
@@ -274,7 +288,11 @@ export const LapTimePage = ({
           ) : null}
 
           {isChartReady ? (
-            <LapTimeChart data={chartData} drivers={activeDriverOptions} unit={unit} />
+            <LapTimeChart
+              data={chartData}
+              drivers={activeDriverOptions}
+              unit={unit}
+            />
           ) : null}
 
           {!isLapLoading &&
