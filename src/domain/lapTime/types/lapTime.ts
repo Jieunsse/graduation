@@ -8,13 +8,6 @@ export interface LapTimeApiResponse {
   team_name?: string | null;
 }
 
-export interface DriverApiResponse {
-  driver_number: number;
-  driver_name?: string | null;
-  full_name?: string | null;
-  broadcast_name?: string | null;
-}
-
 export interface LapTime {
   driver: string;
   lap: number;
