@@ -1,0 +1,44 @@
+[
+  {
+    "sessionKey": 1742097600,
+    "meetingName": "2025 Australian Grand Prix",
+    "sessionName": "Race",
+    "date": "2025-03-16T04:00:00.000Z",
+    "location": "Australia • Melbourne"
+  },
+  {
+    "sessionKey": 1742713200,
+    "meetingName": "2025 Chinese Grand Prix",
+    "sessionName": "Race",
+    "date": "2025-03-23T07:00:00.000Z",
+    "location": "China • Shanghai"
+  },
+  {
+    "sessionKey": 1743915600,
+    "meetingName": "2025 Japanese Grand Prix",
+    "sessionName": "Race",
+    "date": "2025-04-06T05:00:00.000Z",
+    "location": "Japan • Suzuka"
+  },
+  {
+    "sessionKey": 1744556400,
+    "meetingName": "2025 Bahrain Grand Prix",
+    "sessionName": "Race",
+    "date": "2025-04-13T15:00:00.000Z",
+    "location": "Bahrain • Sakhir"
+  },
+  {
+    "sessionKey": 1745168400,
+    "meetingName": "2025 Saudi Arabian Grand Prix",
+    "sessionName": "Race",
+    "date": "2025-04-20T17:00:00.000Z",
+    "location": "Saudi Arabia • Jeddah"
+  },
+  {
+    "sessionKey": 1746385200,
+    "meetingName": "2025 Miami Grand Prix",
+    "sessionName": "Race",
+    "date": "2025-05-04T19:00:00.000Z",
+    "location": "United States • Miami"
+  }
+]
