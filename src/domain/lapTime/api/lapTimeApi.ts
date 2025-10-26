@@ -10,12 +10,12 @@ const openF1Client = axios.create({
 });
 
 export const fetchLapTimes = async (sessionKey: number): Promise<LapTime[]> => {
-  const { data } = await openF1Client.get<LapTimeApiResponse[]>("/laps", {
+  const { data } = await openF1Client.get<LapTimeApiResponse[]>('/laps', {
     params: { session_key: sessionKey },
   });
 
   return data
-    .filter((item) => typeof item.lap_duration === 'number' && item.lap_duration !== null)
+    .filter((item) => typeof item.lap_duration === 'number' && true)
     .map((item) => ({
       driver: item.driver_name?.trim() || `Driver ${item.driver_number}`,
       lap: item.lap_number,
