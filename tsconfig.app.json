@@ -24,6 +24,7 @@
       "@components/*": ["src/app/components/*"],
       "@shared/*": ["src/shared/*"],
       "@domain/*": ["src/domain/*"],
+      "recharts": ["src/shared/lib/recharts.tsx"],
     },
 
     /* Linting */
