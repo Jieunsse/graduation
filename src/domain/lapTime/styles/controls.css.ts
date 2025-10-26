@@ -41,7 +41,6 @@ export const select = style({
   border: '1px solid var(--color-border, rgba(148, 163, 184, 0.3))',
   padding: '0 10px',
   fontSize: 14,
-  width: '100%',
   backgroundColor: 'transparent',
   color: 'inherit',
 });

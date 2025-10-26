@@ -1,20 +1,18 @@
-import { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { MainContainer } from '@shared/layout/MainContainer.tsx';
 import { SideBar } from '@shared/ui/sidebar/SideBar.tsx';
 import { Header } from '@shared/ui/header/Header.tsx';
 import { Footer } from '@shared/ui/footer/Footer.tsx';
 import { useLapTimeData } from '@domain/lapTime/hooks/useLapTimeData.ts';
-import { useRaceSessions } from '@domain/lapTime/hooks/useRaceSessions.ts';
 import {
-  LapTimeChart,
   type LapChartPoint,
+  LapTimeChart,
 } from '@domain/lapTime/components/LapTimeChart.tsx';
 import { ChartOptions } from '@domain/lapTime/components/ChartOptions.tsx';
 import {
-  DriverSelector,
   type DriverOption,
+  DriverSelector,
 } from '@domain/lapTime/components/DriverSelector.tsx';
-import { RaceSelector } from '@domain/lapTime/components/RaceSelector.tsx';
 import type { LapTime, LapTimeUnit } from '@domain/lapTime/types/lapTime.ts';
 import * as styles from '@domain/lapTime/styles/chart.css.ts';
 
@@ -23,7 +21,7 @@ interface LapTimePageProps {
   setAppearance: React.Dispatch<React.SetStateAction<'light' | 'dark'>>;
 }
 
-const TARGET_YEAR = 2025;
+const DEFAULT_SESSION_KEY = 9158;
 
 const colorPalette = [
   '#6366F1',
@@ -51,7 +49,10 @@ const assignDriverColors = (drivers: string[]): Record<string, string> => {
 const convertUnit = (time: number, unit: LapTimeUnit) =>
   unit === 'seconds' ? time : time / 60;
 
-const buildChartData = (laps: LapTime[], unit: LapTimeUnit): LapChartPoint[] => {
+const buildChartData = (
+  laps: LapTime[],
+  unit: LapTimeUnit
+): LapChartPoint[] => {
   const lapMap = new Map<number, LapChartPoint>();
 
   laps.forEach((lap) => {
@@ -64,38 +65,21 @@ const buildChartData = (laps: LapTime[], unit: LapTimeUnit): LapChartPoint[] => 
   return Array.from(lapMap.values()).sort((a, b) => a.lap - b.lap);
 };
 
-export const LapTimePage = ({ appearance, setAppearance }: LapTimePageProps) => {
-  const {
-    data: sessions = [],
-    isLoading: isSessionsLoading,
-    isError: isSessionsError,
-    error: sessionsError,
-  } = useRaceSessions(TARGET_YEAR);
-
-  const [selectedSessionKey, setSelectedSessionKey] = useState<number | undefined>();
-
-  useEffect(() => {
-    if (sessions.length === 0 || typeof selectedSessionKey === 'number') {
-      return;
-    }
-    setSelectedSessionKey(sessions[0]?.sessionKey);
-  }, [sessions, selectedSessionKey]);
-
+export const LapTimePage = ({
+  appearance,
+  setAppearance,
+}: LapTimePageProps) => {
   const {
     data: lapTimes = [],
-    isLoading: isLapTimesLoading,
-    isError: isLapTimesError,
-    error: lapTimesError,
-  } = useLapTimeData(selectedSessionKey);
+    isLoading,
+    isError,
+    error,
+  } = useLapTimeData(DEFAULT_SESSION_KEY);
 
   const [includePitLaps, setIncludePitLaps] = useState(false);
   const [unit, setUnit] = useState<LapTimeUnit>('seconds');
   const [cutOffRatio, setCutOffRatio] = useState(1.3);
   const [selectedDrivers, setSelectedDrivers] = useState<string[]>([]);
-
-  useEffect(() => {
-    setSelectedDrivers([]);
-  }, [selectedSessionKey]);
 
   useEffect(() => {
     if (lapTimes.length === 0) {
@@ -105,16 +89,13 @@ export const LapTimePage = ({ appearance, setAppearance }: LapTimePageProps) => 
       if (prev.length > 0) {
         return prev;
       }
-      const uniqueDrivers = Array.from(
-        new Set(lapTimes.map((lap) => lap.driver)),
-      ).slice(0, 6);
-      return uniqueDrivers;
+      return Array.from(new Set(lapTimes.map((lap) => lap.driver))).slice(0, 6);
     });
   }, [lapTimes]);
 
   const driverColors = useMemo(() => {
     const uniqueDrivers = Array.from(
-      new Set(lapTimes.map((lap) => lap.driver)),
+      new Set(lapTimes.map((lap) => lap.driver))
     );
     return assignDriverColors(uniqueDrivers);
   }, [lapTimes]);
@@ -143,9 +124,7 @@ export const LapTimePage = ({ appearance, setAppearance }: LapTimePageProps) => 
       : lapTimes.filter((lap) => !lap.isPitLap);
 
     if (selectedDrivers.length > 0) {
-      filtered = filtered.filter((lap) =>
-        selectedDrivers.includes(lap.driver),
-      );
+      filtered = filtered.filter((lap) => selectedDrivers.includes(lap.driver));
     }
 
     if (filtered.length === 0) {
@@ -154,7 +133,7 @@ export const LapTimePage = ({ appearance, setAppearance }: LapTimePageProps) => 
 
     const fastest = filtered.reduce(
       (min, lap) => (lap.time < min ? lap.time : min),
-      filtered[0].time,
+      filtered[0].time
     );
 
     const threshold = fastest * cutOffRatio;
@@ -168,13 +147,13 @@ export const LapTimePage = ({ appearance, setAppearance }: LapTimePageProps) => 
     }
     return filteredLapTimes.reduce(
       (min, lap) => (lap.time < min ? lap.time : min),
-      filteredLapTimes[0].time,
+      filteredLapTimes[0].time
     );
   }, [filteredLapTimes]);
 
   const chartData = useMemo(() => {
     const activeDrivers = driverOptions.filter((driver) =>
-      selectedDrivers.includes(driver.name),
+      selectedDrivers.includes(driver.name)
     );
 
     if (filteredLapTimes.length === 0 || activeDrivers.length === 0) {
@@ -185,7 +164,7 @@ export const LapTimePage = ({ appearance, setAppearance }: LapTimePageProps) => 
   }, [filteredLapTimes, driverOptions, selectedDrivers, unit]);
 
   const activeDriverOptions = driverOptions.filter((driver) =>
-    selectedDrivers.includes(driver.name),
+    selectedDrivers.includes(driver.name)
   );
 
   const handleToggleDriver = (driver: string, selected: boolean) => {
@@ -197,21 +176,11 @@ export const LapTimePage = ({ appearance, setAppearance }: LapTimePageProps) => 
     });
   };
 
-  const isReadyForLapTimes = typeof selectedSessionKey === 'number';
-  const isLoading = isSessionsLoading || isLapTimesLoading || !isReadyForLapTimes;
-  const isError = isSessionsError || isLapTimesError;
-  const errorMessage = isSessionsError
-    ? sessionsError
-    : isLapTimesError
-      ? lapTimesError
-      : undefined;
-  const errorText = errorMessage
-    ? String(errorMessage)
-    : '알 수 없는 오류가 발생했습니다.';
-
   return (
     <MainContainer
-      sidebar={<SideBar appearance={appearance} setAppearance={setAppearance} />}
+      sidebar={
+        <SideBar appearance={appearance} setAppearance={setAppearance} />
+      }
     >
       <Header />
       <section className={styles.container}>
@@ -220,7 +189,8 @@ export const LapTimePage = ({ appearance, setAppearance }: LapTimePageProps) => 
             <div>
               <h1 className={styles.chartTitle}>랩타임 비교</h1>
               <p style={{ opacity: 0.7 }}>
-                OpenF1 데이터를 기반으로 세션 내 드라이버의 랩타임 변화를 비교합니다.
+                OpenF1 데이터를 기반으로 세션 내 드라이버의 랩타임 변화를
+                비교합니다.
               </p>
             </div>
             {isLoading ? (
@@ -229,13 +199,6 @@ export const LapTimePage = ({ appearance, setAppearance }: LapTimePageProps) => 
               </div>
             ) : null}
           </div>
-
-          <RaceSelector
-            sessions={sessions}
-            selectedSessionKey={selectedSessionKey}
-            onChange={setSelectedSessionKey}
-            isLoading={isSessionsLoading}
-          />
 
           <ChartOptions
             includePitLaps={includePitLaps}
@@ -260,7 +223,7 @@ export const LapTimePage = ({ appearance, setAppearance }: LapTimePageProps) => 
 
           {isError ? (
             <div className={styles.emptyState} role="alert">
-              데이터를 불러오지 못했습니다. {errorText}
+              데이터를 불러오지 못했습니다. {String(error)}
             </div>
           ) : null}
 
