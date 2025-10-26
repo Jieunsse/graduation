@@ -6,6 +6,7 @@ import type {
   RaceSession,
   RaceSessionApiResponse,
 } from '@domain/lapTime/types/lapTime.ts';
+import { driverNameMap } from '@domain/lapTime/data/driverNameMap.ts';
 
 const openF1Client = axios.create({
   baseURL: 'https://api.openf1.org/v1',
@@ -15,10 +16,22 @@ const openF1Client = axios.create({
 const buildDriverMap = (drivers: DriverApiResponse[]) => {
   const map = new Map<number, { name?: string; team?: string }>();
   drivers.forEach((driver) => {
-    const name = driver.driver_name?.trim();
+    // ① 영어 이름 우선 결정
+    const englishName =
+      driver.full_name?.trim() ||
+      driver.broadcast_name?.trim() ||
+      [driver.first_name, driver.last_name].filter(Boolean).join(' ').trim() ||
+      driver.driver_name?.trim();
+
+    // ② 한글 이름으로 매핑 (없으면 영어 그대로)
+    const localizedName =
+      (englishName && driverNameMap[englishName.toLowerCase()]) || englishName;
+
     const team = driver.team_name?.trim();
+
     map.set(driver.driver_number, {
-      name: name && name.length > 0 ? name : undefined,
+      name:
+        localizedName && localizedName.length > 0 ? localizedName : undefined,
       team: team && team.length > 0 ? team : undefined,
     });
   });
@@ -58,9 +71,10 @@ export const fetchLapTimes = async (sessionKey: number): Promise<LapTime[]> => {
       const teamName = driverInfo?.team || item.team_name?.trim();
 
       return {
-        driver: driverName && driverName.length > 0
-          ? driverName
-          : `Driver ${item.driver_number}`,
+        driver:
+          driverName && driverName.length > 0
+            ? driverName
+            : `Driver ${item.driver_number}`,
         lap: item.lap_number,
         time: item.lap_duration ?? 0,
         isPitLap: Boolean(item.pit_in_time || item.pit_out_time),
@@ -70,18 +84,24 @@ export const fetchLapTimes = async (sessionKey: number): Promise<LapTime[]> => {
     .sort((a, b) => a.lap - b.lap);
 };
 
-export const fetchRaceSessions = async (year: number): Promise<RaceSession[]> => {
-  const { data } = await openF1Client.get<RaceSessionApiResponse[]>('/sessions', {
-    params: {
-      year,
-      session_type: 'Race',
-    },
-  });
+export const fetchRaceSessions = async (
+  year: number
+): Promise<RaceSession[]> => {
+  const { data } = await openF1Client.get<RaceSessionApiResponse[]>(
+    '/sessions',
+    {
+      params: {
+        year,
+        session_type: 'Race',
+      },
+    }
+  );
 
   return data
-    .filter((session) =>
-      (session.session_type ?? '').toLowerCase() === 'race' &&
-      typeof session.session_key === 'number',
+    .filter(
+      (session) =>
+        (session.session_type ?? '').toLowerCase() === 'race' &&
+        typeof session.session_key === 'number'
     )
     .map((session) => ({
       sessionKey: session.session_key,
