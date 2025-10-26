@@ -1,0 +1,23 @@
+[
+  {
+    "sessionKey": 9158,
+    "meetingName": "2024 Abu Dhabi Grand Prix",
+    "sessionName": "Race",
+    "date": "2024-12-08T17:00:00Z",
+    "location": "United Arab Emirates • Yas Marina"
+  },
+  {
+    "sessionKey": 9146,
+    "meetingName": "2024 Las Vegas Grand Prix",
+    "sessionName": "Race",
+    "date": "2024-11-24T06:00:00Z",
+    "location": "United States • Las Vegas"
+  },
+  {
+    "sessionKey": 9126,
+    "meetingName": "2024 Japanese Grand Prix",
+    "sessionName": "Race",
+    "date": "2024-04-07T05:00:00Z",
+    "location": "Japan • Suzuka"
+  }
+]
