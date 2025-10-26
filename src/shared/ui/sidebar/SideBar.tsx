@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as styles from '../styles/sidebar/sidebar.css.ts';
 import React from 'react';
 import type {
@@ -38,22 +38,35 @@ const collapsibleNavigation: CollapsibleNavItem[] = [
   {
     label: '레이스 분석',
     Icon: AnalysisIcon,
-    subItems: ['랩타임 비교', '피트 전략', '트랙 포지션'],
+    subItems: [
+      { label: '랩타임 비교', path: '/analysis/laptime' },
+      { label: '피트 전략' },
+      { label: '트랙 포지션' },
+    ],
   },
   {
     label: '챔피언십',
     Icon: ChampionshipIcon,
-    subItems: ['드라이버 순위', '컨스트럭터 순위'],
+    subItems: [
+      { label: '드라이버 순위' },
+      { label: '컨스트럭터 순위' },
+    ],
   },
   {
     label: '테크니컬',
     Icon: TechIcon,
-    subItems: ['업데이트 추적', '기술 규정 정리'],
+    subItems: [
+      { label: '업데이트 추적' },
+      { label: '기술 규정 정리' },
+    ],
   },
   {
     label: '지원',
     Icon: SupportIcon,
-    subItems: ['고객 센터', '커뮤니티'],
+    subItems: [
+      { label: '고객 센터' },
+      { label: '커뮤니티' },
+    ],
   },
 ];
 
@@ -65,13 +78,30 @@ const controlItems: ControlItem[] = [
 export const SideBar = ({ appearance, setAppearance }: SideBarProps) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [openSections, setOpenSections] = useState<Record<string, boolean>>(
-    () =>
-      collapsibleNavigation.reduce<Record<string, boolean>>((acc, item) => {
-        acc[item.label] = false;
-        return acc;
-      }, {})
+  const [openSections, setOpenSections] = useState<Record<string, boolean>>(() =>
+    collapsibleNavigation.reduce<Record<string, boolean>>((acc, item) => {
+      const shouldOpen = item.subItems.some((subItem) =>
+        subItem.path ? location.pathname.startsWith(subItem.path) : false
+      );
+      acc[item.label] = shouldOpen;
+      return acc;
+    }, {})
   );
+
+  useEffect(() => {
+    setOpenSections((previous) => {
+      const next = { ...previous };
+      collapsibleNavigation.forEach((item) => {
+        const shouldOpen = item.subItems.some((subItem) =>
+          subItem.path ? location.pathname.startsWith(subItem.path) : false
+        );
+        if (shouldOpen) {
+          next[item.label] = true;
+        }
+      });
+      return next;
+    });
+  }, [location.pathname]);
 
   const toggleSection = (label: string) => {
     setOpenSections((prev) => ({
@@ -167,21 +197,35 @@ export const SideBar = ({ appearance, setAppearance }: SideBarProps) => {
                         marginBottom: 8,
                       }}
                     >
-                      {section.subItems.map((subItem) => (
-                        <li key={subItem}>
-                          <button
-                            type="button"
-                            className={styles.menuButton}
-                            style={{
-                              padding: '4px 8px',
-                              fontSize: 13,
-                              background: 'none',
-                            }}
-                          >
-                            <span className={styles.label}>{subItem}</span>
-                          </button>
-                        </li>
-                      ))}
+                      {section.subItems.map((subItem) => {
+                        const isActive = subItem.path
+                          ? location.pathname.startsWith(subItem.path)
+                          : false;
+
+                        return (
+                          <li key={subItem.label}>
+                            <button
+                              type="button"
+                              className={`${styles.menuButton} ${
+                                isActive ? styles.menuButtonActive : ''
+                              }`}
+                              style={{
+                                padding: '4px 8px',
+                                fontSize: 13,
+                                background: 'none',
+                              }}
+                              onClick={() => {
+                                if (subItem.path) {
+                                  navigate(subItem.path);
+                                }
+                              }}
+                              aria-current={isActive ? 'page' : undefined}
+                            >
+                              <span className={styles.label}>{subItem.label}</span>
+                            </button>
+                          </li>
+                        );
+                      })}
                     </ul>
                   ) : null}
                 </li>
