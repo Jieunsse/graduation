@@ -24,3 +24,11 @@ export interface LapTimeFilters {
   unit: LapTimeUnit;
   selectedDrivers: string[];
 }
+
+export interface RaceSession {
+  sessionKey: number;
+  meetingName: string;
+  sessionName: string;
+  date: string;
+  location?: string;
+}
