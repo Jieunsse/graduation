@@ -8,6 +8,12 @@ export interface LapTimeApiResponse {
   team_name?: string | null;
 }
 
+export interface DriverApiResponse {
+  driver_number: number;
+  driver_name?: string | null;
+  team_name?: string | null;
+}
+
 export interface LapTime {
   driver: string;
   lap: number;
@@ -31,4 +37,16 @@ export interface RaceSession {
   sessionName: string;
   date: string;
   location?: string;
+}
+
+export interface RaceSessionApiResponse {
+  session_key: number;
+  meeting_name: string;
+  session_name: string;
+  session_type?: string | null;
+  date_start?: string | null;
+  country_name?: string | null;
+  country?: string | null;
+  location?: string | null;
+  circuit_short_name?: string | null;
 }
