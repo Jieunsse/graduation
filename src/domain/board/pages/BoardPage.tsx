@@ -13,6 +13,13 @@ const POSTS_PER_PAGE = 10;
 
 type CategoryFilter = (typeof categories)[number];
 
+const categoryTypeMap: Record<Exclude<CategoryFilter, '전체' | '공지'>, string> = {
+  정보: 'information',
+  잡담: 'chat',
+  후기: 'review',
+  질문: 'question',
+};
+
 interface BoardPageProps {
   appearance: 'light' | 'dark';
   setAppearance: React.Dispatch<React.SetStateAction<'light' | 'dark'>>;
@@ -41,6 +48,12 @@ const getBadgeLabel = (post: BoardPost) => {
 export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
   const navigate = useNavigate();
   const posts = useBoardStore((state) => state.posts);
+  const isLoading = useBoardStore((state) => state.isLoading);
+  const errorMessage = useBoardStore((state) => state.error);
+  const fetchAllPosts = useBoardStore((state) => state.fetchAllPosts);
+  const fetchPostsByType = useBoardStore((state) => state.fetchPostsByType);
+  const fetchNotices = useBoardStore((state) => state.fetchNotices);
+  const searchPosts = useBoardStore((state) => state.searchPosts);
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>('전체');
   const [searchQuery, setSearchQuery] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
@@ -131,6 +144,10 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
   );
 
   useEffect(() => {
+    void fetchAllPosts();
+  }, [fetchAllPosts]);
+
+  useEffect(() => {
     const normalizedParam = currentPage === 1 ? null : String(currentPage);
 
     if (normalizedParam === rawPageParam) {
@@ -148,11 +165,36 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
   const handleCategoryChange = (category: CategoryFilter) => {
     setActiveCategory(category);
     updatePageQuery(1);
+
+    if (category === '전체') {
+      void fetchAllPosts();
+      return;
+    }
+
+    if (category === '공지') {
+      void fetchNotices();
+      return;
+    }
+
+    const postType = categoryTypeMap[category];
+    if (postType) {
+      void fetchPostsByType(postType);
+    }
   };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(event.target.value);
+    const nextValue = event.target.value;
+    setSearchQuery(nextValue);
     updatePageQuery(1);
+
+    const trimmedValue = nextValue.trim();
+
+    if (!trimmedValue) {
+      void fetchAllPosts();
+      return;
+    }
+
+    void searchPosts(trimmedValue);
   };
 
   const handlePageChange = (page: number) => {
@@ -254,7 +296,11 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
           </div>
 
           <div className={styles.list}>
-            {paginatedPosts.length === 0 ? (
+            {errorMessage ? (
+              <div className={styles.emptyState}>게시글을 불러오지 못했습니다.</div>
+            ) : isLoading ? (
+              <div className={styles.emptyState}>게시글을 불러오는 중입니다.</div>
+            ) : paginatedPosts.length === 0 ? (
               <div className={styles.emptyState}>
                 아직 등록된 글이 없습니다. 새로운 이야기를 가장 먼저 남겨보세요!
               </div>
