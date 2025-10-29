@@ -101,3 +101,36 @@ export const loginButtonStyle = style({
     color: colorVars.text.onCalloutHover,
   },
 });
+
+export const logoutButtonStyle = style({
+  border: 'none',
+  cursor: 'pointer',
+  padding: '10px 16px',
+  borderRadius: '12px',
+  fontFamily: `'Paperozi', sans-serif`,
+  fontWeight: 500,
+  background: colorVars.gradient.callout,
+  color: colorVars.text.onCallout,
+  boxShadow: colorVars.effect.calloutShadow,
+  transition:
+    'background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease',
+
+  ':hover': {
+    background: colorVars.gradient.calloutHover,
+    color: colorVars.text.onCalloutHover,
+    boxShadow: colorVars.effect.calloutShadowHover,
+  },
+
+  selectors: {
+    '.dark &': {
+      background: colorVars.text.onCallout,
+      color: colorVars.brand.primary,
+      boxShadow: colorVars.effect.brandShadow,
+    },
+    '.dark &:hover': {
+      background: colorVars.text.onCalloutHover,
+      color: colorVars.brand.primaryHover,
+      boxShadow: colorVars.effect.brandShadowHover,
+    },
+  },
+});
