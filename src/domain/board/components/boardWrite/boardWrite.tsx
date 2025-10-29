@@ -1,10 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import { TextArea, Button } from '@radix-ui/themes';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import * as styles from './boardWrite.css.ts';
 import { BoardDropDown } from '@domain/board/components/boardDropDown/boardDropDown.tsx';
 import { type UserSelectableCategory } from '../../store/boardStore.ts';
+import { httpClient } from '@shared/api/httpClient.ts';
 
 type FieldKey = 'title' | 'content';
 
@@ -54,9 +54,10 @@ export const BoardWrite = () => {
     }
 
     try {
-      await axios.post('/api/posts', {
+      await httpClient.post('/posts', {
         title,
         content,
+        postType: 'GENERAL',
         category,
       });
 
