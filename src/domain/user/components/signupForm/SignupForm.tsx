@@ -1,13 +1,42 @@
 import type { FormEvent } from 'react';
+import { isAxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { registerUser } from '../../api/registerApi';
 import * as styles from './styles/signup.css.ts';
 
 export const SignupForm = () => {
   const navigate = useNavigate();
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // TODO: integrate real signup flow
+    const formData = new FormData(event.currentTarget);
+    const username = (formData.get('username') ?? '').toString();
+    const email = (formData.get('email') ?? '').toString();
+    const password = (formData.get('password') ?? '').toString();
+    const passwordConfirm = (formData.get('passwordConfirm') ?? '').toString();
+
+    if (password !== passwordConfirm) {
+      alert('비밀번호가 일치하지 않습니다.');
+      return;
+    }
+
+    try {
+      await registerUser(username, email, password);
+      navigate('/login');
+    } catch (error) {
+      if (isAxiosError(error)) {
+        const message = error.response?.data?.error ?? error.message;
+        alert(message);
+        return;
+      }
+
+      if (error instanceof Error) {
+        alert(error.message);
+        return;
+      }
+
+      alert('알 수 없는 오류가 발생했습니다.');
+    }
   };
 
   const handleGoToLogin = () => {
