@@ -130,7 +130,7 @@ const normalizePost = (post: unknown): BoardPost => {
     likes: normalizeNumber(raw?.likes ?? raw?.likeCount),
     category: normalizedCategory,
     tags: normalizeTags(raw?.tags ?? raw?.tagList),
-    isNotice: Boolean(raw?.isNotice ?? (normalizedCategory === '공지')),
+    isNotice: Boolean(raw?.isNotice ?? normalizedCategory === '공지'),
     isNew: Boolean(raw?.isNew),
     isHot: Boolean(raw?.isHot),
     content: normalizeContentBlocks(raw?.content ?? raw?.contentBlocks),

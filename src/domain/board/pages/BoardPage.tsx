@@ -13,7 +13,10 @@ const POSTS_PER_PAGE = 10;
 
 type CategoryFilter = (typeof categories)[number];
 
-const categoryTypeMap: Record<Exclude<CategoryFilter, '전체' | '공지'>, string> = {
+const categoryTypeMap: Record<
+  Exclude<CategoryFilter, '전체' | '공지'>,
+  string
+> = {
   정보: 'information',
   잡담: 'chat',
   후기: 'review',
@@ -27,7 +30,10 @@ interface BoardPageProps {
 
 const formatNumber = (value: number) => value.toLocaleString('ko-KR');
 
-const formatDate = (value: string) => value.replace(/-/g, '.');
+const formatDate = (value: string) => {
+  const datePart = value.split('T')[0];
+  return datePart.replace(/-/g, '.');
+};
 
 const getBadgeLabel = (post: BoardPost) => {
   if (post.isNotice) {
@@ -297,9 +303,13 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
 
           <div className={styles.list}>
             {errorMessage ? (
-              <div className={styles.emptyState}>게시글을 불러오지 못했습니다.</div>
+              <div className={styles.emptyState}>
+                게시글을 불러오지 못했습니다.
+              </div>
             ) : isLoading ? (
-              <div className={styles.emptyState}>게시글을 불러오는 중입니다.</div>
+              <div className={styles.emptyState}>
+                게시글을 불러오는 중입니다.
+              </div>
             ) : paginatedPosts.length === 0 ? (
               <div className={styles.emptyState}>
                 아직 등록된 글이 없습니다. 새로운 이야기를 가장 먼저 남겨보세요!
