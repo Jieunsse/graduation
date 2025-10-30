@@ -1,4 +1,4 @@
-import { httpClient } from '../../../shared/api/httpClient';
+import { httpClient } from '@shared/api/httpClient.ts';
 
 export const logoutUser = async () => {
   const token = localStorage.getItem('token');
@@ -10,6 +10,6 @@ export const logoutUser = async () => {
       headers: {
         Authorization: token ? `Bearer ${token}` : '',
       },
-    },
+    }
   );
 };
