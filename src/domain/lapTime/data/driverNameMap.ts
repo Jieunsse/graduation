@@ -1,7 +1,6 @@
 // src/domain/lapTime/data/driverNameMap.ts
 export const driverNameMap: Record<string, string> = {
   'max verstappen': '막스 베르스타펜',
-  'sergio perez': '세르히오 페레스',
   'lewis hamilton': '루이스 해밀턴',
   'george russell': '조지 러셀',
   'charles leclerc': '샤를 르클레르',
@@ -22,4 +21,5 @@ export const driverNameMap: Record<string, string> = {
   'isack hadjar': '이삭 하자르',
   'liam lawson': '리암 로슨',
   'franco colapinto': '프랑코 콜라핀토',
+  'daniel ricciardo': '다니엘 리카르도',
 };

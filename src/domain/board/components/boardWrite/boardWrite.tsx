@@ -54,12 +54,22 @@ export const BoardWrite = () => {
     }
 
     try {
-      await httpClient.post('/posts', {
-        title,
-        content,
-        postType: 'GENERAL',
-        category,
-      });
+      const token = localStorage.getItem('token');
+
+      await httpClient.post(
+        '/posts',
+        {
+          title,
+          content,
+          postType: 'GENERAL',
+          category,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       navigate('/board');
     } catch (error) {

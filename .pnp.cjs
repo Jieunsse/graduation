@@ -39,6 +39,7 @@ const RAW_RUNTIME_STATE =
           ["@typescript-eslint/eslint-plugin", "virtual:2ee09b135f47d91c6ea8fe367a16d3df22a3bb8492418a1db8f48eed1845f23adaada030a7cb98fd25bdf0f19ed28cd1c03ddbdd733a5955bcbc9a385262918f#npm:8.43.0"],\
           ["@typescript-eslint/parser", "virtual:2ee09b135f47d91c6ea8fe367a16d3df22a3bb8492418a1db8f48eed1845f23adaada030a7cb98fd25bdf0f19ed28cd1c03ddbdd733a5955bcbc9a385262918f#npm:8.43.0"],\
           ["@vanilla-extract/css", "npm:1.17.4"],\
+          ["@vanilla-extract/dynamic", "npm:2.1.5"],\
           ["@vanilla-extract/vite-plugin", "virtual:2ee09b135f47d91c6ea8fe367a16d3df22a3bb8492418a1db8f48eed1845f23adaada030a7cb98fd25bdf0f19ed28cd1c03ddbdd733a5955bcbc9a385262918f#npm:5.1.1"],\
           ["@vitejs/plugin-react", "virtual:2ee09b135f47d91c6ea8fe367a16d3df22a3bb8492418a1db8f48eed1845f23adaada030a7cb98fd25bdf0f19ed28cd1c03ddbdd733a5955bcbc9a385262918f#npm:5.0.2"],\
           ["axios", "npm:1.12.1"],\
@@ -3986,6 +3987,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@vanilla-extract/dynamic", [\
+      ["npm:2.1.5", {\
+        "packageLocation": "../../../.yarn/berry/cache/@vanilla-extract-dynamic-npm-2.1.5-f3aa210f3d-10c0.zip/node_modules/@vanilla-extract/dynamic/",\
+        "packageDependencies": [\
+          ["@vanilla-extract/dynamic", "npm:2.1.5"],\
+          ["@vanilla-extract/private", "npm:1.0.9"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@vanilla-extract/integration", [\
       ["npm:8.0.4", {\
         "packageLocation": "../../../.yarn/berry/cache/@vanilla-extract-integration-npm-8.0.4-7902e4d86f-10c0.zip/node_modules/@vanilla-extract/integration/",\
@@ -5636,6 +5647,7 @@ const RAW_RUNTIME_STATE =
           ["@typescript-eslint/eslint-plugin", "virtual:2ee09b135f47d91c6ea8fe367a16d3df22a3bb8492418a1db8f48eed1845f23adaada030a7cb98fd25bdf0f19ed28cd1c03ddbdd733a5955bcbc9a385262918f#npm:8.43.0"],\
           ["@typescript-eslint/parser", "virtual:2ee09b135f47d91c6ea8fe367a16d3df22a3bb8492418a1db8f48eed1845f23adaada030a7cb98fd25bdf0f19ed28cd1c03ddbdd733a5955bcbc9a385262918f#npm:8.43.0"],\
           ["@vanilla-extract/css", "npm:1.17.4"],\
+          ["@vanilla-extract/dynamic", "npm:2.1.5"],\
           ["@vanilla-extract/vite-plugin", "virtual:2ee09b135f47d91c6ea8fe367a16d3df22a3bb8492418a1db8f48eed1845f23adaada030a7cb98fd25bdf0f19ed28cd1c03ddbdd733a5955bcbc9a385262918f#npm:5.1.1"],\
           ["@vitejs/plugin-react", "virtual:2ee09b135f47d91c6ea8fe367a16d3df22a3bb8492418a1db8f48eed1845f23adaada030a7cb98fd25bdf0f19ed28cd1c03ddbdd733a5955bcbc9a385262918f#npm:5.0.2"],\
           ["axios", "npm:1.12.1"],\
