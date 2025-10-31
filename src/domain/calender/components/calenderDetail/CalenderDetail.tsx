@@ -3,6 +3,7 @@ import type {
   CalenderEvent,
   CalenderSession,
 } from '@domain/calender/data/calender.ts';
+import { findCircuitMeta } from '@domain/calender/data/circuitMeta.ts';
 import * as styles from './calenderDetail.css.ts';
 
 const KOREA_TIMEZONE = 'Asia/Seoul';
@@ -104,6 +105,13 @@ export const CalenderDetail = ({ event }: CalenderDetailProps) => {
     return formatDateRange(event.startDate, event.endDate);
   }, [event]);
 
+  const circuitMeta = useMemo(() => {
+    if (!event) {
+      return undefined;
+    }
+    return findCircuitMeta(event.slug);
+  }, [event]);
+
   if (!event) {
     return (
       <section className={styles.container} aria-label="선택된 일정 없음">
@@ -130,6 +138,15 @@ export const CalenderDetail = ({ event }: CalenderDetailProps) => {
           <span>
             {event.country} / {event.locality} / {event.circuit}
           </span>
+          {circuitMeta ? (
+            <>
+              <span className={styles.metaDivider}>•</span>
+              <span>
+                {circuitMeta.location.country.ko} / {circuitMeta.location.city.ko} /{' '}
+                {circuitMeta.grandPrix.ko}
+              </span>
+            </>
+          ) : null}
         </div>
       </header>
 

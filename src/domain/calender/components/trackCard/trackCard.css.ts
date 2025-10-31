@@ -47,6 +47,17 @@ export const subtitle = style({
   },
 });
 
+export const subtitleSecondary = style({
+  margin: 0,
+  fontSize: 13,
+  color: 'rgba(180, 192, 238, 0.7)',
+  selectors: {
+    ':root.light &': {
+      color: 'rgba(50, 62, 108, 0.58)',
+    },
+  },
+});
+
 export const infoGrid = style({
   display: 'grid',
   gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
@@ -179,6 +190,22 @@ export const recordDriver = style({
   selectors: {
     ':root.light &': {
       color: 'rgba(60, 76, 126, 0.66)',
+    },
+  },
+});
+
+export const metaStack = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 4,
+});
+
+export const metaHelper = style({
+  fontSize: 12,
+  color: 'rgba(160, 178, 232, 0.7)',
+  selectors: {
+    ':root.light &': {
+      color: 'rgba(70, 86, 138, 0.62)',
     },
   },
 });

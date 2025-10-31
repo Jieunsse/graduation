@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import type { TrackInfo } from '@domain/calender/data/trackMap.ts';
+import { findCircuitMeta } from '@domain/calender/data/circuitMeta.ts';
 import * as styles from './trackCard.css.ts';
 
 interface TrackCardProps {
@@ -28,7 +29,44 @@ export const TrackCard = ({ track, mapImage }: TrackCardProps) => {
     );
   }
 
+  const circuitMeta = useMemo(() => findCircuitMeta(track.slug), [track.slug]);
+  const grandPrixLabel = circuitMeta
+    ? `${circuitMeta.grandPrix.ko} (${circuitMeta.grandPrix.en})`
+    : track.circuit;
+  const locationDetail = circuitMeta
+    ? `${circuitMeta.location.country.ko} · ${circuitMeta.location.city.ko} / ${track.location}`
+    : track.location;
+  const mapAlt = circuitMeta
+    ? `${circuitMeta.grandPrix.en} track map`
+    : track.alt ?? `${track.circuit} 트랙맵`;
+
   const statItems: { label: string; value: React.ReactNode }[] = [
+    ...(circuitMeta
+      ? [
+          {
+            label: '그랑프리',
+            value: (
+              <div className={styles.metaStack}>
+                <span className={styles.infoValue}>{circuitMeta.grandPrix.en}</span>
+                <span className={styles.metaHelper}>{circuitMeta.grandPrix.ko}</span>
+              </div>
+            ),
+          },
+          {
+            label: '개최지',
+            value: (
+              <div className={styles.metaStack}>
+                <span className={styles.infoValue}>
+                  {circuitMeta.location.country.ko} · {circuitMeta.location.city.ko}
+                </span>
+                <span className={styles.metaHelper}>
+                  {circuitMeta.location.city.en}, {circuitMeta.location.country.en}
+                </span>
+              </div>
+            ),
+          },
+        ]
+      : []),
     { label: '첫 그랑프리', value: track.firstGrandPrix },
     { label: '랩 카운트', value: track.numberOfLaps },
     { label: '서킷 길이', value: formatDistance(track.circuitLengthKm) },
@@ -57,8 +95,9 @@ export const TrackCard = ({ track, mapImage }: TrackCardProps) => {
         <h2 id={`${track.slug}-track-title`} className={styles.title}>
           트랙 정보
         </h2>
-        <p className={styles.subtitle}>
-          {track.circuit} · {track.location}
+        <p className={styles.subtitle}>{grandPrixLabel}</p>
+        <p className={styles.subtitleSecondary}>
+          {track.circuit} · {locationDetail}
         </p>
       </div>
 
@@ -84,7 +123,7 @@ export const TrackCard = ({ track, mapImage }: TrackCardProps) => {
           {mapImage ? (
             <img
               src={mapImage}
-              alt={track.alt ?? `${track.circuit} 트랙맵`}
+              alt={mapAlt}
               className={styles.mapImage}
             />
           ) : (
