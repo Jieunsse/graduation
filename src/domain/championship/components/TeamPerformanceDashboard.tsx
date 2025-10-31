@@ -44,7 +44,7 @@ const teamShowcaseData: TeamShowcase[] = [
     datasetCount: 356,
     drivers: [
       {
-        name: '찰스 르클레르',
+        name: '샤를 르끌레르',
         imageUrl: 'https://placehold.co/96x96/d90429/ffffff/png?text=CL',
       },
       {
@@ -67,7 +67,7 @@ const teamShowcaseData: TeamShowcase[] = [
         imageUrl: 'https://placehold.co/96x96/38bdf8/001427/png?text=GR',
       },
       {
-        name: '안드레아 킴 앤토넬리',
+        name: '키미 안토넬리',
         imageUrl: 'https://placehold.co/96x96/38bdf8/001427/png?text=AK',
       },
     ],
@@ -86,7 +86,7 @@ const teamShowcaseData: TeamShowcase[] = [
         imageUrl: 'https://placehold.co/96x96/1d3557/ffffff/png?text=MV',
       },
       {
-        name: '유키 쓰노다',
+        name: '유키 츠노다',
         imageUrl: 'https://placehold.co/96x96/1d3557/ffffff/png?text=YT',
       },
     ],
@@ -105,7 +105,7 @@ const teamShowcaseData: TeamShowcase[] = [
         imageUrl: 'https://placehold.co/96x96/00b4d8/001845/png?text=AA',
       },
       {
-        name: '프랑코 콜라피도',
+        name: '프랑코 콜라핀토',
         imageUrl: 'https://placehold.co/96x96/00b4d8/001845/png?text=FC',
       },
     ],
@@ -120,11 +120,11 @@ const teamShowcaseData: TeamShowcase[] = [
     datasetCount: 72,
     drivers: [
       {
-        name: '다니엘 리카르도',
+        name: '리암 로슨',
         imageUrl: 'https://placehold.co/96x96/4361ee/ffffff/png?text=DR',
       },
       {
-        name: '리즈토 히라도',
+        name: '이삭 하자르',
         imageUrl: 'https://placehold.co/96x96/4361ee/ffffff/png?text=RH',
       },
     ],
@@ -162,7 +162,7 @@ const teamShowcaseData: TeamShowcase[] = [
         imageUrl: 'https://placehold.co/96x96/f72585/ffffff/png?text=EO',
       },
       {
-        name: '올리 베어맨',
+        name: '올리버 베어맨',
         imageUrl: 'https://placehold.co/96x96/f72585/ffffff/png?text=OB',
       },
     ],
@@ -177,11 +177,11 @@ const teamShowcaseData: TeamShowcase[] = [
     datasetCount: 60,
     drivers: [
       {
-        name: '발테리 보타스',
+        name: '니코 휠켄버그',
         imageUrl: 'https://placehold.co/96x96/00c4b3/001f1d/png?text=VB',
       },
       {
-        name: '주 가뉴',
+        name: '가브리엘 보톨레토',
         imageUrl: 'https://placehold.co/96x96/00c4b3/001f1d/png?text=ZG',
       },
     ],
@@ -200,7 +200,7 @@ const teamShowcaseData: TeamShowcase[] = [
         imageUrl: 'https://placehold.co/96x96/0096c7/001f2d/png?text=PG',
       },
       {
-        name: '잭 두한',
+        name: '프랑코 콜라핀토',
         imageUrl: 'https://placehold.co/96x96/0096c7/001f2d/png?text=JD',
       },
     ],
