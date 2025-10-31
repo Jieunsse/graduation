@@ -1,4 +1,3 @@
-import kimiAntonelli from '@domain/driver/img/2025mercedesandant01right.png';
 import { driverNameMap } from '@domain/lapTime/data/driverNameMap.ts';
 import type { StartingGrid } from '@domain/grid/api/getStartingGrid.ts';
 
@@ -27,11 +26,12 @@ const teamColors: Record<string, string> = {
   'Williams Racing': '#005AFF',
 };
 
-const rawDriverEntries: Array<Omit<DriverMetadata, 'teamColor'>> = [
+const driverEntries: DriverMetadata[] = [
   {
     driverNumber: 1,
     englishName: 'Max Verstappen',
     teamName: 'Oracle Red Bull Racing',
+    teamColor: teamColors['Oracle Red Bull Racing'],
     imageUrl:
       'https://www.formula1.com/content/dam/fom-website/drivers/M/MAXVER01_Max_Verstappen/maxver01.png.transform/9col/image.png',
   },
@@ -46,13 +46,23 @@ const rawDriverEntries: Array<Omit<DriverMetadata, 'teamColor'>> = [
     driverNumber: 16,
     englishName: 'Charles Leclerc',
     teamName: 'Scuderia Ferrari',
+    teamColor: teamColors['Scuderia Ferrari'],
     imageUrl:
       'https://www.formula1.com/content/dam/fom-website/drivers/C/CHALEC01_Charles_Leclerc/chalec01.png.transform/9col/image.png',
+  },
+  {
+    driverNumber: 55,
+    englishName: 'Carlos Sainz',
+    teamName: 'Williams Racing',
+    teamColor: teamColors['Williams Racing'],
+    imageUrl:
+      'https://www.formula1.com/content/dam/fom-website/drivers/C/CARSAI01_Carlos_Sainz/carsai01.png.transform/9col/image.png',
   },
   {
     driverNumber: 44,
     englishName: 'Lewis Hamilton',
     teamName: 'Scuderia Ferrari',
+    teamColor: teamColors['Scuderia Ferrari'],
     imageUrl:
       'https://www.formula1.com/content/dam/fom-website/drivers/L/LEWHAM01_Lewis_Hamilton/lewham01.png.transform/9col/image.png',
   },
@@ -60,19 +70,15 @@ const rawDriverEntries: Array<Omit<DriverMetadata, 'teamColor'>> = [
     driverNumber: 63,
     englishName: 'George Russell',
     teamName: 'Mercedes-AMG PETRONAS F1 Team',
+    teamColor: teamColors['Mercedes-AMG PETRONAS F1 Team'],
     imageUrl:
       'https://www.formula1.com/content/dam/fom-website/drivers/G/GEORUS01_George_Russell/georus01.png.transform/9col/image.png',
-  },
-  {
-    driverNumber: 7,
-    englishName: 'Kimi Antonelli',
-    teamName: 'Mercedes-AMG PETRONAS F1 Team',
-    imageUrl: kimiAntonelli,
   },
   {
     driverNumber: 4,
     englishName: 'Lando Norris',
     teamName: 'McLaren Formula 1 Team',
+    teamColor: teamColors['McLaren Formula 1 Team'],
     imageUrl:
       'https://www.formula1.com/content/dam/fom-website/drivers/L/LANNOR01_Lando_Norris/lannor01.png.transform/9col/image.png',
   },
@@ -80,6 +86,7 @@ const rawDriverEntries: Array<Omit<DriverMetadata, 'teamColor'>> = [
     driverNumber: 81,
     englishName: 'Oscar Piastri',
     teamName: 'McLaren Formula 1 Team',
+    teamColor: teamColors['McLaren Formula 1 Team'],
     imageUrl:
       'https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_auto/content/dam/fom-website/2018-redesign-assets/drivers/2025/oscpia01.png',
   },
@@ -87,6 +94,7 @@ const rawDriverEntries: Array<Omit<DriverMetadata, 'teamColor'>> = [
     driverNumber: 14,
     englishName: 'Fernando Alonso',
     teamName: 'Aston Martin Aramco F1 Team',
+    teamColor: teamColors['Aston Martin Aramco F1 Team'],
     imageUrl:
       'https://www.formula1.com/content/dam/fom-website/drivers/F/FERALO01_Fernando_Alonso/feralo01.png.transform/9col/image.png',
   },
@@ -94,55 +102,47 @@ const rawDriverEntries: Array<Omit<DriverMetadata, 'teamColor'>> = [
     driverNumber: 18,
     englishName: 'Lance Stroll',
     teamName: 'Aston Martin Aramco F1 Team',
+    teamColor: teamColors['Aston Martin Aramco F1 Team'],
     imageUrl:
       'https://www.formula1.com/content/dam/fom-website/drivers/L/LANSTR01_Lance_Stroll/lanstr01.png.transform/9col/image.png',
-  },
-  {
-    driverNumber: 10,
-    englishName: 'Pierre Gasly',
-    teamName: 'BWT Alpine F1 Team',
-    imageUrl:
-      'https://www.formula1.com/content/dam/fom-website/drivers/P/PIEGAS01_Pierre_Gasly/piegas01.png.transform/9col/image.png',
   },
   {
     driverNumber: 31,
     englishName: 'Esteban Ocon',
     teamName: 'BWT Alpine F1 Team',
+    teamColor: teamColors['BWT Alpine F1 Team'],
     imageUrl:
       'https://www.formula1.com/content/dam/fom-website/drivers/E/ESTOCO01_Esteban_Ocon/estoco01.png.transform/9col/image.png',
   },
   {
-    driverNumber: 30,
-    englishName: 'Liam Lawson',
-    teamName: 'Racing Bulls',
+    driverNumber: 10,
+    englishName: 'Pierre Gasly',
+    teamName: 'BWT Alpine F1 Team',
+    teamColor: teamColors['BWT Alpine F1 Team'],
     imageUrl:
-      'https://www.formula1.com/content/dam/fom-website/drivers/L/LIALAW01_Liam_Lawson/lialaw01.png.transform/9col/image.png',
+      'https://www.formula1.com/content/dam/fom-website/drivers/P/PIEGAS01_Pierre_Gasly/piegas01.png.transform/9col/image.png',
   },
   {
-    driverNumber: 20,
-    englishName: 'Isack Hadjar',
-    teamName: 'Racing Bulls',
+    driverNumber: 22,
+    englishName: 'Yuki Tsunoda',
+    teamName: 'Visa Cash App RB Formula One Team',
+    teamColor: teamColors['Visa Cash App RB Formula One Team'],
     imageUrl:
-      'https://i.namu.wiki/i/aYyQpuIM2Ta41ZbtXIPYHcBHN_rfFZkNWOua_9eEkXap5C-XEEpIzESmCCu5xhbUO2alDOhyvI8IJlu112g9uw.webp',
+      'https://www.formula1.com/content/dam/fom-website/drivers/Y/YUKTSU01_Yuki_Tsunoda/yuktsu01.png.transform/9col/image.png',
   },
   {
     driverNumber: 3,
     englishName: 'Daniel Ricciardo',
-    teamName: 'Racing Bulls',
+    teamName: 'Visa Cash App RB Formula One Team',
+    teamColor: teamColors['Visa Cash App RB Formula One Team'],
     imageUrl:
       'https://www.formula1.com/content/dam/fom-website/drivers/D/DANRIC01_Daniel_Ricciardo/danric01.png.transform/9col/image.png',
-  },
-  {
-    driverNumber: 87,
-    englishName: 'Oliver Bearman',
-    teamName: 'MoneyGram Haas F1 Team',
-    imageUrl:
-      'https://www.formula1.com/content/dam/fom-website/drivers/O/OLIBEA01_Oliver_Bearman/olibea01.png.transform/9col/image.png',
   },
   {
     driverNumber: 27,
     englishName: 'Nico Hulkenberg',
     teamName: 'MoneyGram Haas F1 Team',
+    teamColor: teamColors['MoneyGram Haas F1 Team'],
     imageUrl:
       'https://www.formula1.com/content/dam/fom-website/drivers/N/NICHUL01_Nico_Hulkenberg/nichul01.png.transform/9col/image.png',
   },
@@ -157,13 +157,15 @@ const rawDriverEntries: Array<Omit<DriverMetadata, 'teamColor'>> = [
     driverNumber: 55,
     englishName: 'Carlos Sainz',
     teamName: 'Williams Racing',
+    teamColor: teamColors['Williams Racing'],
     imageUrl:
       'https://www.formula1.com/content/dam/fom-website/drivers/C/CARSAI01_Carlos_Sainz/carsai01.png.transform/9col/image.png',
   },
   {
     driverNumber: 43,
     englishName: 'Franco Colapinto',
-    teamName: 'Williams Racing',
+    teamName: 'BWT Alpine F1 Team',
+    teamColor: teamColors['BWT Alpine F1 Team'],
     imageUrl:
       'https://www.formula1.com/content/dam/fom-website/drivers/F/FRACOL01_Franco_Colapinto/fracol01.png.transform/9col/image.png',
   },
@@ -171,6 +173,7 @@ const rawDriverEntries: Array<Omit<DriverMetadata, 'teamColor'>> = [
     driverNumber: 77,
     englishName: 'Valtteri Bottas',
     teamName: 'Kick Sauber F1 Team',
+    teamColor: teamColors['Kick Sauber F1 Team'],
     imageUrl:
       'https://www.formula1.com/content/dam/fom-website/drivers/V/VALBOT01_Valtteri_Bottas/valbot01.png.transform/9col/image.png',
   },
@@ -178,6 +181,7 @@ const rawDriverEntries: Array<Omit<DriverMetadata, 'teamColor'>> = [
     driverNumber: 5,
     englishName: 'Gabriel Bortoleto',
     teamName: 'Kick Sauber F1 Team',
+    teamColor: teamColors['Kick Sauber F1 Team'],
     imageUrl:
       'https://www.formula1.com/content/dam/fom-website/drivers/G/GABBOR01_Gabriel_Bortoleto/gabbor01.png.transform/9col/image.png',
   },
@@ -205,27 +209,25 @@ export const driverMetadataMap: Record<number, ResolvedDriverMetadata> = driverE
 
 export const fallbackGridOrder: number[] = [
   1,
-  22,
+  11,
   16,
+  55,
   44,
   63,
-  7,
   4,
   81,
   14,
   18,
-  10,
   31,
-  30,
+  10,
+  22,
   3,
-  20,
   27,
-  87,
-  23,
-  55,
-  43,
+  20,
+  24,
   77,
-  5,
+  23,
+  2,
 ];
 
 export const fallbackGridData: StartingGrid[] = fallbackGridOrder.map((driverNumber, index) => ({

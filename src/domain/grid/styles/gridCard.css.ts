@@ -23,7 +23,7 @@ export const card = style({
   borderRadius: '28px',
   background: vars.color.gridCardBg,
   border: `1px solid ${vars.color.gridCardBorder}`,
-  boxShadow: vars.color.gridCardShadow,
+  boxShadow: '0 32px 60px rgba(4, 10, 24, 0.55)',
   color: vars.color.gridCardText,
   textAlign: 'center',
   overflow: 'hidden',
@@ -41,7 +41,7 @@ export const card = style({
     },
     '&:hover': {
       transform: 'translateY(-6px)',
-      boxShadow: vars.color.gridCardHoverShadow,
+      boxShadow: '0 40px 80px rgba(4, 10, 24, 0.65)',
       borderColor: teamColorVar,
     },
   },
@@ -60,7 +60,7 @@ export const position = style({
   fontWeight: 700,
   letterSpacing: '0.08em',
   color: vars.color.gridCardAccent,
-  textShadow: vars.color.gridCardPositionShadow,
+  textShadow: '0 8px 24px rgba(0, 0, 0, 0.45)',
 });
 
 export const bracket = style({
@@ -110,7 +110,7 @@ export const imageWrapper = style({
   borderRadius: '24px',
   overflow: 'hidden',
   background: `linear-gradient(145deg, ${teamColorVar}1A 0%, ${vars.color.gridCardBg} 100%)`,
-  boxShadow: vars.color.gridCardImageShadow,
+  boxShadow: '0 18px 38px rgba(0, 0, 0, 0.45)',
   animation: `${floatIn} 420ms ease`,
 });
 
