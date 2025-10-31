@@ -3,35 +3,28 @@ import { TextArea, Button } from '@radix-ui/themes';
 import { useNavigate } from 'react-router-dom';
 import * as styles from './boardWrite.css.ts';
 import { BoardDropDown } from '@domain/board/components/boardDropDown/boardDropDown.tsx';
-import {
-  useBoardStore,
-  type UserSelectableCategory,
-} from '../../store/boardStore.ts';
+import { type UserSelectableCategory } from '../../store/boardStore.ts';
+import { httpClient } from '@shared/api/httpClient.ts';
 
-type FieldKey = 'title' | 'author' | 'content';
+type FieldKey = 'title' | 'content';
 
 const MIN_LENGTH = {
   title: 2,
-  author: 2,
   content: 10,
 } as const;
 
 export const BoardWrite = () => {
-  const addPost = useBoardStore((state) => state.addPost);
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
   const [content, setContent] = useState('');
   const [category, setCategory] = useState<UserSelectableCategory>('정보');
   const [touched, setTouched] = useState<Record<FieldKey, boolean>>({
     title: false,
-    author: false,
     content: false,
   });
 
   const errors = useMemo(() => {
     const trimmedTitle = title.trim();
-    const trimmedAuthor = author.trim();
     const trimmedContent = content.trim();
 
     return {
@@ -39,42 +32,49 @@ export const BoardWrite = () => {
         trimmedTitle.length >= MIN_LENGTH.title
           ? ''
           : `제목을 ${MIN_LENGTH.title}자 이상 입력해 주세요.`,
-      author:
-        trimmedAuthor.length >= MIN_LENGTH.author
-          ? ''
-          : `작성자 이름을 ${MIN_LENGTH.author}자 이상 입력해 주세요.`,
       content:
         trimmedContent.length >= MIN_LENGTH.content
           ? ''
           : `내용을 ${MIN_LENGTH.content}자 이상 입력해 주세요.`,
     };
-  }, [title, author, content]);
+  }, [title, content]);
 
-  const isValid = useMemo(
-    () => !errors.title && !errors.author && !errors.content,
-    [errors]
-  );
+  const isValid = useMemo(() => !errors.title && !errors.content, [errors]);
 
   const handleBlur = (field: FieldKey) => () => {
     setTouched((prev) => ({ ...prev, [field]: true }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setTouched({ title: true, author: true, content: true });
+    setTouched({ title: true, content: true });
 
     if (!isValid) {
       return;
     }
 
-    addPost({
-      title,
-      author,
-      content,
-      category,
-    });
+    try {
+      const token = localStorage.getItem('token');
 
-    navigate('/board');
+      await httpClient.post(
+        '/posts',
+        {
+          title,
+          content,
+          postType: 'GENERAL',
+          category,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      navigate('/board');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -106,23 +106,6 @@ export const BoardWrite = () => {
           />
           {touched.title && errors.title ? (
             <span className={styles.error}>{errors.title}</span>
-          ) : null}
-        </div>
-
-        <div className={styles.field}>
-          <label htmlFor="board-write-author" className={styles.label}>
-            작성자
-          </label>
-          <input
-            id="board-write-author"
-            value={author}
-            onChange={(event) => setAuthor(event.target.value)}
-            onBlur={handleBlur('author')}
-            placeholder="닉네임 또는 이름을 입력해 주세요"
-            className={styles.input}
-          />
-          {touched.author && errors.author ? (
-            <span className={styles.error}>{errors.author}</span>
           ) : null}
         </div>
 

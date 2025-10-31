@@ -151,7 +151,6 @@ export const contentHeading = style({
 
 export const paragraph = style({
   margin: 0,
-  lineHeight: 0.4,
   color: 'rgba(221, 227, 255, 0.88)',
   fontSize: 15,
   wordBreak: 'keep-all',

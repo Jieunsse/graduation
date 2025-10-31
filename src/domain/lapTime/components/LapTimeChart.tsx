@@ -27,7 +27,9 @@ const getUnitLabel = (unit: LapTimeUnit) => (unit === 'seconds' ? 's' : 'min');
 
 export const LapTimeChart = ({ data, drivers, unit }: LapTimeChartProps) => {
   if (data.length === 0 || drivers.length === 0) {
-    return <div className={styles.emptyState}>표시할 랩타임 데이터가 없습니다.</div>;
+    return (
+      <div className={styles.emptyState}>표시할 랩타임 데이터가 없습니다.</div>
+    );
   }
 
   const unitLabel = getUnitLabel(unit);
@@ -35,11 +37,21 @@ export const LapTimeChart = ({ data, drivers, unit }: LapTimeChartProps) => {
   return (
     <div className={styles.chartWrapper}>
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={data} margin={{ top: 20, right: 20, bottom: 20, left: 10 }}>
+        <LineChart
+          data={data}
+          margin={{ top: 20, right: 20, bottom: 20, left: 10 }}
+        >
           <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-          <XAxis dataKey="lap" label={{ value: 'Lap', position: 'insideBottomRight', offset: -10 }} />
+          <XAxis
+            dataKey="lap"
+            label={{ value: 'Lap', position: 'insideBottomRight', offset: -10 }}
+          />
           <YAxis
-            tickFormatter={(value: number) => value.toFixed(2)}
+            tickFormatter={(value: number) => {
+              const minutes = Math.floor(value / 60);
+              const seconds = (value % 60).toFixed(2);
+              return `${minutes}:${seconds.padStart(5, '0')}`; // 예: "1:23.45"
+            }}
             label={{
               value: `Lap Time (${unitLabel})`,
               angle: -90,
@@ -47,10 +59,11 @@ export const LapTimeChart = ({ data, drivers, unit }: LapTimeChartProps) => {
             }}
           />
           <Tooltip
-            formatter={(value: number, name: string) => [
-              `${value.toFixed(3)} ${unitLabel}`,
-              name,
-            ]}
+            formatter={(value: number, name: string) => {
+              const minutes = Math.floor(value / 60);
+              const seconds = (value % 60).toFixed(3);
+              return [`${minutes}:${seconds.padStart(6, '0')}`, name]; // 예: "1:23.456"
+            }}
             labelFormatter={(label: string | number) => `Lap ${label}`}
           />
           <Legend />

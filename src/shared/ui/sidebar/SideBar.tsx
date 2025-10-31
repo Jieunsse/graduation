@@ -30,7 +30,7 @@ interface SideBarProps {
 const primaryNavigation: MenuItem[] = [
   { label: '레이스 캘린더', Icon: CalendarIcon, path: '/calendar' },
   { label: 'Drivers', Icon: NewsIcon, path: '/drivers' },
-  { label: 'FIA 문서', Icon: DocumentIcon },
+  { label: '스타팅 그리드', Icon: DocumentIcon, path: '/starting-grid' },
   { label: '크리에이터 콘텐츠', Icon: CreatorIcon, path: '/creator' },
 ];
 
@@ -49,7 +49,7 @@ const collapsibleNavigation: CollapsibleNavItem[] = [
     Icon: ChampionshipIcon,
     subItems: [
       { label: '드라이버 순위' },
-      { label: '컨스트럭터 순위' },
+      { label: '컨스트럭터 순위', path: '/championship/constructors' },
     ],
   },
   {
