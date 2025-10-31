@@ -1,4 +1,3 @@
-import React from 'react';
 import * as styles from '../styles/TeamPerformanceDashboard.css.ts';
 
 type DriverInfo = {
@@ -214,9 +213,9 @@ export const TeamPerformanceDashboard = () => {
       <header className={styles.header}>
         <h2 className={styles.title}>Team Performance Dashboard</h2>
         <p className={styles.description}>
-          2025 시즌 기준으로 수집된 최신 데이터를 기반으로 각 팀의 드라이버 구성과
-          차량을 한눈에 확인하세요. 시즌이 진행될수록 카드의 데이터 카운트가
-          업데이트됩니다.
+          2025 시즌 기준으로 수집된 최신 데이터를 기반으로 각 팀의 드라이버
+          구성과 차량을 한눈에 확인하세요. 시즌이 진행될수록 카드의 데이터
+          카운트가 업데이트됩니다.
         </p>
       </header>
 
@@ -238,7 +237,7 @@ export const TeamPerformanceDashboard = () => {
                 <div className={styles.teamMeta}>
                   <h3 className={styles.teamName}>{team.name}</h3>
                   <span className={styles.dataTag}>
-                    2025 시즌 데이터 {team.datasetCount.toLocaleString()}건
+                    컨스트럭터 포인트 : {team.datasetCount.toLocaleString()}
                   </span>
                 </div>
               </div>
