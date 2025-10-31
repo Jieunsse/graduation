@@ -20,7 +20,7 @@ const teamColors: Record<string, string> = {
   'McLaren Formula 1 Team': '#FF6F1D',
   'Aston Martin Aramco F1 Team': '#006F62',
   'BWT Alpine F1 Team': '#0090FF',
-  'Visa Cash App RB Formula One Team': '#1436B0',
+  'Racing Bulls': '#1436B0',
   'MoneyGram Haas F1 Team': '#B6BABD',
   'Kick Sauber F1 Team': '#00E701',
   'Williams Racing': '#005AFF',
@@ -36,12 +36,11 @@ const driverEntries: DriverMetadata[] = [
       'https://www.formula1.com/content/dam/fom-website/drivers/M/MAXVER01_Max_Verstappen/maxver01.png.transform/9col/image.png',
   },
   {
-    driverNumber: 11,
-    englishName: 'Sergio Perez',
+    driverNumber: 22,
+    englishName: 'Yuki Tsunoda',
     teamName: 'Oracle Red Bull Racing',
-    teamColor: teamColors['Oracle Red Bull Racing'],
     imageUrl:
-      'https://www.formula1.com/content/dam/fom-website/drivers/S/SERPER01_Sergio_Perez/serper01.png.transform/9col/image.png',
+      'https://www.formula1.com/content/dam/fom-website/drivers/Y/YUKTSU01_Yuki_Tsunoda/yuktsu01.png.transform/9col/image.png',
   },
   {
     driverNumber: 16,
@@ -54,16 +53,16 @@ const driverEntries: DriverMetadata[] = [
   {
     driverNumber: 55,
     englishName: 'Carlos Sainz',
-    teamName: 'Scuderia Ferrari',
-    teamColor: teamColors['Scuderia Ferrari'],
+    teamName: 'Williams Racing',
+    teamColor: teamColors['Williams Racing'],
     imageUrl:
       'https://www.formula1.com/content/dam/fom-website/drivers/C/CARSAI01_Carlos_Sainz/carsai01.png.transform/9col/image.png',
   },
   {
     driverNumber: 44,
     englishName: 'Lewis Hamilton',
-    teamName: 'Mercedes-AMG PETRONAS F1 Team',
-    teamColor: teamColors['Mercedes-AMG PETRONAS F1 Team'],
+    teamName: 'Scuderia Ferrari',
+    teamColor: teamColors['Scuderia Ferrari'],
     imageUrl:
       'https://www.formula1.com/content/dam/fom-website/drivers/L/LEWHAM01_Lewis_Hamilton/lewham01.png.transform/9col/image.png',
   },
@@ -148,20 +147,27 @@ const driverEntries: DriverMetadata[] = [
       'https://www.formula1.com/content/dam/fom-website/drivers/N/NICHUL01_Nico_Hulkenberg/nichul01.png.transform/9col/image.png',
   },
   {
-    driverNumber: 20,
-    englishName: 'Kevin Magnussen',
-    teamName: 'MoneyGram Haas F1 Team',
-    teamColor: teamColors['MoneyGram Haas F1 Team'],
+    driverNumber: 23,
+    englishName: 'Alexander Albon',
+    teamName: 'Williams Racing',
     imageUrl:
-      'https://www.formula1.com/content/dam/fom-website/drivers/K/KEVMAG01_Kevin_Magnussen/kevmag01.png.transform/9col/image.png',
+      'https://www.formula1.com/content/dam/fom-website/drivers/A/ALEALB01_Alexander_Albon/alealb01.png.transform/9col/image.png',
   },
   {
-    driverNumber: 24,
-    englishName: 'Zhou Guanyu',
-    teamName: 'Kick Sauber F1 Team',
-    teamColor: teamColors['Kick Sauber F1 Team'],
+    driverNumber: 55,
+    englishName: 'Carlos Sainz',
+    teamName: 'Williams Racing',
+    teamColor: teamColors['Williams Racing'],
     imageUrl:
-      'https://www.formula1.com/content/dam/fom-website/drivers/G/GUAZHO01_Guanyu_Zhou/guazho01.png.transform/9col/image.png',
+      'https://www.formula1.com/content/dam/fom-website/drivers/C/CARSAI01_Carlos_Sainz/carsai01.png.transform/9col/image.png',
+  },
+  {
+    driverNumber: 43,
+    englishName: 'Franco Colapinto',
+    teamName: 'BWT Alpine F1 Team',
+    teamColor: teamColors['BWT Alpine F1 Team'],
+    imageUrl:
+      'https://www.formula1.com/content/dam/fom-website/drivers/F/FRACOL01_Franco_Colapinto/fracol01.png.transform/9col/image.png',
   },
   {
     driverNumber: 77,
@@ -172,22 +178,19 @@ const driverEntries: DriverMetadata[] = [
       'https://www.formula1.com/content/dam/fom-website/drivers/V/VALBOT01_Valtteri_Bottas/valbot01.png.transform/9col/image.png',
   },
   {
-    driverNumber: 23,
-    englishName: 'Alexander Albon',
-    teamName: 'Williams Racing',
-    teamColor: teamColors['Williams Racing'],
+    driverNumber: 5,
+    englishName: 'Gabriel Bortoleto',
+    teamName: 'Kick Sauber F1 Team',
+    teamColor: teamColors['Kick Sauber F1 Team'],
     imageUrl:
-      'https://www.formula1.com/content/dam/fom-website/drivers/A/ALEALB01_Alexander_Albon/alealb01.png.transform/9col/image.png',
-  },
-  {
-    driverNumber: 2,
-    englishName: 'Logan Sargeant',
-    teamName: 'Williams Racing',
-    teamColor: teamColors['Williams Racing'],
-    imageUrl:
-      'https://www.formula1.com/content/dam/fom-website/drivers/L/LOGSAR01_Logan_Sargeant/logsar01.png.transform/9col/image.png',
+      'https://www.formula1.com/content/dam/fom-website/drivers/G/GABBOR01_Gabriel_Bortoleto/gabbor01.png.transform/9col/image.png',
   },
 ];
+
+const driverEntries: DriverMetadata[] = rawDriverEntries.map((driver) => ({
+  ...driver,
+  teamColor: teamColors[driver.teamName] ?? '#7B61FF',
+}));
 
 export const driverMetadataMap: Record<number, ResolvedDriverMetadata> = driverEntries.reduce(
   (acc, driver) => {
