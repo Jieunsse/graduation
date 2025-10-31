@@ -1,5 +1,6 @@
 import { style, styleVariants } from '@vanilla-extract/css';
 import { vars } from '@shared/styles/token.css.ts';
+import { colorVars } from '@shared/styles/color.css.ts';
 import * as cardStyles from '@domain/grid/styles/gridCard.css.ts';
 
 export const page = style({
@@ -13,21 +14,20 @@ export const hero = style({
   position: 'relative',
   borderRadius: '36px',
   overflow: 'hidden',
-  background: vars.color.gridHeroBackground,
   border: `1px solid ${vars.color.gridHeroBorder}`,
   boxShadow: '0 40px 120px rgba(5, 10, 28, 0.6)',
   padding: '48px clamp(24px, 4vw, 64px)',
-  color: vars.color.gridCardText,
+  color: '#2f3762',
   isolation: 'isolate',
   selectors: {
     '&::after': {
       content: '',
       position: 'absolute',
       inset: 0,
-      background: vars.color.gridHeroOverlay,
       opacity: 0.7,
       pointerEvents: 'none',
       zIndex: -1,
+      background: colorVars.surface.panel,
     },
   },
 });
@@ -87,7 +87,7 @@ export const controlButton = style({
   padding: '12px 22px',
   borderRadius: '999px',
   border: `1px solid ${vars.color.gridCardBorder}`,
-  background: 'transparent',
+  background: vars.color.gridControlActiveBg,
   color: vars.color.gridCardText,
   fontSize: '15px',
   fontWeight: 600,

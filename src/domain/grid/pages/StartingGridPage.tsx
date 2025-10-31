@@ -66,14 +66,11 @@ export const StartingGridPage = ({
           <div className={styles.heroMeta}>
             <span>{`SESSION ${sessionKey}`}</span>
             <span>{`TOP ${maxPosition}`}</span>
-            <span>목업 데이터</span>
           </div>
 
           <h1 className={styles.heroTitle}>스타팅 그리드</h1>
           <p className={styles.heroDescription}>
-            OpenF1 API 대신 내부 목업 데이터를 기반으로 스타팅 순서를
-            표시합니다. 드라이버 사진, 번호, 팀 컬러를 한눈에 확인할 수
-            있습니다.
+            경기별로 스타팅 그리드 순서를 확인할 수 있습니다.
           </p>
 
           <div className={styles.controls}>
@@ -87,7 +84,7 @@ export const StartingGridPage = ({
                   className={styles.controlButtonVariants[variant]}
                   onClick={() => setMaxPosition(value)}
                 >
-                  {`TOP ${value}`}
+                  {value === 20 ? '전체 보기' : `TOP ${value}`}
                 </button>
               );
             })}
@@ -99,10 +96,6 @@ export const StartingGridPage = ({
             <h2
               className={styles.sectionTitle}
             >{`TOP ${maxPosition} 스타팅 그리드`}</h2>
-            <p className={styles.sectionDescription}>
-              드라이버 번호와 팀 컬러를 기준으로 레이스 시작 순서를
-              정렬했습니다. 각 카드 위에는 포지션과 팀 이름이 표시됩니다.
-            </p>
           </div>
 
           <GridList items={items} isLoading={false} skeletonCount={0} />

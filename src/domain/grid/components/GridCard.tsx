@@ -27,10 +27,7 @@ export const GridCard = ({
   return (
     <article className={styles.card} style={inlineVars}>
       <header className={styles.header}>
-        <span className={styles.position}>{position}</span>
-        <div className={styles.bracket} aria-hidden>
-          <span className={styles.bracketLabel}>GRID</span>
-        </div>
+        <span className={styles.position}>No.{position}</span>
       </header>
 
       <div className={styles.imageWrapper}>

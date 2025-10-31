@@ -132,14 +132,6 @@ const driverEntries: DriverMetadata[] = [
       'https://www.formula1.com/content/dam/fom-website/drivers/P/PIEGAS01_Pierre_Gasly/piegas01.png.transform/9col/image.png',
   },
   {
-    driverNumber: 3,
-    englishName: 'Daniel Ricciardo',
-    teamName: 'Visa Cash App RB Formula One Team',
-    teamColor: teamColors['Racing Bulls'] ?? '#1436B0',
-    imageUrl:
-      'https://www.formula1.com/content/dam/fom-website/drivers/D/DANRIC01_Daniel_Ricciardo/danric01.png.transform/9col/image.png',
-  },
-  {
     driverNumber: 27,
     englishName: 'Nico Hulkenberg',
     teamName: 'MoneyGram Haas F1 Team',
@@ -210,7 +202,7 @@ export const driverMetadataMap: Record<number, ResolvedDriverMetadata> =
   );
 
 export const fallbackGridOrder: number[] = [
-  1, 16, 55, 44, 63, 4, 81, 14, 18, 31, 10, 22, 3, 27, 23, 43, 5, 30, 20, 87, 7,
+  1, 16, 55, 44, 63, 4, 81, 14, 18, 31, 10, 22, 27, 23, 43, 5, 30, 20, 87, 12,
 ];
 
 export const fallbackGridData: StartingGrid[] = fallbackGridOrder.map(

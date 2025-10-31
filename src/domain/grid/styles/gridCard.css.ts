@@ -21,9 +21,8 @@ export const card = style({
   gap: '18px',
   padding: '28px 24px 32px',
   borderRadius: '28px',
-  // background: vars.color.gridCardBg,
   border: `1px solid ${vars.color.gridCardBorder}`,
-  boxShadow: '0 32px 60px rgba(4, 10, 24, 0.55)',
+  boxShadow: '0 28px 60px rgba(4, 10, 24, 0.55)',
   color: vars.color.gridCardText,
   textAlign: 'center',
   overflow: 'hidden',
@@ -100,7 +99,7 @@ export const bracketLabel = style({
   fontWeight: 600,
   letterSpacing: '0.2em',
   textTransform: 'uppercase',
-  // color: vars.color.gridCardDivider,
+  color: '#121212',
 });
 
 export const imageWrapper = style({
