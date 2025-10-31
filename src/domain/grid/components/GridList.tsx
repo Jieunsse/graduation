@@ -18,26 +18,18 @@ interface GridListStatus {
 interface GridListProps {
   items: GridListItem[];
   isLoading: boolean;
-  skeletonCount?: number;
   status?: GridListStatus;
 }
 
 export const GridList = ({
   items,
   isLoading,
-  skeletonCount = 20,
   status,
 }: GridListProps) => {
   if (isLoading) {
     return (
-      <div className={pageStyles.skeletonList} aria-live="polite" aria-busy>
-        {Array.from({ length: skeletonCount }).map((_, index) => (
-          <div
-            key={`grid-skeleton-${index}`}
-            className={pageStyles.skeletonCard}
-            aria-hidden
-          />
-        ))}
+      <div className={pageStyles.loadingMessage} role="status" aria-live="polite">
+        로딩 중…
       </div>
     );
   }
