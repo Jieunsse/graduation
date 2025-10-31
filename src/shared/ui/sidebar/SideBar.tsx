@@ -49,7 +49,7 @@ const collapsibleNavigation: CollapsibleNavItem[] = [
     Icon: ChampionshipIcon,
     subItems: [
       { label: '드라이버 순위' },
-      { label: '컨스트럭터 순위' },
+      { label: '컨스트럭터 순위', path: '/championship/constructors' },
     ],
   },
   {
