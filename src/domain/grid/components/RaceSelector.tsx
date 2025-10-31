@@ -1,9 +1,6 @@
-import React, { useId } from 'react';
+import { useId } from 'react';
 import * as styles from '@domain/grid/styles/raceSelector.css.ts';
-import type {
-  RaceKey,
-  RaceOption,
-} from '@domain/grid/data/raceGridData.ts';
+import type { RaceKey, RaceOption } from '@domain/grid/data/raceGridData.ts';
 
 interface RaceSelectorProps {
   options: RaceOption[];
@@ -11,7 +8,11 @@ interface RaceSelectorProps {
   onChange: (value: RaceKey) => void;
 }
 
-export const RaceSelector = ({ options, value, onChange }: RaceSelectorProps) => {
+export const RaceSelector = ({
+  options,
+  value,
+  onChange,
+}: RaceSelectorProps) => {
   const selectId = useId();
 
   return (

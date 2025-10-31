@@ -15,6 +15,11 @@ export const label = style({
   letterSpacing: '0.14em',
   textTransform: 'uppercase',
   color: vars.color.gridCardSubtleText,
+  selectors: {
+    ':root.light &': {
+      color: '#121212',
+    },
+  },
 });
 
 export const select = style({
@@ -22,6 +27,7 @@ export const select = style({
   WebkitAppearance: 'none',
   MozAppearance: 'none',
   padding: '12px 16px',
+  textAlign: 'center',
   borderRadius: '999px',
   border: `1px solid ${vars.color.gridCardBorder}`,
   background: vars.color.gridCardBg,
@@ -37,6 +43,9 @@ export const select = style({
     '&:focus-visible': {
       borderColor: vars.color.gridControlActiveBorder,
       boxShadow: '0 0 0 3px rgba(129, 140, 248, 0.35)',
+    },
+    ':root.light &': {
+      background: '#6366F1EE',
     },
   },
   '@media': {
