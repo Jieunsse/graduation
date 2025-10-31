@@ -22,4 +22,8 @@ export const driverNameMap: Record<string, string> = {
   'isack hadjar': '이삭 하자르',
   'liam lawson': '리암 로슨',
   'franco colapinto': '프랑코 콜라핀토',
+  'daniel ricciardo': '다니엘 리카르도',
+  'kevin magnussen': '케빈 마그누센',
+  'logan sargeant': '로건 사전트',
+  'zhou guanyu': '저우 관위',
 };
