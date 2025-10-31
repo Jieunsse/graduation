@@ -79,6 +79,13 @@ export const controls = style({
   flexWrap: 'wrap',
 });
 
+export const controlButtonGroup = style({
+  display: 'flex',
+  gap: '12px',
+  flexWrap: 'wrap',
+  alignItems: 'center',
+});
+
 export const controlButton = style({
   position: 'relative',
   display: 'inline-flex',
@@ -188,3 +195,8 @@ export const errorCard = style([
     borderColor: vars.color.gridErrorBorder,
   },
 ]);
+
+export const loadingMessage = style([statusCard, {
+  fontWeight: 600,
+  letterSpacing: '0.02em',
+}]);
