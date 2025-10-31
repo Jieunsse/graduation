@@ -12,7 +12,7 @@ export const loginUser = async (username: string, password: string) => {
       password,
     });
 
-    const { token, message } = response.data;
+    const { token } = response.data;
 
     if (!token) {
       console.error('서버 응답에 토큰이 없습니다.', response.data);
