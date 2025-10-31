@@ -54,7 +54,6 @@ export const heroDescription = style({
   marginTop: '18px',
   maxWidth: '640px',
   lineHeight: 1.7,
-  color: vars.color.gridCardSubtleText,
   fontSize: '17px',
 });
 
@@ -99,20 +98,26 @@ export const controlButton = style({
 });
 
 export const controlButtonVariants = styleVariants({
-  active: [controlButton, {
-    background: vars.color.gridControlActiveBg,
-    color: vars.color.gridControlActiveText,
-    borderColor: vars.color.gridControlActiveBorder,
-    boxShadow: '0 16px 34px rgba(5, 10, 28, 0.35)',
-  }],
-  inactive: [controlButton, {
-    selectors: {
-      '&:hover': {
-        borderColor: vars.color.gridControlHoverBorder,
-        background: vars.color.gridControlHoverBg,
+  active: [
+    controlButton,
+    {
+      background: vars.color.gridControlActiveBg,
+      color: vars.color.gridControlActiveText,
+      borderColor: vars.color.gridControlActiveBorder,
+      boxShadow: '0 16px 34px rgba(5, 10, 28, 0.35)',
+    },
+  ],
+  inactive: [
+    controlButton,
+    {
+      selectors: {
+        '&:hover': {
+          borderColor: vars.color.gridControlHoverBorder,
+          background: vars.color.gridControlHoverBg,
+        },
       },
     },
-  }],
+  ],
 });
 
 export const gridSection = style({
@@ -131,13 +136,13 @@ export const sectionTitle = style({
   fontSize: '28px',
   fontWeight: 700,
   letterSpacing: '-0.01em',
-  color: vars.color.gridCardText,
+  // color: vars.color.gridCardText,
 });
 
 export const sectionDescription = style({
   fontSize: '16px',
   lineHeight: 1.65,
-  color: vars.color.gridCardSubtleText,
+  // color: vars.color.gridCardSubtleText,
   maxWidth: '680px',
 });
 
@@ -176,7 +181,10 @@ export const skeletonList = style({
   },
 });
 
-export const errorCard = style([statusCard, {
-  color: vars.color.gridErrorText,
-  borderColor: vars.color.gridErrorBorder,
-}]);
+export const errorCard = style([
+  statusCard,
+  {
+    color: vars.color.gridErrorText,
+    borderColor: vars.color.gridErrorBorder,
+  },
+]);

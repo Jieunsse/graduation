@@ -1,5 +1,6 @@
 import { driverNameMap } from '@domain/lapTime/data/driverNameMap.ts';
 import type { StartingGrid } from '@domain/grid/api/getStartingGrid.ts';
+import kimiAntonelli from '@domain/driver/img/2025mercedesandant01right.png';
 
 export interface DriverMetadata {
   driverNumber: number;
@@ -38,7 +39,8 @@ const driverEntries: DriverMetadata[] = [
   {
     driverNumber: 22,
     englishName: 'Yuki Tsunoda',
-    teamName: 'Oracle Red Bull Racing',
+    teamName: 'Visa Cash App RB Formula One Team',
+    teamColor: teamColors['Racing Bulls'] ?? '#1436B0',
     imageUrl:
       'https://www.formula1.com/content/dam/fom-website/drivers/Y/YUKTSU01_Yuki_Tsunoda/yuktsu01.png.transform/9col/image.png',
   },
@@ -65,6 +67,13 @@ const driverEntries: DriverMetadata[] = [
     teamColor: teamColors['Scuderia Ferrari'],
     imageUrl:
       'https://www.formula1.com/content/dam/fom-website/drivers/L/LEWHAM01_Lewis_Hamilton/lewham01.png.transform/9col/image.png',
+  },
+  {
+    driverNumber: 12,
+    englishName: 'Kimi Antonelli',
+    teamName: 'Mercedes-AMG PETRONAS F1 Team',
+    teamColor: teamColors['Mercedes-AMG PETRONAS F1 Team'],
+    imageUrl: kimiAntonelli,
   },
   {
     driverNumber: 63,
@@ -123,18 +132,10 @@ const driverEntries: DriverMetadata[] = [
       'https://www.formula1.com/content/dam/fom-website/drivers/P/PIEGAS01_Pierre_Gasly/piegas01.png.transform/9col/image.png',
   },
   {
-    driverNumber: 22,
-    englishName: 'Yuki Tsunoda',
-    teamName: 'Visa Cash App RB Formula One Team',
-    teamColor: teamColors['Visa Cash App RB Formula One Team'],
-    imageUrl:
-      'https://www.formula1.com/content/dam/fom-website/drivers/Y/YUKTSU01_Yuki_Tsunoda/yuktsu01.png.transform/9col/image.png',
-  },
-  {
     driverNumber: 3,
     englishName: 'Daniel Ricciardo',
     teamName: 'Visa Cash App RB Formula One Team',
-    teamColor: teamColors['Visa Cash App RB Formula One Team'],
+    teamColor: teamColors['Racing Bulls'] ?? '#1436B0',
     imageUrl:
       'https://www.formula1.com/content/dam/fom-website/drivers/D/DANRIC01_Daniel_Ricciardo/danric01.png.transform/9col/image.png',
   },
@@ -150,16 +151,9 @@ const driverEntries: DriverMetadata[] = [
     driverNumber: 23,
     englishName: 'Alexander Albon',
     teamName: 'Williams Racing',
-    imageUrl:
-      'https://www.formula1.com/content/dam/fom-website/drivers/A/ALEALB01_Alexander_Albon/alealb01.png.transform/9col/image.png',
-  },
-  {
-    driverNumber: 55,
-    englishName: 'Carlos Sainz',
-    teamName: 'Williams Racing',
     teamColor: teamColors['Williams Racing'],
     imageUrl:
-      'https://www.formula1.com/content/dam/fom-website/drivers/C/CARSAI01_Carlos_Sainz/carsai01.png.transform/9col/image.png',
+      'https://www.formula1.com/content/dam/fom-website/drivers/A/ALEALB01_Alexander_Albon/alealb01.png.transform/9col/image.png',
   },
   {
     driverNumber: 43,
@@ -170,14 +164,6 @@ const driverEntries: DriverMetadata[] = [
       'https://www.formula1.com/content/dam/fom-website/drivers/F/FRACOL01_Franco_Colapinto/fracol01.png.transform/9col/image.png',
   },
   {
-    driverNumber: 77,
-    englishName: 'Valtteri Bottas',
-    teamName: 'Kick Sauber F1 Team',
-    teamColor: teamColors['Kick Sauber F1 Team'],
-    imageUrl:
-      'https://www.formula1.com/content/dam/fom-website/drivers/V/VALBOT01_Valtteri_Bottas/valbot01.png.transform/9col/image.png',
-  },
-  {
     driverNumber: 5,
     englishName: 'Gabriel Bortoleto',
     teamName: 'Kick Sauber F1 Team',
@@ -185,58 +171,57 @@ const driverEntries: DriverMetadata[] = [
     imageUrl:
       'https://www.formula1.com/content/dam/fom-website/drivers/G/GABBOR01_Gabriel_Bortoleto/gabbor01.png.transform/9col/image.png',
   },
+  {
+    driverNumber: 30,
+    englishName: 'Liam Lawson',
+    teamName: 'Racing Bulls',
+    teamColor: teamColors['Racing Bulls'],
+    imageUrl:
+      'https://www.formula1.com/content/dam/fom-website/drivers/L/LIALAW01_Liam_Lawson/lialaw01.png.transform/9col/image.png',
+  },
+  {
+    driverNumber: 20,
+    englishName: 'Isack Hadjar',
+    teamName: 'Racing Bulls',
+    teamColor: teamColors['Racing Bulls'],
+    imageUrl:
+      'https://i.namu.wiki/i/aYyQpuIM2Ta41ZbtXIPYHcBHN_rfFZkNWOua_9eEkXap5C-XEEpIzESmCCu5xhbUO2alDOhyvI8IJlu112g9uw.webp',
+  },
+  {
+    driverNumber: 87,
+    englishName: 'Oliver Bearman',
+    teamName: 'MoneyGram Haas F1 Team',
+    teamColor: teamColors['MoneyGram Haas F1 Team'],
+    imageUrl:
+      'https://www.formula1.com/content/dam/fom-website/drivers/O/OLIBEA01_Oliver_Bearman/olibea01.png.transform/9col/image.png',
+  },
 ];
 
-const driverEntries: DriverMetadata[] = rawDriverEntries.map((driver) => ({
-  ...driver,
-  teamColor: teamColors[driver.teamName] ?? '#7B61FF',
-}));
+export const driverMetadataMap: Record<number, ResolvedDriverMetadata> =
+  driverEntries.reduce(
+    (acc, driver) => {
+      const koreanName =
+        driverNameMap[driver.englishName.toLowerCase()] ?? driver.englishName;
 
-export const driverMetadataMap: Record<number, ResolvedDriverMetadata> = driverEntries.reduce(
-  (acc, driver) => {
-    const koreanName =
-      driverNameMap[driver.englishName.toLowerCase()] ?? driver.englishName;
-
-    acc[driver.driverNumber] = {
-      ...driver,
-      koreanName,
-    };
-
-    return acc;
-  },
-  {} as Record<number, ResolvedDriverMetadata>
-);
+      acc[driver.driverNumber] = { ...driver, koreanName };
+      return acc;
+    },
+    {} as Record<number, ResolvedDriverMetadata>
+  );
 
 export const fallbackGridOrder: number[] = [
-  1,
-  11,
-  16,
-  55,
-  44,
-  63,
-  4,
-  81,
-  14,
-  18,
-  31,
-  10,
-  22,
-  3,
-  27,
-  20,
-  24,
-  77,
-  23,
-  2,
+  1, 16, 55, 44, 63, 4, 81, 14, 18, 31, 10, 22, 3, 27, 23, 43, 5, 30, 20, 87, 7,
 ];
 
-export const fallbackGridData: StartingGrid[] = fallbackGridOrder.map((driverNumber, index) => ({
-  position: index + 1,
-  driver_number: driverNumber,
-  lap_duration: 0,
-  meeting_key: 0,
-  session_key: 0,
-}));
+export const fallbackGridData: StartingGrid[] = fallbackGridOrder.map(
+  (driverNumber, index) => ({
+    position: index + 1,
+    driver_number: driverNumber,
+    lap_duration: 0,
+    meeting_key: 0,
+    session_key: 0,
+  })
+);
 
 export const resolveDriverMetadata = (driverNumber: number) =>
   driverMetadataMap[driverNumber];

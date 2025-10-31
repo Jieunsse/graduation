@@ -1,4 +1,3 @@
-import React from 'react';
 import { GridCard } from '@domain/grid/components/GridCard.tsx';
 import * as pageStyles from '@domain/grid/styles/gridPage.css.ts';
 

@@ -21,14 +21,15 @@ export const card = style({
   gap: '18px',
   padding: '28px 24px 32px',
   borderRadius: '28px',
-  background: vars.color.gridCardBg,
+  // background: vars.color.gridCardBg,
   border: `1px solid ${vars.color.gridCardBorder}`,
   boxShadow: '0 32px 60px rgba(4, 10, 24, 0.55)',
   color: vars.color.gridCardText,
   textAlign: 'center',
   overflow: 'hidden',
   isolation: 'isolate',
-  transition: 'transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease',
+  transition:
+    'transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease',
   selectors: {
     '&::after': {
       content: '',
@@ -99,7 +100,7 @@ export const bracketLabel = style({
   fontWeight: 600,
   letterSpacing: '0.2em',
   textTransform: 'uppercase',
-  color: vars.color.gridCardDivider,
+  // color: vars.color.gridCardDivider,
 });
 
 export const imageWrapper = style({
@@ -134,16 +135,16 @@ export const driverName = style({
   gap: '8px',
   fontSize: '22px',
   fontWeight: 700,
-  color: vars.color.gridCardText,
+  color: '#121212',
   letterSpacing: '-0.01em',
 });
 
 export const driverNumber = style({
-  fontSize: '16px',
-  fontWeight: 600,
+  fontSize: '22px',
+  fontWeight: 700,
   letterSpacing: '0.1em',
   textTransform: 'uppercase',
-  color: vars.color.gridCardSubtleText,
+  // color: vars.color.gridCardSubtleText,
 });
 
 export const teamName = style({

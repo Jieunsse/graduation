@@ -1,4 +1,3 @@
-import React from 'react';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import * as styles from '@domain/grid/styles/gridCard.css.ts';
 
@@ -37,7 +36,7 @@ export const GridCard = ({
       <div className={styles.imageWrapper}>
         <img
           src={imageUrl}
-          alt={`${driverName} 초상`}
+          alt={`${driverName} 드라이버 이미지`}
           className={styles.driverImage}
           loading="lazy"
         />
@@ -48,9 +47,7 @@ export const GridCard = ({
           <span className={styles.driverNumber}>{formattedNumber}</span>
           <span>{driverName}</span>
         </p>
-        <p className={styles.teamName}>
-          {teamName}
-        </p>
+        <p className={styles.teamName}>{teamName}</p>
       </footer>
     </article>
   );
