@@ -79,21 +79,30 @@ interface XAxisProps {
   tickFormatter?: (value: number) => string;
 }
 
-export const XAxis = (_props: XAxisProps) => null;
+export const XAxis = (props: XAxisProps) => {
+  void props;
+  return null;
+};
 
 interface YAxisProps {
   tickFormatter?: (value: number) => string;
   label?: { value: string; angle?: number; position?: string };
 }
 
-export const YAxis = (_props: YAxisProps) => null;
+export const YAxis = (props: YAxisProps) => {
+  void props;
+  return null;
+};
 
 interface CartesianGridProps {
   strokeDasharray?: string;
   opacity?: number;
 }
 
-export const CartesianGrid = (_props: CartesianGridProps) => null;
+export const CartesianGrid = (props: CartesianGridProps) => {
+  void props;
+  return null;
+};
 
 interface LineProps {
   dataKey: string;
@@ -106,7 +115,10 @@ interface LineProps {
   isAnimationActive?: boolean;
 }
 
-export const Line = (_props: LineProps) => null;
+export const Line = (props: LineProps) => {
+  void props;
+  return null;
+};
 
 interface TooltipProps {
   formatter?: (
@@ -116,7 +128,10 @@ interface TooltipProps {
   labelFormatter?: (value: string | number) => string;
 }
 
-export const Tooltip = (_props: TooltipProps) => null;
+export const Tooltip = (props: TooltipProps) => {
+  void props;
+  return null;
+};
 
 export const Legend = () => null;
 
