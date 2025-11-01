@@ -41,7 +41,7 @@ const collapsibleNavigation: CollapsibleNavItem[] = [
     subItems: [
       { label: '랩타임 비교', path: '/analysis/laptime' },
       { label: '피트 전략' },
-      { label: '트랙 포지션' },
+      { label: '경기 결과', path: '/analysis/race-result' },
     ],
   },
   {

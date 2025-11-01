@@ -8,6 +8,7 @@ import { GuideGlossaryPage } from '@domain/ruleBook/pages/ruleBook/GuideGlossary
 import { GuideDetailPage } from '@domain/ruleBook/pages/ruleBookDetail/GuideDetailPage.tsx';
 import { CalenderPage } from '@domain/calender/pages/CalenderPage.tsx';
 import { RaceTimelinePage } from '@domain/raceTimeline/pages/RaceTimelinePage.tsx';
+import { RaceResultPage } from '@domain/raceResult/pages/RaceResultPage.tsx';
 import { LapTimePage } from '@domain/lapTime/pages/LapTimePage.tsx';
 import { LoginPage } from '@domain/user/pages/login/LoginPage.tsx';
 import { SignupPage } from '@domain/user/pages/signup/SignupPage.tsx';
@@ -95,6 +96,15 @@ export const Router = ({ appearance, setAppearance }: RouterProps) => {
           path="/timeline"
           element={
             <RaceTimelinePage
+              appearance={appearance}
+              setAppearance={setAppearance}
+            />
+          }
+        />
+        <Route
+          path="/analysis/race-result"
+          element={
+            <RaceResultPage
               appearance={appearance}
               setAppearance={setAppearance}
             />

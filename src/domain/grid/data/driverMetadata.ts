@@ -1,6 +1,7 @@
 import { driverNameMap } from '@domain/lapTime/data/driverNameMap.ts';
 import type { StartingGrid } from '@domain/grid/api/getStartingGrid.ts';
 import kimiAntonelli from '@domain/driver/img/2025mercedesandant01right.png';
+import { teamColors } from '@shared/data/teamColors.ts';
 
 export interface DriverMetadata {
   driverNumber: number;
@@ -13,19 +14,6 @@ export interface DriverMetadata {
 export interface ResolvedDriverMetadata extends DriverMetadata {
   koreanName: string;
 }
-
-const teamColors: Record<string, string> = {
-  'Oracle Red Bull Racing': '#3671C6',
-  'Scuderia Ferrari': '#E10600',
-  'Mercedes-AMG PETRONAS F1 Team': '#00D2BE',
-  'McLaren Formula 1 Team': '#FF6F1D',
-  'Aston Martin Aramco F1 Team': '#006F62',
-  'BWT Alpine F1 Team': '#0090FF',
-  'Racing Bulls': '#1436B0',
-  'MoneyGram Haas F1 Team': '#B6BABD',
-  'Kick Sauber F1 Team': '#00E701',
-  'Williams Racing': '#005AFF',
-};
 
 const driverEntries: DriverMetadata[] = [
   {
