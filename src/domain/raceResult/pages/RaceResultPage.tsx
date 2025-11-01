@@ -353,7 +353,8 @@ export const RaceResultPage = ({
       const driver = enrichedDrivers.get(result.driver_number);
       const status = classifyStatus(result);
       const statusLabel = STATUS_LABELS[status];
-      const gap = status === 'FIN' ? formatGap(result.gap_to_leader) : statusLabel;
+      const gap =
+        status === 'FIN' ? formatGap(result.gap_to_leader) : statusLabel;
       const teamName = driver?.team ?? result.team_name ?? 'Unknown Team';
       const tooltipParts: string[] = [`드라이버 No.${result.driver_number}`];
 
@@ -379,7 +380,8 @@ export const RaceResultPage = ({
         driverName: driver?.name ?? `드라이버 ${result.driver_number}`,
         teamName,
         points: Number.isFinite(result.points) ? Number(result.points) : 0,
-        laps: typeof result.number_of_laps === 'number' ? result.number_of_laps : 0,
+        laps:
+          typeof result.number_of_laps === 'number' ? result.number_of_laps : 0,
         gap,
         status,
         time: formatDuration(result),
@@ -487,7 +489,6 @@ export const RaceResultPage = ({
           <div className={styles.emptyState}>표시할 경기 결과가 없습니다.</div>
         ) : (
           <>
-            <TopDrivers drivers={topDriverHighlights} />
             <RaceResultTable rows={tableRows} />
             <RetirementList entries={retirementEntries} />
           </>
