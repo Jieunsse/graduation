@@ -8,6 +8,7 @@ export const page = style({
   flexDirection: 'column',
   gap: '48px',
   paddingBottom: '64px',
+  marginTop: '100px',
 });
 
 export const hero = style({
@@ -196,7 +197,10 @@ export const errorCard = style([
   },
 ]);
 
-export const loadingMessage = style([statusCard, {
-  fontWeight: 600,
-  letterSpacing: '0.02em',
-}]);
+export const loadingMessage = style([
+  statusCard,
+  {
+    fontWeight: 600,
+    letterSpacing: '0.02em',
+  },
+]);

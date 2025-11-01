@@ -14,6 +14,7 @@ export const header = style({
   flexDirection: 'column',
   gap: '16px',
   maxWidth: '760px',
+  marginLeft: '24px',
 });
 
 export const title = style({
@@ -27,6 +28,7 @@ export const description = style({
   fontSize: '16px',
   lineHeight: 1.7,
   color: colorVars.text.secondary,
+  wordBreak: 'keep-all',
 });
 
 export const grid = style({
@@ -67,10 +69,16 @@ export const cardThemes = styleVariants({
   mercedes: { background: 'linear-gradient(135deg, #0f9ba8 0%, #2ec4b6 100%)' },
   redbull: { background: 'linear-gradient(135deg, #1d3557 0%, #457b9d 100%)' },
   williams: { background: 'linear-gradient(135deg, #0077b6 0%, #0096c7 100%)' },
-  racingbulls: { background: 'linear-gradient(135deg, #3a0ca3 0%, #4361ee 100%)' },
-  astonmartin: { background: 'linear-gradient(135deg, #016450 0%, #01a982 100%)' },
+  racingbulls: {
+    background: 'linear-gradient(135deg, #3a0ca3 0%, #4361ee 100%)',
+  },
+  astonmartin: {
+    background: 'linear-gradient(135deg, #016450 0%, #01a982 100%)',
+  },
   haas: { background: 'linear-gradient(135deg, #a4133c 0%, #ff4d6d 100%)' },
-  kicksauber: { background: 'linear-gradient(135deg, #008b8b 0%, #00c4b3 100%)' },
+  kicksauber: {
+    background: 'linear-gradient(135deg, #008b8b 0%, #00c4b3 100%)',
+  },
   alpine: { background: 'linear-gradient(135deg, #005f99 0%, #00b4d8 100%)' },
 });
 

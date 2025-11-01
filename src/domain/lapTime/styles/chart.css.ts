@@ -5,6 +5,7 @@ export const container = style({
   flexDirection: 'column',
   gap: 16,
   width: '100%',
+  marginTop: '80px',
 });
 
 export const chartPanel = style({
