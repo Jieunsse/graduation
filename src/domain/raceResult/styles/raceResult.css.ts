@@ -21,7 +21,6 @@ export const page = style({
 });
 
 export const stickyHeader = style({
-  position: 'sticky',
   top: 88,
   zIndex: 5,
 });
@@ -59,7 +58,6 @@ export const headerMeta = style({
   display: 'flex',
   flexWrap: 'wrap',
   gap: 12,
-  color: 'rgba(255, 255, 255, 0.78)',
   fontSize: 13,
   letterSpacing: '0.12em',
   textTransform: 'uppercase',
@@ -69,8 +67,6 @@ export const headerTitle = style({
   margin: 0,
   fontSize: 36,
   fontWeight: 700,
-  color: 'rgba(255, 255, 255, 0.96)',
-  textShadow: '0 8px 24px rgba(0, 0, 0, 0.45)',
 });
 
 export const headerSub = style({
@@ -78,7 +74,7 @@ export const headerSub = style({
   fontSize: 15,
   lineHeight: 1.6,
   maxWidth: 640,
-  color: 'rgba(240, 244, 255, 0.82)',
+  // color: 'rgba(240, 244, 255, 0.82)',
 });
 
 export const podiumRow = style({
@@ -90,15 +86,39 @@ export const podiumRow = style({
 export const podiumCard = style({
   display: 'flex',
   alignItems: 'center',
+  justifyContent: 'space-between',
   gap: 16,
-  padding: '12px 18px',
-  borderRadius: 18,
-  background: `linear-gradient(135deg, rgba(15, 21, 35, 0.92), ${accentColorVar}33)`,
-  border: `1px solid rgba(255, 255, 255, 0.2)`,
-  backdropFilter: 'blur(12px)',
-  color: '#ffffff',
-  minWidth: 220,
-  boxShadow: '0 18px 32px rgba(0, 0, 0, 0.28)',
+  padding: '16px 20px',
+  minWidth: 240,
+
+  borderRadius: 20,
+  background: `linear-gradient(145deg, rgba(25, 28, 40, 0.92) 0%, ${accentColorVar}22 100%)`,
+  border: `1px solid rgba(255, 255, 255, 0.08)`,
+
+  boxShadow: `
+    0 2px 6px rgba(0,0,0,0.25),
+    0 10px 20px rgba(0,0,0,0.25)
+  `,
+  backdropFilter: 'blur(16px)',
+  WebkitBackdropFilter: 'blur(16px)',
+
+  transition:
+    'transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease',
+
+  selectors: {
+    '&:hover': {
+      transform: 'translateY(-4px)',
+      boxShadow: `
+        0 6px 12px rgba(0,0,0,0.3),
+        0 20px 40px rgba(0,0,0,0.3)
+      `,
+      background: `linear-gradient(145deg, rgba(30, 34, 50, 0.95) 0%, ${accentColorVar}44 100%)`,
+    },
+  },
+
+  color: '#fff',
+  fontWeight: 600,
+  letterSpacing: '-0.01em',
 });
 
 export const podiumPlace = style({
@@ -376,7 +396,7 @@ export const table = style({
   width: '100%',
   borderCollapse: 'collapse',
   minWidth: 760,
-  color: 'rgba(233, 237, 255, 0.9)',
+  // color: 'rgba(233, 237, 255, 0.9)',
 });
 
 export const tableHead = style({

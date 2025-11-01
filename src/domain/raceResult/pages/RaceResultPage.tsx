@@ -7,10 +7,8 @@ import { sessionMap } from '../data/sessionMap.ts';
 import { RaceHeader } from '../components/RaceHeader.tsx';
 import { RaceSummary } from '../components/RaceSummary.tsx';
 import { TopDrivers } from '../components/TopDrivers.tsx';
-import { TeamPointsChart } from '../components/TeamPointsChart.tsx';
 import { RaceResultTable } from '../components/RaceResultTable.tsx';
 import { RetirementList } from '../components/RetirementList.tsx';
-import { RaceFooter } from '../components/RaceFooter.tsx';
 import { getSessionResult } from '../api/getSessionResult.ts';
 import { getDriverInfo } from '../api/getDriverInfo.ts';
 import { getMeetingInfo } from '../api/getMeetingInfo.ts';
@@ -69,8 +67,12 @@ const buildDriverLookup = (drivers: DriverInfo[]) => {
     }
 
     const metadata = resolveDriverMetadata(driver.driver_number);
-    const { englishName, localized } = normalizeName(driver, metadata?.englishName);
-    const teamName = driver.team_name?.trim() || metadata?.teamName || 'Unknown Team';
+    const { englishName, localized } = normalizeName(
+      driver,
+      metadata?.englishName
+    );
+    const teamName =
+      driver.team_name?.trim() || metadata?.teamName || 'Unknown Team';
 
     map.set(driver.driver_number, {
       name: localized,
@@ -125,11 +127,18 @@ const classifyStatus = (result: SessionResult) => {
   return 'FIN';
 };
 
-export const RaceResultPage = ({ appearance, setAppearance }: RaceResultPageProps) => {
-  const [selectedSession, setSelectedSession] = useState<RaceSessionMeta>(sessionMap[0]);
+export const RaceResultPage = ({
+  appearance,
+  setAppearance,
+}: RaceResultPageProps) => {
+  const [selectedSession, setSelectedSession] = useState<RaceSessionMeta>(
+    sessionMap[0]
+  );
   const [results, setResults] = useState<SessionResult[]>([]);
   const [meetingInfo, setMeetingInfo] = useState<MeetingInfo | null>(null);
-  const [driverLookup, setDriverLookup] = useState<Map<number, ResolvedDriver>>(new Map());
+  const [driverLookup, setDriverLookup] = useState<Map<number, ResolvedDriver>>(
+    new Map()
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -179,7 +188,9 @@ export const RaceResultPage = ({ appearance, setAppearance }: RaceResultPageProp
       } catch (cause) {
         console.error(cause);
         if (!cancelled) {
-          setError('경기 결과를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');
+          setError(
+            '경기 결과를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.'
+          );
         }
       } finally {
         if (!cancelled) {
@@ -238,7 +249,7 @@ export const RaceResultPage = ({ appearance, setAppearance }: RaceResultPageProp
 
   const teamStats = useMemo(
     () => getTeamStats(results, driverMetaForStats),
-    [results, driverMetaForStats],
+    [results, driverMetaForStats]
   );
 
   const topResults = useMemo(() => {
@@ -263,7 +274,7 @@ export const RaceResultPage = ({ appearance, setAppearance }: RaceResultPageProp
 
     const participants = results.length;
     const finishers = results.filter(
-      (item) => !item.dnf && !item.dsq && !item.dns,
+      (item) => !item.dnf && !item.dsq && !item.dns
     ).length;
     const retirements = results.filter((item) => item.dnf).length;
     const averageLaps =
@@ -271,7 +282,7 @@ export const RaceResultPage = ({ appearance, setAppearance }: RaceResultPageProp
       participants;
     const totalPoints = results.reduce(
       (acc, item) => acc + (Number.isFinite(item.points) ? item.points : 0),
-      0,
+      0
     );
 
     return [
@@ -385,8 +396,9 @@ export const RaceResultPage = ({ appearance, setAppearance }: RaceResultPageProp
   }, [results, enrichedDrivers]);
 
   const footerStats = useMemo(() => {
-    const finishers = results.filter((item) => !item.dnf && !item.dsq && !item.dns)
-      .length;
+    const finishers = results.filter(
+      (item) => !item.dnf && !item.dsq && !item.dns
+    ).length;
     const retirements = results.filter((item) => item.dnf).length;
     const averageLaps =
       results.length > 0
@@ -398,7 +410,7 @@ export const RaceResultPage = ({ appearance, setAppearance }: RaceResultPageProp
     const totalPoints = results
       .reduce(
         (acc, item) => acc + (Number.isFinite(item.points) ? item.points : 0),
-        0,
+        0
       )
       .toFixed(1);
 
@@ -407,7 +419,9 @@ export const RaceResultPage = ({ appearance, setAppearance }: RaceResultPageProp
 
   const handleSessionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const sessionKey = Number(event.target.value);
-    const next = sessionMap.find((session) => session.sessionKey === sessionKey);
+    const next = sessionMap.find(
+      (session) => session.sessionKey === sessionKey
+    );
     if (next) {
       setSelectedSession(next);
     }
@@ -415,7 +429,9 @@ export const RaceResultPage = ({ appearance, setAppearance }: RaceResultPageProp
 
   return (
     <MainContainer
-      sidebar={<SideBar appearance={appearance} setAppearance={setAppearance} />}
+      sidebar={
+        <SideBar appearance={appearance} setAppearance={setAppearance} />
+      }
     >
       <Header />
       <div className={styles.page}>
@@ -428,7 +444,10 @@ export const RaceResultPage = ({ appearance, setAppearance }: RaceResultPageProp
         </div>
 
         <div className={styles.controlsRow}>
-          <label htmlFor="race-session-select" style={{ fontSize: 15, fontWeight: 600 }}>
+          <label
+            htmlFor="race-session-select"
+            style={{ fontSize: 15, fontWeight: 600 }}
+          >
             Grand Prix 선택
           </label>
           <select
@@ -460,17 +479,13 @@ export const RaceResultPage = ({ appearance, setAppearance }: RaceResultPageProp
           <div className={styles.emptyState}>표시할 경기 결과가 없습니다.</div>
         ) : (
           <>
-            <RaceSummary items={summaryItems} accentColor={selectedSession.accentColor} />
+            {/*<RaceSummary*/}
+            {/*  items={summaryItems}*/}
+            {/*  accentColor={selectedSession.accentColor}*/}
+            {/*/>*/}
             <TopDrivers drivers={topDriverHighlights} />
-            <TeamPointsChart data={teamPointsData} />
             <RaceResultTable rows={tableRows} />
             <RetirementList entries={retirementEntries} />
-            <RaceFooter
-              averageLaps={footerStats.averageLaps}
-              totalPoints={footerStats.totalPoints}
-              finishers={footerStats.finishers}
-              retirements={footerStats.retirements}
-            />
           </>
         )}
       </div>
