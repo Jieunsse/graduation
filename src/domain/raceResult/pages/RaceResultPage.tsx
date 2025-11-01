@@ -5,7 +5,6 @@ import { Header } from '@shared/ui/header/Header.tsx';
 import { Footer } from '@shared/ui/footer/Footer.tsx';
 import { sessionMap } from '../data/sessionMap.ts';
 import { RaceHeader } from '../components/RaceHeader.tsx';
-import { RaceSummary } from '../components/RaceSummary.tsx';
 import { TopDrivers } from '../components/TopDrivers.tsx';
 import { RaceResultTable } from '../components/RaceResultTable.tsx';
 import { RetirementList } from '../components/RetirementList.tsx';
@@ -266,8 +265,7 @@ export const RaceResultPage = ({
         };
       });
   }, [results, enrichedDrivers]);
-
-  const summaryItems = useMemo(() => {
+  useMemo(() => {
     if (results.length === 0) {
       return [];
     }
@@ -316,7 +314,6 @@ export const RaceResultPage = ({
       },
     ];
   }, [results]);
-
   const topDriverHighlights = useMemo(() => {
     return results
       .filter((result) => typeof result.position === 'number')
@@ -338,8 +335,7 @@ export const RaceResultPage = ({
         };
       });
   }, [results, enrichedDrivers]);
-
-  const teamPointsData = useMemo(() => {
+  useMemo(() => {
     return teamStats.map((team) => ({
       teamName: team.teamName,
       totalPoints: team.totalPoints,
@@ -348,7 +344,6 @@ export const RaceResultPage = ({
       color: getTeamColor(team.teamName),
     }));
   }, [teamStats]);
-
   const tableRows = useMemo(() => {
     return results.map((result) => {
       const driver = enrichedDrivers.get(result.driver_number);
@@ -394,8 +389,7 @@ export const RaceResultPage = ({
         };
       });
   }, [results, enrichedDrivers]);
-
-  const footerStats = useMemo(() => {
+  useMemo(() => {
     const finishers = results.filter(
       (item) => !item.dnf && !item.dsq && !item.dns
     ).length;
@@ -416,7 +410,6 @@ export const RaceResultPage = ({
 
     return { finishers, retirements, averageLaps, totalPoints };
   }, [results]);
-
   const handleSessionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const sessionKey = Number(event.target.value);
     const next = sessionMap.find(
@@ -479,10 +472,6 @@ export const RaceResultPage = ({
           <div className={styles.emptyState}>표시할 경기 결과가 없습니다.</div>
         ) : (
           <>
-            {/*<RaceSummary*/}
-            {/*  items={summaryItems}*/}
-            {/*  accentColor={selectedSession.accentColor}*/}
-            {/*/>*/}
             <TopDrivers drivers={topDriverHighlights} />
             <RaceResultTable rows={tableRows} />
             <RetirementList entries={retirementEntries} />
