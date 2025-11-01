@@ -380,11 +380,12 @@ export const sectionSubtitle = style({
 
 export const tableCard = style({
   position: 'relative',
-  borderRadius: 28,
-  background: 'rgba(10, 16, 30, 0.92)',
-  border: `1px solid rgba(86, 106, 173, 0.35)`,
+  borderRadius: 30,
+  background:
+    'linear-gradient(155deg, rgba(8, 12, 24, 0.96) 0%, rgba(2, 6, 23, 0.98) 100%)',
+  border: '1px solid rgba(148, 163, 184, 0.22)',
   overflow: 'hidden',
-  boxShadow: '0 22px 48px rgba(10, 16, 30, 0.4)',
+  boxShadow: '0 32px 64px rgba(2, 6, 23, 0.55)',
 });
 
 export const tableScroll = style({
@@ -395,59 +396,235 @@ export const tableScroll = style({
 export const table = style({
   width: '100%',
   borderCollapse: 'collapse',
-  minWidth: 760,
-  // color: 'rgba(233, 237, 255, 0.9)',
+  minWidth: 840,
 });
 
 export const tableHead = style({
   position: 'sticky',
   top: 0,
-  background: 'rgba(8, 13, 24, 0.96)',
-  backdropFilter: 'blur(14px)',
-  textTransform: 'uppercase',
-  letterSpacing: '0.1em',
-  fontSize: 12,
-  color: 'rgba(148, 163, 184, 0.72)',
+  background: 'rgba(2, 6, 23, 0.94)',
+  backdropFilter: 'blur(18px)',
+  borderBottom: '1px solid rgba(148, 163, 184, 0.18)',
+  boxShadow: '0 12px 24px rgba(2, 6, 23, 0.45)',
 });
 
 export const tableHeaderCell = style({
-  padding: '16px 18px',
-  borderBottom: '1px solid rgba(71, 85, 105, 0.45)',
+  padding: '20px 22px',
+  borderBottom: '1px solid rgba(148, 163, 184, 0.14)',
   textAlign: 'left',
+  fontSize: 13,
+  fontWeight: 600,
+  letterSpacing: '0.08em',
+  textTransform: 'uppercase',
+  color: 'rgba(203, 213, 225, 0.78)',
+  whiteSpace: 'nowrap',
 });
 
 export const tableRow = style({
   position: 'relative',
-  transition: 'background 0.2s ease',
+  borderLeft: '4px solid transparent',
+  transition:
+    'transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease',
   selectors: {
+    '&:nth-child(odd)': {
+      background: 'rgba(15, 23, 42, 0.28)',
+    },
     '&:nth-child(even)': {
-      background: 'rgba(15, 23, 42, 0.55)',
+      background: 'rgba(15, 23, 42, 0.38)',
     },
     '&:hover': {
-      background: 'rgba(56, 72, 120, 0.35)',
+      transform: 'translateY(-2px)',
+      boxShadow: '0 16px 32px rgba(15, 23, 42, 0.45)',
+      background: 'rgba(59, 130, 246, 0.18)',
     },
   },
 });
 
 export const tableCell = style({
-  padding: '14px 18px',
+  padding: '18px 22px',
   fontSize: 15,
-  borderBottom: '1px solid rgba(71, 85, 105, 0.3)',
+  color: 'rgba(226, 232, 240, 0.92)',
+  borderBottom: '1px solid rgba(148, 163, 184, 0.14)',
+  verticalAlign: 'middle',
 });
 
 export const podiumHighlight = styleVariants({
   gold: {
+    boxShadow: 'inset 0 0 0 1px rgba(250, 204, 21, 0.42)',
     background:
-      'linear-gradient(90deg, rgba(212, 175, 55, 0.18), rgba(120, 88, 0, 0.15))',
+      'linear-gradient(100deg, rgba(250, 204, 21, 0.18), rgba(202, 138, 4, 0.12))',
   },
   silver: {
+    boxShadow: 'inset 0 0 0 1px rgba(203, 213, 225, 0.38)',
     background:
-      'linear-gradient(90deg, rgba(180, 180, 195, 0.18), rgba(94, 94, 110, 0.18))',
+      'linear-gradient(100deg, rgba(226, 232, 240, 0.22), rgba(148, 163, 184, 0.12))',
   },
   bronze: {
+    boxShadow: 'inset 0 0 0 1px rgba(245, 158, 11, 0.3)',
     background:
-      'linear-gradient(90deg, rgba(205, 127, 50, 0.18), rgba(148, 86, 0, 0.18))',
+      'linear-gradient(100deg, rgba(245, 158, 11, 0.18), rgba(217, 119, 6, 0.12))',
   },
+});
+
+export const positionCell = style({
+  width: 96,
+  textAlign: 'center',
+});
+
+export const positionBadge = style({
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: 48,
+  height: 48,
+  borderRadius: 16,
+  fontSize: 18,
+  fontWeight: 700,
+  color: '#f8fafc',
+  background:
+    'linear-gradient(135deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.62))',
+  boxShadow: '0 12px 24px rgba(2, 6, 23, 0.5)',
+});
+
+export const driverCell = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: 18,
+  minWidth: 240,
+});
+
+export const teamDot = style({
+  width: 14,
+  height: 14,
+  borderRadius: '50%',
+  boxShadow: '0 0 0 3px rgba(255, 255, 255, 0.08)',
+});
+
+export const driverText = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 4,
+});
+
+export const driverNameKo = style({
+  fontSize: 16,
+  fontWeight: 600,
+  color: '#f8fafc',
+});
+
+export const driverNumberBadge = style({
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: 4,
+  padding: '2px 8px',
+  borderRadius: 9999,
+  fontSize: 12,
+  fontWeight: 600,
+  letterSpacing: '0.08em',
+  textTransform: 'uppercase',
+  color: 'rgba(148, 163, 184, 0.85)',
+  background: 'rgba(15, 23, 42, 0.72)',
+  border: '1px solid rgba(148, 163, 184, 0.24)',
+});
+
+export const teamCell = style({
+  fontWeight: 500,
+  color: 'rgba(226, 232, 240, 0.88)',
+});
+
+export const numericCell = style({
+  fontVariantNumeric: 'tabular-nums',
+  textAlign: 'center',
+});
+
+export const gapCell = style({
+  fontVariantNumeric: 'tabular-nums',
+  fontWeight: 600,
+  color: '#facc15',
+});
+
+export const timeCell = style({
+  fontVariantNumeric: 'tabular-nums',
+  color: 'rgba(191, 219, 254, 0.95)',
+});
+
+export const pointsCell = style({
+  textAlign: 'center',
+});
+
+export const pointsBadge = style({
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: 6,
+  padding: '6px 14px',
+  borderRadius: 9999,
+  background: 'rgba(14, 116, 144, 0.22)',
+  border: '1px solid rgba(56, 189, 248, 0.45)',
+  color: '#38bdf8',
+  fontSize: 14,
+  fontWeight: 700,
+  letterSpacing: '0.04em',
+  textTransform: 'uppercase',
+  boxShadow: '0 10px 20px rgba(8, 47, 73, 0.35)',
+});
+
+export const statusCell = style({
+  textAlign: 'right',
+});
+
+export const statusPill = style({
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: 8,
+  padding: '8px 12px',
+  borderRadius: 9999,
+  fontSize: 12,
+  fontWeight: 600,
+  letterSpacing: '0.06em',
+  textTransform: 'none',
+  border: '1px solid rgba(148, 163, 184, 0.25)',
+  background: 'rgba(15, 23, 42, 0.72)',
+});
+
+export const statusBadge = styleVariants({
+  FIN: {
+    background:
+      'linear-gradient(135deg, rgba(34, 197, 94, 0.22), rgba(16, 185, 129, 0.22))',
+    borderColor: 'rgba(34, 197, 94, 0.45)',
+    color: '#4ade80',
+  },
+  DNF: {
+    background:
+      'linear-gradient(135deg, rgba(248, 113, 113, 0.22), rgba(239, 68, 68, 0.22))',
+    borderColor: 'rgba(248, 113, 113, 0.45)',
+    color: '#fb7185',
+  },
+  DSQ: {
+    background:
+      'linear-gradient(135deg, rgba(249, 115, 22, 0.22), rgba(234, 88, 12, 0.22))',
+    borderColor: 'rgba(249, 115, 22, 0.45)',
+    color: '#f97316',
+  },
+  DNS: {
+    background:
+      'linear-gradient(135deg, rgba(234, 179, 8, 0.22), rgba(202, 138, 4, 0.22))',
+    borderColor: 'rgba(234, 179, 8, 0.45)',
+    color: '#facc15',
+  },
+});
+
+export const statusCode = style({
+  fontSize: 12,
+  fontWeight: 700,
+  letterSpacing: '0.08em',
+  textTransform: 'uppercase',
+});
+
+export const statusLabel = style({
+  fontSize: 12,
+  fontWeight: 600,
+  color: 'inherit',
 });
 
 globalStyle(`${tableRow}[data-tooltip]::after`, {
@@ -471,21 +648,6 @@ globalStyle(`${tableRow}[data-tooltip]::after`, {
 globalStyle(`${tableRow}[data-tooltip]:hover::after`, {
   opacity: 1,
   transform: 'translate(-50%, -120%)',
-});
-
-export const statusBadge = styleVariants({
-  fin: {
-    color: '#22c55e',
-  },
-  dnf: {
-    color: '#fb7185',
-  },
-  dsq: {
-    color: '#f97316',
-  },
-  dns: {
-    color: '#eab308',
-  },
 });
 
 export const retirementSection = style({
@@ -593,25 +755,113 @@ globalStyle(`.light ${chartCard}`, {
 });
 
 globalStyle(`.light ${tableCard}`, {
-  background: '#ffffff',
-  border: '1px solid rgba(15, 23, 42, 0.1)',
+  background:
+    'linear-gradient(155deg, rgba(255, 255, 255, 0.96) 0%, rgba(241, 245, 255, 0.98) 100%)',
+  border: '1px solid rgba(15, 23, 42, 0.08)',
+  boxShadow: '0 24px 48px rgba(15, 23, 42, 0.12)',
 });
 
 globalStyle(`.light ${tableHead}`, {
-  background: 'rgba(244, 247, 254, 0.95)',
-  color: 'rgba(71, 85, 105, 0.8)',
+  background: 'rgba(248, 250, 255, 0.94)',
+  color: 'rgba(71, 85, 105, 0.82)',
+  boxShadow: '0 10px 20px rgba(148, 163, 184, 0.18)',
+});
+
+globalStyle(`.light ${tableHeaderCell}`, {
+  color: 'rgba(71, 85, 105, 0.82)',
+  borderBottom: '1px solid rgba(148, 163, 184, 0.2)',
 });
 
 globalStyle(`.light ${tableRow}`, {
-  background: 'transparent', // 기본 배경
+  background: 'transparent',
+  boxShadow: 'none',
+});
+
+globalStyle(`.light ${tableRow}:nth-child(odd)`, {
+  background: 'rgba(241, 245, 255, 0.72)',
 });
 
 globalStyle(`.light ${tableRow}:nth-child(even)`, {
-  background: 'rgba(241, 245, 249, 0.55)',
+  background: 'rgba(226, 232, 240, 0.58)',
 });
 
 globalStyle(`.light ${tableRow}:hover`, {
-  background: 'rgba(224, 231, 255, 0.6)',
+  background: 'rgba(191, 219, 254, 0.65)',
+  boxShadow: '0 12px 24px rgba(148, 163, 184, 0.24)',
+});
+
+globalStyle(`.light ${tableCell}`, {
+  color: '#0f172a',
+  borderBottom: '1px solid rgba(148, 163, 184, 0.18)',
+});
+
+globalStyle(`.light ${positionBadge}`, {
+  background:
+    'linear-gradient(135deg, rgba(226, 232, 240, 0.95), rgba(148, 163, 184, 0.4))',
+  color: '#0f172a',
+  boxShadow: '0 8px 16px rgba(148, 163, 184, 0.28)',
+});
+
+globalStyle(`.light ${driverNameKo}`, {
+  color: '#0f172a',
+});
+
+globalStyle(`.light ${driverNumberBadge}`, {
+  background: 'rgba(226, 232, 240, 0.85)',
+  border: '1px solid rgba(148, 163, 184, 0.32)',
+  color: 'rgba(71, 85, 105, 0.85)',
+});
+
+globalStyle(`.light ${teamCell}`, {
+  color: '#1f2937',
+});
+
+globalStyle(`.light ${gapCell}`, {
+  color: '#2563eb',
+});
+
+globalStyle(`.light ${timeCell}`, {
+  color: '#1e40af',
+});
+
+globalStyle(`.light ${pointsBadge}`, {
+  background: 'rgba(191, 219, 254, 0.6)',
+  border: '1px solid rgba(59, 130, 246, 0.45)',
+  color: '#1d4ed8',
+  boxShadow: '0 6px 14px rgba(59, 130, 246, 0.25)',
+});
+
+globalStyle(`.light ${statusPill}`, {
+  background: 'rgba(248, 250, 255, 0.92)',
+  border: '1px solid rgba(148, 163, 184, 0.35)',
+});
+
+globalStyle(`.light ${statusBadge.FIN}`, {
+  background:
+    'linear-gradient(135deg, rgba(134, 239, 172, 0.48), rgba(74, 222, 128, 0.18))',
+  borderColor: 'rgba(34, 197, 94, 0.32)',
+  color: '#15803d',
+});
+
+globalStyle(`.light ${statusBadge.DNF}`, {
+  background:
+    'linear-gradient(135deg, rgba(254, 202, 202, 0.6), rgba(248, 113, 113, 0.22))',
+  borderColor: 'rgba(248, 113, 113, 0.32)',
+  color: '#b91c1c',
+});
+
+globalStyle(`.light ${statusBadge.DSQ}`, {
+  background:
+    'linear-gradient(135deg, rgba(254, 215, 170, 0.6), rgba(249, 115, 22, 0.2))',
+  borderColor: 'rgba(249, 115, 22, 0.32)',
+  color: '#c2410c',
+});
+
+globalStyle(`.light ${statusBadge.DNS}`, {
+  background:
+    'linear-gradient(135deg, rgba(254, 240, 138, 0.6), rgba(234, 179, 8, 0.2))',
+  borderColor: 'rgba(234, 179, 8, 0.32)',
+  color: '#b45309',
 });
 
 globalStyle(`.light ${retirementSection}`, {

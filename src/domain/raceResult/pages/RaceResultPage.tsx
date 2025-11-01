@@ -6,7 +6,11 @@ import { Footer } from '@shared/ui/footer/Footer.tsx';
 import { sessionMap } from '../data/sessionMap.ts';
 import { RaceHeader } from '../components/RaceHeader.tsx';
 import { TopDrivers } from '../components/TopDrivers.tsx';
-import { RaceResultTable } from '../components/RaceResultTable.tsx';
+import {
+  RaceResultTable,
+  STATUS_LABELS,
+} from '../components/RaceResultTable.tsx';
+import type { RaceResultRow } from '../components/RaceResultTable.tsx';
 import { RetirementList } from '../components/RetirementList.tsx';
 import { getSessionResult } from '../api/getSessionResult.ts';
 import { getDriverInfo } from '../api/getDriverInfo.ts';
@@ -344,34 +348,45 @@ export const RaceResultPage = ({
       color: getTeamColor(team.teamName),
     }));
   }, [teamStats]);
-  const tableRows = useMemo(() => {
+  const tableRows = useMemo<RaceResultRow[]>(() => {
     return results.map((result) => {
       const driver = enrichedDrivers.get(result.driver_number);
       const status = classifyStatus(result);
-      const gap = status === 'FIN' ? formatGap(result.gap_to_leader) : status;
-      const tooltip = [
-        `드라이버 No.${result.driver_number}`,
-        driver?.englishName,
-        driver?.countryCode ? `국가: ${driver.countryCode}` : undefined,
-        `팀: ${driver?.team ?? result.team_name ?? 'Unknown Team'}`,
-        `랩: ${result.number_of_laps}`,
-      ]
-        .filter(Boolean)
-        .join(' | ');
+      const statusLabel = STATUS_LABELS[status];
+      const gap = status === 'FIN' ? formatGap(result.gap_to_leader) : statusLabel;
+      const teamName = driver?.team ?? result.team_name ?? 'Unknown Team';
+      const tooltipParts: string[] = [`드라이버 No.${result.driver_number}`];
+
+      if (driver?.englishName) {
+        tooltipParts.push(`영문명: ${driver.englishName}`);
+      }
+
+      if (driver?.countryCode) {
+        tooltipParts.push(`국가: ${driver.countryCode}`);
+      }
+
+      tooltipParts.push(`팀: ${teamName}`);
+      tooltipParts.push(`상태: ${statusLabel}`);
+
+      if (typeof result.number_of_laps === 'number') {
+        tooltipParts.push(`랩: ${result.number_of_laps}`);
+      }
+
+      const tooltip = tooltipParts.join(' | ');
 
       return {
-        position: result.position,
-        driverName: driver?.name ?? `Driver ${result.driver_number}`,
-        teamName: driver?.team ?? result.team_name ?? 'Unknown Team',
-        points: Number.isFinite(result.points) ? result.points : 0,
-        laps: result.number_of_laps,
+        position: result.position ?? null,
+        driverName: driver?.name ?? `드라이버 ${result.driver_number}`,
+        teamName,
+        points: Number.isFinite(result.points) ? Number(result.points) : 0,
+        laps: typeof result.number_of_laps === 'number' ? result.number_of_laps : 0,
         gap,
         status,
         time: formatDuration(result),
         driverNumber: result.driver_number,
-        teamColor: driver?.teamColor ?? getTeamColor(result.team_name),
+        teamColor: driver?.teamColor ?? getTeamColor(teamName),
         tooltip,
-      };
+      } satisfies RaceResultRow;
     });
   }, [results, enrichedDrivers]);
 
