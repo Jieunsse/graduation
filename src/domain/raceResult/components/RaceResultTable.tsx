@@ -1,4 +1,3 @@
-import React from 'react';
 import * as styles from '../styles/raceResult.css.ts';
 
 export interface RaceResultRow {
@@ -73,7 +72,8 @@ export const RaceResultTable = ({ rows }: RaceResultTableProps) => {
                 data-tooltip={row.tooltip}
                 style={{
                   borderLeft: `4px solid ${row.teamColor}`,
-                  opacity: row.status === 'DNF' || row.status === 'DSQ' ? 0.6 : 1,
+                  opacity:
+                    row.status === 'DNF' || row.status === 'DSQ' ? 0.6 : 1,
                 }}
               >
                 <td className={styles.tableCell}>{row.position ?? '-'}</td>
@@ -82,7 +82,9 @@ export const RaceResultTable = ({ rows }: RaceResultTableProps) => {
                 <td className={styles.tableCell}>{row.points.toFixed(1)}</td>
                 <td className={styles.tableCell}>{row.laps}</td>
                 <td className={styles.tableCell}>{row.gap}</td>
-                <td className={`${styles.tableCell} ${statusClass(row.status)}`}>
+                <td
+                  className={`${styles.tableCell} ${statusClass(row.status)}`}
+                >
                   {row.status}
                 </td>
               </tr>

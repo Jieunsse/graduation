@@ -1,5 +1,4 @@
 import { assignInlineVars } from '@vanilla-extract/dynamic';
-import React from 'react';
 import type { MeetingInfo, RaceSessionMeta } from '../types.ts';
 import * as styles from '../styles/raceResult.css.ts';
 
@@ -34,12 +33,13 @@ const formatMeetingDate = (value?: string | number) => {
   });
 };
 
-export const RaceHeader = ({ meta, meetingInfo, topResults }: RaceHeaderProps) => {
+export const RaceHeader = ({
+  meta,
+  meetingInfo,
+  topResults,
+}: RaceHeaderProps) => {
   const dateLabel = formatMeetingDate(meetingInfo?.start_date);
-  const locationLabel = [
-    meetingInfo?.location,
-    meetingInfo?.country_name,
-  ]
+  const locationLabel = [meetingInfo?.location, meetingInfo?.country_name]
     .filter(Boolean)
     .join(' · ');
 

@@ -1,6 +1,5 @@
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { motion } from 'framer-motion';
-import React from 'react';
 import * as styles from '../styles/raceResult.css.ts';
 
 export interface SummaryItem {

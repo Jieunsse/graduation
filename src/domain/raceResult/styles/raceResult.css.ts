@@ -1,4 +1,10 @@
-import { createVar, globalStyle, style, styleVariants } from '@vanilla-extract/css';
+import {
+  createVar,
+  globalKeyframes,
+  globalStyle,
+  style,
+  styleVariants,
+} from '@vanilla-extract/css';
 import { colorVars } from '@shared/styles/color.css.ts';
 
 export const themeColorVar = createVar();
@@ -213,13 +219,16 @@ export const summaryValue = style({
 
 export const summaryBadge = styleVariants({
   fin: {
-    background: 'linear-gradient(120deg, rgba(34, 197, 94, 0.2), rgba(15, 118, 110, 0.25))',
+    background:
+      'linear-gradient(120deg, rgba(34, 197, 94, 0.2), rgba(15, 118, 110, 0.25))',
   },
   out: {
-    background: 'linear-gradient(120deg, rgba(248, 113, 113, 0.25), rgba(185, 28, 28, 0.2))',
+    background:
+      'linear-gradient(120deg, rgba(248, 113, 113, 0.25), rgba(185, 28, 28, 0.2))',
   },
   info: {
-    background: 'linear-gradient(120deg, rgba(96, 165, 250, 0.25), rgba(59, 130, 246, 0.18))',
+    background:
+      'linear-gradient(120deg, rgba(96, 165, 250, 0.25), rgba(59, 130, 246, 0.18))',
   },
 });
 
@@ -407,12 +416,17 @@ export const tableCell = style({
 });
 
 export const podiumHighlight = styleVariants({
-  gold: { background: 'linear-gradient(90deg, rgba(212, 175, 55, 0.18), rgba(120, 88, 0, 0.15))' },
+  gold: {
+    background:
+      'linear-gradient(90deg, rgba(212, 175, 55, 0.18), rgba(120, 88, 0, 0.15))',
+  },
   silver: {
-    background: 'linear-gradient(90deg, rgba(180, 180, 195, 0.18), rgba(94, 94, 110, 0.18))',
+    background:
+      'linear-gradient(90deg, rgba(180, 180, 195, 0.18), rgba(94, 94, 110, 0.18))',
   },
   bronze: {
-    background: 'linear-gradient(90deg, rgba(205, 127, 50, 0.18), rgba(148, 86, 0, 0.18))',
+    background:
+      'linear-gradient(90deg, rgba(205, 127, 50, 0.18), rgba(148, 86, 0, 0.18))',
   },
 });
 
@@ -504,7 +518,7 @@ export const footer = style({
   color: 'rgba(226, 232, 240, 0.86)',
 });
 
-globalStyle('@keyframes retire-fade', {
+globalKeyframes('retire-fade', {
   '0%': { opacity: 0.95 },
   '50%': { opacity: 0.7 },
   '100%': { opacity: 0.95 },
@@ -540,13 +554,15 @@ globalStyle(`.light ${topDriversSection}`, {
 });
 
 globalStyle(`.light ${topPodiumCard}`, {
-  background: 'linear-gradient(135deg, rgba(241, 245, 249, 0.95), rgba(255, 255, 255, 0.95))',
+  background:
+    'linear-gradient(135deg, rgba(241, 245, 249, 0.95), rgba(255, 255, 255, 0.95))',
   border: '1px solid rgba(148, 163, 184, 0.24)',
   color: '#0f172a',
 });
 
 globalStyle(`.light ${topDriverCard}`, {
-  background: 'linear-gradient(135deg, rgba(244, 247, 254, 0.95), rgba(255, 255, 255, 0.95))',
+  background:
+    'linear-gradient(135deg, rgba(244, 247, 254, 0.95), rgba(255, 255, 255, 0.95))',
   border: '1px solid rgba(148, 163, 184, 0.24)',
   color: '#0f172a',
 });
@@ -567,14 +583,15 @@ globalStyle(`.light ${tableHead}`, {
 });
 
 globalStyle(`.light ${tableRow}`, {
-  selectors: {
-    '&:nth-child(even)': {
-      background: 'rgba(241, 245, 249, 0.55)',
-    },
-    '&:hover': {
-      background: 'rgba(224, 231, 255, 0.6)',
-    },
-  },
+  background: 'transparent', // 기본 배경
+});
+
+globalStyle(`.light ${tableRow}:nth-child(even)`, {
+  background: 'rgba(241, 245, 249, 0.55)',
+});
+
+globalStyle(`.light ${tableRow}:hover`, {
+  background: 'rgba(224, 231, 255, 0.6)',
 });
 
 globalStyle(`.light ${retirementSection}`, {

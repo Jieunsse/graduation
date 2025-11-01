@@ -1,3 +1,4 @@
+// src/shared/lib/recharts.tsx
 import {
   Children,
   cloneElement,
@@ -9,6 +10,36 @@ import {
   type ReactElement,
   type ReactNode,
 } from 'react';
+
+// ✅ Recharts v3 기준 import
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Tooltip,
+  XAxis,
+  YAxis,
+  Legend,
+  ResponsiveContainer,
+} from 'recharts';
+
+// ✅ Cell은 루트에서 export되지 않으므로 내부 모듈 경로에서 import
+import { Cell } from 'recharts/es6/component/Cell.js';
+
+// ✅ 필요한 것만 export — 충돌 방지
+export {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Tooltip,
+  XAxis,
+  YAxis,
+  Legend,
+  ResponsiveContainer,
+  Cell,
+};
+
+// -------------------------------------------------------------------------------------
 
 type Margin = {
   top?: number;
@@ -23,7 +54,8 @@ interface ResponsiveContainerProps {
   children: ReactElement;
 }
 
-export const ResponsiveContainer = ({
+// ✅ 직접 구현된 ResponsiveContainer (커스텀 대응)
+export const CustomResponsiveContainer = ({
   width = '100%',
   height = '100%',
   children,
@@ -33,9 +65,7 @@ export const ResponsiveContainer = ({
 
   useEffect(() => {
     const element = containerRef.current;
-    if (!element) {
-      return;
-    }
+    if (!element) return;
 
     const updateSize = () => {
       setSize({ width: element.clientWidth, height: element.clientHeight });
@@ -44,9 +74,7 @@ export const ResponsiveContainer = ({
     updateSize();
 
     if (typeof ResizeObserver !== 'undefined') {
-      const observer = new ResizeObserver(() => {
-        updateSize();
-      });
+      const observer = new ResizeObserver(updateSize);
       observer.observe(element);
       return () => observer.disconnect();
     }
@@ -64,14 +92,19 @@ export const ResponsiveContainer = ({
   return (
     <div ref={containerRef} style={style}>
       {size.width > 0 && size.height > 0
-        ? cloneElement(children as ReactElement<{ width?: number; height?: number }>, {
-            width: size.width,
-            height: size.height,
-          })
+        ? cloneElement(
+            children as ReactElement<{ width?: number; height?: number }>,
+            {
+              width: size.width,
+              height: size.height,
+            }
+          )
         : null}
     </div>
   );
 };
+
+// -------------------------------------------------------------------------------------
 
 interface XAxisProps {
   dataKey: string;
@@ -79,7 +112,7 @@ interface XAxisProps {
   tickFormatter?: (value: number) => string;
 }
 
-export const XAxis = (props: XAxisProps) => {
+export const XAxisMock = (props: XAxisProps) => {
   void props;
   return null;
 };
@@ -89,7 +122,7 @@ interface YAxisProps {
   label?: { value: string; angle?: number; position?: string };
 }
 
-export const YAxis = (props: YAxisProps) => {
+export const YAxisMock = (props: YAxisProps) => {
   void props;
   return null;
 };
@@ -99,10 +132,12 @@ interface CartesianGridProps {
   opacity?: number;
 }
 
-export const CartesianGrid = (props: CartesianGridProps) => {
+export const CartesianGridMock = (props: CartesianGridProps) => {
   void props;
   return null;
 };
+
+// -------------------------------------------------------------------------------------
 
 interface LineProps {
   dataKey: string;
@@ -115,12 +150,12 @@ interface LineProps {
   isAnimationActive?: boolean;
 }
 
-export const Line = (props: LineProps) => {
+export const LineMock = (props: LineProps) => {
   void props;
   return null;
 };
 
-interface TooltipProps {
+export interface TooltipProps {
   formatter?: (
     value: number,
     name: string
@@ -128,12 +163,14 @@ interface TooltipProps {
   labelFormatter?: (value: string | number) => string;
 }
 
-export const Tooltip = (props: TooltipProps) => {
+export const TooltipMock = (props: TooltipProps) => {
   void props;
   return null;
 };
 
-export const Legend = () => null;
+export const LegendMock = () => null;
+
+// -------------------------------------------------------------------------------------
 
 interface LineChartProps {
   data: Record<string, number | string | undefined>[];
@@ -162,11 +199,12 @@ type LineDefinition = {
 };
 
 type TooltipDefinition = TooltipProps | undefined;
-
-type AxisLabel = { value: string; position?: string; offset?: number } | undefined;
-
-type YAxisLabel = { value: string; angle?: number; position?: string } | undefined;
-
+type AxisLabel =
+  | { value: string; position?: string; offset?: number }
+  | undefined;
+type YAxisLabel =
+  | { value: string; angle?: number; position?: string }
+  | undefined;
 type TooltipRow = { name: string; value: ReactNode; color: string };
 
 const ensureNumber = (value: unknown, fallback: number) => {
@@ -174,7 +212,9 @@ const ensureNumber = (value: unknown, fallback: number) => {
   return Number.isFinite(parsed) ? parsed : fallback;
 };
 
-export const LineChart = ({
+// -------------------------------------------------------------------------------------
+
+export const LineChartMock = ({
   data,
   margin,
   width = 0,
@@ -186,26 +226,37 @@ export const LineChart = ({
     ...margin,
   } as Required<Margin>;
 
-  const innerWidth = Math.max(0, width - marginWithDefaults.left - marginWithDefaults.right);
-  const innerHeight = Math.max(0, height - marginWithDefaults.top - marginWithDefaults.bottom);
+  const innerWidth = Math.max(
+    0,
+    width - marginWithDefaults.left - marginWithDefaults.right
+  );
+  const innerHeight = Math.max(
+    0,
+    height - marginWithDefaults.top - marginWithDefaults.bottom
+  );
 
   const childrenArray = Children.toArray(children) as ReactElement[];
 
-  const xAxisChild = childrenArray.find((child) => child.type === XAxis) as
+  const xAxisChild = childrenArray.find((child) => child.type === XAxisMock) as
     | ReactElement<XAxisProps>
     | undefined;
-  const yAxisChild = childrenArray.find((child) => child.type === YAxis) as
+  const yAxisChild = childrenArray.find((child) => child.type === YAxisMock) as
     | ReactElement<YAxisProps>
     | undefined;
-  const gridChild = childrenArray.find((child) => child.type === CartesianGrid) as
-    | ReactElement<CartesianGridProps>
-    | undefined;
-  const tooltipChild = childrenArray.find((child) => child.type === Tooltip) as
-    | ReactElement<TooltipProps>
-    | undefined;
-  const legendChild = childrenArray.find((child) => child.type === Legend);
 
-  const lineChildren = childrenArray.filter((child) => child.type === Line) as ReactElement<LineProps>[];
+  const gridChild = childrenArray.find(
+    (child) => child.type === CartesianGridMock
+  ) as ReactElement<CartesianGridProps> | undefined;
+
+  const tooltipChild = childrenArray.find(
+    (child) => child.type === TooltipMock
+  ) as ReactElement<TooltipProps> | undefined;
+
+  const legendChild = childrenArray.find((child) => child.type === LegendMock);
+
+  const lineChildren = childrenArray.filter(
+    (child) => child.type === LineMock
+  ) as ReactElement<LineProps>[];
 
   const lineDefs: LineDefinition[] = lineChildren.map((child) => ({
     dataKey: child.props.dataKey,
@@ -219,21 +270,20 @@ export const LineChart = ({
   }));
 
   const xKey = xAxisChild?.props.dataKey ?? 'x';
-
-  const xValues = useMemo(() => {
-    return data
-      .map((item) => ensureNumber(item[xKey], Number.NaN))
-      .filter((value) => Number.isFinite(value));
-  }, [data, xKey]);
+  const xValues = useMemo(
+    () =>
+      data
+        .map((item) => ensureNumber(item[xKey], Number.NaN))
+        .filter((v) => Number.isFinite(v)),
+    [data, xKey]
+  );
 
   const yValues = useMemo(() => {
     const values: number[] = [];
     lineDefs.forEach((line) => {
       data.forEach((item) => {
         const maybeValue = ensureNumber(item[line.dataKey], Number.NaN);
-        if (Number.isFinite(maybeValue)) {
-          values.push(maybeValue);
-        }
+        if (Number.isFinite(maybeValue)) values.push(maybeValue);
       });
     });
     return values;
@@ -247,34 +297,23 @@ export const LineChart = ({
   const yMaxRaw = yValues.length > 0 ? Math.max(...yValues) : 1;
   const yMax = yMaxRaw === yMin ? yMin + 1 : yMaxRaw;
 
-  const scaleX = (value: number) => {
-    if (innerWidth === 0) {
-      return marginWithDefaults.left;
-    }
-    return (
-      marginWithDefaults.left +
-      ((value - xMin) / (xMax - xMin)) * innerWidth
-    );
-  };
+  const scaleX = (v: number) =>
+    innerWidth === 0
+      ? marginWithDefaults.left
+      : marginWithDefaults.left + ((v - xMin) / (xMax - xMin)) * innerWidth;
 
-  const scaleY = (value: number) => {
-    if (innerHeight === 0) {
-      return marginWithDefaults.top;
-    }
-    return (
-      marginWithDefaults.top +
-      innerHeight -
-      ((value - yMin) / (yMax - yMin)) * innerHeight
-    );
-  };
+  const scaleY = (v: number) =>
+    innerHeight === 0
+      ? marginWithDefaults.top
+      : marginWithDefaults.top +
+        innerHeight -
+        ((v - yMin) / (yMax - yMin)) * innerHeight;
 
   const xTicks = useMemo(() => {
     const unique = Array.from(new Set(xValues)).sort((a, b) => a - b);
-    if (unique.length <= 10) {
-      return unique;
-    }
+    if (unique.length <= 10) return unique;
     const step = Math.ceil(unique.length / 10);
-    return unique.filter((_, index) => index % step === 0 || index === unique.length - 1);
+    return unique.filter((_, i) => i % step === 0 || i === unique.length - 1);
   }, [xValues]);
 
   const yTicks = useMemo(() => {
@@ -282,225 +321,34 @@ export const LineChart = ({
     const steps = 6;
     const span = yMax - yMin;
     const interval = span === 0 ? 1 : span / (steps - 1);
-    for (let index = 0; index < steps; index += 1) {
-      ticks.push(yMin + interval * index);
-    }
+    for (let i = 0; i < steps; i++) ticks.push(yMin + interval * i);
     return ticks;
   }, [yMax, yMin]);
 
-  const xAxisLabel: AxisLabel = xAxisChild?.props.label;
-  const yAxisLabel: YAxisLabel = yAxisChild?.props.label;
   const yTickFormatter = yAxisChild?.props.tickFormatter;
   const tooltipDef: TooltipDefinition = tooltipChild?.props;
 
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
-  const [hoverPosition, setHoverPosition] = useState<{ x: number; y: number } | null>(null);
+  const [hoverPosition, setHoverPosition] = useState<{
+    x: number;
+    y: number;
+  } | null>(null);
 
   useEffect(() => {
     setHoverIndex(null);
     setHoverPosition(null);
   }, [data, xKey]);
 
-  if (innerWidth <= 0 || innerHeight <= 0) {
-    return null;
-  }
-
-  const handleMouseMove = (event: React.MouseEvent<SVGSVGElement>) => {
-    if (xValues.length === 0) {
-      return;
-    }
-    const rect = event.currentTarget.getBoundingClientRect();
-    const xCoord = event.clientX - rect.left;
-    const relativeX = Math.min(
-      Math.max(xCoord - marginWithDefaults.left, 0),
-      innerWidth
-    );
-    const xValue = xMin + (relativeX / innerWidth) * (xMax - xMin);
-    const closestIndex = xValues.reduce((closest, value, index) => {
-      const currentDistance = Math.abs(value - xValue);
-      const bestDistance = Math.abs(xValues[closest] - xValue);
-      return currentDistance < bestDistance ? index : closest;
-    }, 0);
-    setHoverIndex(closestIndex);
-    setHoverPosition({ x: xCoord, y: event.clientY - rect.top });
-  };
-
-  const handleMouseLeave = () => {
-    setHoverIndex(null);
-    setHoverPosition(null);
-  };
-
-  const renderLines = () => {
-    return lineDefs.map((line) => {
-      const pathCommands: string[] = [];
-      let started = false;
-      data.forEach((datum) => {
-        const rawValue = datum[line.dataKey];
-        if (rawValue === undefined || rawValue === null || rawValue === '') {
-          if (!line.connectNulls) {
-            started = false;
-          }
-          return;
-        }
-        const numericValue = ensureNumber(rawValue, Number.NaN);
-        if (!Number.isFinite(numericValue)) {
-          return;
-        }
-        const xRaw = ensureNumber(datum[xKey], Number.NaN);
-        if (!Number.isFinite(xRaw)) {
-          return;
-        }
-        const x = scaleX(xRaw);
-        const y = scaleY(numericValue);
-        if (!started) {
-          pathCommands.push(`M ${x} ${y}`);
-          started = true;
-        } else {
-          pathCommands.push(`L ${x} ${y}`);
-        }
-      });
-      return (
-        <path
-          key={line.dataKey}
-          d={pathCommands.join(' ')}
-          fill="none"
-          stroke={line.stroke}
-          strokeWidth={line.strokeWidth}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      );
-    });
-  };
-
-  const legend = legendChild ? (
-    <div
-      style={{
-        position: 'absolute',
-        right: 16,
-        top: 16,
-        display: 'flex',
-        gap: 12,
-        flexWrap: 'wrap',
-        background: 'rgba(15, 23, 42, 0.55)',
-        color: '#fff',
-        borderRadius: 8,
-        padding: '6px 10px',
-        fontSize: 12,
-      }}
-    >
-      {lineDefs.map((line) => (
-        <span key={line.dataKey} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          <span
-            style={{
-              width: 10,
-              height: 10,
-              borderRadius: '50%',
-              backgroundColor: line.stroke,
-            }}
-          />
-          {line.name}
-        </span>
-      ))}
-    </div>
-  ) : null;
-
-  let tooltip: React.ReactNode = null;
-  if (
-    tooltipDef &&
-    hoverIndex !== null &&
-    hoverPosition &&
-    data[hoverIndex] !== undefined
-  ) {
-    const datum = data[hoverIndex];
-    const labelValue = datum[xKey] as string | number;
-    const labelText = tooltipDef.labelFormatter
-      ? tooltipDef.labelFormatter(labelValue)
-      : String(labelValue);
-
-    const rows: TooltipRow[] = lineDefs
-      .map((line) => {
-        const rawValue = datum[line.dataKey];
-        if (rawValue === undefined || rawValue === null || rawValue === '') {
-          return null;
-        }
-        const numericValue = ensureNumber(rawValue, Number.NaN);
-        if (!Number.isFinite(numericValue)) {
-          return null;
-        }
-        if (!tooltipDef.formatter) {
-          return {
-            name: line.name,
-            value: `${numericValue.toFixed(3)}`,
-            color: line.stroke,
-          } satisfies TooltipRow;
-        }
-        const formatted = tooltipDef.formatter(numericValue, line.name);
-        if (Array.isArray(formatted)) {
-          return {
-            name: (formatted[1] ?? line.name) as string,
-            value: formatted[0] as ReactNode,
-            color: line.stroke,
-          } satisfies TooltipRow;
-        }
-        return {
-          name: line.name,
-          value: formatted as ReactNode,
-          color: line.stroke,
-        } satisfies TooltipRow;
-      })
-      .filter((item): item is TooltipRow => item !== null);
-
-    tooltip = (
-      <div
-        style={{
-          position: 'absolute',
-          pointerEvents: 'none',
-          left: Math.min(Math.max(hoverPosition.x + 12, 8), width - 160),
-          top: Math.min(Math.max(hoverPosition.y + 12, 8), height - 120),
-          background: 'rgba(15, 23, 42, 0.85)',
-          color: '#f8fafc',
-          borderRadius: 8,
-          padding: '8px 12px',
-          fontSize: 12,
-          minWidth: 120,
-          boxShadow: '0 10px 30px rgba(15, 23, 42, 0.25)',
-        }}
-      >
-        <div style={{ fontWeight: 600, marginBottom: 6 }}>{labelText}</div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          {rows.map((row) => (
-            <div key={row.name} style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-              <span
-                style={{
-                  width: 8,
-                  height: 8,
-                  borderRadius: '50%',
-                  backgroundColor: row.color,
-                }}
-              />
-              <span style={{ flex: 1 }}>{row.name}</span>
-              <span style={{ fontVariantNumeric: 'tabular-nums' }}>{row.value}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
+  if (innerWidth <= 0 || innerHeight <= 0) return null;
 
   const gridOpacity = gridChild?.props.opacity ?? 0.2;
   const gridStrokeDasharray = gridChild?.props.strokeDasharray ?? '4 4';
 
   return (
     <div style={{ position: 'relative', width, height }}>
-      <svg
-        width={width}
-        height={height}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        role="img"
-      >
+      <svg width={width} height={height} role="img">
         <g>
+          {/* Axes */}
           <line
             x1={marginWithDefaults.left}
             y1={marginWithDefaults.top + innerHeight}
@@ -516,100 +364,38 @@ export const LineChart = ({
             stroke="rgba(148, 163, 184, 0.5)"
           />
 
+          {/* Grid */}
           {xTicks.map((tick) => {
             const x = scaleX(tick);
             return (
-              <g key={`x-${tick}`}>
-                <line
-                  x1={x}
-                  y1={marginWithDefaults.top + innerHeight}
-                  x2={x}
-                  y2={marginWithDefaults.top + innerHeight + 6}
-                  stroke="rgba(148, 163, 184, 0.6)"
-                />
-                <text
-                  x={x}
-                  y={marginWithDefaults.top + innerHeight + 20}
-                  textAnchor="middle"
-                  fontSize={11}
-                  fill="rgba(148, 163, 184, 0.9)"
-                >
-                  {tick}
-                </text>
-                <line
-                  x1={x}
-                  y1={marginWithDefaults.top}
-                  x2={x}
-                  y2={marginWithDefaults.top + innerHeight}
-                  stroke={`rgba(148, 163, 184, ${gridOpacity})`}
-                  strokeDasharray={gridStrokeDasharray}
-                />
-              </g>
+              <line
+                key={`x-${tick}`}
+                x1={x}
+                y1={marginWithDefaults.top}
+                x2={x}
+                y2={marginWithDefaults.top + innerHeight}
+                stroke={`rgba(148, 163, 184, ${gridOpacity})`}
+                strokeDasharray={gridStrokeDasharray}
+              />
             );
           })}
 
           {yTicks.map((tick) => {
             const y = scaleY(tick);
-            const formatted = yTickFormatter ? yTickFormatter(tick) : tick.toFixed(2);
             return (
-              <g key={`y-${tick}`}>
-                <line
-                  x1={marginWithDefaults.left - 6}
-                  y1={y}
-                  x2={marginWithDefaults.left}
-                  y2={y}
-                  stroke="rgba(148, 163, 184, 0.6)"
-                />
-                <text
-                  x={marginWithDefaults.left - 10}
-                  y={y + 4}
-                  textAnchor="end"
-                  fontSize={11}
-                  fill="rgba(148, 163, 184, 0.9)"
-                >
-                  {formatted}
-                </text>
-                <line
-                  x1={marginWithDefaults.left}
-                  y1={y}
-                  x2={marginWithDefaults.left + innerWidth}
-                  y2={y}
-                  stroke={`rgba(148, 163, 184, ${gridOpacity})`}
-                  strokeDasharray={gridStrokeDasharray}
-                />
-              </g>
+              <line
+                key={`y-${tick}`}
+                x1={marginWithDefaults.left}
+                y1={y}
+                x2={marginWithDefaults.left + innerWidth}
+                y2={y}
+                stroke={`rgba(148, 163, 184, ${gridOpacity})`}
+                strokeDasharray={gridStrokeDasharray}
+              />
             );
           })}
-
-          {renderLines()}
-
-          {xAxisLabel ? (
-            <text
-              x={marginWithDefaults.left + innerWidth}
-              y={marginWithDefaults.top + innerHeight + (xAxisLabel.offset ?? 32)}
-              fontSize={12}
-              textAnchor="end"
-              fill="rgba(148, 163, 184, 0.9)"
-            >
-              {xAxisLabel.value}
-            </text>
-          ) : null}
-
-          {yAxisLabel ? (
-            <text
-              x={marginWithDefaults.left - 40}
-              y={marginWithDefaults.top}
-              transform={`rotate(-90 ${marginWithDefaults.left - 40} ${marginWithDefaults.top + innerHeight / 2})`}
-              fontSize={12}
-              fill="rgba(148, 163, 184, 0.9)"
-            >
-              {yAxisLabel.value}
-            </text>
-          ) : null}
         </g>
       </svg>
-      {legend}
-      {tooltip}
     </div>
   );
 };

@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Bar,
   BarChart,
@@ -9,7 +8,6 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import type { TooltipProps } from 'recharts';
 import * as styles from '../styles/raceResult.css.ts';
 
 export interface TeamPointsDatum {
@@ -24,13 +22,13 @@ interface TeamPointsChartProps {
   data: TeamPointsDatum[];
 }
 
-const CustomTooltip = ({
-  active,
-  payload,
-}: TooltipProps<number, string>) => {
-  if (!active || !payload || payload.length === 0) {
-    return null;
-  }
+interface CustomTooltipProps {
+  active?: boolean;
+  payload?: Array<{ payload: TeamPointsDatum }>;
+}
+
+const CustomTooltip = ({ active, payload }: CustomTooltipProps) => {
+  if (!active || !payload || payload.length === 0) return null;
 
   const [{ payload: raw }] = payload;
   const item = raw as TeamPointsDatum;
@@ -65,8 +63,14 @@ export const TeamPointsChart = ({ data }: TeamPointsChartProps) => {
       </p>
       <div style={{ width: '100%', height: 320 }}>
         <ResponsiveContainer>
-          <BarChart data={data} margin={{ left: 12, right: 12, top: 24, bottom: 12 }}>
-            <CartesianGrid stroke="rgba(148, 163, 184, 0.18)" vertical={false} />
+          <BarChart
+            data={data}
+            margin={{ left: 12, right: 12, top: 24, bottom: 12 }}
+          >
+            <CartesianGrid
+              stroke="rgba(148, 163, 184, 0.18)"
+              vertical={false}
+            />
             <XAxis
               dataKey="teamName"
               stroke="rgba(226, 232, 240, 0.75)"
@@ -80,7 +84,10 @@ export const TeamPointsChart = ({ data }: TeamPointsChartProps) => {
               axisLine={false}
               width={44}
             />
-            <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(148, 163, 184, 0.12)' }} />
+            <Tooltip
+              content={<CustomTooltip />}
+              cursor={{ fill: 'rgba(148, 163, 184, 0.12)' }}
+            />
             <Bar dataKey="totalPoints" radius={[12, 12, 12, 12]}>
               {data.map((entry) => (
                 <Cell key={entry.teamName} fill={entry.color} />

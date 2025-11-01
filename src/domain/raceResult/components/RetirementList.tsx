@@ -1,4 +1,3 @@
-import React from 'react';
 import * as styles from '../styles/raceResult.css.ts';
 
 export interface RetirementEntry {

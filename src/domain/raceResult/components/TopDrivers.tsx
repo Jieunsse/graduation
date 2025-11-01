@@ -1,4 +1,3 @@
-import React from 'react';
 import * as styles from '../styles/raceResult.css.ts';
 
 export interface DriverHighlight {
@@ -28,7 +27,8 @@ export const TopDrivers = ({ drivers }: TopDriversProps) => {
       <div>
         <h2 className={styles.sectionTitle}>Top 10 Drivers</h2>
         <p className={styles.sectionSubtitle}>
-          상위권 드라이버의 포인트, 팀 색상, 리더와의 격차를 시각적으로 확인하세요.
+          상위권 드라이버의 포인트, 팀 색상, 리더와의 격차를 시각적으로
+          확인하세요.
         </p>
       </div>
 
