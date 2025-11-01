@@ -5,14 +5,12 @@ import { Header } from '@shared/ui/header/Header.tsx';
 import { Footer } from '@shared/ui/footer/Footer.tsx';
 import { sessionMap } from '../data/sessionMap.ts';
 import { RaceHeader } from '../components/RaceHeader.tsx';
-import { RaceSummary } from '../components/RaceSummary.tsx';
 import { TopDrivers } from '../components/TopDrivers.tsx';
 import { RaceResultTable } from '../components/RaceResultTable.tsx';
 import { RetirementList } from '../components/RetirementList.tsx';
 import { getSessionResult } from '../api/getSessionResult.ts';
 import { getDriverInfo } from '../api/getDriverInfo.ts';
 import { getMeetingInfo } from '../api/getMeetingInfo.ts';
-import { getTeamStats } from '../api/getTeamStats.ts';
 import { driverNameMap } from '@domain/lapTime/data/driverNameMap.ts';
 import { resolveDriverMetadata } from '@domain/grid/data/driverMetadata.ts';
 import { getTeamColor } from '@shared/data/teamColors.ts';
@@ -238,20 +236,13 @@ export const RaceResultPage = ({
 
     return map;
   }, [driverLookup, results]);
-
-  const driverMetaForStats = useMemo(() => {
+  useMemo(() => {
     const map = new Map<number, { name: string; team?: string }>();
     enrichedDrivers.forEach((value, key) => {
       map.set(key, { name: value.name, team: value.team });
     });
     return map;
   }, [enrichedDrivers]);
-
-  const teamStats = useMemo(
-    () => getTeamStats(results, driverMetaForStats),
-    [results, driverMetaForStats]
-  );
-
   const topResults = useMemo(() => {
     return results
       .filter((result) => typeof result.position === 'number')
@@ -266,8 +257,7 @@ export const RaceResultPage = ({
         };
       });
   }, [results, enrichedDrivers]);
-
-  const summaryItems = useMemo(() => {
+  useMemo(() => {
     if (results.length === 0) {
       return [];
     }
@@ -316,7 +306,6 @@ export const RaceResultPage = ({
       },
     ];
   }, [results]);
-
   const topDriverHighlights = useMemo(() => {
     return results
       .filter((result) => typeof result.position === 'number')
@@ -338,16 +327,6 @@ export const RaceResultPage = ({
         };
       });
   }, [results, enrichedDrivers]);
-
-  const teamPointsData = useMemo(() => {
-    return teamStats.map((team) => ({
-      teamName: team.teamName,
-      totalPoints: team.totalPoints,
-      finishers: team.finishers,
-      drivers: team.drivers.map((driver) => driver.name),
-      color: getTeamColor(team.teamName),
-    }));
-  }, [teamStats]);
 
   const tableRows = useMemo(() => {
     return results.map((result) => {
@@ -394,28 +373,6 @@ export const RaceResultPage = ({
         };
       });
   }, [results, enrichedDrivers]);
-
-  const footerStats = useMemo(() => {
-    const finishers = results.filter(
-      (item) => !item.dnf && !item.dsq && !item.dns
-    ).length;
-    const retirements = results.filter((item) => item.dnf).length;
-    const averageLaps =
-      results.length > 0
-        ? (
-            results.reduce((acc, item) => acc + (item.number_of_laps ?? 0), 0) /
-            results.length
-          ).toFixed(1)
-        : '0.0';
-    const totalPoints = results
-      .reduce(
-        (acc, item) => acc + (Number.isFinite(item.points) ? item.points : 0),
-        0
-      )
-      .toFixed(1);
-
-    return { finishers, retirements, averageLaps, totalPoints };
-  }, [results]);
 
   const handleSessionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const sessionKey = Number(event.target.value);
@@ -479,10 +436,6 @@ export const RaceResultPage = ({
           <div className={styles.emptyState}>표시할 경기 결과가 없습니다.</div>
         ) : (
           <>
-            {/*<RaceSummary*/}
-            {/*  items={summaryItems}*/}
-            {/*  accentColor={selectedSession.accentColor}*/}
-            {/*/>*/}
             <TopDrivers drivers={topDriverHighlights} />
             <RaceResultTable rows={tableRows} />
             <RetirementList entries={retirementEntries} />
