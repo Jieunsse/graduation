@@ -36,7 +36,9 @@ const DEFAULT_FONT_FAMILY =
   "'Inter', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
 
 const formatMaybeValue = (
-  formatter: ((value: number, name: string) => [string, string] | string | number) | undefined,
+  formatter:
+    | ((value: number, name: string) => [string, string] | string | number)
+    | undefined,
   rawValue: number,
   name: string
 ): { value: string; name: string } => {
@@ -185,7 +187,10 @@ interface TooltipCursor {
 }
 
 export interface TooltipProps {
-  formatter?: (value: number, name: string) => [string, string] | string | number;
+  formatter?: (
+    value: number,
+    name: string
+  ) => [string, string] | string | number;
   labelFormatter?: (value: string | number) => string;
   content?: ReactElement;
   cursor?: TooltipCursor | boolean;
@@ -309,7 +314,10 @@ const renderLegend = (lines: LineDefinition[]) => {
       }}
     >
       {lines.map((line) => (
-        <span key={line.dataKey} style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+        <span
+          key={line.dataKey}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}
+        >
           <span
             style={{
               width: 10,
@@ -360,9 +368,9 @@ export const LineChart = ({
     (child) => child.type === CartesianGrid
   ) as ReactElement<CartesianGridProps> | undefined;
 
-  const tooltipChild = childrenArray.find(
-    (child) => child.type === Tooltip
-  ) as ReactElement<TooltipProps> | undefined;
+  const tooltipChild = childrenArray.find((child) => child.type === Tooltip) as
+    | ReactElement<TooltipProps>
+    | undefined;
 
   const legendChild = childrenArray.find((child) => child.type === Legend);
 
@@ -398,7 +406,8 @@ export const LineChart = ({
   }, [data, lineDefs, xKey]);
 
   const xValues = useMemo(
-    () => parsedData.map((entry) => entry.xValue).filter((v) => Number.isFinite(v)),
+    () =>
+      parsedData.map((entry) => entry.xValue).filter((v) => Number.isFinite(v)),
     [parsedData]
   );
 
@@ -460,9 +469,10 @@ export const LineChart = ({
   const tooltipDef = tooltipChild?.props;
 
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
-  const [hoverPosition, setHoverPosition] = useState<{ x: number; y: number } | null>(
-    null
-  );
+  const [hoverPosition, setHoverPosition] = useState<{
+    x: number;
+    y: number;
+  } | null>(null);
 
   useEffect(() => {
     setHoverIndex(null);
@@ -510,7 +520,15 @@ export const LineChart = ({
         y: marginWithDefaults.top,
       });
     },
-    [innerWidth, marginWithDefaults.left, marginWithDefaults.top, parsedData, scaleX, xMax, xMin]
+    [
+      innerWidth,
+      marginWithDefaults.left,
+      marginWithDefaults.top,
+      parsedData,
+      scaleX,
+      xMax,
+      xMin,
+    ]
   );
 
   const handleMouseLeave = useCallback(() => {
@@ -524,20 +542,29 @@ export const LineChart = ({
     if (!hoverData) return [];
     return lineDefs.map((line, index) => {
       const rawValue = hoverData.yValues[index];
-      const formatted = formatMaybeValue(tooltipDef?.formatter, rawValue, line.name);
-      return { name: formatted.name, value: formatted.value, color: line.stroke };
+      const formatted = formatMaybeValue(
+        tooltipDef?.formatter,
+        rawValue,
+        line.name
+      );
+      return {
+        name: formatted.name,
+        value: formatted.value,
+        color: line.stroke,
+      };
     });
   }, [hoverData, lineDefs, tooltipDef?.formatter]);
 
-  const tooltipPayload: TooltipPayload<Record<string, unknown>> = useMemo(() => {
-    if (!hoverData) return [];
-    return lineDefs.map((line, index) => ({
-      name: line.name,
-      color: line.stroke,
-      value: hoverData.yValues[index],
-      payload: hoverData.original,
-    }));
-  }, [hoverData, lineDefs]);
+  const tooltipPayload: TooltipPayload<Record<string, unknown>> =
+    useMemo(() => {
+      if (!hoverData) return [];
+      return lineDefs.map((line, index) => ({
+        name: line.name,
+        color: line.stroke,
+        value: hoverData.yValues[index],
+        payload: hoverData.original,
+      }));
+    }, [hoverData, lineDefs]);
 
   const tooltipLabel = hoverData
     ? formatMaybeLabel(tooltipDef?.labelFormatter, hoverData.xRaw ?? '')
@@ -576,7 +603,10 @@ export const LineChart = ({
         <div style={{ fontWeight: 600, marginBottom: 6 }}>{tooltipLabel}</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
           {tooltipRows.map((row) => (
-            <div key={row.name} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div
+              key={row.name}
+              style={{ display: 'flex', alignItems: 'center', gap: 8 }}
+            >
               <span
                 style={{
                   width: 10,
@@ -587,7 +617,9 @@ export const LineChart = ({
                 }}
               />
               <span style={{ flex: 1 }}>{row.name}</span>
-              <span style={{ fontVariantNumeric: 'tabular-nums' }}>{row.value}</span>
+              <span style={{ fontVariantNumeric: 'tabular-nums' }}>
+                {row.value}
+              </span>
             </div>
           ))}
         </div>
@@ -675,10 +707,14 @@ export const LineChart = ({
 
           {yAxisChild?.props.label ? (
             <text
-              x={marginWithDefaults.left - (yAxisChild.props.label.position === 'insideLeft' ? 36 : 48)}
+              x={
+                marginWithDefaults.left -
+                (yAxisChild.props.label.position === 'insideLeft' ? 36 : 48)
+              }
               y={marginWithDefaults.top + innerHeight / 2}
               transform={`rotate(-90 ${
-                marginWithDefaults.left - (yAxisChild.props.label.position === 'insideLeft' ? 36 : 48)
+                marginWithDefaults.left -
+                (yAxisChild.props.label.position === 'insideLeft' ? 36 : 48)
               } ${marginWithDefaults.top + innerHeight / 2})`}
               fill="#e2e8f0"
               fontSize={12}
@@ -692,7 +728,12 @@ export const LineChart = ({
           {xAxisChild?.props.label ? (
             <text
               x={marginWithDefaults.left + innerWidth}
-              y={marginWithDefaults.top + innerHeight + 32 + (xAxisChild.props.label.offset ?? 0)}
+              y={
+                marginWithDefaults.top +
+                innerHeight +
+                32 +
+                (xAxisChild.props.label.offset ?? 0)
+              }
               fill="#e2e8f0"
               fontSize={12}
               fontFamily={DEFAULT_FONT_FAMILY}
@@ -704,7 +745,9 @@ export const LineChart = ({
 
           {lineDefs.map((line, lineIndex) => {
             const points = parsedData.map((entry) => ({
-              x: Number.isFinite(entry.xValue) ? scaleX(entry.xValue) : Number.NaN,
+              x: Number.isFinite(entry.xValue)
+                ? scaleX(entry.xValue)
+                : Number.NaN,
               y: Number.isFinite(entry.yValues[lineIndex])
                 ? scaleY(entry.yValues[lineIndex])
                 : Number.NaN,
@@ -747,9 +790,11 @@ export const LineChart = ({
               y1={marginWithDefaults.top}
               x2={hoverPosition.x}
               y2={marginWithDefaults.top + innerHeight}
-              stroke={tooltipDef?.cursor && typeof tooltipDef.cursor !== 'boolean'
-                ? tooltipDef.cursor.fill ?? 'rgba(148, 163, 184, 0.35)'
-                : 'rgba(148, 163, 184, 0.35)'}
+              stroke={
+                tooltipDef?.cursor && typeof tooltipDef.cursor !== 'boolean'
+                  ? (tooltipDef.cursor.fill ?? 'rgba(148, 163, 184, 0.35)')
+                  : 'rgba(148, 163, 184, 0.35)'
+              }
               strokeDasharray="4 4"
             />
           ) : null}
@@ -811,9 +856,9 @@ export const BarChart = ({
     (child) => child.type === CartesianGrid
   ) as ReactElement<CartesianGridProps> | undefined;
 
-  const tooltipChild = childrenArray.find(
-    (child) => child.type === Tooltip
-  ) as ReactElement<TooltipProps> | undefined;
+  const tooltipChild = childrenArray.find((child) => child.type === Tooltip) as
+    | ReactElement<TooltipProps>
+    | undefined;
 
   const barChild = childrenArray.find((child) => child.type === Bar) as
     | ReactElement<BarProps>
@@ -821,8 +866,12 @@ export const BarChart = ({
 
   const cellFills = useMemo(() => {
     if (!barChild) return [] as string[];
-    const barChildren = Children.toArray(barChild.props.children) as ReactElement<CellProps>[];
-    return barChildren.filter((child) => child.type === Cell).map((cell) => cell.props.fill);
+    const barChildren = Children.toArray(
+      barChild.props.children
+    ) as ReactElement<CellProps>[];
+    return barChildren
+      .filter((child) => child.type === Cell)
+      .map((cell) => cell.props.fill);
   }, [barChild]);
 
   const barDef: BarDefinition | null = barChild
@@ -840,7 +889,9 @@ export const BarChart = ({
     return data.map((item) => {
       const xRaw = item[xKey];
       const xValue = typeof xRaw === 'string' ? xRaw : String(xRaw ?? '');
-      const yValue = barDef ? ensureNumber(item[barDef.dataKey], Number.NaN) : Number.NaN;
+      const yValue = barDef
+        ? ensureNumber(item[barDef.dataKey], Number.NaN)
+        : Number.NaN;
       return { original: item, xRaw, xValue, yValue };
     });
   }, [data, barDef, xKey]);
@@ -893,9 +944,10 @@ export const BarChart = ({
   const yTickFormatter = yAxisChild?.props.tickFormatter;
 
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
-  const [hoverPosition, setHoverPosition] = useState<{ x: number; y: number } | null>(
-    null
-  );
+  const [hoverPosition, setHoverPosition] = useState<{
+    x: number;
+    y: number;
+  } | null>(null);
 
   useEffect(() => {
     setHoverIndex(null);
@@ -922,19 +974,20 @@ export const BarChart = ({
     setHoverPosition({ x, y });
   };
 
-  const tooltipPayload: TooltipPayload<Record<string, unknown>> = useMemo(() => {
-    if (hoverIndex === null) return [];
-    const entry = parsedData[hoverIndex];
-    if (!entry) return [];
-    return [
-      {
-        name: barDef.dataKey,
-        color: barDef.cellFills[hoverIndex] ?? barDef.fill,
-        value: entry.yValue,
-        payload: entry.original,
-      },
-    ];
-  }, [barDef.cellFills, barDef.dataKey, barDef.fill, hoverIndex, parsedData]);
+  const tooltipPayload: TooltipPayload<Record<string, unknown>> =
+    useMemo(() => {
+      if (hoverIndex === null) return [];
+      const entry = parsedData[hoverIndex];
+      if (!entry) return [];
+      return [
+        {
+          name: barDef.dataKey,
+          color: barDef.cellFills[hoverIndex] ?? barDef.fill,
+          value: entry.yValue,
+          payload: entry.original,
+        },
+      ];
+    }, [barDef.cellFills, barDef.dataKey, barDef.fill, hoverIndex, parsedData]);
 
   const tooltipLabel = useMemo(() => {
     if (hoverIndex === null) return '';
@@ -993,7 +1046,9 @@ export const BarChart = ({
             }}
           />
           <span style={{ flex: 1 }}>{formatted.name}</span>
-          <span style={{ fontVariantNumeric: 'tabular-nums' }}>{formatted.value}</span>
+          <span style={{ fontVariantNumeric: 'tabular-nums' }}>
+            {formatted.value}
+          </span>
         </div>
       </div>
     );
@@ -1058,10 +1113,14 @@ export const BarChart = ({
             const xCenter = scaleX(index);
             const value = entry.yValue;
             if (!Number.isFinite(value)) return null;
-            const barHeight = Math.abs(scaleY(value) - scaleY(Math.max(0, yMin)));
+            const barHeight = Math.abs(
+              scaleY(value) - scaleY(Math.max(0, yMin))
+            );
             const barTop = value >= 0 ? scaleY(value) : scaleY(0);
             const fill = barDef.cellFills[index] ?? barDef.fill;
-            const rx = Array.isArray(barDef.radius) ? barDef.radius[0] ?? 0 : barDef.radius ?? 0;
+            const rx = Array.isArray(barDef.radius)
+              ? (barDef.radius[0] ?? 0)
+              : (barDef.radius ?? 0);
 
             return (
               <g key={`${entry.xValue}-${index}`}>
@@ -1091,7 +1150,7 @@ export const BarChart = ({
               fill={
                 typeof tooltipDef.cursor === 'boolean'
                   ? 'rgba(148, 163, 184, 0.12)'
-                  : tooltipDef.cursor.fill ?? 'rgba(148, 163, 184, 0.12)'
+                  : (tooltipDef.cursor.fill ?? 'rgba(148, 163, 184, 0.12)')
               }
               pointerEvents="none"
             />
@@ -1099,7 +1158,9 @@ export const BarChart = ({
 
           {parsedData.map((entry, index) =>
             renderAxisText(
-              xAxisChild?.props.tickFormatter?.(entry.xRaw as number | string) ?? entry.xValue,
+              xAxisChild?.props.tickFormatter?.(
+                entry.xRaw as number | string
+              ) ?? entry.xValue,
               scaleX(index),
               marginWithDefaults.top + innerHeight + 18,
               'middle',
