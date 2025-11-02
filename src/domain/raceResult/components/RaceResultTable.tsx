@@ -91,9 +91,8 @@ export const RaceResultTable = ({ rows }: RaceResultTableProps) => {
                 }}
               >
                 <td className={styles.tableCell}>{row.position ?? '-'}</td>
-                <td
-                  className={`${styles.tableCell} ${styles.driverCell}`}
-                >
+
+                <td className={`${styles.tableCell} ${styles.driverCell}`}>
                   <img
                     className={styles.driverAvatarSmall}
                     src={row.driverImageUrl}

@@ -9,7 +9,10 @@ import {
   RaceResultTable,
   type RaceResultRow,
 } from '../components/RaceResultTable.tsx';
-import { PodiumCard, type PodiumDriverInfo } from '../components/PodiumCard.tsx';
+import {
+  PodiumCard,
+  type PodiumDriverInfo,
+} from '../components/PodiumCard.tsx';
 import {
   driverRankingData,
   type DriverRanking,
@@ -33,8 +36,7 @@ const podiumRotation: DriverRanking['id'][][] = [
 const podiumMockBySession = sessionMap.reduce<
   Record<number, DriverRanking['id'][]>
 >((acc, session, index) => {
-  acc[session.sessionKey] =
-    podiumRotation[index % podiumRotation.length];
+  acc[session.sessionKey] = podiumRotation[index % podiumRotation.length];
   return acc;
 }, {});
 
@@ -64,12 +66,12 @@ const baseResultTemplate: Array<{
   { gap: '+1 랩', status: 'FIN' },
   { gap: '+1 랩', status: 'FIN' },
   { gap: '+1 랩', status: 'FIN' },
-  { gap: '+2 랩', status: 'FIN' },
-  { gap: '+2 랩', status: 'FIN' },
-  { gap: '+2 랩', status: 'FIN' },
-  { gap: '+3 랩', status: 'FIN' },
-  { gap: '+3 랩', status: 'FIN' },
-  { gap: '+4 랩', status: 'FIN' },
+  { gap: '+1 랩', status: 'FIN' },
+  { gap: '+1 랩', status: 'FIN' },
+  { gap: '+1 랩', status: 'FIN' },
+  { gap: '+1 랩', status: 'FIN' },
+  { gap: '+1 랩', status: 'FIN' },
+  { gap: '+1 랩', status: 'FIN' },
   { gap: '탈락 (엔진 문제)', status: 'DNF' },
   { gap: '탈락 (브레이크 과열)', status: 'DNF' },
   { gap: '탈락 (사고)', status: 'DNF' },
@@ -152,7 +154,8 @@ export const RaceResultPage = ({
       ];
 
       const rows: RaceResultRow[] = raceOrderIds.map((driverId, index) => {
-        const driver = driverById.get(driverId) ?? sortedDrivers[index] ?? sortedDrivers[0];
+        const driver =
+          driverById.get(driverId) ?? sortedDrivers[index] ?? sortedDrivers[0];
         const template =
           baseResultTemplate[index] ?? fallbackGapForPosition(index);
 
@@ -225,9 +228,7 @@ export const RaceResultPage = ({
         {/* ✅ 포디엄 카드 */}
         <section className={highlightStyles.section}>
           <div className={highlightStyles.sectionHeader}>
-            <h2 className={highlightStyles.sectionTitle}>
-              포디엄 하이라이트 (목업)
-            </h2>
+            <h2 className={highlightStyles.sectionTitle}>포디엄 하이라이트</h2>
             <p className={highlightStyles.sectionCaption}>
               {selectedSession.grandPrix}
             </p>

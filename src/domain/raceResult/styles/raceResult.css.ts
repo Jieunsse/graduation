@@ -83,6 +83,18 @@ export const podiumRow = style({
   gap: 18,
 });
 
+export const driverTeamCell = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '14px',
+  flexWrap: 'nowrap',
+});
+
+export const teamNameText = style({
+  fontSize: '14px',
+  color: 'inherit',
+});
+
 export const podiumCard = style({
   display: 'flex',
   alignItems: 'center',
@@ -479,7 +491,6 @@ export const teamLogo = style({
   height: 34,
   borderRadius: '50%',
   objectFit: 'contain',
-  background: 'rgba(15, 23, 42, 0.85)',
   padding: 6,
   boxShadow: '0 4px 12px rgba(15, 23, 42, 0.35)',
 });
