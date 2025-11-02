@@ -5,7 +5,10 @@ import { Header } from '@shared/ui/header/Header.tsx';
 import { Footer } from '@shared/ui/footer/Footer.tsx';
 import { sessionMap } from '../data/sessionMap.ts';
 import { RaceHeader } from '../components/RaceHeader.tsx';
-import { RaceResultTable } from '../components/RaceResultTable.tsx';
+import {
+  RaceResultTable,
+  type RaceResultRow,
+} from '../components/RaceResultTable.tsx';
 import { PodiumCard, type PodiumDriverInfo } from '../components/PodiumCard.tsx';
 import {
   driverRankingData,
@@ -34,6 +37,54 @@ const podiumMockBySession = sessionMap.reduce<
     podiumRotation[index % podiumRotation.length];
   return acc;
 }, {});
+
+const teamColorById: Record<string, string> = {
+  mclaren: '#FF6F1D',
+  ferrari: '#E10600',
+  redbull: '#3671C6',
+  mercedes: '#00D2BE',
+  astonmartin: '#006F62',
+  williams: '#005AFF',
+  haas: '#B6BABD',
+  alpine: '#0090FF',
+  racingbulls: '#1436B0',
+};
+
+const baseResultTemplate: Array<{
+  gap: string;
+  status: RaceResultRow['status'];
+}> = [
+  { gap: '1:37:57.574초', status: 'FIN' },
+  { gap: '+30.324초', status: 'FIN' },
+  { gap: '+31.049초', status: 'FIN' },
+  { gap: '+40.955초', status: 'FIN' },
+  { gap: '+42.065초', status: 'FIN' },
+  { gap: '+54.832초', status: 'FIN' },
+  { gap: '+1:08.214초', status: 'FIN' },
+  { gap: '+1 랩', status: 'FIN' },
+  { gap: '+1 랩', status: 'FIN' },
+  { gap: '+1 랩', status: 'FIN' },
+  { gap: '+2 랩', status: 'FIN' },
+  { gap: '+2 랩', status: 'FIN' },
+  { gap: '+2 랩', status: 'FIN' },
+  { gap: '+3 랩', status: 'FIN' },
+  { gap: '+3 랩', status: 'FIN' },
+  { gap: '+4 랩', status: 'FIN' },
+  { gap: '탈락 (엔진 문제)', status: 'DNF' },
+  { gap: '탈락 (브레이크 과열)', status: 'DNF' },
+  { gap: '탈락 (사고)', status: 'DNF' },
+  { gap: '탈락 (기어박스 고장)', status: 'DNF' },
+];
+
+const fallbackGapForPosition = (
+  positionIndex: number
+): { gap: string; status: RaceResultRow['status'] } => {
+  const secondsBehind = 75 + positionIndex * 4.2;
+  return {
+    gap: `+${secondsBehind.toFixed(3)}초`,
+    status: 'FIN',
+  };
+};
 
 interface RaceResultPageProps {
   appearance: 'light' | 'dark';
@@ -82,21 +133,55 @@ export const RaceResultPage = ({
     });
   }, [driverById, selectedSession.sessionKey, sortedDrivers]);
 
-  // ✅ 전체 순위 데이터 (테이블용)
-  const tableRows = useMemo(() => {
-    return sortedDrivers.map((driver, index) => ({
-        position: index + 1,
-        driverName: driver.name,
-        teamName: driver.teamName,
-        points: driver.points,
-        laps: 71, // 목업
-        gap: index === 0 ? '리더' : `+${(index * 5).toFixed(3)}s`,
-        status: 'FIN',
-        driverNumber: index + 1,
-        teamColor: driver.teamId,
-        tooltip: `${driver.englishName} | ${driver.teamName}`,
-      }));
-  }, [sortedDrivers]);
+  const tableRowsBySession = useMemo(() => {
+    const map = new Map<number, RaceResultRow[]>();
+
+    sessionMap.forEach((session) => {
+      const podiumDriverIds =
+        podiumMockBySession[session.sessionKey] ??
+        sortedDrivers.slice(0, 3).map((driver) => driver.id);
+
+      const podiumSet = new Set(podiumDriverIds);
+      const remainingDrivers = sortedDrivers.filter(
+        (driver) => !podiumSet.has(driver.id)
+      );
+
+      const raceOrderIds = [
+        ...podiumDriverIds,
+        ...remainingDrivers.map((driver) => driver.id),
+      ];
+
+      const rows: RaceResultRow[] = raceOrderIds.map((driverId, index) => {
+        const driver = driverById.get(driverId) ?? sortedDrivers[index] ?? sortedDrivers[0];
+        const template =
+          baseResultTemplate[index] ?? fallbackGapForPosition(index);
+
+        return {
+          position: index + 1,
+          driverName: driver.name,
+          driverCode: driver.code,
+          driverImageUrl: driver.imageUrl,
+          teamName: driver.teamName,
+          teamLogoUrl: driver.teamLogoUrl,
+          points: driver.points,
+          gap: template.gap,
+          status: template.status,
+          driverNumber: index + 1,
+          teamColor: teamColorById[driver.teamId] ?? '#4C516D',
+          tooltip: `${driver.englishName} | ${driver.teamName}`,
+        };
+      });
+
+      map.set(session.sessionKey, rows);
+    });
+
+    return map;
+  }, [driverById, sortedDrivers]);
+
+  const tableRows = useMemo(
+    () => tableRowsBySession.get(selectedSession.sessionKey) ?? [],
+    [selectedSession.sessionKey, tableRowsBySession]
+  );
 
   const handleSessionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const key = Number(e.target.value);

@@ -435,6 +435,55 @@ export const tableCell = style({
   borderBottom: '1px solid rgba(71, 85, 105, 0.3)',
 });
 
+export const driverCell = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: 12,
+});
+
+export const driverAvatarSmall = style({
+  width: 42,
+  height: 42,
+  borderRadius: '50%',
+  objectFit: 'cover',
+  border: '2px solid rgba(255, 255, 255, 0.6)',
+  background: 'rgba(15, 23, 42, 0.95)',
+});
+
+export const driverText = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 2,
+});
+
+export const driverNameText = style({
+  fontWeight: 600,
+  fontSize: 15,
+});
+
+export const driverCodeText = style({
+  fontSize: 12,
+  textTransform: 'uppercase',
+  color: 'rgba(226, 232, 240, 0.7)',
+  letterSpacing: '0.08em',
+});
+
+export const teamCell = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: 12,
+});
+
+export const teamLogo = style({
+  width: 34,
+  height: 34,
+  borderRadius: '50%',
+  objectFit: 'contain',
+  background: 'rgba(15, 23, 42, 0.85)',
+  padding: 6,
+  boxShadow: '0 4px 12px rgba(15, 23, 42, 0.35)',
+});
+
 export const podiumHighlight = styleVariants({
   gold: {
     background:
@@ -612,6 +661,20 @@ globalStyle(`.light ${tableRow}:nth-child(even)`, {
 
 globalStyle(`.light ${tableRow}:hover`, {
   background: 'rgba(224, 231, 255, 0.6)',
+});
+
+globalStyle(`.light ${driverAvatarSmall}`, {
+  border: '2px solid rgba(15, 23, 42, 0.12)',
+  background: '#ffffff',
+});
+
+globalStyle(`.light ${driverCodeText}`, {
+  color: 'rgba(71, 85, 105, 0.7)',
+});
+
+globalStyle(`.light ${teamLogo}`, {
+  background: '#f8fafc',
+  boxShadow: '0 4px 12px rgba(15, 23, 42, 0.15)',
 });
 
 globalStyle(`.light ${retirementSection}`, {
