@@ -1,4 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
+import type { ChangeEvent } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { MainContainer } from '@shared/layout/MainContainer.tsx';
 import { SideBar } from '@shared/ui/sidebar/SideBar.tsx';
 import { Header } from '@shared/ui/header/Header.tsx';
@@ -8,12 +10,15 @@ import { RaceHeader } from '../components/RaceHeader.tsx';
 import { TopDrivers } from '../components/TopDrivers.tsx';
 import { RaceResultTable } from '../components/RaceResultTable.tsx';
 import { RetirementList } from '../components/RetirementList.tsx';
+import { PodiumCard } from '../components/PodiumCard.tsx';
+import { RaceResultChart } from '../components/RaceResultChart.tsx';
 import { getSessionResult } from '../api/getSessionResult.ts';
 import { getDriverInfo } from '../api/getDriverInfo.ts';
 import { getMeetingInfo } from '../api/getMeetingInfo.ts';
 import { driverNameMap } from '@domain/lapTime/data/driverNameMap.ts';
 import { resolveDriverMetadata } from '@domain/grid/data/driverMetadata.ts';
 import { getTeamColor } from '@shared/data/teamColors.ts';
+import { driverShowcaseLookup } from '../mocks/teamShowcaseData.ts';
 import type {
   DriverInfo,
   MeetingInfo,
@@ -21,6 +26,7 @@ import type {
   SessionResult,
 } from '../types.ts';
 import * as styles from '../styles/raceResult.css.ts';
+import * as highlightStyles from '../styles/highlights.css.ts';
 
 interface RaceResultPageProps {
   appearance: 'light' | 'dark';
@@ -125,6 +131,63 @@ const classifyStatus = (result: SessionResult) => {
   return 'FIN';
 };
 
+const resolveShowcaseEntry = (
+  driver?: ResolvedDriver,
+  result?: SessionResult,
+) => {
+  const candidateKeys = new Set<string>();
+
+  if (driver?.englishName) {
+    candidateKeys.add(driver.englishName.toLowerCase());
+  }
+
+  if (result?.driver_name) {
+    candidateKeys.add(result.driver_name.toLowerCase());
+  }
+
+  for (const key of Array.from(candidateKeys)) {
+    const trimmed = key.replace(/\./g, '').trim();
+    if (trimmed.length > 0) {
+      candidateKeys.add(trimmed);
+      candidateKeys.add(trimmed.replace(/\s+/g, '-'));
+    }
+  }
+
+  for (const key of candidateKeys) {
+    const entry = driverShowcaseLookup.get(key);
+    if (entry) {
+      return entry;
+    }
+  }
+
+  return undefined;
+};
+
+const deriveDriverCode = (
+  result: SessionResult,
+  driver?: ResolvedDriver,
+  fallback?: string,
+) => {
+  if (fallback && fallback.trim().length > 0) {
+    return fallback;
+  }
+
+  const englishName = driver?.englishName;
+  if (englishName) {
+    const initials = englishName
+      .split(/\s+/)
+      .filter(Boolean)
+      .map((part) => part[0]?.toUpperCase())
+      .join('');
+
+    if (initials.length >= 2) {
+      return initials.slice(0, 3);
+    }
+  }
+
+  return `#${result.driver_number}`;
+};
+
 export const RaceResultPage = ({
   appearance,
   setAppearance,
@@ -132,77 +195,60 @@ export const RaceResultPage = ({
   const [selectedSession, setSelectedSession] = useState<RaceSessionMeta>(
     sessionMap[0]
   );
-  const [results, setResults] = useState<SessionResult[]>([]);
-  const [meetingInfo, setMeetingInfo] = useState<MeetingInfo | null>(null);
-  const [driverLookup, setDriverLookup] = useState<Map<number, ResolvedDriver>>(
-    new Map()
+
+  const {
+    data: driverInfo,
+    isLoading: isDriverLoading,
+    error: driverError,
+  } = useQuery<DriverInfo[], Error>({
+    queryKey: ['race-result', 'drivers'],
+    queryFn: getDriverInfo,
+    staleTime: 1000 * 60 * 60 * 6,
+    refetchOnWindowFocus: false,
+  });
+
+  const driverLookup = useMemo(
+    () => (driverInfo ? buildDriverLookup(driverInfo) : new Map()),
+    [driverInfo]
   );
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    let cancelled = false;
+  const {
+    data: results = [],
+    isLoading: isResultLoading,
+    isFetching: isResultFetching,
+    error: sessionError,
+  } = useQuery<SessionResult[], Error>({
+    queryKey: ['race-result', 'sessions', selectedSession.sessionKey],
+    queryFn: () => getSessionResult(selectedSession.sessionKey),
+    staleTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false,
+    placeholderData: (previousData) => previousData ?? [],
+  });
 
-    const loadDrivers = async () => {
-      try {
-        const driverInfo = await getDriverInfo();
-        if (!cancelled) {
-          setDriverLookup(buildDriverLookup(driverInfo));
-        }
-      } catch (cause) {
-        console.error(cause);
-        if (!cancelled) {
-          setError('드라이버 정보를 불러오지 못했습니다. 새로고침 해주세요.');
-        }
-      }
-    };
+  const { data: meetingInfo } = useQuery<MeetingInfo | null, Error>({
+    queryKey: ['race-result', 'meeting', selectedSession.meetingKey],
+    queryFn: () => getMeetingInfo(selectedSession.meetingKey),
+    staleTime: 1000 * 60 * 30,
+    refetchOnWindowFocus: false,
+  });
 
-    loadDrivers();
+  const errorMessage = useMemo(() => {
+    if (sessionError) {
+      console.error(sessionError);
+      return '경기 결과를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.';
+    }
 
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+    if (driverError) {
+      console.error(driverError);
+      return '드라이버 정보를 불러오지 못했습니다. 새로고침 해주세요.';
+    }
 
-  useEffect(() => {
-    let cancelled = false;
+    return null;
+  }, [sessionError, driverError]);
 
-    const loadSession = async () => {
-      setIsLoading(true);
-      setError(null);
-
-      try {
-        const [sessionResult, meeting] = await Promise.all([
-          getSessionResult(selectedSession.sessionKey),
-          getMeetingInfo(selectedSession.meetingKey),
-        ]);
-
-        if (cancelled) {
-          return;
-        }
-
-        setResults(sessionResult);
-        setMeetingInfo(meeting);
-      } catch (cause) {
-        console.error(cause);
-        if (!cancelled) {
-          setError(
-            '경기 결과를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.'
-          );
-        }
-      } finally {
-        if (!cancelled) {
-          setIsLoading(false);
-        }
-      }
-    };
-
-    loadSession();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [selectedSession]);
+  const isInitialLoading = isDriverLoading || isResultLoading;
+  const isUpdating = isResultFetching && !isResultLoading;
+  const shouldShowSkeleton = isInitialLoading || (isUpdating && results.length === 0);
 
   const enrichedDrivers = useMemo(() => {
     const map = new Map(driverLookup);
@@ -243,20 +289,65 @@ export const RaceResultPage = ({
     });
     return map;
   }, [enrichedDrivers]);
-  const topResults = useMemo(() => {
-    return results
-      .filter((result) => typeof result.position === 'number')
-      .slice(0, 3)
-      .map((result) => {
+  const classifiedResults = useMemo(() => {
+    const filtered = results.filter(
+      (result) => typeof result.position === 'number'
+    );
+    return filtered.sort(
+      (a, b) =>
+        (a.position ?? Number.POSITIVE_INFINITY) -
+        (b.position ?? Number.POSITIVE_INFINITY)
+    );
+  }, [results]);
+
+  const podiumDetails = useMemo(() => {
+    return classifiedResults.slice(0, 3).map((result) => {
+      const driver = enrichedDrivers.get(result.driver_number);
+      const showcase = resolveShowcaseEntry(driver, result);
+      const englishName = driver?.englishName ?? result.driver_name ?? '';
+
+      return {
+        position: result.position ?? 0,
+        driverName: driver?.name ?? `Driver ${result.driver_number}`,
+        englishName,
+        teamName: driver?.team ?? result.team_name ?? 'Unknown Team',
+        teamColor: driver?.teamColor ?? getTeamColor(result.team_name),
+        points: Number.isFinite(result.points) ? result.points : 0,
+        imageUrl: showcase?.imageUrl ?? driver?.imageUrl,
+        teamLogoUrl: showcase?.teamLogoUrl,
+        code: deriveDriverCode(result, driver, showcase?.code),
+      };
+    });
+  }, [classifiedResults, enrichedDrivers]);
+
+  const topResults = useMemo(
+    () =>
+      podiumDetails.map((detail) => ({
+        position: detail.position,
+        driverName: detail.driverName,
+        teamName: detail.teamName,
+        points: detail.points,
+      })),
+    [podiumDetails]
+  );
+
+  const chartData = useMemo(
+    () =>
+      classifiedResults.map((result) => {
         const driver = enrichedDrivers.get(result.driver_number);
+        const showcase = resolveShowcaseEntry(driver, result);
+
         return {
-          position: result.position ?? 0,
+          driverNumber: result.driver_number,
           driverName: driver?.name ?? `Driver ${result.driver_number}`,
-          teamName: driver?.team ?? result.team_name ?? 'Unknown Team',
+          shortCode: deriveDriverCode(result, driver, showcase?.code),
           points: Number.isFinite(result.points) ? result.points : 0,
+          position: result.position ?? 0,
+          teamColor: driver?.teamColor ?? getTeamColor(result.team_name),
         };
-      });
-  }, [results, enrichedDrivers]);
+      }),
+    [classifiedResults, enrichedDrivers]
+  );
   useMemo(() => {
     if (results.length === 0) {
       return [];
@@ -307,26 +398,23 @@ export const RaceResultPage = ({
     ];
   }, [results]);
   const topDriverHighlights = useMemo(() => {
-    return results
-      .filter((result) => typeof result.position === 'number')
-      .slice(0, 10)
-      .map((result) => {
-        const driver = enrichedDrivers.get(result.driver_number);
-        const gap = formatGap(result.gap_to_leader);
-        const duration = formatDuration(result);
+    return classifiedResults.slice(0, 10).map((result) => {
+      const driver = enrichedDrivers.get(result.driver_number);
+      const gap = formatGap(result.gap_to_leader);
+      const duration = formatDuration(result);
 
-        return {
-          position: result.position ?? 0,
-          driverName: driver?.name ?? `Driver ${result.driver_number}`,
-          teamName: driver?.team ?? result.team_name ?? 'Unknown Team',
-          points: Number.isFinite(result.points) ? result.points : 0,
-          gapToLeader: gap,
-          totalTime: duration,
-          teamColor: driver?.teamColor ?? getTeamColor(result.team_name),
-          imageUrl: driver?.imageUrl,
-        };
-      });
-  }, [results, enrichedDrivers]);
+      return {
+        position: result.position ?? 0,
+        driverName: driver?.name ?? `Driver ${result.driver_number}`,
+        teamName: driver?.team ?? result.team_name ?? 'Unknown Team',
+        points: Number.isFinite(result.points) ? result.points : 0,
+        gapToLeader: gap,
+        totalTime: duration,
+        teamColor: driver?.teamColor ?? getTeamColor(result.team_name),
+        imageUrl: driver?.imageUrl,
+      };
+    });
+  }, [classifiedResults, enrichedDrivers]);
 
   const tableRows = useMemo(() => {
     return results.map((result) => {
@@ -374,7 +462,7 @@ export const RaceResultPage = ({
       });
   }, [results, enrichedDrivers]);
 
-  const handleSessionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSessionChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const sessionKey = Number(event.target.value);
     const next = sessionMap.find(
       (session) => session.sessionKey === sessionKey
@@ -421,21 +509,65 @@ export const RaceResultPage = ({
           </select>
         </div>
 
-        {error ? (
+        {errorMessage ? (
           <div className={styles.errorState}>
-            <span>{error}</span>
+            <span>{errorMessage}</span>
             <span style={{ fontSize: 13, opacity: 0.8 }}>
               네트워크 상태를 확인하거나 새로고침 후 다시 시도해주세요.
             </span>
           </div>
         ) : null}
 
-        {isLoading ? (
-          <div className={styles.loadingState}>로딩중...</div>
+        {shouldShowSkeleton ? (
+          <div className={highlightStyles.section} aria-hidden>
+            <div className={highlightStyles.podiumSkeletonRow}>
+              <div className={highlightStyles.skeletonCard} />
+              <div className={highlightStyles.skeletonCard} />
+              <div className={highlightStyles.skeletonCard} />
+            </div>
+            <div className={highlightStyles.chartWrapper}>
+              <div className={highlightStyles.skeletonChart} />
+            </div>
+          </div>
         ) : results.length === 0 ? (
           <div className={styles.emptyState}>표시할 경기 결과가 없습니다.</div>
         ) : (
           <>
+            <section
+              className={highlightStyles.section}
+              aria-live="polite"
+              aria-busy={isUpdating}
+            >
+              <span className={highlightStyles.srOnly}>
+                {isUpdating
+                  ? '새로운 세션 데이터를 불러오는 중입니다.'
+                  : '포디엄 결과가 업데이트되었습니다.'}
+              </span>
+              <div className={highlightStyles.sectionHeader}>
+                <h2 className={highlightStyles.sectionTitle}>포디엄 하이라이트</h2>
+                <p className={highlightStyles.sectionCaption}>
+                  {selectedSession.grandPrix} 상위 3명 결과
+                </p>
+              </div>
+              <div className={highlightStyles.podiumGrid}>
+                {podiumDetails.length > 0 ? (
+                  podiumDetails.map((entry) => (
+                    <PodiumCard key={entry.position} {...entry} />
+                  ))
+                ) : (
+                  <div className={styles.emptyState} style={{ minHeight: 120 }}>
+                    포디엄 정보를 찾을 수 없습니다.
+                  </div>
+                )}
+              </div>
+            </section>
+            <div className={highlightStyles.chartWrapper} aria-live="polite">
+              <RaceResultChart
+                data={chartData}
+                title="레이스 포인트 분포"
+                subtitle={`${selectedSession.grandPrix} 참가 드라이버 포인트 비교`}
+              />
+            </div>
             <TopDrivers drivers={topDriverHighlights} />
             <RaceResultTable rows={tableRows} />
             <RetirementList entries={retirementEntries} />
