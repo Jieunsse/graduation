@@ -64,28 +64,6 @@ export const RaceHeader = ({
           최종 순위, 팀 포인트, 리타이어 정보를 한눈에 확인하고 경기의 흐름을
           다시 살펴보세요.
         </p>
-        <div className={styles.podiumRow}>
-          {topResults.map((result) => {
-            let medal = '🥉';
-            if (result.position === 1) {
-              medal = '🥇';
-            } else if (result.position === 2) {
-              medal = '🥈';
-            }
-
-            return (
-              <div key={result.position} className={styles.podiumCard}>
-                <div className={styles.podiumPlace}>{medal}</div>
-                <div className={styles.podiumInfo}>
-                  <span className={styles.podiumName}>{result.driverName}</span>
-                  <span className={styles.podiumPoints}>
-                    {result.teamName} • {result.points.toFixed(1)} pts
-                  </span>
-                </div>
-              </div>
-            );
-          })}
-        </div>
       </div>
     </header>
   );
