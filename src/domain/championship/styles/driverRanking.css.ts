@@ -166,10 +166,9 @@ export const driverMeta = style({
 });
 
 export const driverCode = style({
-  fontSize: '13px',
+  fontSize: '20px',
   fontWeight: 700,
   letterSpacing: '0.3em',
-  textTransform: 'uppercase',
   opacity: 0.8,
 });
 

@@ -16,6 +16,7 @@ import { DriverCardPage } from '@domain/driver/pages/driverCardPage.tsx';
 import { CreatorContentPage } from '@domain/creator/pages/CreatorContentPage.tsx';
 import { StartingGridPage } from '@domain/grid/pages/StartingGridPage.tsx';
 import { ConstructorStandingsPage } from '@domain/championship/pages/ConstructorStandingsPage.tsx';
+import { DriverRankingPage } from '@domain/championship/pages/DriverRankingPage.tsx';
 
 interface RouterProps {
   appearance: 'light' | 'dark';
@@ -150,6 +151,15 @@ export const Router = ({ appearance, setAppearance }: RouterProps) => {
           path="/championship/constructors"
           element={
             <ConstructorStandingsPage
+              appearance={appearance}
+              setAppearance={setAppearance}
+            />
+          }
+        />
+        <Route
+          path="/championship/driver"
+          element={
+            <DriverRankingPage
               appearance={appearance}
               setAppearance={setAppearance}
             />

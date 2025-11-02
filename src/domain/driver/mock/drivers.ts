@@ -184,7 +184,7 @@ export const drivers: Driver[] = [
       'https://www.formula1.com/content/dam/fom-website/drivers/L/LANNOR01_Lando_Norris/lannor01.png.transform/9col/image.png',
   },
   {
-    id: '에스테반 오콘',
+    id: 'esteban-ocon',
     driverNumber: 31,
     name: '에스테반 오콘',
     team: 'BWT Alpine F1 Team',
