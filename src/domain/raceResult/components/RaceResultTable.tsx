@@ -3,12 +3,13 @@ import * as styles from '../styles/raceResult.css.ts';
 export interface RaceResultRow {
   position: number | null;
   driverName: string;
+  driverCode: string;
+  driverImageUrl: string;
   teamName: string;
+  teamLogoUrl: string;
   points: number;
-  laps: number;
   gap: string;
   status: 'FIN' | 'DNF' | 'DSQ' | 'DNS';
-  time: string;
   driverNumber: number;
   teamColor: string;
   tooltip: string;
@@ -48,6 +49,20 @@ const statusClass = (status: RaceResultRow['status']) => {
   }
 };
 
+const statusLabel = (status: RaceResultRow['status']) => {
+  switch (status) {
+    case 'FIN':
+      return '완주';
+    case 'DNF':
+      return '탈락';
+    case 'DSQ':
+      return '실격';
+    case 'DNS':
+    default:
+      return '불참';
+  }
+};
+
 export const RaceResultTable = ({ rows }: RaceResultTableProps) => {
   return (
     <section className={styles.tableCard}>
@@ -59,8 +74,7 @@ export const RaceResultTable = ({ rows }: RaceResultTableProps) => {
               <th className={styles.tableHeaderCell}>드라이버</th>
               <th className={styles.tableHeaderCell}>팀</th>
               <th className={styles.tableHeaderCell}>포인트</th>
-              <th className={styles.tableHeaderCell}>랩</th>
-              <th className={styles.tableHeaderCell}>차이</th>
+              <th className={styles.tableHeaderCell}>기록/차이</th>
               <th className={styles.tableHeaderCell}>상태</th>
             </tr>
           </thead>
@@ -77,15 +91,37 @@ export const RaceResultTable = ({ rows }: RaceResultTableProps) => {
                 }}
               >
                 <td className={styles.tableCell}>{row.position ?? '-'}</td>
-                <td className={styles.tableCell}>{row.driverName}</td>
-                <td className={styles.tableCell}>{row.teamName}</td>
+                <td
+                  className={`${styles.tableCell} ${styles.driverCell}`}
+                >
+                  <img
+                    className={styles.driverAvatarSmall}
+                    src={row.driverImageUrl}
+                    alt={`${row.driverName} 프로필 이미지`}
+                  />
+                  <div className={styles.driverText}>
+                    <span className={styles.driverNameText}>
+                      {row.driverName}
+                    </span>
+                    <span className={styles.driverCodeText}>
+                      {row.driverCode}
+                    </span>
+                  </div>
+                </td>
+                <td className={`${styles.tableCell} ${styles.teamCell}`}>
+                  <img
+                    className={styles.teamLogo}
+                    src={row.teamLogoUrl}
+                    alt={`${row.teamName} 로고`}
+                  />
+                  <span>{row.teamName}</span>
+                </td>
                 <td className={styles.tableCell}>{row.points.toFixed(1)}</td>
-                <td className={styles.tableCell}>{row.laps}</td>
                 <td className={styles.tableCell}>{row.gap}</td>
                 <td
                   className={`${styles.tableCell} ${statusClass(row.status)}`}
                 >
-                  {row.status}
+                  {statusLabel(row.status)}
                 </td>
               </tr>
             ))}
