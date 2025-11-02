@@ -1,56 +1,64 @@
-import type { AxiosResponse } from 'axios';
 import { httpClient } from '@shared/api/httpClient.ts';
 
 export interface Comment {
-  commentId: number;
+  commentId?: number;
+  id?: number;
   postId: number;
-  userId: number;
-  content: string;
-  createdAt: string;
-  updatedAt: string;
+  userId?: number;
+  content?: string;
+  body?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  author?: string;
+  username?: string;
+  nickname?: string;
 }
 
 export interface CreateCommentRequest {
   postId: number;
-  userId: number;
   content: string;
 }
 
-export type UpdateCommentRequest = Partial<Pick<Comment, 'content'>>;
+const extractComments = (payload: unknown): Comment[] => {
+  if (Array.isArray(payload)) {
+    return payload as Comment[];
+  }
 
-export const getAllComments = async (): Promise<Comment[]> => {
-  const response: AxiosResponse<Comment[]> = await httpClient.get('/comments');
-  return response.data;
+  if (payload && typeof payload === 'object') {
+    const data = payload as Record<string, unknown>;
+
+    if (Array.isArray(data.comments)) {
+      return data.comments as Comment[];
+    }
+
+    if (Array.isArray(data.data)) {
+      return data.data as Comment[];
+    }
+  }
+
+  return [];
 };
 
-export const getCommentById = async (commentId: number): Promise<Comment> => {
-  const response: AxiosResponse<Comment> = await httpClient.get(
-    `/comments/${commentId}`
-  );
-  return response.data;
+const extractComment = (payload: unknown): Comment | null => {
+  if (!payload) {
+    return null;
+  }
+
+  if (payload && typeof payload === 'object') {
+    return payload as Comment;
+  }
+
+  return null;
+};
+
+export const getCommentsByPostId = async (postId: number): Promise<Comment[]> => {
+  const response = await httpClient.get(`/comments/post/${postId}`);
+  return extractComments(response.data);
 };
 
 export const createComment = async (
   payload: CreateCommentRequest
-): Promise<Comment> => {
-  const response: AxiosResponse<Comment> = await httpClient.post(
-    '/comments',
-    payload
-  );
-  return response.data;
-};
-
-export const updateComment = async (
-  commentId: number,
-  payload: UpdateCommentRequest
-): Promise<Comment> => {
-  const response: AxiosResponse<Comment> = await httpClient.put(
-    `/comments/${commentId}`,
-    payload
-  );
-  return response.data;
-};
-
-export const deleteComment = async (commentId: number): Promise<void> => {
-  await httpClient.delete(`/comments/${commentId}`);
+): Promise<Comment | null> => {
+  const response = await httpClient.post('/comments', payload);
+  return extractComment(response.data);
 };

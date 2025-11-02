@@ -48,25 +48,19 @@ const collapsibleNavigation: CollapsibleNavItem[] = [
     label: '챔피언십',
     Icon: ChampionshipIcon,
     subItems: [
-      { label: '드라이버 순위' },
+      { label: '드라이버 순위', path: '/championship/driver' },
       { label: '컨스트럭터 순위', path: '/championship/constructors' },
     ],
   },
   {
     label: '테크니컬',
     Icon: TechIcon,
-    subItems: [
-      { label: '업데이트 추적' },
-      { label: '기술 규정 정리' },
-    ],
+    subItems: [{ label: '업데이트 추적' }, { label: '기술 규정 정리' }],
   },
   {
     label: '지원',
     Icon: SupportIcon,
-    subItems: [
-      { label: '고객 센터' },
-      { label: '커뮤니티' },
-    ],
+    subItems: [{ label: '고객 센터' }, { label: '커뮤니티' }],
   },
 ];
 
@@ -78,14 +72,15 @@ const controlItems: ControlItem[] = [
 export const SideBar = ({ appearance, setAppearance }: SideBarProps) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [openSections, setOpenSections] = useState<Record<string, boolean>>(() =>
-    collapsibleNavigation.reduce<Record<string, boolean>>((acc, item) => {
-      const shouldOpen = item.subItems.some((subItem) =>
-        subItem.path ? location.pathname.startsWith(subItem.path) : false
-      );
-      acc[item.label] = shouldOpen;
-      return acc;
-    }, {})
+  const [openSections, setOpenSections] = useState<Record<string, boolean>>(
+    () =>
+      collapsibleNavigation.reduce<Record<string, boolean>>((acc, item) => {
+        const shouldOpen = item.subItems.some((subItem) =>
+          subItem.path ? location.pathname.startsWith(subItem.path) : false
+        );
+        acc[item.label] = shouldOpen;
+        return acc;
+      }, {})
   );
 
   useEffect(() => {
@@ -221,7 +216,9 @@ export const SideBar = ({ appearance, setAppearance }: SideBarProps) => {
                               }}
                               aria-current={isActive ? 'page' : undefined}
                             >
-                              <span className={styles.label}>{subItem.label}</span>
+                              <span className={styles.label}>
+                                {subItem.label}
+                              </span>
                             </button>
                           </li>
                         );

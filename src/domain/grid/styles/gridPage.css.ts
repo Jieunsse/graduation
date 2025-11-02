@@ -40,7 +40,7 @@ export const heroMeta = style({
   fontSize: '14px',
   textTransform: 'uppercase',
   letterSpacing: '0.24em',
-  color: vars.color.gridCardSubtleText,
+  // color: vars.color.gridCardSubtleText,
   fontWeight: 600,
 });
 
