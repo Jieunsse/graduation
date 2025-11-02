@@ -33,11 +33,7 @@ const formatMeetingDate = (value?: string | number) => {
   });
 };
 
-export const RaceHeader = ({
-  meta,
-  meetingInfo,
-  topResults,
-}: RaceHeaderProps) => {
+export const RaceHeader = ({ meta, meetingInfo }: RaceHeaderProps) => {
   const dateLabel = formatMeetingDate(meetingInfo?.start_date);
   const locationLabel = [meetingInfo?.location, meetingInfo?.country_name]
     .filter(Boolean)
