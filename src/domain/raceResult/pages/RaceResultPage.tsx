@@ -6,10 +6,34 @@ import { Footer } from '@shared/ui/footer/Footer.tsx';
 import { sessionMap } from '../data/sessionMap.ts';
 import { RaceHeader } from '../components/RaceHeader.tsx';
 import { RaceResultTable } from '../components/RaceResultTable.tsx';
-import { PodiumCard } from '../components/PodiumCard.tsx';
-import { driverRankingData } from '../mocks/teamShowcaseData.ts';
+import { PodiumCard, type PodiumDriverInfo } from '../components/PodiumCard.tsx';
+import {
+  driverRankingData,
+  type DriverRanking,
+} from '../mocks/teamShowcaseData.ts';
 import * as styles from '../styles/raceResult.css.ts';
 import * as highlightStyles from '../styles/highlights.css.ts';
+
+const podiumRotation: DriverRanking['id'][][] = [
+  ['lando-norris', 'max-verstappen', 'charles-leclerc'],
+  ['oscar-piastri', 'lando-norris', 'george-russell'],
+  ['max-verstappen', 'lando-norris', 'lewis-hamilton'],
+  ['charles-leclerc', 'lando-norris', 'pierre-gasly'],
+  ['lando-norris', 'oscar-piastri', 'george-russell'],
+  ['max-verstappen', 'lando-norris', 'yuki-tsunoda'],
+  ['lando-norris', 'lewis-hamilton', 'fernando-alonso'],
+  ['lando-norris', 'max-verstappen', 'oscar-piastri'],
+  ['george-russell', 'lando-norris', 'charles-leclerc'],
+  ['oscar-piastri', 'lando-norris', 'alex-albon'],
+];
+
+const podiumMockBySession = sessionMap.reduce<
+  Record<number, DriverRanking['id'][]>
+>((acc, session, index) => {
+  acc[session.sessionKey] =
+    podiumRotation[index % podiumRotation.length];
+  return acc;
+}, {});
 
 interface RaceResultPageProps {
   appearance: 'light' | 'dark';
@@ -22,29 +46,45 @@ export const RaceResultPage = ({
 }: RaceResultPageProps) => {
   const [selectedSession, setSelectedSession] = useState(sessionMap[0]);
 
+  const sortedDrivers = useMemo(
+    () => [...driverRankingData].sort((a, b) => b.points - a.points),
+    []
+  );
+
+  const driverById = useMemo(() => {
+    return driverRankingData.reduce<Map<string, DriverRanking>>(
+      (acc, driver) => acc.set(driver.id, driver),
+      new Map<string, DriverRanking>()
+    );
+  }, []);
+
   // ✅ 포디엄 데이터 (1~3위)
-  const podiumDetails = useMemo(() => {
-    return driverRankingData
-      .sort((a, b) => b.points - a.points)
-      .slice(0, 3)
-      .map((driver, index) => ({
+  const podiumDetails = useMemo<PodiumDriverInfo[]>(() => {
+    const fallbackIds = sortedDrivers.slice(0, 3).map((driver) => driver.id);
+    const driverIds =
+      podiumMockBySession[selectedSession.sessionKey] ?? fallbackIds;
+
+    return driverIds.map((driverId, index) => {
+      const fallbackDriver = sortedDrivers[index] ?? sortedDrivers[0];
+      const driver = driverById.get(driverId) ?? fallbackDriver;
+
+      return {
         position: index + 1,
         driverName: driver.name,
         englishName: driver.englishName,
         teamName: driver.teamName,
-        teamColor: driver.teamId,
+        teamId: driver.teamId as PodiumDriverInfo['teamId'],
         points: driver.points,
         imageUrl: driver.imageUrl,
         teamLogoUrl: driver.teamLogoUrl,
         code: driver.code,
-      }));
-  }, []);
+      };
+    });
+  }, [driverById, selectedSession.sessionKey, sortedDrivers]);
 
   // ✅ 전체 순위 데이터 (테이블용)
   const tableRows = useMemo(() => {
-    return driverRankingData
-      .sort((a, b) => b.points - a.points)
-      .map((driver, index) => ({
+    return sortedDrivers.map((driver, index) => ({
         position: index + 1,
         driverName: driver.name,
         teamName: driver.teamName,
@@ -56,7 +96,7 @@ export const RaceResultPage = ({
         teamColor: driver.teamId,
         tooltip: `${driver.englishName} | ${driver.teamName}`,
       }));
-  }, []);
+  }, [sortedDrivers]);
 
   const handleSessionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const key = Number(e.target.value);

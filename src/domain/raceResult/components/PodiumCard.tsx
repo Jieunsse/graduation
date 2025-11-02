@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import * as styles from '../styles/podiumCard.css.ts';
-import { assignInlineVars } from '@vanilla-extract/dynamic';
+
+type TeamIdentifier = keyof typeof styles.cardThemes;
 
 export interface PodiumDriverInfo {
   position: number;
@@ -8,21 +9,11 @@ export interface PodiumDriverInfo {
   englishName?: string;
   teamName: string;
   teamLogoUrl?: string;
-  teamColor: string;
+  teamId: TeamIdentifier;
   points: number;
   imageUrl?: string;
   code?: string;
 }
-
-const positionVariantMap: Record<1 | 2 | 3, keyof typeof styles.podiumVariant> =
-  {
-    1: 'first',
-    2: 'second',
-    3: 'third',
-  };
-
-const formatPoints = (points: number) =>
-  Number.isFinite(points) ? points.toLocaleString() : '0';
 
 export const PodiumCard: FC<PodiumDriverInfo> = ({
   position,
@@ -30,70 +21,55 @@ export const PodiumCard: FC<PodiumDriverInfo> = ({
   englishName,
   teamName,
   teamLogoUrl,
-  teamColor,
+  teamId,
   points,
   imageUrl,
   code,
 }) => {
-  const clampedPosition = (position > 3 ? 3 : position) as 1 | 2 | 3;
-  const variant = styles.podiumVariant[positionVariantMap[clampedPosition]];
-  const accent = `${teamColor}55`;
-
   return (
     <article
-      className={`${styles.card} ${variant}`}
-      // ✅ 수정된 부분 (assignInlineVars로 CSS 변수 안전 주입)
-      style={assignInlineVars({
-        [styles.accentVar]: accent,
-      })}
+      className={`${styles.card} ${styles.cardThemes[teamId]}`}
       aria-label={`${position}위 ${driverName}`}
     >
+      <span className={styles.positionBadge}>P{position}</span>
       <span className={styles.srOnly} aria-hidden>
         {englishName}
       </span>
 
-      <div className={styles.glow} />
-      <div className={styles.content}>
-        <header className={styles.header}>
-          <span className={styles.rankBadge}>
-            <span>{`No.${position}`}</span>
-            {code ? <span aria-hidden>{code}</span> : null}
-          </span>
-
-          <span className={styles.teamBadge}>
-            {teamLogoUrl ? (
-              <img
-                src={teamLogoUrl}
-                alt={`${teamName} 로고`}
-                className={styles.teamLogo}
-                loading="lazy"
-              />
-            ) : null}
-            <span>{teamName}</span>
-          </span>
-        </header>
-
-        <div className={styles.body}>
+      <div className={styles.cardBody}>
+        <div className={styles.driverHeader}>
+          {teamLogoUrl ? (
+            <img
+              className={styles.teamLogo}
+              src={teamLogoUrl}
+              alt={`${teamName} 로고`}
+              loading="lazy"
+            />
+          ) : null}
           <div className={styles.driverMeta}>
-            <strong className={styles.driverName}>{driverName}</strong>
-            {englishName ? (
-              <span className={styles.teamName}>{englishName}</span>
-            ) : null}
+            <span className={styles.driverCode}>
+              {code ? `No.${code}` : `P${position}`}
+            </span>
+            <h3 className={styles.driverName}>{driverName}</h3>
           </div>
+        </div>
 
-          <div className={styles.pointsWrapper}>
-            <span className={styles.pointsValue}>{formatPoints(points)}</span>
-            <span className={styles.pointsLabel}>포인트</span>
+        <div className={styles.infoRow}>
+          <span className={styles.teamBadge}>{teamName}</span>
+          <div className={styles.points}>
+            <span className={styles.pointsLabel}>드라이버 포인트</span>
+            <span className={styles.pointsValue}>
+              {points.toLocaleString()}
+            </span>
           </div>
         </div>
       </div>
 
       {imageUrl ? (
         <img
-          src={imageUrl}
-          alt=""
-          aria-hidden
           className={styles.driverImage}
+          src={imageUrl}
+          alt={`${driverName} 드라이버 이미지`}
           loading="lazy"
         />
       ) : null}
