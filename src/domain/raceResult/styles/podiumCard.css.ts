@@ -46,6 +46,7 @@ export const positionBadge = style({
   top: 20,
   left: 24,
   display: 'inline-flex',
+  marginLeft: '280px',
   alignItems: 'center',
   justifyContent: 'center',
   padding: '6px 14px',

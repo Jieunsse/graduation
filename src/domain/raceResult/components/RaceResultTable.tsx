@@ -111,10 +111,9 @@ export const RaceResultTable = ({ rows }: RaceResultTableProps) => {
           <thead className={styles.tableHead}>
             <tr>
               <th className={styles.tableHeaderCell}>순위</th>
-              <th className={styles.tableHeaderCell}>드라이버</th>
-              <th className={styles.tableHeaderCell}>팀</th>
+              <th className={styles.tableHeaderCell}>드라이버/팀</th>
               <th className={styles.tableHeaderCell}>포인트</th>
-              <th className={styles.tableHeaderCell}>기록/차이</th>
+              <th className={styles.tableHeaderCell}>기록</th>
               <th className={styles.tableHeaderCell}>상태</th>
             </tr>
           </thead>
@@ -147,9 +146,6 @@ export const RaceResultTable = ({ rows }: RaceResultTableProps) => {
                     <span className={styles.driverNameText}>
                       {row.driverName}
                     </span>
-                    <span className={styles.driverCodeText}>
-                      {row.driverCode}
-                    </span>
                   </div>
                 </td>
                 <td className={`${styles.tableCell} ${styles.teamCell}`}>
@@ -159,9 +155,11 @@ export const RaceResultTable = ({ rows }: RaceResultTableProps) => {
                     alt={`${row.teamName} 로고`}
                     style={buildTeamLogoStyles(row.teamColor)}
                   />
-                  <span className={styles.teamNameCellText}>{row.teamName}</span>
+                  <span className={styles.teamNameCellText}>
+                    {row.teamName}
+                  </span>
                 </td>
-                <td className={styles.tableCell}>{row.points.toFixed(1)}</td>
+                <td className={styles.tableCell}>{Math.trunc(row.points)}</td>
                 <td className={styles.tableCell}>{row.gap}</td>
                 <td
                   className={`${styles.tableCell} ${statusClass(row.status)}`}
