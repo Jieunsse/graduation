@@ -5,10 +5,8 @@ import { Header } from '@shared/ui/header/Header.tsx';
 import { Footer } from '@shared/ui/footer/Footer.tsx';
 import { sessionMap } from '../data/sessionMap.ts';
 import { RaceHeader } from '../components/RaceHeader.tsx';
-import { TopDrivers } from '../components/TopDrivers.tsx';
 import { RaceResultTable } from '../components/RaceResultTable.tsx';
 import { PodiumCard } from '../components/PodiumCard.tsx';
-import { RaceResultChart } from '../components/RaceResultChart.tsx';
 import { driverRankingData } from '../mocks/teamShowcaseData.ts';
 import * as styles from '../styles/raceResult.css.ts';
 import * as highlightStyles from '../styles/highlights.css.ts';
@@ -57,20 +55,6 @@ export const RaceResultPage = ({
         driverNumber: index + 1,
         teamColor: driver.teamId,
         tooltip: `${driver.englishName} | ${driver.teamName}`,
-      }));
-  }, []);
-
-  // ✅ 차트 데이터 (Recharts)
-  const chartData = useMemo(() => {
-    return driverRankingData
-      .sort((a, b) => b.points - a.points)
-      .map((driver, index) => ({
-        driverNumber: index + 1,
-        driverName: driver.name,
-        shortCode: driver.code,
-        points: driver.points,
-        position: index + 1,
-        teamColor: driver.teamId,
       }));
   }, []);
 
