@@ -57,21 +57,21 @@ const baseResultTemplate: Array<{
   status: RaceResultRow['status'];
 }> = [
   { gap: '1:37:57.574초', status: 'FIN' },
-  { gap: '+30.324초', status: 'FIN' },
-  { gap: '+31.049초', status: 'FIN' },
-  { gap: '+40.955초', status: 'FIN' },
-  { gap: '+42.065초', status: 'FIN' },
-  { gap: '+54.832초', status: 'FIN' },
-  { gap: '+1:08.214초', status: 'FIN' },
+  { gap: '+12.324초', status: 'FIN' },
+  { gap: '+18.049초', status: 'FIN' },
+  { gap: '+26.955초', status: 'FIN' },
+  { gap: '+32.065초', status: 'FIN' },
+  { gap: '+38.832초', status: 'FIN' },
+  { gap: '+48.214초', status: 'FIN' },
+  { gap: '+55.987초', status: 'FIN' },
+  { gap: '+1:03.411초', status: 'FIN' },
   { gap: '+1 랩', status: 'FIN' },
   { gap: '+1 랩', status: 'FIN' },
+  { gap: '+1:18.245초', status: 'FIN' },
+  { gap: '+1:22.998초', status: 'FIN' },
   { gap: '+1 랩', status: 'FIN' },
-  { gap: '+1 랩', status: 'FIN' },
-  { gap: '+1 랩', status: 'FIN' },
-  { gap: '+1 랩', status: 'FIN' },
-  { gap: '+1 랩', status: 'FIN' },
-  { gap: '+1 랩', status: 'FIN' },
-  { gap: '+1 랩', status: 'FIN' },
+  { gap: '+1:35.210초', status: 'FIN' },
+  { gap: '+1:40.533초', status: 'FIN' },
   { gap: '탈락 (엔진 문제)', status: 'DNF' },
   { gap: '탈락 (브레이크 과열)', status: 'DNF' },
   { gap: '탈락 (사고)', status: 'DNF' },
@@ -86,6 +86,46 @@ const fallbackGapForPosition = (
     gap: `+${secondsBehind.toFixed(3)}초`,
     status: 'FIN',
   };
+};
+
+const pseudoRandom = (seed: number) => {
+  const value = Math.sin(seed) * 10000;
+  return value - Math.floor(value);
+};
+
+const shuffleWithSeed = <T,>(items: T[], seed: number) => {
+  const list = [...items];
+  for (let i = list.length - 1; i > 0; i -= 1) {
+    seed += i + 1;
+    const rand = pseudoRandom(seed);
+    const swapIndex = Math.floor(rand * (i + 1));
+    [list[i], list[swapIndex]] = [list[swapIndex], list[i]];
+  }
+  return list;
+};
+
+const applyGapVariance = (
+  gap: string,
+  sessionKey: number,
+  rowIndex: number
+) => {
+  if (!gap.includes('초') || gap.includes(':')) {
+    return gap;
+  }
+
+  const baseSeconds = parseFloat(gap.replace(/[+초\s]/g, ''));
+
+  if (Number.isNaN(baseSeconds)) {
+    return gap;
+  }
+
+  const varianceSeed = sessionKey * 7919 + rowIndex * 149 + 37;
+  const randomSpan = pseudoRandom(varianceSeed);
+  const direction = pseudoRandom(varianceSeed + 17) > 0.45 ? 1 : -1;
+  const adjustment = (rowIndex < 6 ? 0.35 : 1.25) * randomSpan * direction;
+  const adjusted = Math.max(baseSeconds + adjustment, 0).toFixed(3);
+
+  return `+${adjusted}초`;
 };
 
 interface RaceResultPageProps {
@@ -144,8 +184,9 @@ export const RaceResultPage = ({
         sortedDrivers.slice(0, 3).map((driver) => driver.id);
 
       const podiumSet = new Set(podiumDriverIds);
-      const remainingDrivers = sortedDrivers.filter(
-        (driver) => !podiumSet.has(driver.id)
+      const remainingDrivers = shuffleWithSeed(
+        sortedDrivers.filter((driver) => !podiumSet.has(driver.id)),
+        session.sessionKey * 613
       );
 
       const raceOrderIds = [
@@ -167,7 +208,7 @@ export const RaceResultPage = ({
           teamName: driver.teamName,
           teamLogoUrl: driver.teamLogoUrl,
           points: driver.points,
-          gap: template.gap,
+          gap: applyGapVariance(template.gap, session.sessionKey, index),
           status: template.status,
           driverNumber: index + 1,
           teamColor: teamColorById[driver.teamId] ?? '#4C516D',
