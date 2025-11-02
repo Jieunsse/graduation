@@ -393,10 +393,10 @@ export const sectionSubtitle = style({
 export const tableCard = style({
   position: 'relative',
   borderRadius: 28,
-  background: 'rgba(10, 16, 30, 0.92)',
-  border: `1px solid rgba(86, 106, 173, 0.35)`,
+  background: 'rgba(10, 16, 30, 0.88)',
+  border: `1px solid rgba(86, 106, 173, 0.28)`,
   overflow: 'hidden',
-  boxShadow: '0 22px 48px rgba(10, 16, 30, 0.4)',
+  boxShadow: '0 18px 40px rgba(10, 16, 30, 0.38)',
 });
 
 export const tableScroll = style({
@@ -408,7 +408,7 @@ export const table = style({
   width: '100%',
   borderCollapse: 'collapse',
   minWidth: 760,
-  // color: 'rgba(233, 237, 255, 0.9)',
+  backgroundColor: 'transparent',
 });
 
 export const tableHead = style({
@@ -423,34 +423,38 @@ export const tableHead = style({
 });
 
 export const tableHeaderCell = style({
-  padding: '16px 18px',
-  borderBottom: '1px solid rgba(71, 85, 105, 0.45)',
+  padding: '18px 22px',
+  borderBottom: '1px solid rgba(71, 85, 105, 0.38)',
   textAlign: 'left',
 });
 
 export const tableRow = style({
   position: 'relative',
-  transition: 'background 0.2s ease',
+  backgroundColor: 'rgba(8, 13, 24, 0.78)',
+  transition: 'background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease',
   selectors: {
     '&:nth-child(even)': {
-      background: 'rgba(15, 23, 42, 0.55)',
+      backgroundColor: 'rgba(11, 18, 32, 0.82)',
     },
     '&:hover': {
-      background: 'rgba(56, 72, 120, 0.35)',
+      transform: 'translateY(-2px)',
+      boxShadow: '0 16px 32px rgba(8, 13, 24, 0.45)',
+      backgroundColor: 'rgba(20, 28, 48, 0.9)',
     },
   },
 });
 
 export const tableCell = style({
-  padding: '14px 18px',
+  padding: '16px 22px',
   fontSize: 15,
-  borderBottom: '1px solid rgba(71, 85, 105, 0.3)',
+  borderBottom: '1px solid rgba(71, 85, 105, 0.26)',
+  verticalAlign: 'middle',
 });
 
 export const driverCell = style({
   display: 'flex',
   alignItems: 'center',
-  gap: 12,
+  gap: 16,
 });
 
 export const driverAvatarSmall = style({
@@ -464,8 +468,9 @@ export const driverAvatarSmall = style({
 
 export const driverText = style({
   display: 'flex',
-  flexDirection: 'column',
-  gap: 2,
+  alignItems: 'center',
+  gap: 10,
+  flexWrap: 'wrap',
 });
 
 export const driverNameText = style({
@@ -476,38 +481,41 @@ export const driverNameText = style({
 export const driverCodeText = style({
   fontSize: 12,
   textTransform: 'uppercase',
-  color: 'rgba(226, 232, 240, 0.7)',
+  color: 'rgba(226, 232, 240, 0.85)',
   letterSpacing: '0.08em',
+  padding: '2px 8px',
+  borderRadius: 999,
+  background: 'rgba(15, 23, 42, 0.66)',
+  border: '1px solid rgba(148, 163, 184, 0.32)',
 });
 
 export const teamCell = style({
   display: 'flex',
   alignItems: 'center',
-  gap: 12,
+  gap: 16,
+  flexWrap: 'nowrap',
 });
 
 export const teamLogo = style({
-  width: 34,
-  height: 34,
+  width: 38,
+  height: 38,
   borderRadius: '50%',
   objectFit: 'contain',
-  padding: 6,
-  boxShadow: '0 4px 12px rgba(15, 23, 42, 0.35)',
+  padding: 7,
+  background: 'rgba(255, 255, 255, 0.06)',
+  backdropFilter: 'blur(6px)',
+  WebkitBackdropFilter: 'blur(6px)',
+  transition: 'transform 0.2s ease',
+  selectors: {
+    '&:hover': {
+      transform: 'scale(1.04)',
+    },
+  },
 });
 
-export const podiumHighlight = styleVariants({
-  gold: {
-    background:
-      'linear-gradient(90deg, rgba(212, 175, 55, 0.18), rgba(120, 88, 0, 0.15))',
-  },
-  silver: {
-    background:
-      'linear-gradient(90deg, rgba(180, 180, 195, 0.18), rgba(94, 94, 110, 0.18))',
-  },
-  bronze: {
-    background:
-      'linear-gradient(90deg, rgba(205, 127, 50, 0.18), rgba(148, 86, 0, 0.18))',
-  },
+export const teamNameCellText = style({
+  fontWeight: 500,
+  letterSpacing: '-0.01em',
 });
 
 globalStyle(`${tableRow}[data-tooltip]::after`, {
@@ -663,15 +671,15 @@ globalStyle(`.light ${tableHead}`, {
 });
 
 globalStyle(`.light ${tableRow}`, {
-  background: 'transparent', // 기본 배경
+  backgroundColor: 'transparent', // 기본 배경
 });
 
 globalStyle(`.light ${tableRow}:nth-child(even)`, {
-  background: 'rgba(241, 245, 249, 0.55)',
+  backgroundColor: 'rgba(241, 245, 249, 0.55)',
 });
 
 globalStyle(`.light ${tableRow}:hover`, {
-  background: 'rgba(224, 231, 255, 0.6)',
+  backgroundColor: 'rgba(224, 231, 255, 0.6)',
 });
 
 globalStyle(`.light ${driverAvatarSmall}`, {
@@ -680,7 +688,9 @@ globalStyle(`.light ${driverAvatarSmall}`, {
 });
 
 globalStyle(`.light ${driverCodeText}`, {
-  color: 'rgba(71, 85, 105, 0.7)',
+  color: 'rgba(71, 85, 105, 0.85)',
+  background: 'rgba(226, 232, 240, 0.75)',
+  border: '1px solid rgba(148, 163, 184, 0.32)',
 });
 
 globalStyle(`.light ${teamLogo}`, {
