@@ -1,5 +1,6 @@
-import type { CSSProperties, FC } from 'react';
+import type { FC } from 'react';
 import * as styles from '../styles/podiumCard.css.ts';
+import { assignInlineVars } from '@vanilla-extract/dynamic';
 
 export interface PodiumDriverInfo {
   position: number;
@@ -13,11 +14,12 @@ export interface PodiumDriverInfo {
   code?: string;
 }
 
-const positionVariantMap: Record<1 | 2 | 3, keyof typeof styles.podiumVariant> = {
-  1: 'first',
-  2: 'second',
-  3: 'third',
-};
+const positionVariantMap: Record<1 | 2 | 3, keyof typeof styles.podiumVariant> =
+  {
+    1: 'first',
+    2: 'second',
+    3: 'third',
+  };
 
 const formatPoints = (points: number) =>
   Number.isFinite(points) ? points.toLocaleString() : '0';
@@ -40,12 +42,16 @@ export const PodiumCard: FC<PodiumDriverInfo> = ({
   return (
     <article
       className={`${styles.card} ${variant}`}
-      style={{ [styles.accentVar]: accent } as CSSProperties}
+      // ✅ 수정된 부분 (assignInlineVars로 CSS 변수 안전 주입)
+      style={assignInlineVars({
+        [styles.accentVar]: accent,
+      })}
       aria-label={`${position}위 ${driverName}`}
     >
       <span className={styles.srOnly} aria-hidden>
         {englishName}
       </span>
+
       <div className={styles.glow} />
       <div className={styles.content}>
         <header className={styles.header}>
@@ -53,6 +59,7 @@ export const PodiumCard: FC<PodiumDriverInfo> = ({
             <span>{`No.${position}`}</span>
             {code ? <span aria-hidden>{code}</span> : null}
           </span>
+
           <span className={styles.teamBadge}>
             {teamLogoUrl ? (
               <img
@@ -65,6 +72,7 @@ export const PodiumCard: FC<PodiumDriverInfo> = ({
             <span>{teamName}</span>
           </span>
         </header>
+
         <div className={styles.body}>
           <div className={styles.driverMeta}>
             <strong className={styles.driverName}>{driverName}</strong>
@@ -72,12 +80,14 @@ export const PodiumCard: FC<PodiumDriverInfo> = ({
               <span className={styles.teamName}>{englishName}</span>
             ) : null}
           </div>
+
           <div className={styles.pointsWrapper}>
             <span className={styles.pointsValue}>{formatPoints(points)}</span>
             <span className={styles.pointsLabel}>포인트</span>
           </div>
         </div>
       </div>
+
       {imageUrl ? (
         <img
           src={imageUrl}
@@ -90,4 +100,3 @@ export const PodiumCard: FC<PodiumDriverInfo> = ({
     </article>
   );
 };
-

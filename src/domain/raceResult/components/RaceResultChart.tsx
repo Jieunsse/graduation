@@ -38,10 +38,7 @@ const renderLegend = () => (
 
 const tooltipFormatter = (value: number) => `${value.toLocaleString()} pt`;
 
-const tooltipContent = ({
-  active,
-  payload,
-}: TooltipProps<number, string>) => {
+const tooltipContent = ({ active, payload }: TooltipProps) => {
   if (!active || !payload || payload.length === 0) {
     return null;
   }
@@ -50,7 +47,9 @@ const tooltipContent = ({
 
   return (
     <div className={styles.tooltip} style={{ borderColor: color }}>
-      <h4 className={styles.tooltipTitle}>{`${item.driverName} (${item.shortCode})`}</h4>
+      <h4
+        className={styles.tooltipTitle}
+      >{`${item.driverName} (${item.shortCode})`}</h4>
       <div className={styles.tooltipStat}>
         <span>포인트</span>
         <strong>{item.points.toLocaleString()}</strong>
@@ -73,10 +72,12 @@ export const RaceResultChart: FC<RaceResultChartProps> = ({
       <h3 className={styles.chartTitle}>{title}</h3>
       <p className={styles.chartSubtitle}>{subtitle}</p>
     </div>
+
     <div className={styles.chartArea}>
       <ResponsiveContainer>
         <BarChart data={data} margin={{ left: 12, right: 12, bottom: 12 }}>
           <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
+
           <XAxis
             dataKey="shortCode"
             stroke={axisColor}
@@ -84,6 +85,7 @@ export const RaceResultChart: FC<RaceResultChartProps> = ({
             axisLine={{ stroke: axisColor }}
             tickLine={{ stroke: axisColor }}
           />
+
           <YAxis
             yAxisId="points"
             stroke={axisColor}
@@ -94,17 +96,34 @@ export const RaceResultChart: FC<RaceResultChartProps> = ({
             allowDecimals={false}
             width={70}
           />
+
           <Tooltip content={tooltipContent} cursor={{ fill: 'transparent' }} />
           <Legend content={renderLegend} />
+
+          {/* ✅ 커스텀 label 렌더링 + key 명시 */}
           <Bar
             yAxisId="points"
             dataKey="points"
             radius={[12, 12, 0, 0]}
             maxBarSize={38}
-            label={{ position: 'top', fill: axisColor, fontSize: 12 }}
+            label={({ x, y, width, value, index }) => (
+              <text
+                key={`label-${index}`}
+                x={x + width / 2}
+                y={y - 8}
+                textAnchor="middle"
+                fill={axisColor}
+                fontSize={12}
+              >
+                {value}
+              </text>
+            )}
           >
             {data.map((entry) => (
-              <Cell key={entry.driverNumber} fill={entry.teamColor} />
+              <Cell
+                key={`${entry.driverNumber}-${entry.shortCode}-${entry.points}`}
+                fill={entry.teamColor}
+              />
             ))}
           </Bar>
         </BarChart>
@@ -112,4 +131,3 @@ export const RaceResultChart: FC<RaceResultChartProps> = ({
     </div>
   </section>
 );
-
