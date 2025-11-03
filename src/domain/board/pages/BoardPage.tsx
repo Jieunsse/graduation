@@ -15,12 +15,12 @@ type CategoryFilter = (typeof categories)[number];
 
 const categoryTypeMap: Record<
   Exclude<CategoryFilter, '전체' | '공지'>,
-  string
+  'INFORMATION' | 'CHAT' | 'REVIEW' | 'QUESTION'
 > = {
-  정보: 'information',
-  잡담: 'chat',
-  후기: 'review',
-  질문: 'question',
+  정보: 'INFORMATION',
+  잡담: 'CHAT',
+  후기: 'REVIEW',
+  질문: 'QUESTION',
 };
 
 interface BoardPageProps {
