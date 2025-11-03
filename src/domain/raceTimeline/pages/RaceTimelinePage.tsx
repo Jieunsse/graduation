@@ -9,6 +9,7 @@ import { PlaybackControls } from '../components/PlaybackControls.tsx';
 import { EventCard } from '../components/EventCard.tsx';
 import * as styles from '../styles/timeline.css.ts';
 import type { RaceEvent } from '../types/raceEvent.ts';
+import { raceEventTypeLabel } from '../types/raceEvent.ts';
 
 interface RaceTimelinePageProps {
   appearance: 'light' | 'dark';
@@ -129,6 +130,12 @@ export const RaceTimelinePage = ({ appearance, setAppearance }: RaceTimelinePage
     setSpeed(nextSpeed);
   };
 
+  const totalLaps = events.length > 0 ? events[events.length - 1].lap : 0;
+  const currentLabel = activeEvent
+    ? raceEventTypeLabel[activeEvent.type]
+    : '대기 중';
+  const remainingCount = upcomingEvents.length;
+
   return (
     <MainContainer
       sidebar={<SideBar appearance={appearance} setAppearance={setAppearance} />}
@@ -137,27 +144,42 @@ export const RaceTimelinePage = ({ appearance, setAppearance }: RaceTimelinePage
 
       <div className={styles.page}>
         <section className={styles.hero}>
-          <div className={styles.heroGlow} aria-hidden />
-          <div className={styles.heroMeta}>
-            <span>실시간 이벤트 스트림</span>
-            <span>총 {events.length}개 이벤트</span>
-            <span>최대 랩 {events.length > 0 ? events[events.length - 1].lap : '-'}</span>
+          <div className={styles.heroHeader}>
+            <span className={styles.heroEyebrow}>실시간 이벤트 스트림</span>
+            <h1 className={styles.heroTitle}>F1 레이스 타임라인</h1>
+            <p className={styles.heroDescription}>
+              추월, 사고, 피트스탑부터 레드 플래그까지. 정제된 타임라인에서 경기의 흐름을
+              빠르게 파악하고, 자동 재생으로 주요 순간을 다시 체험해보세요.
+            </p>
           </div>
-          <h1 className={styles.heroTitle}>F1 레이스 타임라인</h1>
-          <p className={styles.heroDescription}>
-            추월, 사고, 피트스탑부터 레드 플래그까지. 실시간 스트리밍 타임라인으로
-            경기의 흐름을 한눈에 파악하세요. 슬라이더를 움직이거나 자동 재생으로
-            주요 순간을 다시 체험할 수 있습니다.
-          </p>
+
+          <div className={styles.heroStats}>
+            <div className={styles.statCard}>
+              <span className={styles.statLabel}>전체 이벤트</span>
+              <span className={styles.statValue}>{events.length}</span>
+            </div>
+            <div className={styles.statCard}>
+              <span className={styles.statLabel}>최대 랩</span>
+              <span className={styles.statValue}>{totalLaps || '-'}</span>
+            </div>
+            <div className={styles.statCard}>
+              <span className={styles.statLabel}>현재 이벤트</span>
+              <span className={styles.statValue}>{currentLabel}</span>
+            </div>
+            <div className={styles.statCard}>
+              <span className={styles.statLabel}>남은 이벤트</span>
+              <span className={styles.statValue}>{remainingCount}</span>
+            </div>
+          </div>
         </section>
 
         <div className={styles.layout}>
-          <section className={styles.timelineSurface}>
-            <div className={styles.surfaceHeader}>
-              <h2 className={styles.surfaceTitle}>타임라인</h2>
-              <p className={styles.surfaceSubtitle}>
-                마우스 휠 혹은 드래그로 시간축을 탐색하고, 이벤트 아이콘을 클릭해
-                주요 장면으로 이동하세요.
+          <section className={styles.timelineSection}>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>타임라인</h2>
+              <p className={styles.sectionSubtitle}>
+                마우스 휠 혹은 드래그로 시간축을 탐색하고, 이벤트 배지를 클릭해 주요 장면으로
+                이동하세요.
               </p>
             </div>
 
