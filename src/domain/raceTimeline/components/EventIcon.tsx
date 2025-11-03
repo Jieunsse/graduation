@@ -2,8 +2,8 @@ import * as styles from '../styles/timeline.css.ts';
 import type { RaceEventType } from '../types/raceEvent.ts';
 
 const iconMap: Record<RaceEventType, string> = {
-  OVERTAKE: '⬆',
-  CRASH: '✖',
+  OVERTAKE: '↗',
+  CRASH: '✕',
   PIT_STOP: '🛠',
   SAFETY_CAR: '⚠',
   RED_FLAG: '⛔',
