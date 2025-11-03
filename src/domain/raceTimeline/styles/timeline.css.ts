@@ -1,4 +1,9 @@
-import { globalStyle, keyframes, style, styleVariants } from '@vanilla-extract/css';
+import {
+  globalStyle,
+  keyframes,
+  style,
+  styleVariants,
+} from '@vanilla-extract/css';
 import type { RaceEventType } from '../types/raceEvent.ts';
 
 const palette = {
@@ -314,7 +319,8 @@ export const lapCount = style({
 });
 
 export const timeCode = style({
-  fontFamily: '"DM Mono", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+  fontFamily:
+    '"DM Mono", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
   fontSize: 14,
   color: palette.textStrongDark,
 });
@@ -449,20 +455,23 @@ export const eventTitle = style({
   color: palette.textStrongDark,
 });
 
-export const eventBadge = styleVariants(eventTheme, ({ background, border, text }) => ({
-  display: 'inline-flex',
-  alignItems: 'center',
-  gap: 8,
-  padding: '6px 12px',
-  borderRadius: 999,
-  fontSize: 13,
-  fontWeight: 600,
-  textTransform: 'uppercase',
-  letterSpacing: '0.08em',
-  background,
-  border: `1px solid ${border}`,
-  color: text,
-}));
+export const eventBadge = styleVariants(
+  eventTheme,
+  ({ background, border, text }) => ({
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: 8,
+    padding: '6px 12px',
+    borderRadius: 999,
+    fontSize: 13,
+    fontWeight: 600,
+    textTransform: 'uppercase',
+    letterSpacing: '0.08em',
+    background,
+    border: `1px solid ${border}`,
+    color: text,
+  })
+);
 
 export const eventDescription = style({
   margin: 0,
@@ -551,7 +560,8 @@ export const nextItemMeta = style({
 });
 
 export const nextTime = style({
-  fontFamily: '"DM Mono", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+  fontFamily:
+    '"DM Mono", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
   fontSize: 13,
   color: palette.textStrongDark,
 });
@@ -644,9 +654,9 @@ globalStyle(`.light .${markerButton}`, {
   background: '#FFFFFF',
 });
 
-globalStyle(`.light .${markerIcon}`, {
-  color: palette.textStrongLight,
-});
+// globalStyle(`.light .${markerIcon}`, {
+//   color: palette.textStrongLight,
+// });
 
 globalStyle(`.light .${currentIndicator}`, {
   background: palette.primary,
