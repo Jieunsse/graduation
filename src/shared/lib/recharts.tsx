@@ -19,10 +19,15 @@ type Margin = {
   left?: number;
 };
 
+type ChartChildSizeProps = {
+  width?: number;
+  height?: number;
+};
+
 interface ResponsiveContainerProps {
   width?: string | number;
   height?: string | number;
-  children: ReactElement;
+  children: ReactElement<ChartChildSizeProps>;
 }
 
 const DEFAULT_MARGIN: Required<Margin> = {
@@ -186,13 +191,27 @@ interface TooltipCursor {
   fill?: string;
 }
 
+type TooltipPayload<T extends Record<string, unknown>> = Array<{
+  name: string;
+  color: string;
+  value: number;
+  payload: T;
+}>;
+
+type TooltipContentProps<T extends Record<string, unknown>> = {
+  active?: boolean;
+  payload?: TooltipPayload<T>;
+  label?: string | number;
+  coordinate?: { x: number; y: number };
+};
+
 export interface TooltipProps {
   formatter?: (
     value: number,
     name: string
   ) => [string, string] | string | number;
   labelFormatter?: (value: string | number) => string;
-  content?: ReactElement;
+  content?: ReactElement<TooltipContentProps<Record<string, unknown>>>;
   cursor?: TooltipCursor | boolean;
 }
 
@@ -247,13 +266,6 @@ type LineDefinition = {
 };
 
 type TooltipRow = { name: string; value: string; color: string };
-
-type TooltipPayload<T extends Record<string, unknown>> = Array<{
-  name: string;
-  color: string;
-  value: number;
-  payload: T;
-}>;
 
 const buildLinePath = (
   points: Array<{ x: number; y: number }>,
@@ -479,8 +491,6 @@ export const LineChart = ({
     setHoverPosition(null);
   }, [data, xKey]);
 
-  if (innerWidth <= 0 || innerHeight <= 0) return null;
-
   const gridOpacity = gridChild?.props.opacity ?? 0.2;
   const gridStrokeDasharray = gridChild?.props.strokeDasharray ?? '4 4';
   const gridStroke = gridChild?.props.stroke ?? 'rgba(148, 163, 184, 0.3)';
@@ -537,6 +547,8 @@ export const LineChart = ({
   }, []);
 
   const hoverData = hoverIndex === null ? null : parsedData[hoverIndex];
+
+  const canRenderChart = innerWidth > 0 && innerHeight > 0;
 
   const tooltipRows: TooltipRow[] = useMemo(() => {
     if (!hoverData) return [];
@@ -629,15 +641,16 @@ export const LineChart = ({
 
   return (
     <div style={{ position: 'relative', width, height }}>
-      <svg
-        width={width}
-        height={height}
-        role="img"
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        style={{ touchAction: 'none' }}
-      >
-        <g>
+      {canRenderChart ? (
+        <svg
+          width={width}
+          height={height}
+          role="img"
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          style={{ touchAction: 'none' }}
+        >
+          <g>
           <line
             x1={marginWithDefaults.left}
             y1={marginWithDefaults.top + innerHeight}
@@ -798,11 +811,12 @@ export const LineChart = ({
               strokeDasharray="4 4"
             />
           ) : null}
-        </g>
-      </svg>
+          </g>
+        </svg>
+      ) : null}
 
-      {legendChild ? renderLegend(lineDefs) : null}
-      {tooltipContent}
+      {canRenderChart && legendChild ? renderLegend(lineDefs) : null}
+      {canRenderChart ? tooltipContent : null}
     </div>
   );
 };
@@ -954,8 +968,6 @@ export const BarChart = ({
     setHoverPosition(null);
   }, [data, xKey]);
 
-  if (innerWidth <= 0 || innerHeight <= 0 || !barDef) return null;
-
   const gridOpacity = gridChild?.props.opacity ?? 0.25;
   const gridStrokeDasharray = gridChild?.props.strokeDasharray;
   const gridStroke = gridChild?.props.stroke ?? 'rgba(148, 163, 184, 0.18)';
@@ -974,20 +986,19 @@ export const BarChart = ({
     setHoverPosition({ x, y });
   };
 
-  const tooltipPayload: TooltipPayload<Record<string, unknown>> =
-    useMemo(() => {
-      if (hoverIndex === null) return [];
-      const entry = parsedData[hoverIndex];
-      if (!entry) return [];
-      return [
-        {
-          name: barDef.dataKey,
-          color: barDef.cellFills[hoverIndex] ?? barDef.fill,
-          value: entry.yValue,
-          payload: entry.original,
-        },
-      ];
-    }, [barDef.cellFills, barDef.dataKey, barDef.fill, hoverIndex, parsedData]);
+  const tooltipPayload: TooltipPayload<Record<string, unknown>> = useMemo(() => {
+    if (hoverIndex === null || !barDef) return [];
+    const entry = parsedData[hoverIndex];
+    if (!entry) return [];
+    return [
+      {
+        name: barDef.dataKey,
+        color: barDef.cellFills[hoverIndex] ?? barDef.fill,
+        value: entry.yValue,
+        payload: entry.original,
+      },
+    ];
+  }, [barDef, hoverIndex, parsedData]);
 
   const tooltipLabel = useMemo(() => {
     if (hoverIndex === null) return '';
@@ -997,7 +1008,7 @@ export const BarChart = ({
   }, [hoverIndex, parsedData, tooltipDef?.labelFormatter]);
 
   const tooltipContent = (() => {
-    if (hoverIndex === null || !hoverPosition) return null;
+    if (hoverIndex === null || !hoverPosition || !barDef) return null;
 
     const entry = parsedData[hoverIndex];
     if (!entry) return null;
@@ -1054,10 +1065,13 @@ export const BarChart = ({
     );
   })();
 
+  const canRenderChart = barDef !== null && innerWidth > 0 && innerHeight > 0;
+
   return (
     <div style={{ position: 'relative', width, height }}>
-      <svg width={width} height={height} role="img">
-        <g>
+      {canRenderChart && barDef ? (
+        <svg width={width} height={height} role="img">
+          <g>
           <line
             x1={marginWithDefaults.left}
             y1={marginWithDefaults.top + innerHeight}
@@ -1177,9 +1191,10 @@ export const BarChart = ({
               yAxisChild?.props.style
             )
           )}
-        </g>
-      </svg>
-      {tooltipContent}
+          </g>
+        </svg>
+      ) : null}
+      {canRenderChart ? tooltipContent : null}
     </div>
   );
 };
