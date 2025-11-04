@@ -29,8 +29,6 @@ export const ConstructorStandingsPage = ({
           <div className={styles.heroContent}>
             <div className={styles.heroMeta}>
               <span>실시간 세션 기반 컨스트럭터 데이터</span>
-              <span>OpenF1 API 연동</span>
-              <span>팀별 평균 순위 및 전력 지표</span>
             </div>
             <h1 className={styles.heroTitle}>컨스트럭터 성과 대시보드</h1>
             <p className={styles.heroDescription}>
