@@ -17,7 +17,9 @@ export const DriverRankingPage = ({
 }: DriverRankingPageProps) => {
   return (
     <MainContainer
-      sidebar={<SideBar appearance={appearance} setAppearance={setAppearance} />}
+      sidebar={
+        <SideBar appearance={appearance} setAppearance={setAppearance} />
+      }
     >
       <Header />
 
@@ -27,10 +29,8 @@ export const DriverRankingPage = ({
           <div className={styles.heroContent}>
             <div className={styles.heroMeta}>
               <span>드라이버별 실시간 순위 데이터</span>
-              <span>OpenF1 API 기반 세션 추적</span>
-              <span>팀 컬러 및 로스터 연동</span>
             </div>
-            <h1 className={styles.heroTitle}>드라이버 성과 인사이트</h1>
+            <h1 className={styles.heroTitle}>드라이버 스탠딩</h1>
             <p className={styles.heroDescription}>
               포뮬러 1 2025 시즌을 대표하는 드라이버들의 포인트와 소속 팀 정보를
               팀별 색상 테마와 함께 확인하세요.

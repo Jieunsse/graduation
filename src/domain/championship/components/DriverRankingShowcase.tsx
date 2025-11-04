@@ -266,8 +266,8 @@ export const DriverRankingShowcase = () => {
       <header className={styles.sectionHeader}>
         <h2 className={styles.sectionTitle}>드라이버 순위</h2>
         <p className={styles.sectionDescription}>
-          시즌 누적 데이터를 기반으로 드라이버별 포인트, 소속 팀, 팀 로고와 함께
-          각 드라이버의 활약을 확인하세요.
+          시즌 누적 데이터를 기반으로 드라이버별 포인트 함께 각 드라이버의
+          활약을 확인하세요.
         </p>
       </header>
 

@@ -31,7 +31,9 @@ const formatTimestamp = (value: string | undefined | null) => {
   });
 };
 
-type StoreComment = ReturnType<typeof useCommentStore.getState>['comments'][number];
+type StoreComment = ReturnType<
+  typeof useCommentStore.getState
+>['comments'][number];
 
 const resolveCommentId = (comment: StoreComment, fallback: number) =>
   comment.commentId ?? comment.id ?? fallback;
@@ -53,10 +55,10 @@ export const BoardDetail = ({ post, onBack }: BoardDetailProps) => {
   const clearCommentError = useCommentStore((state) => state.clearError);
   const commentCount = isLoadingComments ? post.comments : comments.length;
 
-  const formattedCreatedAt = useMemo(
-    () => formatDate(post.createdAt),
-    [post.createdAt]
-  );
+  const formattedCreatedAt = useMemo(() => {
+    const formatted = formatDate(post.createdAt);
+    return formatted.split('T')[0];
+  }, [post.createdAt]);
 
   useEffect(() => {
     void fetchComments(post.id);
@@ -160,15 +162,13 @@ export const BoardDetail = ({ post, onBack }: BoardDetailProps) => {
 
           <div className={styles.commentActions}>
             <span className={styles.commentHelper}>
-              로그인 후 댓글을 작성해 주세요. 커뮤니티 운영 원칙을 꼭
-              지켜 주세요.
+              로그인 후 댓글을 작성해 주세요. 커뮤니티 운영 원칙을 꼭 지켜
+              주세요.
             </span>
             <button
               type="submit"
               className={styles.commentSubmit}
-              disabled={
-                !commentValue.trim() || isSubmittingComment
-              }
+              disabled={!commentValue.trim() || isSubmittingComment}
             >
               {isSubmittingComment ? '등록 중...' : '댓글 등록'}
             </button>
@@ -201,9 +201,7 @@ export const BoardDetail = ({ post, onBack }: BoardDetailProps) => {
             ))}
           </ul>
         ) : (
-          <div className={styles.emptyComment}>
-            댓글이 없습니다.
-          </div>
+          <div className={styles.emptyComment}>댓글이 없습니다.</div>
         )}
       </section>
     </div>
