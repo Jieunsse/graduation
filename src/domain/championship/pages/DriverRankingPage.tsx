@@ -3,18 +3,18 @@ import { MainContainer } from '@shared/layout/MainContainer.tsx';
 import { SideBar } from '@shared/ui/sidebar/SideBar.tsx';
 import { Header } from '@shared/ui/header/Header.tsx';
 import { Footer } from '@shared/ui/footer/Footer.tsx';
-import { TeamPerformanceDashboard } from '../components/TeamPerformanceDashboard.tsx';
-import * as styles from './ConstructorStandingsPage.css.ts';
+import * as styles from '../styles/driverRanking.css.ts';
+import { DriverRankingShowcase } from '../components/DriverRankingShowcase.tsx';
 
-interface ConstructorStandingsPageProps {
+interface DriverRankingPageProps {
   appearance: 'light' | 'dark';
   setAppearance: React.Dispatch<React.SetStateAction<'light' | 'dark'>>;
 }
 
-export const ConstructorStandingsPage = ({
+export const DriverRankingPage = ({
   appearance,
   setAppearance,
-}: ConstructorStandingsPageProps) => {
+}: DriverRankingPageProps) => {
   return (
     <MainContainer
       sidebar={
@@ -28,17 +28,17 @@ export const ConstructorStandingsPage = ({
           <div className={styles.heroAccent} aria-hidden />
           <div className={styles.heroContent}>
             <div className={styles.heroMeta}>
-              <span>실시간 세션 기반 컨스트럭터 데이터</span>
+              <span>드라이버별 실시간 순위 데이터</span>
             </div>
-            <h1 className={styles.heroTitle}>컨스트럭터 성과 대시보드</h1>
+            <h1 className={styles.heroTitle}>드라이버 스탠딩</h1>
             <p className={styles.heroDescription}>
-              최신 세션 데이터를 기반으로 각 팀의 평균 순위, 최고/최저 순위,
-              드라이버 수를 한눈에 비교하세요.
+              포뮬러 1 2025 시즌을 대표하는 드라이버들의 포인트와 소속 팀 정보를
+              팀별 색상 테마와 함께 확인하세요.
             </p>
           </div>
         </section>
 
-        <TeamPerformanceDashboard />
+        <DriverRankingShowcase />
       </div>
 
       <Footer />

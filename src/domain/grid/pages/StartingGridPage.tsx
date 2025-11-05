@@ -26,7 +26,6 @@ export const StartingGridPage = ({
   appearance,
   setAppearance,
 }: StartingGridPageProps) => {
-  const sessionKey = useGridStore((state) => state.sessionKey);
   const maxPosition = useGridStore((state) => state.maxPosition);
   const setMaxPosition = useGridStore((state) => state.setMaxPosition);
   const [selectedRace, setSelectedRace] = useState<RaceKey>(DEFAULT_RACE_KEY);
@@ -51,13 +50,18 @@ export const StartingGridPage = ({
 
   const selectedRaceLabel = useMemo(
     () =>
-      raceOptions.find((option) => option.key === selectedRace)?.label ?? '선택된 경기',
+      raceOptions.find((option) => option.key === selectedRace)?.label ??
+      '선택된 경기',
     [selectedRace]
   );
 
-  const status = !isLoading && items.length === 0
-    ? { type: 'empty' as const, message: '표시할 스타팅 그리드 데이터가 없습니다.' }
-    : undefined;
+  const status =
+    !isLoading && items.length === 0
+      ? {
+          type: 'empty' as const,
+          message: '표시할 스타팅 그리드 데이터가 없습니다.',
+        }
+      : undefined;
 
   return (
     <MainContainer
@@ -69,12 +73,6 @@ export const StartingGridPage = ({
 
       <div className={styles.page}>
         <section className={styles.hero}>
-          <div className={styles.heroMeta}>
-            <span>{`SESSION ${sessionKey}`}</span>
-            <span>{`TOP ${maxPosition}`}</span>
-            <span>{selectedRaceLabel}</span>
-          </div>
-
           <h1 className={styles.heroTitle}>스타팅 그리드</h1>
           <p className={styles.heroDescription}>
             경기별로 스타팅 그리드 순서를 확인할 수 있습니다.

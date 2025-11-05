@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as styles from '../styles/sidebar/sidebar.css.ts';
-import React from 'react';
 import type {
   CollapsibleNavItem,
   ControlItem,
@@ -15,10 +14,8 @@ import {
   DocumentIcon,
   LanguageIcon,
   NewsIcon,
-  SupportIcon,
-  TechIcon,
-  ThemeIcon,
   SunIcon,
+  ThemeIcon,
 } from '@shared/ui/sidebar/SideBarIcons.tsx';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -40,32 +37,15 @@ const collapsibleNavigation: CollapsibleNavItem[] = [
     Icon: AnalysisIcon,
     subItems: [
       { label: '랩타임 비교', path: '/analysis/laptime' },
-      { label: '피트 전략' },
-      { label: '트랙 포지션' },
+      { label: '경기 결과', path: '/analysis/race-result' },
     ],
   },
   {
     label: '챔피언십',
     Icon: ChampionshipIcon,
     subItems: [
-      { label: '드라이버 순위' },
+      { label: '드라이버 순위', path: '/championship/driver' },
       { label: '컨스트럭터 순위', path: '/championship/constructors' },
-    ],
-  },
-  {
-    label: '테크니컬',
-    Icon: TechIcon,
-    subItems: [
-      { label: '업데이트 추적' },
-      { label: '기술 규정 정리' },
-    ],
-  },
-  {
-    label: '지원',
-    Icon: SupportIcon,
-    subItems: [
-      { label: '고객 센터' },
-      { label: '커뮤니티' },
     ],
   },
 ];
@@ -78,14 +58,14 @@ const controlItems: ControlItem[] = [
 export const SideBar = ({ appearance, setAppearance }: SideBarProps) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [openSections, setOpenSections] = useState<Record<string, boolean>>(() =>
-    collapsibleNavigation.reduce<Record<string, boolean>>((acc, item) => {
-      const shouldOpen = item.subItems.some((subItem) =>
-        subItem.path ? location.pathname.startsWith(subItem.path) : false
-      );
-      acc[item.label] = shouldOpen;
-      return acc;
-    }, {})
+  const [openSections, setOpenSections] = useState<Record<string, boolean>>(
+    () =>
+      collapsibleNavigation.reduce<Record<string, boolean>>((acc, item) => {
+        acc[item.label] = item.subItems.some((subItem) =>
+          subItem.path ? location.pathname.startsWith(subItem.path) : false
+        );
+        return acc;
+      }, {})
   );
 
   useEffect(() => {
@@ -116,7 +96,6 @@ export const SideBar = ({ appearance, setAppearance }: SideBarProps) => {
 
   return (
     <aside className={styles.container}>
-      {/* 상단 메뉴 */}
       <div>
         <nav className={styles.section} aria-label="주요 메뉴">
           <ul className={styles.menuList}>
@@ -162,7 +141,6 @@ export const SideBar = ({ appearance, setAppearance }: SideBarProps) => {
 
         <hr className={styles.divider} />
 
-        {/* 접힘형 메뉴 */}
         <nav className={styles.section} aria-label="세부 메뉴">
           <ul className={styles.menuList}>
             {collapsibleNavigation.map((section) => {
@@ -181,7 +159,6 @@ export const SideBar = ({ appearance, setAppearance }: SideBarProps) => {
                       <IconComponent className={styles.icon} />
                     </span>
                     <span className={styles.label}>{section.label}</span>
-                    {/* 우측 화살표 아이콘: 별도 클래스 없이 최소 인라인만 */}
                     <span style={{ marginLeft: 'auto', opacity: 0.65 }}>
                       <ChevronDownIcon className={styles.icon} />
                     </span>
@@ -221,7 +198,9 @@ export const SideBar = ({ appearance, setAppearance }: SideBarProps) => {
                               }}
                               aria-current={isActive ? 'page' : undefined}
                             >
-                              <span className={styles.label}>{subItem.label}</span>
+                              <span className={styles.label}>
+                                {subItem.label}
+                              </span>
                             </button>
                           </li>
                         );
@@ -235,7 +214,6 @@ export const SideBar = ({ appearance, setAppearance }: SideBarProps) => {
         </nav>
       </div>
 
-      {/* 하단 컨트롤(테마/언어) */}
       <div
         style={{
           display: 'flex',

@@ -1,4 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
+import { EventIcon } from './EventIcon.tsx';
 import * as styles from '../styles/timeline.css.ts';
 import type { RaceEvent } from '../types/raceEvent.ts';
 import { raceEventTypeLabel } from '../types/raceEvent.ts';
@@ -53,9 +54,13 @@ export const TimelineSlider = ({
     [currentTime, findNearestEventIndex]
   );
 
+  const activeEvent = events[currentIndex];
   const activeTime = eventCount > 0 ? eventTimes[currentIndex] : 0;
   const maxTime = eventCount > 0 ? eventTimes[eventCount - 1] : 0;
-  const progress = maxIndex === 0 ? 0 : (currentIndex / maxIndex) * 100;
+  const progressRatio = maxIndex === 0 ? 0 : currentIndex / maxIndex;
+  const progressPercent = progressRatio * 100;
+  const totalLap = events[eventCount - 1]?.lap ?? 0;
+  const currentLap = activeEvent?.lap;
 
   const handleInputChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -110,32 +115,42 @@ export const TimelineSlider = ({
   }, [currentIndex, events, maxIndex]);
 
   return (
-    <div className={styles.sliderContainer} onWheel={handleWheel}>
-      <div className={styles.sliderRoot}>
+    <div className={styles.sliderContainer}>
+      <div className={styles.sliderRail} onWheel={handleWheel}>
         <div className={styles.sliderTrack}>
           <div
-            className={styles.sliderRange}
-            style={{ width: `${progress}%` }}
+            className={styles.sliderProgress}
+            style={{ transform: `scaleX(${progressRatio})` }}
             aria-hidden
           />
+
           <div className={styles.markerLayer}>
             {markers.map((marker) => (
               <button
                 key={marker.id}
                 type="button"
+                title={marker.label}
                 style={{ left: `${marker.percent}%` }}
-                className={`${styles.marker} ${styles.markerByType[marker.type]} ${marker.isActive ? styles.markerActive : ''}`}
+                className={`${styles.markerButton} ${marker.isActive ? styles.markerActive : ''}`}
                 onClick={() => handleMarkerClick(marker.time)}
                 aria-label={marker.label}
-              />
+              >
+                <EventIcon type={marker.type} size="small" ariaLabel={marker.label} />
+              </button>
             ))}
+
+            {events.length > 0 ? (
+              <div
+                className={styles.currentIndicator}
+                style={{ left: `${progressPercent}%` }}
+                aria-hidden
+              >
+                <span className={styles.currentPulse} />
+              </div>
+            ) : null}
           </div>
-          <div
-            className={styles.sliderThumb}
-            style={{ left: `${progress}%` }}
-            aria-hidden
-          />
         </div>
+
         <input
           type="range"
           min={0}
@@ -149,16 +164,20 @@ export const TimelineSlider = ({
         />
       </div>
 
-      <div className={styles.playheadTime}>
-        <span>현재 시점 {formatRaceTime(activeTime)}</span>
-        <span>전체 {formatRaceTime(maxTime)}</span>
+      <div className={styles.sliderMeta}>
+        <div className={styles.lapInfo}>
+          <span className={styles.lapIcon} role="img" aria-label="현재 랩">
+            🏁
+          </span>
+          <span>
+            Lap <span className={styles.lapCount}>{currentLap ?? '-'}</span> / {totalLap || '-'}
+          </span>
+        </div>
+        <div className={styles.timeStack}>
+          <span className={styles.timeCode}>현재 {formatRaceTime(activeTime)}</span>
+          <span className={styles.timeCode}>전체 {formatRaceTime(maxTime)}</span>
+        </div>
       </div>
-
-      {/*<div className={styles.controlGroup} aria-hidden>*/}
-      {/*  {markers.map((marker) => (*/}
-      {/*    <EventIcon key={marker.id} type={marker.type} size="small" ariaLabel={marker.label} />*/}
-      {/*  ))}*/}
-      {/*</div>*/}
     </div>
   );
 };

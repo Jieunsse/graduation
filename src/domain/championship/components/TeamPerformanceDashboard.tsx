@@ -214,8 +214,7 @@ export const TeamPerformanceDashboard = () => {
         <h2 className={styles.title}>Team Performance Dashboard</h2>
         <p className={styles.description}>
           2025 시즌 기준으로 수집된 최신 데이터를 기반으로 각 팀의 드라이버
-          구성과 차량을 한눈에 확인하세요. 시즌이 진행될수록 카드의 데이터
-          카운트가 업데이트됩니다.
+          구성과 차량을 한눈에 확인하세요.
         </p>
       </header>
 

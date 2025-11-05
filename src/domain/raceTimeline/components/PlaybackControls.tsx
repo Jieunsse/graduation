@@ -21,10 +21,10 @@ export const PlaybackControls = ({
 }: PlaybackControlsProps) => {
   return (
     <div className={styles.controlsRow}>
-      <div className={styles.controlGroup}>
+      <div className={styles.controlsPrimary}>
         <button
           type="button"
-          className={`${styles.controlButton} ${styles.controlButtonPrimary}`}
+          className={styles.playButton}
           onClick={onTogglePlay}
           disabled={isDisabled}
         >
@@ -32,7 +32,7 @@ export const PlaybackControls = ({
         </button>
         <button
           type="button"
-          className={styles.controlButton}
+          className={`${styles.controlButton} ${styles.resetButton}`}
           onClick={onReset}
           disabled={isDisabled}
         >
@@ -40,8 +40,8 @@ export const PlaybackControls = ({
         </button>
       </div>
 
-      <div className={styles.controlGroup}>
-        <span className={styles.controlLabel}>재생 속도</span>
+      <div className={styles.controlsPrimary}>
+        <span className={styles.speedLabel}>재생 속도</span>
         {playbackSpeeds.map((value) => {
           const isActive = value === speed;
           return (
@@ -50,8 +50,9 @@ export const PlaybackControls = ({
               type="button"
               className={`${styles.controlButton} ${isActive ? styles.controlButtonActive : ''}`}
               onClick={() => onSpeedChange(value)}
+              aria-pressed={isActive}
             >
-              {value.toFixed(1)}
+              {value.toFixed(1)}x
             </button>
           );
         })}

@@ -6,6 +6,7 @@ export const page = style({
   flexDirection: 'column',
   gap: '32px',
   padding: '32px 0 48px',
+  marginTop: '60px',
 });
 
 export const hero = style({

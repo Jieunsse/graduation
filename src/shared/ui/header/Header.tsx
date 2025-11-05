@@ -6,16 +6,16 @@ import * as style from '../styles/header/header.css.ts';
 
 const navItems = [
   { label: '게시판', to: '/board', type: 'link' as const },
-  { label: '타임라인', to: '/timeline', type: 'link' as const },
-  { label: '데이터랩', type: 'button' as const },
+  { label: '레이스 분석', to: '/analysis/laptime', type: 'link' as const },
+  { label: '챔피언쉽', to: '/championship/driver', type: 'link' as const },
   { label: '룰북', to: '/guide', type: 'link' as const },
 ];
 
 export const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(
-    () => Boolean(localStorage.getItem('token')),
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() =>
+    Boolean(localStorage.getItem('token'))
   );
 
   useEffect(() => {

@@ -8,6 +8,7 @@ import { GuideGlossaryPage } from '@domain/ruleBook/pages/ruleBook/GuideGlossary
 import { GuideDetailPage } from '@domain/ruleBook/pages/ruleBookDetail/GuideDetailPage.tsx';
 import { CalenderPage } from '@domain/calender/pages/CalenderPage.tsx';
 import { RaceTimelinePage } from '@domain/raceTimeline/pages/RaceTimelinePage.tsx';
+import { RaceResultPage } from '@domain/raceResult/pages/RaceResultPage.tsx';
 import { LapTimePage } from '@domain/lapTime/pages/LapTimePage.tsx';
 import { LoginPage } from '@domain/user/pages/login/LoginPage.tsx';
 import { SignupPage } from '@domain/user/pages/signup/SignupPage.tsx';
@@ -15,6 +16,7 @@ import { DriverCardPage } from '@domain/driver/pages/driverCardPage.tsx';
 import { CreatorContentPage } from '@domain/creator/pages/CreatorContentPage.tsx';
 import { StartingGridPage } from '@domain/grid/pages/StartingGridPage.tsx';
 import { ConstructorStandingsPage } from '@domain/championship/pages/ConstructorStandingsPage.tsx';
+import { DriverRankingPage } from '@domain/championship/pages/DriverRankingPage.tsx';
 
 interface RouterProps {
   appearance: 'light' | 'dark';
@@ -101,6 +103,15 @@ export const Router = ({ appearance, setAppearance }: RouterProps) => {
           }
         />
         <Route
+          path="/analysis/race-result"
+          element={
+            <RaceResultPage
+              appearance={appearance}
+              setAppearance={setAppearance}
+            />
+          }
+        />
+        <Route
           path="/analysis/laptime"
           element={
             <LapTimePage
@@ -140,6 +151,15 @@ export const Router = ({ appearance, setAppearance }: RouterProps) => {
           path="/championship/constructors"
           element={
             <ConstructorStandingsPage
+              appearance={appearance}
+              setAppearance={setAppearance}
+            />
+          }
+        />
+        <Route
+          path="/championship/driver"
+          element={
+            <DriverRankingPage
               appearance={appearance}
               setAppearance={setAppearance}
             />

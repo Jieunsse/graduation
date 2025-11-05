@@ -1,58 +1,17 @@
 import { style, styleVariants } from '@vanilla-extract/css';
 import { colorVars } from '@shared/styles/color.css.ts';
 
-export const dashboard = style({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '32px',
-  width: '100%',
-  padding: '24px 0 64px',
-});
-
-export const header = style({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '16px',
-  maxWidth: '760px',
-  marginLeft: '24px',
-});
-
-export const title = style({
-  fontSize: '32px',
-  fontWeight: 800,
-  letterSpacing: '-0.01em',
-  color: colorVars.text.heading,
-});
-
-export const description = style({
-  fontSize: '16px',
-  lineHeight: 1.7,
-  color: colorVars.text.secondary,
-  wordBreak: 'keep-all',
-});
-
-export const grid = style({
-  display: 'grid',
-  gap: '28px',
-  gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-  '@media': {
-    'screen and (max-width: 1024px)': {
-      gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
-    },
-  },
-});
-
 export const card = style({
   position: 'relative',
   overflow: 'hidden',
   borderRadius: '24px',
-  padding: '28px 28px 0',
-  minHeight: '280px',
+  padding: '28px',
+  minHeight: '320px',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  gap: '20px',
-  color: '#ffffff',
+  gap: '24px',
+  color: colorVars.neutral.white,
   boxShadow: '0 28px 48px rgba(15, 23, 42, 0.32)',
   transition: 'transform 0.25s ease, box-shadow 0.25s ease',
   selectors: {
@@ -82,92 +41,120 @@ export const cardThemes = styleVariants({
   alpine: { background: 'linear-gradient(135deg, #005f99 0%, #00b4d8 100%)' },
 });
 
+export const positionBadge = style({
+  position: 'absolute',
+  top: 20,
+  left: 24,
+  display: 'inline-flex',
+  marginLeft: '280px',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: '6px 14px',
+  borderRadius: '999px',
+  backgroundColor: 'rgba(0, 0, 0, 0.35)',
+  color: colorVars.neutral.white,
+  fontSize: '14px',
+  fontWeight: 700,
+  letterSpacing: '0.12em',
+  textTransform: 'uppercase',
+});
+
 export const cardBody = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '20px',
-  paddingBottom: '20px',
 });
 
-export const teamHeader = style({
+export const driverHeader = style({
   display: 'flex',
   alignItems: 'center',
   gap: '16px',
 });
 
 export const teamLogo = style({
-  width: '52px',
-  height: '52px',
-  borderRadius: '16px',
+  width: '56px',
+  height: '56px',
+  borderRadius: '18px',
   backgroundColor: 'rgba(255, 255, 255, 0.16)',
-  padding: '10px',
+  padding: '12px',
   objectFit: 'contain',
 });
 
-export const teamMeta = style({
+export const driverMeta = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '8px',
+  gap: '6px',
 });
 
-export const teamName = style({
-  fontSize: '22px',
+export const driverCode = style({
+  fontSize: '20px',
+  fontWeight: 700,
+  letterSpacing: '0.3em',
+  opacity: 0.8,
+});
+
+export const driverName = style({
+  fontSize: '24px',
   fontWeight: 800,
   letterSpacing: '-0.01em',
 });
 
-export const dataTag = style({
+export const infoRow = style({
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: '12px',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+});
+
+export const teamBadge = style({
   display: 'inline-flex',
   alignItems: 'center',
-  padding: '6px 12px',
+  padding: '8px 16px',
   borderRadius: '999px',
   fontSize: '13px',
   fontWeight: 600,
   backgroundColor: 'rgba(255, 255, 255, 0.22)',
-  color: '#ffffff',
-  letterSpacing: '0.01em',
+  color: colorVars.neutral.white,
+  letterSpacing: '0.02em',
 });
 
-export const driverList = style({
-  listStyle: 'none',
-  margin: 0,
-  padding: 0,
+export const points = style({
   display: 'flex',
-  gap: '16px',
-  flexWrap: 'wrap',
+  flexDirection: 'column',
+  alignItems: 'flex-end',
+  gap: '6px',
 });
 
-export const driver = style({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '12px',
-  padding: '12px 16px',
-  borderRadius: '18px',
-  backgroundColor: 'rgba(255, 255, 255, 0.2)',
-  backdropFilter: 'blur(6px)',
-  boxShadow: '0 12px 24px rgba(0, 0, 0, 0.18)',
+export const pointsLabel = style({
+  fontSize: '12px',
+  letterSpacing: '0.08em',
+  textTransform: 'uppercase',
+  opacity: 0.75,
 });
 
-export const driverAvatar = style({
-  width: '56px',
-  height: '56px',
-  borderRadius: '50%',
-  objectFit: 'cover',
-  border: '2px solid rgba(255, 255, 255, 0.8)',
-  backgroundColor: 'rgba(0, 0, 0, 0.1)',
+export const pointsValue = style({
+  fontSize: '28px',
+  fontWeight: 800,
+  letterSpacing: '-0.01em',
 });
 
-export const driverName = style({
-  fontSize: '15px',
-  fontWeight: 600,
-  letterSpacing: '0.01em',
-});
-
-export const carImage = style({
+export const driverImage = style({
   width: '100%',
-  maxWidth: '520px',
+  maxWidth: '320px',
   height: 'auto',
   alignSelf: 'flex-end',
   transform: 'translateY(12px)',
   filter: 'drop-shadow(0 18px 36px rgba(0, 0, 0, 0.35))',
+});
+
+export const srOnly = style({
+  position: 'absolute',
+  width: 1,
+  height: 1,
+  padding: 0,
+  margin: -1,
+  overflow: 'hidden',
+  clip: 'rect(0, 0, 0, 0)',
+  border: 0,
 });

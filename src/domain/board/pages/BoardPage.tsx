@@ -15,12 +15,12 @@ type CategoryFilter = (typeof categories)[number];
 
 const categoryTypeMap: Record<
   Exclude<CategoryFilter, '전체' | '공지'>,
-  string
+  'INFORMATION' | 'CHAT' | 'REVIEW' | 'QUESTION'
 > = {
-  정보: 'information',
-  잡담: 'chat',
-  후기: 'review',
-  질문: 'question',
+  정보: 'INFORMATION',
+  잡담: 'CHAT',
+  후기: 'REVIEW',
+  질문: 'QUESTION',
 };
 
 interface BoardPageProps {
@@ -62,6 +62,7 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
   const searchPosts = useBoardStore((state) => state.searchPosts);
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>('전체');
   const [searchQuery, setSearchQuery] = useState('');
+
   const [searchParams, setSearchParams] = useSearchParams();
   const rawPageParam = searchParams.get('page');
 
@@ -334,6 +335,7 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
                         ) : null}
                         {post.title}
                       </p>
+
                       {post.tags && post.tags.length > 0 ? (
                         <div className={styles.tagGroup}>
                           {post.tags.map((tag) => (
