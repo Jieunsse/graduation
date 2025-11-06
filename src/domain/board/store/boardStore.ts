@@ -17,7 +17,6 @@ interface BoardState {
   error: string | null;
   addPost: (payload: AddPostPayload) => BoardPost;
   fetchAllPosts: () => Promise<void>;
-  fetchPostsByType: (postType: string) => Promise<void>;
   fetchNotices: () => Promise<void>;
   searchPosts: (keyword: string) => Promise<void>;
 }
@@ -53,7 +52,10 @@ const SERVER_CATEGORY_VALUES = Object.values(
 
 type CategoryServerKey = keyof typeof CATEGORY_SERVER_TO_CLIENT;
 
-const normalizeCategory = (value: unknown): BoardPost['category'] => {
+const normalizeCategory = (
+  value: unknown,
+  tags?: readonly string[]
+): BoardPost['category'] => {
   if (typeof value === 'string') {
     if (SERVER_CATEGORY_VALUES.includes(value as BoardPost['category'])) {
       return value as BoardPost['category'];
@@ -62,6 +64,19 @@ const normalizeCategory = (value: unknown): BoardPost['category'] => {
     const upperValue = value.toUpperCase() as CategoryServerKey;
     if (upperValue in CATEGORY_SERVER_TO_CLIENT) {
       return CATEGORY_SERVER_TO_CLIENT[upperValue];
+    }
+  }
+
+  if (tags && tags.length > 0) {
+    for (const tag of tags) {
+      if (SERVER_CATEGORY_VALUES.includes(tag as BoardPost['category'])) {
+        return tag as BoardPost['category'];
+      }
+
+      const upperTag = tag.toUpperCase() as CategoryServerKey;
+      if (upperTag in CATEGORY_SERVER_TO_CLIENT) {
+        return CATEGORY_SERVER_TO_CLIENT[upperTag];
+      }
     }
   }
 
@@ -90,15 +105,19 @@ const normalizeNumber = (value: unknown): number => {
 };
 
 const normalizeTags = (value: unknown): string[] | undefined => {
+  const toTagArray = (items: string[]) =>
+    items
+      .map((item) => item.trim())
+      .filter((item): item is string => item.length > 0);
+
   if (Array.isArray(value)) {
-    return value.filter((item): item is string => typeof item === 'string');
+    return toTagArray(
+      value.filter((item): item is string => typeof item === 'string')
+    );
   }
 
   if (typeof value === 'string' && value.trim().length > 0) {
-    return value
-      .split(',')
-      .map((item) => item.trim())
-      .filter(Boolean);
+    return toTagArray(value.split(','));
   }
 
   return undefined;
@@ -118,7 +137,11 @@ const normalizeContentBlocks = (value: unknown): string[] | undefined => {
 
 const normalizePost = (post: unknown): BoardPost => {
   const raw = post as Record<string, unknown>;
-  const normalizedCategory = normalizeCategory(raw?.category ?? raw?.postType);
+  const normalizedTags = normalizeTags(raw?.tags ?? raw?.tagList);
+  const normalizedCategory = normalizeCategory(
+    raw?.category ?? raw?.postType,
+    normalizedTags
+  );
 
   return {
     id: normalizeNumber(raw?.id ?? raw?.postId ?? Date.now()),
@@ -129,7 +152,7 @@ const normalizePost = (post: unknown): BoardPost => {
     comments: normalizeNumber(raw?.comments ?? raw?.commentCount),
     likes: normalizeNumber(raw?.likes ?? raw?.likeCount),
     category: normalizedCategory,
-    tags: normalizeTags(raw?.tags ?? raw?.tagList),
+    tags: normalizedTags,
     isNotice: Boolean(raw?.isNotice ?? normalizedCategory === '공지'),
     isNew: Boolean(raw?.isNew),
     isHot: Boolean(raw?.isHot),
@@ -200,18 +223,6 @@ export const useBoardStore = create<BoardState>((set, get) => ({
       set({ posts, isLoading: false, error: null });
     } catch (error) {
       console.error('Failed to fetch posts', error);
-      set({ isLoading: false, error: '게시글을 불러오지 못했습니다.' });
-    }
-  },
-  fetchPostsByType: async (postType) => {
-    set({ isLoading: true, error: null });
-
-    try {
-      const response = await httpClient.get(`/posts/type/${postType}`);
-      const posts = extractPosts(response.data);
-      set({ posts, isLoading: false, error: null });
-    } catch (error) {
-      console.error('Failed to fetch posts by type', error);
       set({ isLoading: false, error: '게시글을 불러오지 못했습니다.' });
     }
   },
