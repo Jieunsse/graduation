@@ -7,7 +7,13 @@ interface CreatorCardProps {
 
 export const CreatorCard = ({ content }: CreatorCardProps) => {
   return (
-    <article className={styles.card}>
+    <a
+      className={styles.card}
+      tabIndex={0}
+      href={content.link}
+      target="_blank"
+      rel="noopener norefferer"
+    >
       <div className={styles.thumbnailWrapper}>
         <img
           src={content.thumbnail}
@@ -20,17 +26,11 @@ export const CreatorCard = ({ content }: CreatorCardProps) => {
 
       <div className={styles.body}>
         <div className={styles.creatorInfo}>
-          <img
-            src={content.profileImage}
-            alt={`${content.creator} 프로필 이미지`}
-            className={styles.profileImage}
-            loading="lazy"
-          />
           <span className={styles.creatorName}>{content.creator}</span>
         </div>
 
         <p className={styles.description}>{content.description}</p>
       </div>
-    </article>
+    </a>
   );
 };

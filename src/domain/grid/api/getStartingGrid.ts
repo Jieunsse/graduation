@@ -8,12 +8,6 @@ export interface StartingGrid {
   session_key: number;
 }
 
-/**
- * 🔹 OpenF1 Starting Grid API
- * 특정 세션(session_key)의 스타팅 그리드 데이터를 조회합니다.
- * @param sessionKey - 세션 키 (예: 7783)
- * @param maxPosition - 가져올 최대 포지션 (예: 3 → 상위 3명)
- */
 export const getStartingGrid = async (
   sessionKey: number,
   maxPosition: number

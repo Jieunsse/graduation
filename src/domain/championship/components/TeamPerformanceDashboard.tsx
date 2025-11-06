@@ -1,4 +1,5 @@
 import * as styles from '../styles/TeamPerformanceDashboard.css.ts';
+import kimiAntonelli from '@domain/driver/img/2025mercedesandant01right.png';
 
 type DriverInfo = {
   name: string;
@@ -26,11 +27,13 @@ const teamShowcaseData: TeamShowcase[] = [
     drivers: [
       {
         name: '랜도 노리스',
-        imageUrl: 'https://placehold.co/96x96/ff6f00/ffffff/png?text=LN',
+        imageUrl:
+          'https://www.formula1.com/content/dam/fom-website/drivers/L/LANNOR01_Lando_Norris/lannor01.png.transform/9col/image.png',
       },
       {
         name: '오스카 피아스트리',
-        imageUrl: 'https://placehold.co/96x96/ff6f00/ffffff/png?text=OP',
+        imageUrl:
+          'https://media.formula1.com/image/upload/f_auto,c_limit,q_75,w_auto/content/dam/fom-website/2018-redesign-assets/drivers/2025/oscpia01.png',
       },
     ],
   },
@@ -44,12 +47,14 @@ const teamShowcaseData: TeamShowcase[] = [
     datasetCount: 356,
     drivers: [
       {
-        name: '샤를 르끌레르',
-        imageUrl: 'https://placehold.co/96x96/d90429/ffffff/png?text=CL',
+        name: '샤를 르클레르',
+        imageUrl:
+          'https://www.formula1.com/content/dam/fom-website/drivers/C/CHALEC01_Charles_Leclerc/chalec01.png.transform/9col/image.png',
       },
       {
         name: '루이스 해밀턴',
-        imageUrl: 'https://placehold.co/96x96/d90429/ffffff/png?text=LH',
+        imageUrl:
+          'https://www.formula1.com/content/dam/fom-website/drivers/L/LEWHAM01_Lewis_Hamilton/lewham01.png.transform/9col/image.png',
       },
     ],
   },
@@ -64,11 +69,12 @@ const teamShowcaseData: TeamShowcase[] = [
     drivers: [
       {
         name: '조지 러셀',
-        imageUrl: 'https://placehold.co/96x96/38bdf8/001427/png?text=GR',
+        imageUrl:
+          'https://www.formula1.com/content/dam/fom-website/drivers/G/GEORUS01_George_Russell/georus01.png.transform/9col/image.png',
       },
       {
         name: '키미 안토넬리',
-        imageUrl: 'https://placehold.co/96x96/38bdf8/001427/png?text=AK',
+        imageUrl: kimiAntonelli,
       },
     ],
   },
@@ -82,12 +88,14 @@ const teamShowcaseData: TeamShowcase[] = [
     datasetCount: 346,
     drivers: [
       {
-        name: '맥스 페르스타펜',
-        imageUrl: 'https://placehold.co/96x96/1d3557/ffffff/png?text=MV',
+        name: '막스 베르스타펜',
+        imageUrl:
+          'https://www.formula1.com/content/dam/fom-website/drivers/M/MAXVER01_Max_Verstappen/maxver01.png.transform/9col/image.png',
       },
       {
         name: '유키 츠노다',
-        imageUrl: 'https://placehold.co/96x96/1d3557/ffffff/png?text=YT',
+        imageUrl:
+          'https://www.formula1.com/content/dam/fom-website/drivers/Y/YUKTSU01_Yuki_Tsunoda/yuktsu01.png.transform/9col/image.png',
       },
     ],
   },
@@ -102,11 +110,13 @@ const teamShowcaseData: TeamShowcase[] = [
     drivers: [
       {
         name: '알렉산더 알본',
-        imageUrl: 'https://placehold.co/96x96/00b4d8/001845/png?text=AA',
+        imageUrl:
+          'https://www.formula1.com/content/dam/fom-website/drivers/A/ALEALB01_Alexander_Albon/alealb01.png.transform/9col/image.png',
       },
       {
         name: '프랑코 콜라핀토',
-        imageUrl: 'https://placehold.co/96x96/00b4d8/001845/png?text=FC',
+        imageUrl:
+          'https://www.formula1.com/content/dam/fom-website/drivers/F/FRACOL01_Franco_Colapinto/fracol01.png.transform/9col/image.png',
       },
     ],
   },
@@ -121,11 +131,13 @@ const teamShowcaseData: TeamShowcase[] = [
     drivers: [
       {
         name: '리암 로슨',
-        imageUrl: 'https://placehold.co/96x96/4361ee/ffffff/png?text=DR',
+        imageUrl:
+          'https://www.formula1.com/content/dam/fom-website/drivers/L/LIALAW01_Liam_Lawson/lialaw01.png.transform/9col/image.png',
       },
       {
         name: '이삭 하자르',
-        imageUrl: 'https://placehold.co/96x96/4361ee/ffffff/png?text=RH',
+        imageUrl:
+          'https://i.namu.wiki/i/aYyQpuIM2Ta41ZbtXIPYHcBHN_rfFZkNWOua_9eEkXap5C-XEEpIzESmCCu5xhbUO2alDOhyvI8IJlu112g9uw.webp',
       },
     ],
   },
@@ -140,11 +152,13 @@ const teamShowcaseData: TeamShowcase[] = [
     drivers: [
       {
         name: '페르난도 알론소',
-        imageUrl: 'https://placehold.co/96x96/00b894/00332a/png?text=FA',
+        imageUrl:
+          'https://www.formula1.com/content/dam/fom-website/drivers/F/FERALO01_Fernando_Alonso/feralo01.png.transform/9col/image.png',
       },
       {
         name: '랜스 스트롤',
-        imageUrl: 'https://placehold.co/96x96/00b894/00332a/png?text=LS',
+        imageUrl:
+          'https://www.formula1.com/content/dam/fom-website/drivers/L/LANSTR01_Lance_Stroll/lanstr01.png.transform/9col/image.png',
       },
     ],
   },
@@ -159,11 +173,13 @@ const teamShowcaseData: TeamShowcase[] = [
     drivers: [
       {
         name: '에스테반 오콘',
-        imageUrl: 'https://placehold.co/96x96/f72585/ffffff/png?text=EO',
+        imageUrl:
+          'https://www.formula1.com/content/dam/fom-website/drivers/E/ESTOCO01_Esteban_Ocon/estoco01.png.transform/9col/image.png',
       },
       {
         name: '올리버 베어맨',
-        imageUrl: 'https://placehold.co/96x96/f72585/ffffff/png?text=OB',
+        imageUrl:
+          'https://www.formula1.com/content/dam/fom-website/drivers/O/OLIBEA01_Oliver_Bearman/olibea01.png.transform/9col/image.png',
       },
     ],
   },
@@ -177,12 +193,14 @@ const teamShowcaseData: TeamShowcase[] = [
     datasetCount: 60,
     drivers: [
       {
-        name: '니코 휠켄버그',
-        imageUrl: 'https://placehold.co/96x96/00c4b3/001f1d/png?text=VB',
+        name: '니코 휠켄베르크',
+        imageUrl:
+          'https://www.formula1.com/content/dam/fom-website/drivers/N/NICHUL01_Nico_Hulkenberg/nichul01.png.transform/9col/image.png',
       },
       {
-        name: '가브리엘 보톨레토',
-        imageUrl: 'https://placehold.co/96x96/00c4b3/001f1d/png?text=ZG',
+        name: '가브리엘 보르톨레토',
+        imageUrl:
+          'https://www.formula1.com/content/dam/fom-website/drivers/G/GABBOR01_Gabriel_Bortoleto/gabbor01.png.transform/9col/image.png',
       },
     ],
   },
@@ -197,11 +215,13 @@ const teamShowcaseData: TeamShowcase[] = [
     drivers: [
       {
         name: '피에르 가슬리',
-        imageUrl: 'https://placehold.co/96x96/0096c7/001f2d/png?text=PG',
+        imageUrl:
+          'https://www.formula1.com/content/dam/fom-website/drivers/P/PIEGAS01_Pierre_Gasly/piegas01.png.transform/9col/image.png',
       },
       {
         name: '프랑코 콜라핀토',
-        imageUrl: 'https://placehold.co/96x96/0096c7/001f2d/png?text=JD',
+        imageUrl:
+          'https://www.formula1.com/content/dam/fom-website/drivers/F/FRACOL01_Franco_Colapinto/fracol01.png.transform/9col/image.png',
       },
     ],
   },

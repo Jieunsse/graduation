@@ -11,6 +11,7 @@ export const card = style({
   boxShadow: colorVars.effect.elevation,
   color: colorVars.text.primary,
   minHeight: '100%',
+  cursor: 'pointer',
   transition: 'opacity 0.2s ease, border-color 0.2s ease',
   selectors: {
     '&:hover': {
