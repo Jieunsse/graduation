@@ -5,4 +5,5 @@ export interface CreatorContent {
   creator: string;
   description: string;
   duration: string;
+  link: string;
 }

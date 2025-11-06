@@ -151,7 +151,6 @@ export const RaceResultPage = ({
     );
   }, []);
 
-  // ✅ 포디엄 데이터 (1~3위)
   const podiumDetails = useMemo<PodiumDriverInfo[]>(() => {
     const fallbackIds = sortedDrivers.slice(0, 3).map((driver) => driver.id);
     const driverIds =

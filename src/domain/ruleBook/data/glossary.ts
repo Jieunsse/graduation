@@ -379,7 +379,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     title: '미디엄 타이어 (C4–C2)',
     englishTitle: 'Medium Tyre (C4–C2)',
     category: 'FLAG',
-    img: '/images/tires/medium.png',
+    img: 'https://us.f1authentics.com/cdn/shop/files/PirelliWindTunnelTyre-YellowMediumCompound_1.jpg?crop=center&height=3227&v=1715701342&width=3227',
     alt: 'Medium tyre with yellow sidewall',
     summary:
       '밸런스형 옐로우 스트라이프 컴파운드로, 스틴트 길이와 페이스 사이 균형을 잡아 메인 레이스 전략의 기준이 됩니다.',
@@ -418,7 +418,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     title: '하드 타이어 (C3–C1)',
     englishTitle: 'Hard Tyre (C3–C1)',
     category: 'FLAG',
-    img: '/images/tires/hard.png',
+    img: 'https://www.f1authentics.com/cdn/shop/files/PirelliWindTunnelTyre-WhiteHardCompound_1.jpg?v=1715700940&width=2000',
     alt: 'Hard tyre with white sidewall',
     summary:
       '화이트 스트라이프 내구형 컴파운드로, 긴 스틴트와 높은 트랙 온도에서 안정성을 제공하지만 예열 시간이 길어집니다.',
@@ -457,7 +457,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     title: '인터미디엇 타이어',
     englishTitle: 'Intermediate Tyre',
     category: 'FLAG',
-    img: '/images/tires/intermediate.png',
+    img: 'https://www.f1authentics.com/cdn/shop/files/PirelliWindTunnelTyre-GreenIntermediateCompound_1_grande.jpg?v=1715700687',
     alt: 'Intermediate tyre with green sidewall',
     summary:
       '그린 스트라이프의 다용도 레인 컴파운드로, 젖은 노면에서 수막을 배출하면서도 드라잉 라인에서 과열을 억제합니다.',
@@ -496,7 +496,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     title: '풀 웻 타이어',
     englishTitle: 'Full Wet Tyre',
     category: 'FLAG',
-    img: '/images/tires/full-wet.png',
+    img: 'https://tyre-assets.pirelli.com/images/global/968/233/cinturato-blue-wet-4505508953865.png',
     alt: 'Full wet tyre with blue sidewall',
     summary:
       '블루 스트라이프의 깊은 그루브를 가진 레인 타이어로, 폭우 속에서도 수막을 95L/s까지 배출하여 안전한 시야와 그립을 제공합니다.',
@@ -531,50 +531,11 @@ export const glossaryTerms: GlossaryTerm[] = [
     ],
   },
   {
-    slug: 'tire-qualifier-2025',
-    title: '퀄리파이어 타이어 (C5, Q)',
-    englishTitle: 'Qualifier Tyre (C5, Q)',
-    category: 'FLAG',
-    img: '/images/tires/qualifier.png',
-    alt: 'Qualifier tyre with purple sidewall',
-    summary:
-      '2025 시즌 도입 예정인 퍼플 스트라이프 Q 타이어로, 예선 세션당 한 세트만 제공되며 단 한 랩의 최적 성능을 위해 설계되었습니다.',
-    highlight: '타이어',
-    description:
-      '퀄리파이어 타이어는 C5 컴파운드를 기반으로 한 극단적 저수명 타이어로, FIA가 예선 쇼를 강화하기 위해 도입했습니다. 사용 후 즉시 회수되어 레이스 세션에서는 재사용이 금지됩니다.',
-    keyPoints: [
-      '각 드라이버는 예선에서 단 한 번의 플라잉랩을 위해 사용하며, 쿨다운 랩 후 즉시 회수됩니다.',
-      '퍼플 사이드월과 Q 표시로 식별되며, 레이스 세션에서는 사용 금지입니다.',
-      '피트 크루는 타이어 워머로 120°C까지 예열해 최대 그립을 확보합니다.',
-    ],
-    quickFacts: [
-      { label: '권장 온도', value: '115~125°C' },
-      { label: '대표 용도', value: '예선 Q3 플라잉랩' },
-      { label: '색상', value: '퍼플' },
-    ],
-    sections: [
-      {
-        heading: '전략 포인트',
-        content: [
-          '런 플랜은 아웃랩-플라잉랩-쿨다운으로 고정되며, 드라이버는 트랙 에볼루션이 최고조에 달하는 타이밍을 노립니다.',
-          '무게를 줄이기 위해 연료는 최소량만 주입하고, 에너지 회수 설정도 플라잉랩에 맞춰 조정됩니다.',
-        ],
-      },
-      {
-        heading: '관리 팁',
-        content: [
-          '예열 후 지체하면 온도가 급락하므로, 피트에서 출발 타이밍을 정밀하게 맞춰야 합니다.',
-          '트레드가 얇아 코딩이 거의 없기 때문에 오버스티어를 방지하기 위해 스로틀 모듈레이션이 필수입니다.',
-        ],
-      },
-    ],
-  },
-  {
     slug: 'tire-compound-overview-2025',
     title: 'C1–C5 컴파운드 개요',
     englishTitle: 'C1–C5 Compound Overview',
     category: 'FLAG',
-    img: '/images/tires/compound-overview.png',
+    img: 'https://tyre-assets.pirelli.com/images/global/900/131/hero-tyresgroup-4505508874689.png',
     alt: 'All 2025 tyre compounds lined up',
     summary:
       '2025년 FIA가 승인한 C1부터 C5까지 슬릭 컴파운드의 역할과 배정 기준을 정리한 항목으로, 서킷 특성과 주말 포맷에 따라 조합이 달라집니다.',
@@ -587,8 +548,14 @@ export const glossaryTerms: GlossaryTerm[] = [
       '전자식 타이어 태그가 도입되어 실시간 마모 데이터가 FIA에 전송됩니다.',
     ],
     quickFacts: [
-      { label: '할당 규정', value: '슬릭 11세트, 인터미디엇 4세트, 풀 웻 3세트' },
-      { label: '컴파운드 범위', value: 'C1 (가장 단단함) ~ C5 (가장 부드러움)' },
+      {
+        label: '할당 규정',
+        value: '슬릭 11세트, 인터미디엇 4세트, 풀 웻 3세트',
+      },
+      {
+        label: '컴파운드 범위',
+        value: 'C1 (가장 단단함) ~ C5 (가장 부드러움)',
+      },
       { label: '색상 코드', value: '화이트/옐로우/레드 + 특수 퍼플(Q)' },
     ],
     sections: [

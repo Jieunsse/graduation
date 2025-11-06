@@ -127,7 +127,7 @@ export const LapTimePage = ({
     const newDrivers =
       validPrev.length > 0 ? validPrev : uniqueDrivers.slice(0, 6);
 
-    // ✅ 이전 상태와 동일하면 setState 호출하지 않기
+    // 이전 상태와 동일하면 setState 호출하지 않기
     if (JSON.stringify(newDrivers) !== JSON.stringify(selectedDrivers)) {
       setSelectedDrivers(newDrivers);
     }
