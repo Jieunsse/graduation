@@ -9,18 +9,79 @@ import type { BoardPost } from '../types/types.ts';
 import { useBoardStore } from '../store/boardStore.ts';
 
 const categories = ['전체', '공지', '정보', '잡담', '후기', '질문'] as const;
-const POSTS_PER_PAGE = 10;
-
 type CategoryFilter = (typeof categories)[number];
 
-const categoryTypeMap: Record<
-  Exclude<CategoryFilter, '전체' | '공지'>,
-  'INFORMATION' | 'CHAT' | 'REVIEW' | 'QUESTION'
-> = {
-  정보: 'INFORMATION',
-  잡담: 'CHAT',
-  후기: 'REVIEW',
-  질문: 'QUESTION',
+const selectableCategories = categories.filter(
+  (category): category is Exclude<CategoryFilter, '전체'> => category !== '전체'
+);
+type SelectableCategory = (typeof selectableCategories)[number];
+
+const POSTS_PER_PAGE = 10;
+
+const isSelectableCategory = (value: string): value is SelectableCategory =>
+  (selectableCategories as readonly string[]).includes(value);
+
+const normalizeTagToCategory = (tag: string): SelectableCategory | null => {
+  const trimmed = tag.trim();
+
+  if (!trimmed) {
+    return null;
+  }
+
+  if (isSelectableCategory(trimmed)) {
+    return trimmed;
+  }
+
+  switch (trimmed.toLowerCase()) {
+    case 'notice':
+      return '공지';
+    case 'information':
+    case 'info':
+      return '정보';
+    case 'chat':
+    case 'talk':
+      return '잡담';
+    case 'review':
+    case 'impression':
+      return '후기';
+    case 'question':
+    case 'qna':
+    case 'q&a':
+      return '질문';
+    default:
+      return null;
+  }
+};
+
+const getPostCategories = (post: BoardPost): SelectableCategory[] => {
+  const categoriesSet = new Set<SelectableCategory>();
+
+  categoriesSet.add(post.category);
+
+  post.tags?.forEach((tag) => {
+    const normalized = normalizeTagToCategory(tag);
+    if (normalized) {
+      categoriesSet.add(normalized);
+    }
+  });
+
+  if (post.isNotice) {
+    categoriesSet.add('공지');
+  }
+
+  return Array.from(categoriesSet);
+};
+
+const doesPostMatchCategory = (
+  post: BoardPost,
+  category: CategoryFilter
+): boolean => {
+  if (category === '전체') {
+    return true;
+  }
+
+  const postCategories = getPostCategories(post);
+  return postCategories.includes(category as SelectableCategory);
 };
 
 interface BoardPageProps {
@@ -57,7 +118,6 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
   const isLoading = useBoardStore((state) => state.isLoading);
   const errorMessage = useBoardStore((state) => state.error);
   const fetchAllPosts = useBoardStore((state) => state.fetchAllPosts);
-  const fetchPostsByType = useBoardStore((state) => state.fetchPostsByType);
   const fetchNotices = useBoardStore((state) => state.fetchNotices);
   const searchPosts = useBoardStore((state) => state.searchPosts);
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>('전체');
@@ -79,10 +139,7 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
 
     return posts
       .filter((post) => {
-        const categoryMatch =
-          activeCategory === '전체' ? true : post.category === activeCategory;
-
-        if (!categoryMatch) {
+        if (!doesPostMatchCategory(post, activeCategory)) {
           return false;
         }
 
@@ -173,20 +230,12 @@ export const BoardPage = ({ appearance, setAppearance }: BoardPageProps) => {
     setActiveCategory(category);
     updatePageQuery(1);
 
-    if (category === '전체') {
-      void fetchAllPosts();
-      return;
-    }
-
     if (category === '공지') {
       void fetchNotices();
       return;
     }
 
-    const postType = categoryTypeMap[category];
-    if (postType) {
-      void fetchPostsByType(postType);
-    }
+    void fetchAllPosts();
   };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
