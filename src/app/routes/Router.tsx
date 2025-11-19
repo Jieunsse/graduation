@@ -17,6 +17,7 @@ import { CreatorContentPage } from '@domain/creator/pages/CreatorContentPage.tsx
 import { StartingGridPage } from '@domain/grid/pages/StartingGridPage.tsx';
 import { ConstructorStandingsPage } from '@domain/championship/pages/ConstructorStandingsPage.tsx';
 import { DriverRankingPage } from '@domain/championship/pages/DriverRankingPage.tsx';
+import NewsPage from '@domain/news/pages/NewsPage.tsx';
 
 interface RouterProps {
   appearance: 'light' | 'dark';
@@ -167,6 +168,7 @@ export const Router = ({ appearance, setAppearance }: RouterProps) => {
         />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/news" element={<NewsPage />} />
       </Routes>
     </BrowserRouter>
   );
