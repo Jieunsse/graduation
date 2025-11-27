@@ -18,6 +18,7 @@ import { StartingGridPage } from '@domain/grid/pages/StartingGridPage.tsx';
 import { ConstructorStandingsPage } from '@domain/championship/pages/ConstructorStandingsPage.tsx';
 import { DriverRankingPage } from '@domain/championship/pages/DriverRankingPage.tsx';
 import { NewsListPage } from '@domain/news/NewsListPage.tsx';
+import { NewsDetailPage } from '@domain/news/NewsDetailPage.tsx';
 
 interface RouterProps {
   appearance: 'light' | 'dark';
@@ -172,6 +173,15 @@ export const Router = ({ appearance, setAppearance }: RouterProps) => {
           path="/news"
           element={
             <NewsListPage
+              appearance={appearance}
+              setAppearance={setAppearance}
+            />
+          }
+        />
+        <Route
+          path="/news/:id"
+          element={
+            <NewsDetailPage
               appearance={appearance}
               setAppearance={setAppearance}
             />
