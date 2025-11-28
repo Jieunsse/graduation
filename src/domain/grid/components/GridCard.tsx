@@ -23,12 +23,7 @@ export const GridCard = ({
   });
 
   return (
-    <article className={styles.card} style={inlineVars}>
-      <div className={styles.positionColumn}>
-        <span className={styles.positionNumber}>{position}</span>
-        <span className={styles.positionBracket} aria-hidden />
-      </div>
-
+    <article className={styles.card} style={inlineVars} data-position={position}>
       <div className={styles.cardContent}>
         <div className={styles.portraitFrame}>
           <img

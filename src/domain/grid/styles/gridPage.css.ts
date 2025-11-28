@@ -156,10 +156,12 @@ export const sectionDescription = style({
 
 export const gridList = style({
   display: 'grid',
-  gap: '28px',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
+  gap: '24px',
+  gridTemplateColumns: 'minmax(0, 1fr)',
+  alignItems: 'stretch',
+  justifyItems: 'center',
   '@media': {
-    '(min-width: 960px)': {
+    '(min-width: 840px)': {
       gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
     },
   },
