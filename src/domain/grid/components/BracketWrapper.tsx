@@ -7,10 +7,8 @@ interface BracketWrapperProps {
 }
 
 export const BracketWrapper = ({ position, children }: BracketWrapperProps) => {
-  const direction = position % 2 === 1 ? 'left' : 'right';
-
   return (
-    <div className={styles.container[direction]}>
+    <div className={styles.container}>
       <div className={styles.frame}>
         <span className={styles.positionLabel}>{position}</span>
         <div className={styles.frameInner}>{children}</div>
