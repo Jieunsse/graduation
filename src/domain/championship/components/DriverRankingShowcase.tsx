@@ -1,3 +1,4 @@
+import { BracketWrapper } from './BracketWrapper.tsx';
 import * as styles from '../styles/driverRanking.css.ts';
 import kimiAntonelli from '@domain/driver/img/2025mercedesandant01right.png';
 
@@ -273,43 +274,44 @@ export const DriverRankingShowcase = () => {
 
       <div className={styles.grid}>
         {sortedDrivers.map((driver, index) => (
-          <article
-            key={driver.id}
-            className={`${styles.card} ${styles.cardThemes[driver.teamId]}`}
-            aria-label={`${driver.name} 순위 카드`}
-          >
-            <div className={styles.cardBody}>
-              <div className={styles.driverHeader}>
-                <img
-                  className={styles.teamLogo}
-                  src={driver.teamLogoUrl}
-                  alt={`${driver.teamName} 로고`}
-                  loading="lazy"
-                />
-                <div className={styles.driverMeta}>
-                  <span className={styles.driverCode}>No.{index + 1}</span>
-                  <h3 className={styles.driverName}>{driver.name}</h3>
+          <BracketWrapper key={driver.id} position={index + 1}>
+            <article
+              className={`${styles.card} ${styles.cardThemes[driver.teamId]}`}
+              aria-label={`${driver.name} 순위 카드`}
+            >
+              <div className={styles.cardBody}>
+                <div className={styles.driverHeader}>
+                  <img
+                    className={styles.teamLogo}
+                    src={driver.teamLogoUrl}
+                    alt={`${driver.teamName} 로고`}
+                    loading="lazy"
+                  />
+                  <div className={styles.driverMeta}>
+                    <span className={styles.driverCode}>No.{index + 1}</span>
+                    <h3 className={styles.driverName}>{driver.name}</h3>
+                  </div>
+                </div>
+
+                <div className={styles.infoRow}>
+                  <span className={styles.teamBadge}>{driver.teamName}</span>
+                  <div className={styles.points}>
+                    <span className={styles.pointsLabel}>드라이버 포인트</span>
+                    <span className={styles.pointsValue}>
+                      {driver.points.toLocaleString()}
+                    </span>
+                  </div>
                 </div>
               </div>
 
-              <div className={styles.infoRow}>
-                <span className={styles.teamBadge}>{driver.teamName}</span>
-                <div className={styles.points}>
-                  <span className={styles.pointsLabel}>드라이버 포인트</span>
-                  <span className={styles.pointsValue}>
-                    {driver.points.toLocaleString()}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <img
-              className={styles.driverImage}
-              src={driver.imageUrl}
-              alt={`${driver.name} 드라이버 이미지`}
-              loading="lazy"
-            />
-          </article>
+              <img
+                className={styles.driverImage}
+                src={driver.imageUrl}
+                alt={`${driver.name} 드라이버 이미지`}
+                loading="lazy"
+              />
+            </article>
+          </BracketWrapper>
         ))}
       </div>
     </section>
