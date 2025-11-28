@@ -10,7 +10,7 @@ const mockNewsDetail: Record<string, NewsArticleDetail> = {
     author: 'Alex Thompson',
     readingTime: 6,
     thumbnail:
-      'https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1200&q=80',
     link: 'https://www.motorsport.com/f1',
     excerpt:
       '팀 관계자는 새 플로어가 코너링 안정성을 크게 향상시킨다고 밝혔으며, 바레인 프리시즌 테스트에서 첫선을 보일 예정이다.',
@@ -29,7 +29,7 @@ const mockNewsDetail: Record<string, NewsArticleDetail> = {
     author: 'Marie Dubois',
     readingTime: 5,
     thumbnail:
-      'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1200&q=80',
     link: 'https://www.fia.com',
     excerpt:
       '하이브리드 시스템 비중을 늘리고 지속 가능한 연료 사용 의무가 강화된다. 각 팀은 2025년 말까지 인증 절차를 마쳐야 한다.',
@@ -48,7 +48,7 @@ const mockNewsDetail: Record<string, NewsArticleDetail> = {
     author: 'James Lee',
     readingTime: 4,
     thumbnail:
-      'https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1521414139064-8388455697b0?auto=format&fit=crop&w=1200&q=80',
     link: 'https://www.skysports.com/f1',
     excerpt:
       '새 파트너십으로 인한 추가 자본은 공장 업그레이드와 시뮬레이터 고도화에 사용될 예정이다.',
@@ -67,7 +67,7 @@ const mockNewsDetail: Record<string, NewsArticleDetail> = {
     author: 'Lucia Ferraro',
     readingTime: 4,
     thumbnail:
-      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1506704888326-3a36c5a52b47?auto=format&fit=crop&w=1200&q=80',
     link: 'https://www.gazzetta.it',
     excerpt:
       '드라이버들은 새로운 서스펜션 패키지를 시험했고, 특히 저속 구간 트랙션이 개선됐다는 평가가 나왔다.',
@@ -86,7 +86,7 @@ const mockNewsDetail: Record<string, NewsArticleDetail> = {
     author: 'Daniel Park',
     readingTime: 5,
     thumbnail:
-      'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1476610182048-b716b8518aae?auto=format&fit=crop&w=1200&q=80',
     link: 'https://www.formula1.com',
     excerpt:
       '프로모터 측은 친환경 모빌리티 쇼케이스와 결합된 야간 레이스 포맷을 제안한 것으로 알려졌다.',
@@ -105,7 +105,7 @@ const mockNewsDetail: Record<string, NewsArticleDetail> = {
     author: 'Sophia Grant',
     readingTime: 4,
     thumbnail:
-      'https://images.unsplash.com/photo-1471478331149-c72f17e33c73?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1522775736090-742eabcadf7a?auto=format&fit=crop&w=1200&q=80',
     link: 'https://www.the-race.com',
     excerpt:
       'AI가 공기역학 해석과 전략 시나리오 생성을 동시에 수행해 개발 속도를 가속화할 계획이다.',
@@ -113,7 +113,7 @@ const mockNewsDetail: Record<string, NewsArticleDetail> = {
     content: [
       '메르세데스가 브랙슬리 공장에 AI 기반 시뮬레이션 허브를 구축한다고 발표했다. 새 시스템은 공기역학 해석과 전략 시나리오 생성을 동시에 처리해 개발 속도를 끌어올리는 것이 목표다.',
       '팀은 클라우드 연산과 머신러닝 모델을 결합해 패키지별 성능 예측 정확도를 높이고, 실시간으로 전략 변수를 계산하는 기능을 도입할 예정이다.',
-      '테크니컬 디렉터는 “AI가 엔지니어의 의사결정을 보조하면서 더 창의적인 세팅 실험이 가능해질 것”이라고 강조했다.',
+      '테크니 디렉터는 “AI가 엔지니어의 의사결정을 보조하면서 더 창의적인 세팅 실험이 가능해질 것”이라고 강조했다.',
     ],
   },
   'news-007': {
@@ -124,7 +124,7 @@ const mockNewsDetail: Record<string, NewsArticleDetail> = {
     author: 'Marco Rossi',
     readingTime: 3,
     thumbnail:
-      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1512083373534-36c34a1990fd?auto=format&fit=crop&w=1200&q=80',
     link: 'https://www.autosport.com',
     excerpt:
       '팀 관계자는 리브랜딩이 젊은 팬층 공략과 스폰서십 다변화 전략의 핵심이라고 설명했다.',
@@ -143,7 +143,7 @@ const mockNewsDetail: Record<string, NewsArticleDetail> = {
     author: 'Elena Petrova',
     readingTime: 4,
     thumbnail:
-      'https://images.unsplash.com/photo-1471478331149-c72f17e33c73?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1200&q=80',
     link: 'https://www.formula1.com',
     excerpt:
       '로운 고무 조성은 작동 온도 범위를 넓혀 전략적 다양성을 제공할 것으로 예상된다.',
