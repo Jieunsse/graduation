@@ -1,3 +1,4 @@
+import { BracketWrapper } from '@domain/grid/components/BracketWrapper.tsx';
 import { GridCard } from '@domain/grid/components/GridCard.tsx';
 import * as pageStyles from '@domain/grid/styles/gridPage.css.ts';
 
@@ -43,15 +44,16 @@ export const GridList = ({
   return (
     <div className={pageStyles.gridList}>
       {items.map((item) => (
-        <GridCard
-          key={`${item.position}-${item.driverNumber}`}
-          position={item.position}
-          driverNumber={item.driverNumber}
-          driverName={item.driverName}
-          teamName={item.teamName}
-          teamColor={item.teamColor}
-          imageUrl={item.imageUrl}
-        />
+        <BracketWrapper key={`${item.position}-${item.driverNumber}`} position={item.position}>
+          <GridCard
+            position={item.position}
+            driverNumber={item.driverNumber}
+            driverName={item.driverName}
+            teamName={item.teamName}
+            teamColor={item.teamColor}
+            imageUrl={item.imageUrl}
+          />
+        </BracketWrapper>
       ))}
     </div>
   );
