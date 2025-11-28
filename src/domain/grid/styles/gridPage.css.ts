@@ -156,8 +156,8 @@ export const sectionDescription = style({
 
 export const gridList = style({
   display: 'grid',
-  gap: '32px',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+  gap: '28px',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
   '@media': {
     '(min-width: 960px)': {
       gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',

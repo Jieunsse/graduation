@@ -3,11 +3,6 @@ import { vars } from '@shared/styles/token.css.ts';
 
 export const teamColorVar = createVar();
 
-const floatIn = keyframes({
-  '0%': { transform: 'translateY(12px)', opacity: 0 },
-  '100%': { transform: 'translateY(0)', opacity: 1 },
-});
-
 const shimmer = keyframes({
   '0%': { transform: 'translateX(-100%)' },
   '100%': { transform: 'translateX(100%)' },
@@ -16,139 +11,133 @@ const shimmer = keyframes({
 export const card = style({
   position: 'relative',
   display: 'flex',
-  flexDirection: 'column',
   alignItems: 'center',
-  gap: '18px',
-  padding: '28px 24px 32px',
-  borderRadius: '28px',
+  gap: '20px',
+  padding: '18px 20px',
+  borderRadius: '20px',
   border: `1px solid ${vars.color.gridCardBorder}`,
-  boxShadow: '0 28px 60px rgba(4, 10, 24, 0.55)',
+  background: `linear-gradient(120deg, ${vars.color.gridCardBg} 0%, ${vars.color.gridCardBg} 60%, color-mix(in srgb, ${teamColorVar} 18%, ${vars.color.gridCardBg}) 100%)`,
+  boxShadow: '0 26px 52px rgba(0, 0, 0, 0.45)',
   color: vars.color.gridCardText,
-  textAlign: 'center',
   overflow: 'hidden',
   isolation: 'isolate',
   transition:
     'transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease',
   selectors: {
-    '&::after': {
+    '&::before': {
       content: '',
       position: 'absolute',
-      inset: '0',
-      background: `radial-gradient(120% 150% at 50% 0%, ${vars.color.gridCardGlow} 0%, transparent 68%)`,
-      opacity: 0.7,
+      inset: 0,
+      background: `linear-gradient(90deg, color-mix(in srgb, ${teamColorVar} 24%, transparent) 0%, transparent 50%)`,
+      opacity: 0.9,
       pointerEvents: 'none',
       zIndex: -1,
     },
     '&:hover': {
-      transform: 'translateY(-6px)',
-      boxShadow: '0 40px 80px rgba(4, 10, 24, 0.65)',
+      transform: 'translateY(-4px)',
+      boxShadow: '0 36px 78px rgba(0, 0, 0, 0.55)',
       borderColor: teamColorVar,
     },
   },
 });
 
-export const header = style({
+export const positionColumn = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: '12px',
-  width: '100%',
+  justifyContent: 'center',
+  width: '86px',
+  gap: '4px',
 });
 
-export const position = style({
+export const positionNumber = style({
   fontSize: '42px',
-  fontWeight: 700,
-  letterSpacing: '0.08em',
+  fontWeight: 800,
+  fontStyle: 'italic',
+  letterSpacing: '0.04em',
   color: vars.color.gridCardAccent,
-  textShadow: '0 8px 24px rgba(0, 0, 0, 0.45)',
+  textShadow: '0 14px 28px rgba(0, 0, 0, 0.55)',
 });
 
-export const bracket = style({
+export const positionBracket = style({
   position: 'relative',
-  width: '88px',
-  height: '40px',
+  width: '66px',
+  height: '46px',
   borderTop: `2px solid ${vars.color.gridCardDivider}`,
   borderBottom: `2px solid ${vars.color.gridCardDivider}`,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
   selectors: {
     '&::before': {
       content: '',
       position: 'absolute',
+      insetBlock: '-2px',
       left: '-2px',
-      top: '-2px',
-      bottom: '-2px',
       width: '2px',
       background: vars.color.gridCardDivider,
     },
     '&::after': {
       content: '',
       position: 'absolute',
+      insetBlock: '-2px',
       right: '-2px',
-      top: '-2px',
-      bottom: '-2px',
       width: '2px',
       background: vars.color.gridCardDivider,
     },
   },
 });
 
-export const bracketLabel = style({
-  fontSize: '13px',
-  fontWeight: 600,
-  letterSpacing: '0.2em',
-  textTransform: 'uppercase',
-  color: '#121212',
+export const cardContent = style({
+  flex: 1,
+  display: 'flex',
+  alignItems: 'center',
+  gap: '18px',
+  minWidth: 0,
 });
 
-export const imageWrapper = style({
+export const portraitFrame = style({
   position: 'relative',
-  width: '100%',
-  maxWidth: '240px',
+  width: '148px',
   aspectRatio: '3 / 4',
-  borderRadius: '24px',
+  borderRadius: '18px',
   overflow: 'hidden',
-  background: `linear-gradient(145deg, ${teamColorVar}1A 0%, ${vars.color.gridCardBg} 100%)`,
-  boxShadow: '0 18px 38px rgba(0, 0, 0, 0.45)',
-  animation: `${floatIn} 420ms ease`,
+  background: `linear-gradient(150deg, color-mix(in srgb, ${teamColorVar} 42%, rgba(0, 0, 0, 0.2)) 0%, ${vars.color.gridCardBg} 80%)`,
+  border: `1px solid ${vars.color.gridCardBorder}`,
+  boxShadow: '0 18px 38px rgba(0, 0, 0, 0.55)',
 });
 
 export const driverImage = style({
   width: '100%',
   height: '100%',
   objectFit: 'cover',
-  transform: 'scale(1.08)',
+  transform: 'scale(1.04)',
 });
 
 export const info = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '6px',
+  gap: '8px',
 });
 
 export const driverName = style({
   display: 'flex',
   alignItems: 'baseline',
-  justifyContent: 'center',
-  gap: '8px',
-  fontSize: '22px',
-  fontWeight: 700,
-  color: '#121212',
+  gap: '10px',
+  fontSize: '21px',
+  fontWeight: 800,
   letterSpacing: '-0.01em',
+  color: vars.color.gridCardText,
 });
 
 export const driverNumber = style({
-  fontSize: '22px',
-  fontWeight: 700,
-  letterSpacing: '0.1em',
-  textTransform: 'uppercase',
-  // color: vars.color.gridCardSubtleText,
+  fontSize: '20px',
+  fontWeight: 800,
+  fontStyle: 'italic',
+  color: vars.color.gridCardSubtleText,
 });
 
 export const teamName = style({
   fontSize: '16px',
-  fontWeight: 600,
+  fontWeight: 700,
+  letterSpacing: '0.02em',
   color: teamColorVar,
 });
 

@@ -22,30 +22,31 @@ export const GridCard = ({
     [styles.teamColorVar]: teamColor,
   });
 
-  const formattedNumber = `${driverNumber}.`;
-
   return (
     <article className={styles.card} style={inlineVars}>
-      <header className={styles.header}>
-        <span className={styles.position}>No.{position}</span>
-      </header>
-
-      <div className={styles.imageWrapper}>
-        <img
-          src={imageUrl}
-          alt={`${driverName} 드라이버 이미지`}
-          className={styles.driverImage}
-          loading="lazy"
-        />
+      <div className={styles.positionColumn}>
+        <span className={styles.positionNumber}>{position}</span>
+        <span className={styles.positionBracket} aria-hidden />
       </div>
 
-      <footer className={styles.info}>
-        <p className={styles.driverName}>
-          <span className={styles.driverNumber}>{formattedNumber}</span>
-          <span>{driverName}</span>
-        </p>
-        <p className={styles.teamName}>{teamName}</p>
-      </footer>
+      <div className={styles.cardContent}>
+        <div className={styles.portraitFrame}>
+          <img
+            src={imageUrl}
+            alt={`${driverName} 드라이버 이미지`}
+            className={styles.driverImage}
+            loading="lazy"
+          />
+        </div>
+
+        <div className={styles.info}>
+          <p className={styles.driverName}>
+            <span className={styles.driverNumber}>{driverNumber}.</span>
+            <span>{driverName}</span>
+          </p>
+          <p className={styles.teamName}>{teamName}</p>
+        </div>
+      </div>
     </article>
   );
 };
