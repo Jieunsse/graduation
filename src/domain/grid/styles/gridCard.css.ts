@@ -45,50 +45,6 @@ export const card = style({
   },
 });
 
-export const positionColumn = style({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: '100%',
-  gap: '10px',
-});
-
-export const positionNumber = style({
-  fontSize: '24px',
-  fontWeight: 800,
-  fontStyle: 'italic',
-  letterSpacing: '0.06em',
-  color: vars.color.gridCardAccent,
-  textShadow: '0 10px 28px rgba(0, 0, 0, 0.45)',
-});
-
-export const positionBracket = style({
-  position: 'relative',
-  width: '72px',
-  height: '16px',
-  borderTop: `2px solid ${vars.color.gridCardDivider}`,
-  borderBottom: `2px solid ${vars.color.gridCardDivider}`,
-  selectors: {
-    '&::before': {
-      content: '',
-      position: 'absolute',
-      insetBlock: '-2px',
-      left: '-2px',
-      width: '2px',
-      background: vars.color.gridCardDivider,
-    },
-    '&::after': {
-      content: '',
-      position: 'absolute',
-      insetBlock: '-2px',
-      right: '-2px',
-      width: '2px',
-      background: vars.color.gridCardDivider,
-    },
-  },
-});
-
 export const cardContent = style({
   flex: 1,
   display: 'flex',
