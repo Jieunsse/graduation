@@ -15,8 +15,8 @@ export const card = style({
   alignItems: 'center',
   width: '100%',
   maxWidth: '320px',
-  gap: '16px',
-  padding: '24px 18px 22px',
+  gap: '14px',
+  padding: '22px 18px 20px',
   borderRadius: '18px',
   border: `1px solid ${vars.color.gridCardBorder}`,
   background: `linear-gradient(180deg, color-mix(in srgb, ${vars.color.gridCardBg} 88%, ${teamColorVar} 12%) 0%, ${vars.color.gridCardBg} 100%)`,
@@ -51,7 +51,42 @@ export const positionColumn = style({
   alignItems: 'center',
   justifyContent: 'center',
   width: '100%',
-  gap: '12px',
+  gap: '10px',
+});
+
+export const positionNumber = style({
+  fontSize: '24px',
+  fontWeight: 800,
+  fontStyle: 'italic',
+  letterSpacing: '0.06em',
+  color: vars.color.gridCardAccent,
+  textShadow: '0 10px 28px rgba(0, 0, 0, 0.45)',
+});
+
+export const positionBracket = style({
+  position: 'relative',
+  width: '72px',
+  height: '16px',
+  borderTop: `2px solid ${vars.color.gridCardDivider}`,
+  borderBottom: `2px solid ${vars.color.gridCardDivider}`,
+  selectors: {
+    '&::before': {
+      content: '',
+      position: 'absolute',
+      insetBlock: '-2px',
+      left: '-2px',
+      width: '2px',
+      background: vars.color.gridCardDivider,
+    },
+    '&::after': {
+      content: '',
+      position: 'absolute',
+      insetBlock: '-2px',
+      right: '-2px',
+      width: '2px',
+      background: vars.color.gridCardDivider,
+    },
+  },
 });
 
 export const cardContent = style({
