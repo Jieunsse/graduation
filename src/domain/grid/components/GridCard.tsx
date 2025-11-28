@@ -1,9 +1,7 @@
 import { assignInlineVars } from '@vanilla-extract/dynamic';
-import { PositionBracket } from '@domain/grid/components/PositionBracket.tsx';
 import * as styles from '@domain/grid/styles/gridCard.css.ts';
 
 interface GridCardProps {
-  position: number;
   driverNumber: number;
   driverName: string;
   teamName: string;
@@ -12,7 +10,6 @@ interface GridCardProps {
 }
 
 export const GridCard = ({
-  position,
   driverNumber,
   driverName,
   teamName,
@@ -23,14 +20,8 @@ export const GridCard = ({
     [styles.teamColorVar]: teamColor,
   });
 
-  const bracketDirection = position % 2 === 1 ? 'left' : 'right';
-
   return (
     <article className={styles.card} style={inlineVars}>
-      <div className={styles.positionColumn}>
-        <PositionBracket direction={bracketDirection} position={position} />
-      </div>
-
       <div className={styles.cardContent}>
         <div className={styles.portraitFrame}>
           <img

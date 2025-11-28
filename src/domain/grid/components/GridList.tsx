@@ -46,7 +46,6 @@ export const GridList = ({
       {items.map((item) => (
         <BracketWrapper key={`${item.position}-${item.driverNumber}`} position={item.position}>
           <GridCard
-            position={item.position}
             driverNumber={item.driverNumber}
             driverName={item.driverName}
             teamName={item.teamName}

@@ -11,8 +11,8 @@ export const BracketWrapper = ({ position, children }: BracketWrapperProps) => {
 
   return (
     <div className={styles.container[direction]}>
-      <span className={styles.positionLabel}>{position}</span>
       <div className={styles.frame}>
+        <span className={styles.positionLabel}>{position}</span>
         <div className={styles.frameInner}>{children}</div>
       </div>
     </div>
