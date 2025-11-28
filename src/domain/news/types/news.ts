@@ -7,3 +7,11 @@ export interface NewsArticle {
   link: string;
   excerpt?: string;
 }
+
+export interface NewsArticleDetail extends NewsArticle {
+  author?: string;
+  updatedAt?: string;
+  readingTime?: number;
+  tags?: string[];
+  content: string[];
+}

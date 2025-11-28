@@ -1,5 +1,6 @@
 import * as styles from '@domain/news/components/NewsCard/newsCard.css.ts';
 import type { NewsArticle } from '@domain/news/types/news.ts';
+import { Link } from 'react-router-dom';
 
 interface NewsCardProps {
   article: NewsArticle;
@@ -21,13 +22,7 @@ export const NewsCard = ({ article }: NewsCardProps) => {
   const formattedDate = formatPublishedDate(article.publishedAt);
 
   return (
-    <a
-      className={styles.card}
-      tabIndex={0}
-      href={article.link ?? '#'}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
+    <Link className={styles.card} tabIndex={0} to={`/news/${article.id}`}>
       <div className={styles.thumbnailWrapper}>
         <img
           src={article.thumbnail}
@@ -46,6 +41,6 @@ export const NewsCard = ({ article }: NewsCardProps) => {
         <h3 className={styles.title}>{article.title}</h3>
         {article.excerpt ? <p className={styles.excerpt}>{article.excerpt}</p> : null}
       </div>
-    </a>
+    </Link>
   );
 };
