@@ -10,7 +10,7 @@ const mockNewsDetail: Record<string, NewsArticleDetail> = {
     author: 'Alex Thompson',
     readingTime: 6,
     thumbnail:
-      'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1200&q=80',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFrgqlDmOFRTY2Q29rKVAY4v4pPW1siJIe5Q&s',
     link: 'https://www.motorsport.com/f1',
     excerpt:
       '팀 관계자는 새 플로어가 코너링 안정성을 크게 향상시킨다고 밝혔으며, 바레인 프리시즌 테스트에서 첫선을 보일 예정이다.',
@@ -29,7 +29,7 @@ const mockNewsDetail: Record<string, NewsArticleDetail> = {
     author: 'Marie Dubois',
     readingTime: 5,
     thumbnail:
-      'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1200&q=80',
+      'https://media.formula1.com/image/upload/c_lfill,w_3392/q_auto/v1740000000/fom-website/2024/Miscellaneous/fia-f1-flags.webp',
     link: 'https://www.fia.com',
     excerpt:
       '하이브리드 시스템 비중을 늘리고 지속 가능한 연료 사용 의무가 강화된다. 각 팀은 2025년 말까지 인증 절차를 마쳐야 한다.',
@@ -48,7 +48,7 @@ const mockNewsDetail: Record<string, NewsArticleDetail> = {
     author: 'James Lee',
     readingTime: 4,
     thumbnail:
-      'https://images.unsplash.com/photo-1521414139064-8388455697b0?auto=format&fit=crop&w=1200&q=80',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvOKq4lyX2kIG6aqoOOC2r9A0Y9XQyld6HHA&s',
     link: 'https://www.skysports.com/f1',
     excerpt:
       '새 파트너십으로 인한 추가 자본은 공장 업그레이드와 시뮬레이터 고도화에 사용될 예정이다.',
@@ -67,7 +67,7 @@ const mockNewsDetail: Record<string, NewsArticleDetail> = {
     author: 'Lucia Ferraro',
     readingTime: 4,
     thumbnail:
-      'https://images.unsplash.com/photo-1506704888326-3a36c5a52b47?auto=format&fit=crop&w=1200&q=80',
+      'https://cdn.autoview.co.kr/news/photo/202203/20220322_7_bodyimg_76180.jpg',
     link: 'https://www.gazzetta.it',
     excerpt:
       '드라이버들은 새로운 서스펜션 패키지를 시험했고, 특히 저속 구간 트랙션이 개선됐다는 평가가 나왔다.',
@@ -80,19 +80,19 @@ const mockNewsDetail: Record<string, NewsArticleDetail> = {
   },
   'news-005': {
     id: 'news-005',
-    title: 'F1, 서울 도심을 포함한 신규 아시안 시티 레이스 후보지 검토',
+    title: 'F1, 인천 도심을 포함한 신규 아시안 시티 레이스 후보지 검토',
     source: 'F1 Insider',
     publishedAt: '2025-02-11T14:20:00Z',
     author: 'Daniel Park',
     readingTime: 5,
     thumbnail:
-      'https://images.unsplash.com/photo-1476610182048-b716b8518aae?auto=format&fit=crop&w=1200&q=80',
+      'https://pimg.mk.co.kr/news/cms/202404/15/20240415_01110124000004_L00.jpg',
     link: 'https://www.formula1.com',
     excerpt:
       '프로모터 측은 친환경 모빌리티 쇼케이스와 결합된 야간 레이스 포맷을 제안한 것으로 알려졌다.',
     tags: ['도심 레이스', '아시아', '서울'],
     content: [
-      'F1 프로모터가 서울을 포함한 신규 아시안 시티 레이스 후보지를 검토 중인 것으로 알려졌다. 잠실 일대를 활용한 야간 레이스 포맷과 친환경 모빌리티 쇼케이스가 결합된 이벤트가 제안되었다.',
+      'F1 프로모터가 인천을 포함한 신규 아시안 시티 레이스 후보지를 검토 중인 것으로 알려졌다. 잠실 일대를 활용한 야간 레이스 포맷과 친환경 모빌리티 쇼케이스가 결합된 이벤트가 제안되었다.',
       '현지 관계자는 “도심 인프라와 대중교통 접근성이 뛰어나며, 야간 경기 시 독특한 스카이라인을 보여줄 수 있다”고 설명했다. 다만 소음 규제와 주민 협의가 핵심 과제로 남아있다.',
       'F1 측은 올 하반기까지 후보지 타당성 평가를 마치고, 2026 시즌 캘린더 반영 여부를 결정할 계획이다.',
     ],
@@ -105,7 +105,7 @@ const mockNewsDetail: Record<string, NewsArticleDetail> = {
     author: 'Sophia Grant',
     readingTime: 4,
     thumbnail:
-      'https://images.unsplash.com/photo-1522775736090-742eabcadf7a?auto=format&fit=crop&w=1200&q=80',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIq1x6w3HmXKQnic6atEv9hvjo-u-bP_molA&s',
     link: 'https://www.the-race.com',
     excerpt:
       'AI가 공기역학 해석과 전략 시나리오 생성을 동시에 수행해 개발 속도를 가속화할 계획이다.',
@@ -118,13 +118,13 @@ const mockNewsDetail: Record<string, NewsArticleDetail> = {
   },
   'news-007': {
     id: 'news-007',
-    title: '알파타우리, 2025년 팀명 변경과 함께 로고 전면 교체 예고',
+    title: '킥 자우버, 2025년 팀명 변경과 함께 로고 전면 교체 예고',
     source: 'Autosport',
     publishedAt: '2025-02-09T07:30:00Z',
     author: 'Marco Rossi',
     readingTime: 3,
     thumbnail:
-      'https://images.unsplash.com/photo-1512083373534-36c34a1990fd?auto=format&fit=crop&w=1200&q=80',
+      'https://t1.daumcdn.net/brunch/service/user/eiox/image/176vgG5mYHkl-0naONLZVHCFRlA.png',
     link: 'https://www.autosport.com',
     excerpt:
       '팀 관계자는 리브랜딩이 젊은 팬층 공략과 스폰서십 다변화 전략의 핵심이라고 설명했다.',
@@ -143,7 +143,7 @@ const mockNewsDetail: Record<string, NewsArticleDetail> = {
     author: 'Elena Petrova',
     readingTime: 4,
     thumbnail:
-      'https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1200&q=80',
+      'https://fueler.store/cdn/shop/articles/explained-pirelli-f1-tyre-compounds-fuelertm_51ea6bd3-3c4a-4b6c-a402-1900cb530319.jpg?v=1759248361&width=1600',
     link: 'https://www.formula1.com',
     excerpt:
       '로운 고무 조성은 작동 온도 범위를 넓혀 전략적 다양성을 제공할 것으로 예상된다.',
