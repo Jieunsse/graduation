@@ -19,6 +19,7 @@ import { ConstructorStandingsPage } from '@domain/championship/pages/Constructor
 import { DriverRankingPage } from '@domain/championship/pages/DriverRankingPage.tsx';
 import { NewsListPage } from '@domain/news/NewsListPage.tsx';
 import { NewsDetailPage } from '@domain/news/NewsDetailPage.tsx';
+import { WeatherPage } from '@domain/weather/pages/WeatherPage.tsx';
 
 interface RouterProps {
   appearance: 'light' | 'dark';
@@ -90,6 +91,15 @@ export const Router = ({ appearance, setAppearance }: RouterProps) => {
           path="/calendar/:slug"
           element={
             <CalenderPage
+              appearance={appearance}
+              setAppearance={setAppearance}
+            />
+          }
+        />
+        <Route
+          path="/weather"
+          element={
+            <WeatherPage
               appearance={appearance}
               setAppearance={setAppearance}
             />

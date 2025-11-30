@@ -70,6 +70,24 @@ export const NewsIcon = ({ className }: SvgIconProps) => (
   </svg>
 );
 
+export const WeatherIcon = ({ className }: SvgIconProps) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path
+      d="M14.5 7.5a3.5 3.5 0 1 0-6.8 1M8 10a4 4 0 1 0 0 8h8.75A3.25 3.25 0 0 0 20 14.75 3.75 3.75 0 0 0 16.25 11H15"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M13 4.5 13.3 3M8.8 6.5 7.5 5.7M17 6.5l1.1-1.3M7 11.5 6 12.7"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
 export const DocumentIcon = ({ className }: SvgIconProps) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden="true">
     <path
