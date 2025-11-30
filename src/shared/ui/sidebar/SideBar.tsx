@@ -16,6 +16,7 @@ import {
   NewsIcon,
   SunIcon,
   ThemeIcon,
+  WeatherIcon,
 } from '@shared/ui/sidebar/SideBarIcons.tsx';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -26,6 +27,7 @@ interface SideBarProps {
 
 const primaryNavigation: MenuItem[] = [
   { label: '레이스 캘린더', Icon: CalendarIcon, path: '/calendar' },
+  { label: '날씨', Icon: WeatherIcon, path: '/weather', variant: 'highlight' },
   { label: '뉴스', Icon: NewsIcon, path: '/news' },
   { label: '스타팅 그리드', Icon: DocumentIcon, path: '/starting-grid' },
   { label: '크리에이터 콘텐츠', Icon: CreatorIcon, path: '/creator' },
