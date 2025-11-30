@@ -16,7 +16,7 @@ const mockNewsList: NewsArticle[] = [
     id: 'news-002',
     title: 'FIA, 2026 파워유닛 규정 세부안 추가 발표',
     source: 'FIA Official',
-    publishedAt: '2025-02-14T16:30:00Z',
+    publishedAt: '2025-04-14T16:30:00Z',
     thumbnail:
       'https://media.formula1.com/image/upload/c_lfill,w_3392/q_auto/v1740000000/fom-website/2024/Miscellaneous/fia-f1-flags.webp',
     link: 'https://www.fia.com',
@@ -27,7 +27,7 @@ const mockNewsList: NewsArticle[] = [
     id: 'news-003',
     title: '맥라렌, 신규 타이틀 스폰서와 장기 파트너십 체결',
     source: 'Sky Sports F1',
-    publishedAt: '2025-02-13T11:15:00Z',
+    publishedAt: '2025-05-13T11:15:00Z',
     thumbnail:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvOKq4lyX2kIG6aqoOOC2r9A0Y9XQyld6HHA&s',
     link: 'https://www.skysports.com/f1',
@@ -38,7 +38,7 @@ const mockNewsList: NewsArticle[] = [
     id: 'news-004',
     title: '페라리, 이몰라에서 비공개 테스트 진행… 차세대 업그레이드 점검',
     source: 'Gazzetta dello Sport',
-    publishedAt: '2025-02-12T08:45:00Z',
+    publishedAt: '2025-07-12T08:45:00Z',
     thumbnail:
       'https://cdn.autoview.co.kr/news/photo/202203/20220322_7_bodyimg_76180.jpg',
     link: 'https://www.gazzetta.it',
@@ -49,7 +49,7 @@ const mockNewsList: NewsArticle[] = [
     id: 'news-005',
     title: 'F1, 인천 도심을 포함한 신규 아시안 시티 레이스 후보지 검토',
     source: 'F1 Insider',
-    publishedAt: '2025-02-11T14:20:00Z',
+    publishedAt: '2025-08-11T14:20:00Z',
     thumbnail:
       'https://pimg.mk.co.kr/news/cms/202404/15/20240415_01110124000004_L00.jpg',
     link: 'https://www.formula1.com',
@@ -60,7 +60,7 @@ const mockNewsList: NewsArticle[] = [
     id: 'news-006',
     title: '메르세데스, 브랙슬리 공장에 AI 기반 시뮬레이션 허브 구축',
     source: 'The Race',
-    publishedAt: '2025-02-10T19:10:00Z',
+    publishedAt: '2025-04-10T19:10:00Z',
     thumbnail:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIq1x6w3HmXKQnic6atEv9hvjo-u-bP_molA&s',
     link: 'https://www.the-race.com',
@@ -71,7 +71,7 @@ const mockNewsList: NewsArticle[] = [
     id: 'news-007',
     title: '킥 자우버, 2025년 팀명 변경과 함께 로고 전면 교체 예고',
     source: 'Autosport',
-    publishedAt: '2025-02-09T07:30:00Z',
+    publishedAt: '2025-07-09T07:30:00Z',
     thumbnail:
       'https://t1.daumcdn.net/brunch/service/user/eiox/image/176vgG5mYHkl-0naONLZVHCFRlA.png',
     link: 'https://www.autosport.com',
@@ -82,7 +82,7 @@ const mockNewsList: NewsArticle[] = [
     id: 'news-008',
     title: 'Pirelli, 차세대 하드 컴파운드 공개… 장거리 스틴트에 최적화',
     source: 'Formula1.com',
-    publishedAt: '2025-02-08T10:05:00Z',
+    publishedAt: '2025-10-08T10:05:00Z',
     thumbnail:
       'https://fueler.store/cdn/shop/articles/explained-pirelli-f1-tyre-compounds-fuelertm_51ea6bd3-3c4a-4b6c-a402-1900cb530319.jpg?v=1759248361&width=1600',
     link: 'https://www.formula1.com',
